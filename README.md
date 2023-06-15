@@ -1,4 +1,4 @@
-# CDE Tour ACE Workshop HOL
+# CDE 1.19 ACE Workshop Hands-On-Lab
 
 ## Objective
 
@@ -12,10 +12,11 @@ This Hands On Lab is designed to walk you through the Services's main capabiliti
 2. Learn about Iceberg's most popular features.
 3. Orchestrate pipelines with Airflow.
 4. Use the CDE CLI to execute Spark Submits and more from your local machine.
+5. Use the CDE Spark Submit Migration Tool to automatically convert a Spark Submit to a CDE Spark Submit.
 
 ## Step by Step Instructions
 
-Detailed instructions in English are provided in the [step_by_step_guides](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md) folder.
+Detailed instructions in English are provided in the [step_by_step_guides](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english.md) folder.
 
 ## Next Steps
 

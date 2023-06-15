@@ -37,37 +37,36 @@
 # #  Author(s): Paul de Fusco
 #***************************************************************************/
 
-### Installing Requirements
-#!pip3 install -r requirements.txt
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
+from pyspark.sql.window import Window
+import sys
+import configparser
 
-import os
-import yaml
+config = configparser.ConfigParser()
+config.read('/app/mount/parameters.conf')
+data_lake_name=config.get("general","data_lake_name")
+s3BucketName=config.get("general","s3BucketName")
+username=config.get("general","username")
 
-def main(args):
+print("Running as Username: ", username)
 
-    # Setting variables for script
-    JOBS_API_URL = args[1] #"https://z4xgdztf.cde-6fr6l74r.go01-dem.ylcu-atmi.cloudera.site/dex/api/v1"
-    WORKLOAD_USER = args[2] #"cdpusername"
+#---------------------------------------------------
+#               CREATE SPARK SESSION
+#---------------------------------------------------
+spark = SparkSession\
+            .builder\
+            .appName('CAR INSTALLS REPORT')\
+            .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
+            .getOrCreate()
 
-    ### CDE CLI Setup
-    os.system("cd ~")
-    os.system("mkdir .cde")
+installs_etl_step2_df = spark.sql("SELECT * FROM CDE_WORKSHOP.INSTALLS_ETL_{}".format(username))
 
-    ### Recreating Yaml file with your credentials:
-    dict_yaml = {"user" : WORKLOAD_USER,
-                 "vcluster-endpoint": JOBS_API_URL}
+print("Report: Weekly Count of Parts Installed")
+installs_etl_step3_df = installs_etl_step2_df.drop("timestamp").groupBy("weekofyear").count().orderBy("weekofyear", asc=True)
+installs_etl_step3_df.show()
 
-    with open(r'.cde/config.yaml', 'w') as file:
-      documents = yaml.dump(dict_yaml, file)
-
-    ### Manually upload the CDE CLI before running the below commands:
-
-    os.system("mv ~/Documents/cde_first_steps/cli/cde ~/usr/local/bin")
-    os.system("chmod 777 ~/usr/local/bin/cde")
-
-    ### Do not run these
-    #!export PATH=/home/cdsw/.cde:$PATH
-    #!wget $CDE_CLI_linux -P /home/cdsw/.local/bin
-
-if __name__ == '__main__':
-    main(sys.argv)
+print("Report: Weekly Cumulative of Parts Installed")
+installs_etl_step4_df = installs_etl_step3_df.withColumn('count_percent',F.col('count')/F.sum('count').over(Window.partitionBy())*100)
+installs_etl_step5_df = installs_etl_step4_df.withColumn('cum_percent', F.sum(installs_etl_step4_df.count_percent).over(Window.partitionBy().orderBy().rowsBetween(-sys.maxsize, 0)))
+installs_etl_step5_df.show()
