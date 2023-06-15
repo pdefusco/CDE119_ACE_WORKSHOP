@@ -4,9 +4,7 @@
 
 In order to execute the Hands On Labs you need:
 * A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok).
-* No script code changes are required other than entering your Storage Bucket and Credentials in resources_files/parameters.conf.
-* Familiarity with Python and PySpark is highly recommended.
-* The files contained in the data folder should be manually loaded in the Storage Location of choice. If you are attending a CDE ACE Workshop, this will already have been done for you. Please validate this with your Cloudera Workshop Lead.  
+* Very few code changes are required but familiarity with Python and PySpark is highly recommended.
 * Bonus Lab 1 requires a Hive CDW Virtual Warehouse. This lab is optional.
 
 ## Project Setup
@@ -16,12 +14,21 @@ Clone this GitHub repository to your local machine or the VM where you will be r
 ```
 mkdir ~/Documents/cde_ace_hol
 cd ~/Documents/cde_ace_hol
-git clone https://github.com/pdefusco/CDE_Tour_ACE_HOL.git
+git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 ```
 
-Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE_Tour_ACE_HOL.git) and manually download the files.
+Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) and manually download the files.
 
-## Introduction to the CDE Data Service
+## Recommendations Before you Start
+
+Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
+
+Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
+
+Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+
+
+# Introduction to the CDE Data Service
 
 Cloudera Data Engineering (CDE) is a serverless service for Cloudera Data Platform that allows you to submit batch jobs to auto-scaling virtual clusters. CDE enables you to spend more time on your applications, and less time on infrastructure.
 
@@ -120,17 +127,6 @@ To learn more about CDE Architecture please visit [Creating and Managing Virtual
 #### Summary
 
 In this section you will execute four Spark jobs from the CDE UI. You will store files and python virtual environments in CDE Resources, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
-
-#### Recommendations Before you Start
-
->**⚠ Warning**  
-> Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
-
->**⚠ Warning**  
-> Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
-
->**⚠ Warning**  
-> Each attendee will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
 
 #### Editing Files and Creating CDE Resources
 
