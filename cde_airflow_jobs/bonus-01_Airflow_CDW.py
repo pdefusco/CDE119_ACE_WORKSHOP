@@ -45,11 +45,8 @@ from airflow import DAG
 from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
 from cloudera.cdp.airflow.operators.cdw_operator import CDWOperator
 from airflow.operators.bash import BashOperator
-import configparser
 
-config = configparser.ConfigParser()
-config.read('/app/mount/parameters.conf')
-username=config.get("general","username")
+username = "pdefusco_061523"
 
 print("Running as Username: ", username)
 
@@ -84,7 +81,7 @@ show databases;
 dw_step = CDWOperator(
     task_id='dataset-etl-cdw',
     dag=airflow_cdw_dag,
-    cli_conn_id='cdw_connection',
+    cli_conn_id='azure_cdw_connection',
     hql=cdw_query,
     schema='default',
     use_proxy_user=False,

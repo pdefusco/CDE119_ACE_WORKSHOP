@@ -36,7 +36,6 @@
 #
 # #  Author(s): Paul de Fusco
 #***************************************************************************/
-
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 import pyspark.sql.functions as F
@@ -50,78 +49,23 @@ username=config.get("general","username")
 
 print("Running as Username: ", username)
 
+_DEBUG_ = False
+
 #---------------------------------------------------
 #               CREATE SPARK SESSION
 #---------------------------------------------------
 spark = SparkSession.builder.appName('INGEST').config("spark.yarn.access.hadoopFileSystems", data_lake_name).getOrCreate()
 
-#-----------------------------------------------------------------------------------
-# LOAD DATA FROM .CSV FILES ON AWS S3 CLOUD STORAGE
-#
-# REQUIREMENT: Update variable s3BucketName
-#              using storage.location.base attribute; defined by your environment.
-#
-#              For example, property storage.location.base
-#                           has value 's3a://usermarketing-cdp-demo'
-#                           Therefore, set variable as:
-#                                 s3BucketName = "s3a://usermarketing-cdp-demo"
-#-----------------------------------------------------------------------------------
-car_installs  = spark.read.csv(s3BucketName + "/car_installs.csv",        header=True, inferSchema=True)
-car_sales     = spark.read.csv(s3BucketName + "/historical_car_sales.csv",           header=True, inferSchema=True)
-customer_data = spark.read.csv(s3BucketName + "/customer_data.csv",       header=True, inferSchema=True)
-factory_data  = spark.read.csv(s3BucketName + "/experimental_motors.csv", header=True, inferSchema=True)
-geo_data      = spark.read.csv(s3BucketName + "/postal_codes.csv",        header=True, inferSchema=True)
-
 #---------------------------------------------------
-#       SQL CLEANUP: DATABASES, TABLES, VIEWS
+#               READ TABLES
 #---------------------------------------------------
-#print("JOB STARTED...")
-#spark.sql("DROP DATABASE IF EXISTS CDE_WORKSHOP CASCADE")
+car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_INSTALLS_{}".format(username))
+car_sales_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}".format(username))
+factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}".format(username))
+customer_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CUSTOMER_DATA_{}".format(username))
+geo_data_df = spark.sql("SELECT * FROM CDE_WORKSHOP.GEO_DATA_XREF_{}".format(username))
 
-##---------------------------------------------------
-##                 CREATE DATABASES
-##---------------------------------------------------
-#spark.sql("CREATE DATABASE CDE_WORKSHOP")
-
-#---------------------------------------------------
-#               POPULATE TABLES
-#---------------------------------------------------
-
-#NB: The car sales table is partitioned by month
-car_sales.write.mode("overwrite").partitionBy("month").saveAsTable('CDE_WORKSHOP.CAR_SALES_{}'.format(username), format="parquet")
-car_installs.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.CAR_INSTALLS_{}'.format(username), format="parquet")
-factory_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}'.format(username), format="parquet")
-customer_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.CUSTOMER_DATA_{}'.format(username), format="parquet")
-geo_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.GEO_DATA_XREF_{}'.format(username), format="parquet")
 print("\tPOPULATE TABLE(S) COMPLETED")
-
-#---------------------------------------------------
-#               RUNNING DATA QUALITY TESTS
-#---------------------------------------------------
-
-# Test 1: Ensure Customer ID is Present so Join Can Happen
-print("RUNNING DATA QUALITY TESTS WITH QUINN LIBRARY")
-utils.test_column_presence(car_sales, ["customer_id"])
-utils.test_column_presence(customer_data, ["customer_id"])
-
-# Test 2: Spot Nulls or Blanks in Customer Data Sale Price Column:
-car_sales = utils.test_null_presence_in_col(car_sales, "saleprice")
-
-# Test 3:
-#customer_data_df = utils.test_values_not_in_col(customer_data_df, ["99999", "11111", "00000"], "zip")
-
-#---------------------------------------------------
-#                  APPLY FILTERS
-# - Remove under aged drivers (less than 16 yrs old)
-#---------------------------------------------------
-#before = customer_data.count()
-
-print(customer_data.dtypes)
-print(customer_data.schema)
-
-customer_data = customer_data.filter(col('birthdate') <= F.add_months(F.current_date(),-192))
-#after = customer_data.count()
-print(f"\tFILTER DATA (CUSTOMER_DATA): Before({before}), After ({after}), Difference ({after - before}) rows")
 
 #---------------------------------------------------
 #             JOIN DATA INTO ONE TABLE
@@ -129,7 +73,7 @@ print(f"\tFILTER DATA (CUSTOMER_DATA): Before({before}), After ({after}), Differ
 # SQL way to do things
 salesandcustomers_sql = "SELECT customers.*, sales.saleprice, sales.model, sales.VIN \
                             FROM CDE_WORKSHOP.CAR_SALES_{0} sales JOIN CDE_WORKSHOP.CUSTOMER_DATA_{0} customers \
-                             ON sales.customer_id = customers.customer_id ".format(username)
+                             ON sales.customer_id = customers.customer_id".format(username)
 
 tempTable = spark.sql(salesandcustomers_sql)
 if (_DEBUG_):
@@ -141,26 +85,26 @@ if (_DEBUG_):
     tempTable.show(n=5)
 
 # Add geolocations based on ZIP
-tempTable = tempTable.join(geo_data, "zip")
+tempTable = tempTable.withColumn("postalcode", F.col("zip")).join(geo_data_df.drop("id"), "postalcode")
 if (_DEBUG_):
     print("\tTABLE: GEO_DATA_XREF")
-    geo_data.show(n=5)
+    geo_data_df.show(n=5)
     print("\tJOIN: CAR_SALES x CUSTOMER_DATA x GEO_DATA_XREF (zip)")
     tempTable.show(n=5)
 
 # Add installation information (What part went into what car?)
-tempTable = tempTable.join(car_installs, ["VIN","model"])
+tempTable = tempTable.join(car_installs_df.drop("id"), ["VIN","model"])
 if (_DEBUG_):
     print("\tTABLE: CAR_INSTALLS")
-    car_installs.show(n=5)
+    car_installs_df.show(n=5)
     print("\tJOIN: CAR_SALES x CUSTOMER_DATA x GEO_DATA_XREF (zip) x CAR_INSTALLS (vin, model)")
     tempTable.show(n=5)
 
 # Add factory information (For each part, in what factory was it made, from what machine, and at what time)
-tempTable = tempTable.join(factory_data, ["serial_no"])
+tempTable = tempTable.join(factory_data_df.drop("id"), ["serial_no"])
 if (_DEBUG_):
     print("\tTABLE: EXPERIMENTAL_MOTORS")
-    factory_data.show(n=5)
+    factory_data_df.show(n=5)
     print("\tJOIN QUERY: CAR_SALES x CUSTOMER_DATA x GEO_DATA_XREF (zip) x CAR_INSTALLS (vin, model) x EXPERIMENTAL_MOTORS (serial_no)")
     tempTable.show(n=5)
 
@@ -170,6 +114,8 @@ if (_DEBUG_):
 tempTable.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.experimental_motors_enriched_{}'.format(username), format="parquet")
 print("\tNEW ENRICHED TABLE CREATED: CDE_WORKSHOP.experimental_motors_enriched_{}".format(username))
 tempTable.show(n=5)
+print("\n")
+tempTable.dtypes
 
 spark.stop()
 print("JOB COMPLETED!\n\n")
