@@ -114,7 +114,11 @@ car_sales = car_sales.withColumn("car_model", F.when(F.col("model") == "Model A"
       .when(F.col("model") == "Model B","B") \
       .when(F.col("model") == "Model C","C") \
       .when(F.col("model") == "Model D","D") \
-      .when(F.col("model") == "Model E","E"))\
+      .when(F.col("model") == "Model E","E")\
+      .when(F.col("model") == "Model F","F") \
+      .when(F.col("model") == "Model G","G") \
+      .when(F.col("model") == "Model H","H") \
+      .when(F.col("model") == "Model I","I"))\
       .drop(F.col("model"))\
       .withColumnRenamed("car_model","model")
 

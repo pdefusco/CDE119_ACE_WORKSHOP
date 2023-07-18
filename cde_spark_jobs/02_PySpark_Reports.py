@@ -85,7 +85,8 @@ if (_DEBUG_):
     tempTable.show(n=5)
 
 # Add geolocations based on ZIP
-tempTable = tempTable.withColumn("postalcode", F.col("zip")).join(geo_data_df.drop("id"), "postalcode")
+tempTable = tempTable.withColumn("postalcode", F.col("zip"))
+tempTable = tempTable.join(geo_data_df, geo_data_df.postalcode == tempTable.postalcode).drop(tempTable.postalcode).drop(geo_data_df.id)
 if (_DEBUG_):
     print("\tTABLE: GEO_DATA_XREF")
     geo_data_df.show(n=5)
@@ -93,15 +94,19 @@ if (_DEBUG_):
     tempTable.show(n=5)
 
 # Add installation information (What part went into what car?)
-tempTable = tempTable.join(car_installs_df.drop("id"), ["VIN","model"])
+#tempTable = tempTable.join(car_installs_df.drop("id"), ["VIN"])
+#tempTable = tempTable.join(car_installs_df, car_installs_df.VIN == tempTable.VIN).drop(car_installs_df.model).drop(car_installs_df.VIN).drop(car_installs_df.id)
+
+# Add installation information (What part went into what car?)
+tempTable.join(car_installs_df, car_installs_df.id == tempTable.id).drop(car_installs_df.model).drop(car_installs_df.VIN).drop(car_installs_df.id)
 if (_DEBUG_):
     print("\tTABLE: CAR_INSTALLS")
     car_installs_df.show(n=5)
-    print("\tJOIN: CAR_SALES x CUSTOMER_DATA x GEO_DATA_XREF (zip) x CAR_INSTALLS (vin, model)")
+    print("\tJOIN: CAR_SALES x CUSTOMER_DATA x GEO_DATA_XREF (zip) x CAR_INSTALLS (vin)")
     tempTable.show(n=5)
 
 # Add factory information (For each part, in what factory was it made, from what machine, and at what time)
-tempTable = tempTable.join(factory_data_df.drop("id"), ["serial_no"])
+tempTable = tempTable.join(factory_data_df, factory_data_df.serial_no == tempTable.serial_no).drop(factory_data_df.serial_no).drop(factory_data_df.id)
 if (_DEBUG_):
     print("\tTABLE: EXPERIMENTAL_MOTORS")
     factory_data_df.show(n=5)
@@ -111,8 +116,8 @@ if (_DEBUG_):
 #---------------------------------------------------
 #             CREATE NEW HIVE TABLE
 #---------------------------------------------------
-tempTable.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.experimental_motors_enriched_{}'.format(username), format="parquet")
-print("\tNEW ENRICHED TABLE CREATED: CDE_WORKSHOP.experimental_motors_enriched_{}".format(username))
+tempTable.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.experimental_motors_report_{}_tuned'.format(username), format="parquet")
+print("\tNEW ENRICHED TABLE CREATED: CDE_WORKSHOP.experimental_motors_report_{}".format(username))
 tempTable.show(n=5)
 print("\n")
 tempTable.dtypes

@@ -1,5 +1,13 @@
 # Step by Step Guide - ENG
 
+## Recommendations Before you Start
+
+Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
+
+Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
+
+Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+
 ## Requirements
 
 In order to execute the Hands On Labs you need:
@@ -19,13 +27,12 @@ git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 
 Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) and manually download the files.
 
-## Recommendations Before you Start
+## Index
 
-Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
-
-Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
-
-Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+* In Part 1 you will develop three Spark Jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. One of the Jobs will focus on Apache Iceberg.
+* In Part 2 you will create an Airflow Pipeline to orchestrate multiple Spark Jobs.
+* In Part 3 you will use the CDE Spark Migration tool to convert Spark Jobs into CDE Spark Jobs.
+* The Bonus Labs include cover a variety of topics including Airflow Orchestration of CDW Queries and the CDE Airflow Editor.
 
 
 # Introduction to the CDE Data Service
@@ -61,6 +68,10 @@ A defined collection of files such as a Python file or application JAR, dependen
 
 ##### Job Run
 An individual job run.
+
+##### CDE Session
+
+CDE interactive sessions give data engineers flexible end-points to start developing Spark applications from anywhere -- in a web-based terminal, local CLI, favorite IDE, and even via JDBC from third-party tools.
 
 ##### CDE User Interface
 
@@ -122,11 +133,11 @@ To learn more about CDE Architecture please visit [Creating and Managing Virtual
 >CDE Spark Job auto-scaling is controlled by Apache Spark dynamic allocation. Dynamic allocation scales job executors up and down as needed for running jobs. This can provide large performance benefits by allocating as many resources as needed by the running job, and by returning resources when they are not needed so that concurrent jobs can potentially run faster.
 
 
-## Part 1: Implement a Spark Pipeline
+## Part 1: Developing Spark Jobs in CDE
 
 #### Summary
 
-In this section you will execute four Spark jobs from the CDE UI. You will store files and python virtual environments in CDE Resources, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
+In this section you will create and refine three Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
 
 #### Editing Files and Creating CDE Resources
 
@@ -136,27 +147,18 @@ To create a File Resource, from the CDE Home Page click on "Create New" in the "
 
 ![alt text](../img/cde_res_1.png)
 
-Pick your Spark 3 / Iceberg-enabled CDE Virtual Cluster and name your Resource after your username or a unique ID.
+Pick your Spark 3 / Iceberg enabled CDE Virtual Cluster and name your Resource after your username or a unique ID.
 
 ![alt text](../img/cde_res_2.png)
 
-Upload all files from the "cde_ace_hol/cde_spark_jobs" folder. Then, navigate back to the Resources tab, reopen the resource and upload the two Airflow DAGs located in the "cde_ace_hol/cde_airflow_jobs" folders. Finally, reopen the resource and upload the "utils.py" file contained in the "cde_ace_hol/resources_files" folder.
+Upload the following files located in the "cde_ace_hol/cde_spark_jobs" and "cde_ace_hol/resources_files" folders.
 
 When you are done, ensure that the following files are located in your File Resource:
 
 ```
-01_Pre_Setup.py
-02_EnrichData_ETL.py
-03_Spark2Iceberg.py
-04_Sales_Report.py
-05-A-ETL.py
-05-B-Resports.py
-06-pyspark-sql.py
-07-A-pyspark-LEFT.py
-07-B-pyspark-RIGHT.py
-07-C-pyspark-JOIN.py
-05-Airflow-Basic-Dag.py
-07-Airflow-Logic-Dag.py
+01_PySpark_ETL.py
+simple_udf.zip
+simple_udf_dependency.py
 parameters.conf
 utils.py
 ```
@@ -181,25 +183,38 @@ Notice the CDE Resource is now building the Python Virtual Environment. After a 
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
-#### Creating CDE Spark Jobs
+#### Creating CDE Spark Jobs in the UI
 
-Next we will create four CDE Jobs of type Spark using scripts "01_Pre_Setup.py", "02_EnrichData_ETL.py", "03_Spark2Iceberg.py" and "04_Sales_Report.py" located in the "cde_ace_hol/cde_spark_jobs" folder.
+Next we will create a CDE Job of type Spark using the script "01_PySpark_ETL.py" which you have already uploaded to your CDE File Resource in the prior step.
 
 Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
 
 ![alt text](../img/cde_jobs_1.png)
 
-Select your CDE Virtual Cluster and assign "O1_Setup" as the Job Name.
+Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name.
 
 ![alt text](../img/cde_jobs_2.png)
 
-Scroll down; ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_Pre_Setup.py".
+Scroll down; ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
 
 ![alt text](../img/cde_jobs_3.png)
 
 ![alt text](../img/cde_jobs_4.png)
 
+The Configurations section allows you to set Spark Application Configurations such as Driver and Executor settings, Jars, Spark properties, and many more. In other words, most of the properties available in the [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) can be applied here.
+
+In this example, we will set the "spark.executorEnv.PYTHONPATH" configuration so it can read the UDF from the CDE File Resource.
+
+
+
 Scroll down again to the "Resources" section and notice that your File Resource has been mapped to the Job by default. This allows the PySpark script to load modules in the same Resource such as the ones contained in the "utils.py" file.
+
+
+
+
+
+
+
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
