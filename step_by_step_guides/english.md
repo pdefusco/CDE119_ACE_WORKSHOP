@@ -195,26 +195,46 @@ Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name.
 
 ![alt text](../img/cde_jobs_2.png)
 
+###### 1. Set Application File
+
+The Application File is the code that will run as the Spark Job. This could be a PySpark file or a Jar.
+
 Scroll down; ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
 
 ![alt text](../img/cde_jobs_3.png)
 
 ![alt text](../img/cde_jobs_4.png)
 
-The Configurations section allows you to set Spark Application Configurations such as Driver and Executor settings, Jars, Spark properties, and many more. In other words, most of the properties available in the [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) can be applied here.
+###### 2. Set Spark Configurations
 
-In this example, we will set the "spark.executorEnv.PYTHONPATH" configuration so it can read the UDF from the CDE File Resource.
+The Configurations section allows you to set Spark Application Configurations such as Driver and Executor settings, Jars, Spark properties, and many more. In other words, virtually most properties available in the [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) can be applied here.
 
+In this job we will set the "spark.executorEnv.PYTHONPATH" configuration to "/app/mount/simple_udf.zip" so it can read the UDF from the CDE File Resource.
 
+###### 3. Set Python Environment
+
+Set the Python environment to the CDE Python Resource you created in the previous step.
+
+###### 4. Set Advanced Options
+
+The Python, Egg, Zip Files section allows you to load dependencies onto your job. This can be used for a variety of use cases including mounting Python files to the Executors, using Wheel files, and more.
+
+In the Python, Egg, Zip Files section select the "utils.py" and "simple_udf.zip" file dependencies to load the UDF to the Spark Job. Notice the files have already been uploaded to the File Resource so you just need to select them from there.
 
 Scroll down again to the "Resources" section and notice that your File Resource has been mapped to the Job by default. This allows the PySpark script to load modules in the same Resource such as the ones contained in the "utils.py" file.
 
+###### 5. Set Compute Options
 
+Compute Options allow you to set important Spark Resource Configs.
 
+* The Executors toggle bar allows you to set the "spark.dynamicAllocation.minExecutors" and "spark.dynamicAllocation.maxExecutors" options. These determine how many executors will be deployed by Spark Dynamic Allocation. Spark Dynamic Allocation is overridden to "Enabled" by default in CDE.
+* The Initial Executors bar allows you to set the "spark.dynamicAllocation.initialExecutors" property. The option sets the initial number of executors for dynamic allocation. We recommend ensuring this is not set too high, especially to a value that is above the Job's expected number of Executors.
+* Driver Cores and Driver Memory allow you to set "spark.driver.cores" and "spark.driver.memory". Increasing Driver Cores and Memory can be useful when your queries compile slowly or in case you call lots of collect() or take(N) actions especially on large RDD's.
+* Executor Cores and Executor Memory allow you to set "spark.executor.cores" and "spark.executor.memory". These properties are used heavily in the context of Spark Tuning as they provide you with the ability to influence the degree of parallelism and storage capacity available in each Executor.
 
+Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 4, Driver Memory to 2, and Executor Memory to 4. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
 
-
-
+####### 6. Trigger and Monitor the Job
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
@@ -244,26 +264,6 @@ The Spark UI allows you to visualize resources, optimize performance and trouble
 
 ![alt text](../img/cde_jobs_10.png)
 
-Now that you have learned how to create a CDE Spark Job with the CDE UI, repeat the same process with the following scripts and settings. Leave all other options to their default. Allow each job to complete before creating and executing a new one.
-
-```
-Job Name: 02_EnrichData_ETL
-Type: Spark
-Application File: 02_EnrichData_ETL.py
-Resource(s): cde_hol_files (or your File Resource name if you used a different one)
-
-Job Name: 03_Spark2Iceberg
-Type: Spark
-Application File: 03_Spark2Iceberg.py
-Resource(s): cde_hol_files
-
-Job Name: 04_Sales_Report
-Type: Spark
-Python Environment: cde_hol_python
-Application File: 04_Sales_Report.py
-Job Resource(s): cde_hol_files
-```
-
 >**Note**  
 >Your credentials are stored in parameters.conf
 
@@ -272,6 +272,14 @@ Job Resource(s): cde_hol_files
 
 >**Note**  
 >Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
+
+#### Creating CDE Spark Jobs in the CLI
+
+
+
+#### Creating a CDE Spark Job that uses Apache Iceberg
+
+
 
 To learn more about Iceberg in CDE please visit [Using Apache Iceberg in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-using-iceberg.html).
 
