@@ -340,8 +340,40 @@ The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel f
 
 ####### 2. CDE Spark Job via the CDE CLI.
 
+Similar to a CDE Spark Submit a CDE Spark Job is Application code to execute a Spark (or Airflow) Job in a CDE Virtual Cluster. However, the CDE Job allows you to easily define, edit and reuse configurations and resources in future runs. Jobs can be run on demand or scheduled. An individual job execution is called a Job Run.
 
+A CDE Job of type Spark always requires a reference CDE Resource in order to mount Application Code and any dependencies. Therefore, start by creating a CDE Resource of type File:
 
+```
+cde resource create --name my_user_resource
+```
+
+Upload Application Code to the Resource:
+
+```
+cde resource upload --name my_user_resource --local-path cde_spark_jobs/cdejobjar_2.12-1.0.jar
+```
+
+Now create a CDE Job of type Spark mounting the uploaded Resource files:
+
+```
+cde job create \
+  --name my-cde-job \
+  --type spark \
+  --mount-1-resource my_user_resource \
+  --application-file cdejobjar_2.12-1.0.jar \
+  --conf spark.sql.shuffle.partitions=10 \
+  --executor-cores 2 \
+  --executor-memory 2g
+```
+
+As before, notice Spark Configurations such as ```--exeutor-cores```, ```--executor-memory```, or ```spark.sql.shuffle.partitions=10``` via the ```--conf``` flag can be applied to the CDE Job.
+
+Finally, run the Job :
+
+```cde job run --name my-cde-job```
+
+Notice the Job Run ID output to the terminal and validate the Job in the Job Runs page of your cluster.
 
 
 #### Exploring Data Interactively with CDE Sessions

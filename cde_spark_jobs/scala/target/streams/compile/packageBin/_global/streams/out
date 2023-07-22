@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/pauldefusco/Documents/demos_github/CDE119_ACE_Workshop/cde_spark_jobs/scala/target/scala-2.12/cdejobjar_2.12-1.0.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ExampleApp$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/pauldefusco/Documents/demos_github/CDE119_ACE_Workshop/cde_spark_jobs/scala/target/scala-2.12/classes/ExampleApp$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ExampleApp.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/pauldefusco/Documents/demos_github/CDE119_ACE_Workshop/cde_spark_jobs/scala/target/scala-2.12/classes/ExampleApp.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
