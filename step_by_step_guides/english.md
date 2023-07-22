@@ -310,7 +310,6 @@ Step 5: Save the configuration file. If you have not done so already, make sure 
 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
-
 ####### 1. CDE Spark Submit via the CDE CLI.
 
 A CDE Spark Submit is the fastest way to prototype a Spark Job. It allows you to submit Spark Application Code and monitor results with CDE's logging and observability features but it does not allow you to save the Code as a reusable CDE Job Definition. This is beneficial for example in case you want to reschedule the job to run on a recurrent basis or include it in a CDE Airflow Job.
@@ -336,7 +335,6 @@ cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl c
 ```
 
 The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
-
 
 ####### 2. CDE Spark Job via the CDE CLI.
 
@@ -367,13 +365,15 @@ cde job create \
   --executor-memory 2g
 ```
 
-As before, notice Spark Configurations such as ```--exeutor-cores```, ```--executor-memory```, or ```spark.sql.shuffle.partitions=10``` via the ```--conf``` flag can be applied to the CDE Job.
+As before, notice Spark Configurations such as ```--executor-cores```, ```--executor-memory```, or ```spark.sql.shuffle.partitions=10``` via the ```--conf``` flag can be applied to the CDE Job.
 
 Finally, run the Job :
 
 ```cde job run --name my-cde-job```
 
 Notice the Job Run ID output to the terminal and validate the Job in the Job Runs page of your cluster.
+
+Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice that the Definition can be edited and is reusable.
 
 
 #### Exploring Data Interactively with CDE Sessions
