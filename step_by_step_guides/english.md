@@ -728,7 +728,7 @@ Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the T
 ![alt text](../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Using the CDE CLI to Streamliine CDE Production Use Cases (In-Depth)
+### Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
 
 #### Summary
 
@@ -738,37 +738,10 @@ In this part of the workshop you will gain familiarity with the CDE CLI by rerun
 
 You can use the CDE CLI or API to execute Spark and Airflow jobs remotely rather than via the CDE UI as shown up to this point. In general, the CDE CLI is recommended over the UI when running spark submits from a local machine. The API is instead recommended when integrating CDE Spark Jobs or Airflow Jobs (or both) with 3rd party orchestration systems. For example you can use GitLab CI to build CDE Pipelines across multiple Virtual Clusters. For a detailed example, please reference [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE).
 
-##### Manual CLI Installation
-
-You can download the CDE CLI to your local machine following the instructions provided in the [official documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html).
-
-##### Automated CLI Installation
-
-Alternatively, you can use the "00_cde_cli_install.py" automation script located in the "cde_cli_jobs" folder. This will install the CDE CLI in your local machine if you have a Mac.
-
->**⚠ Warning**  
-> The Automated CLI Installation script is not supported by Cloudera. It is just a utility which may not be compatible with your laptop settings. If you are having trouble using this script please follow the documentation to install the CLI Manually.
-
-In order to use the automated installation script, please follow the steps below.
+We assume you have already installed the CLI following the instructions in Part 1. If you haven't done so, please install the CDE CLI now.
 
 First, create a Python virtual environment and install the requirements.
 
-```
-#Create
-python3 -m venv venv
-
-#Activate
-source venv/bin/activate
-
-#Install requirements
-pip install -r requirements.txt #Optionally use pip3 install
-```
-
-Then, execute the script with the following commands:
-
-```
-python cde_cli_jobs/00_cde_cli_install.py JOBS_API_URL CDP_WORKLOAD_USER
-```
 
 #### Using the CDE CLI
 
