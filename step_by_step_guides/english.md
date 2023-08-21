@@ -619,17 +619,17 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 
 Navigate to the CDP Management Console and download your user credentials file. The credentials file includes a CDP Access Key ID and a CDP Private Key.
 
-![alt text](img/mgt_console1.png)
+![alt text](../img/mgt_console1.png)
 
-![alt text](img/mgt_console2.png)
+![alt text](../img/mgt_console2.png)
 
-![alt text](img/mgt_console3.png)
+![alt text](../img/mgt_console3.png)
 
-![alt text](img/mgt_console4.png)
+![alt text](../img/mgt_console4.png)
 
 Next, navigate to the CDE Virtual Cluster Details and copy the JOBS_API_URL.
 
-![alt text](img/jobsapiurl.png)
+![alt text](../img/jobsapiurl.png)
 
 Launch the example Docker container.
 
@@ -665,11 +665,11 @@ spark-submit \
 
 Shortly you should get output in your terminal including a Job Run ID confirming successful job submission to CDE. In the screenshot example below the Job Run ID is 9.
 
-![alt text](img/job_submit_confirm1.png)
+![alt text](../img/job_submit_confirm1.png)
 
 Navigate to your CDE Virtual Cluster Job Runs page and validate the job is running or has run successfully.
 
-![alt text](img/job_submit_confirm3.png)
+![alt text](../img/job_submit_confirm3.png)
 
 >**⚠ Warning**  
 >If you are unable to run the spark-submit you may have to remove the tls setting from config.yaml. In other words, completely erase line 4.
@@ -689,17 +689,17 @@ Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other
 
 First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
 
-![alt text](img/airflow_connection_0.png)
+![alt text](../img/airflow_connection_0.png)
 
-![alt text](img/airflow_connection_1.png)
+![alt text](../img/airflow_connection_1.png)
 
 Open Airflow Connections under the Admin dropdown as shown below.
 
-![alt text](img/airflow_connection_2.png)
+![alt text](../img/airflow_connection_2.png)
 
 Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
 
-![alt text](img/airflow_connection_3.png)
+![alt text](../img/airflow_connection_3.png)
 
 Fill out the following fields as shown below and save.
 
