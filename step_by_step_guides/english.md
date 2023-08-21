@@ -95,7 +95,7 @@ Apache Iceberg is a cloud-native, high-performance open table format for organiz
 
 Open Data Lakehouse on CDP simplifies advanced analytics on all data with a unified platform for structured and unstructured data and integrated data services to enable any analytics use case from ML, BI to stream analytics and real-time analytics. Apache Iceberg is the secret sauce of the open lakehouse.
 
-Iceberg is compatible with a variety of compute engines including Spark. CDE allows you to deploy Iceberg-enabled Virtual Clusters. 
+Iceberg is compatible with a variety of compute engines including Spark. CDE allows you to deploy Iceberg-enabled Virtual Clusters.
 
 For more information please visit the [documentation](https://iceberg.apache.org/).
 
@@ -260,7 +260,7 @@ Compute Options allow you to set important Spark Resource Configs.
 
 Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 4, Driver Memory to 2, and Executor Memory to 4. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
 
-####### 6. Trigger and Monitor the Job
+###### 6. Trigger and Monitor the Job
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
@@ -306,7 +306,7 @@ So far we have created a Spark Job via the CDE UI. However, CDE use cases involv
 
 In this section we will create a CDE Spark Submit and a CDE Spark Job via the CLI. In the process we will explain the difference.
 
-####### 0. Installing the CDE CLI
+###### 0. Installing the CDE CLI
 
 Step 1: Download the CLI Client:
 
@@ -336,7 +336,8 @@ Step 5: Save the configuration file. If you have not done so already, make sure 
 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
-####### 1. CDE Spark Submit via the CDE CLI.
+
+###### 1. CDE Spark Submit via the CDE CLI.
 
 A CDE Spark Submit is the fastest way to prototype a Spark Job. It allows you to submit Spark Application Code and monitor results with CDE's logging and observability features but it does not allow you to save the Code as a reusable CDE Job Definition. This is beneficial for example in case you want to reschedule the job to run on a recurrent basis or include it in a CDE Airflow Job.
 
@@ -362,7 +363,8 @@ cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl c
 
 The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
 
-####### 2. CDE Spark Job via the CDE CLI.
+
+###### 2. CDE Spark Job via the CDE CLI.
 
 Similar to a CDE Spark Submit a CDE Spark Job is Application code to execute a Spark (or Airflow) Job in a CDE Virtual Cluster. However, the CDE Job allows you to easily define, edit and reuse configurations and resources in future runs. Jobs can be run on demand or scheduled. An individual job execution is called a Job Run.
 
@@ -402,7 +404,7 @@ Notice the Job Run ID output to the terminal and validate the Job in the Job Run
 Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice that the Definition can be edited and is reusable.
 
 
-#### Exploring Data Interactively with CDE Sessions
+###### 3. Exploring Data Interactively with CDE Sessions
 
 A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
 
@@ -491,8 +493,7 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 ![alt text](img/sparkshell4_cdeui.png)
 
 
-
-#### Creating a CDE Spark Job with Apache Iceberg
+###### 4. Creating a CDE Spark Job with Apache Iceberg
 
 
 
