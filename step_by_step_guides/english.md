@@ -1027,9 +1027,9 @@ x = requests.get(url, headers=headers)
 x.json()["resources"][-3:-1]
 ```
 
-As an exmaple we built [CDE Alerter](https://github.com/pdefusco/CDE_Alerter) and the cde_python module. CDE Alerter is a Python App to continuously monitor the status of CDE Jobs across multiple CDE Virtual Clusters. It allows you to implement a set of rules to notify a set of recipients in case of a particular event. It uses cde_python, a custom Python wrapper for the CDE API, to issue requests to the CDE Virtual Cluster.
+As an exmaple we built [CDE Alerter](https://github.com/pdefusco/CDE_Alerter) and the cde_python module. CDE Alerter is a Python App to continuously monitor the status of CDE Jobs across multiple CDE Virtual Clusters. It allows you to flag CDE Jobs that last more than a provided number of seconds. It uses cde_python, a custom Python wrapper for the CDE API, to periodically submit requests to the CDE Virtual Cluster. The general idea is that you can use Python to implement a set of business rules in case of a particular event in a CDE Cluster.  
 
-In order to run this App in your local machine little to none code changes are required. You will need Python 3.6 or above, a Gmail account with 2-step authentication and an App password. Steps to set up a Gmail account correctly are provided below. We recommend creating a new one and not using your personal Gmail account if you have one.
+In order to run this App in your local machine little to none code changes are required. You will need Python 3.6 or above, a Gmail account with 2-step authentication and an App password. Steps to set up a Gmail account correctly are provided below. We do not recommend using your existing Gmail account if you have one and instead creating a new one as shown below.
 
 ## Instructions
 
@@ -1044,6 +1044,7 @@ git clone https://github.com/pdefusco/CDE_Alerter.git
 ```
 
 Alternatively, if you don't have GitHub create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE_Alerter.git) and download the files.
+
 
 #### Step 1: Create a Python Virtual Environment and Install Requirements
 
@@ -1063,14 +1064,17 @@ pip install pandas #Optionally use pip3 install
 pip install -r requirements.txt #Optionally use pip3 install
 ```
 
-![alt text](img/alerter_img01.png)
+![alt text](../img/alerter_img01.png)
 
-#### Step 2: Test CDE Connection
 
-To test if your VM can reach the CDE Virtual Cluster, open your terminal and run the following command:
+#### Step 2: Edit Clusters.txt and Test CDE Connection
+
+The clusters.txt file contains a list of JOBS_API_URL and email addresses, reflecting the cluster(s) you want to monitor and the email addresses to be notified.
+
+Add your JOBS_API_URL and email to clusters.txt and remove any other entries. The app works with one or multiple cluster entries. Then, ensure that your machine or VM can reach the CDE Virtual Cluster by running the following command in the terminal:
 
 ```
-python3 connection_tester.py jobs_api_url cdpusername cdppassword
+python3 connection_tester.py jobs_api_url cdpusername cdppwd
 ```
 
 The output in the terminal should confirm that a test resource has been created successfully.
