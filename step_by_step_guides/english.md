@@ -457,62 +457,6 @@ Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and valid
 
 ![alt text](../img/cde_airflow_6.png)
 
-##### Executing Airflow Logic Dag
-
-Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.
-
-Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other popular Operators such as the SimpleHttpOperator Operator to send/receive API requests.
-
-In order to use it, first you have to set up a Connection to the endpoint referenced at line 110 in the DAG. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
-
-![alt text](../img/airflow_connection_0.png)
-
-![alt text](../img/airflow_connection_1.png)
-
-Open Airflow Connections under the Admin dropdown as shown below.
-
-![alt text](../img/airflow_connection_2.png)
-
-Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
-
-![alt text](../img/airflow_connection_3.png)
-
-Fill out the following fields as shown below and save.
-
-```
-Connection Id: random_joke_connection
-Connection Type: HTTP
-Host: https://official-joke-api.appspot.com/
-```
-
-![alt text](../img/airflow_connection_4.png)
-
-Now open "07-Airflow-Logic-DAG.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
-
-* Review line 127. Task Execution no longer follows a linear sequence. Step 3 only executes when both Step 1 and 2 have completed successfully.
-* At lines 75-77, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
-* At lines 106-115, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
-* At line 109 the connection id value is the same as the one used in the Airflow Connection you just created.
-* At line 110 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
-* At line 112 the response is captured and parsed by the "handle_response" method specified between lines 98-104.
-* At line 114 we use the "do_xcom_push" option to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
-* At lines 120-124 the Python Operator executes the "_print_random_joke" method declared at lines 117-118 and outputs the response of the API call.
-
-As in the previous example, first create (but don't run) three CDE Spark Jobs using "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" and  "07_C_pyspark_JOIN.py".
-
-Then, open "07-Airflow-Logic-DAG.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
-
-Finally, reupload the script to your CDE Files Resource. Create a new CDE Job of type Airflow and select the script from your CDE Resource.
-
->**Note**
->The SimpleHttpOperator Operator can be used to interact with 3rd party systems and exchange data to and from a CDE Airflow Job run. For example you could trigger the execution of jobs outside CDP or execute CDE Airflow DAG logic based on inputs from 3rd party systems.
-
->**Note**  
->You can use CDE Airflow to orchestrate SQL queries in CDW, the Cloudera Data Warehouse Data Service, with the Cloudera-supported  CDWOperator. If you want to learn more, please go to [Bonus Lab 1: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
-
->**Note**  
->Additionally, other operators including Python, HTTP, and Bash are available in CDE. If you want to learn more about Airflow in CDE, please reference [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
-
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
 ##### Using the No-Code CDE Airflow Editor to Build Airflow DAGs in the UI
@@ -628,8 +572,64 @@ So far you explored the core aspects of CDE Spark, Airflow and Iceberg. The foll
 
 Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
 
+### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 
-### Bonus Lab 1: Using CDE Airflow with CDW
+Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.
+
+Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other popular Operators such as the SimpleHttpOperator Operator to send/receive API requests.
+
+First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
+
+![alt text](../img/airflow_connection_0.png)
+
+![alt text](../img/airflow_connection_1.png)
+
+Open Airflow Connections under the Admin dropdown as shown below.
+
+![alt text](../img/airflow_connection_2.png)
+
+Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
+
+![alt text](../img/airflow_connection_3.png)
+
+Fill out the following fields as shown below and save.
+
+```
+Connection Id: random_joke_connection
+Connection Type: HTTP
+Host: https://official-joke-api.appspot.com/
+```
+
+![alt text](../img/airflow_connection_4.png)
+
+Now open "07-Airflow-Logic-DAG.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
+
+* Review line 127. Task Execution no longer follows a linear sequence. Step 3 only executes when both Step 1 and 2 have completed successfully.
+* At lines 75-77, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
+* At lines 106-115, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
+* At line 109 the connection id value is the same as the one used in the Airflow Connection you just created.
+* At line 110 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
+* At line 112 the response is captured and parsed by the "handle_response" method specified between lines 98-104.
+* At line 114 we use the "do_xcom_push" option to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
+* At lines 120-124 the Python Operator executes the "_print_random_joke" method declared at lines 117-118 and outputs the response of the API call.
+
+As in the previous example, first create (but don't run) three CDE Spark Jobs using "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" and  "07_C_pyspark_JOIN.py".
+
+Then, open "07-Airflow-Logic-DAG.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
+
+Finally, reupload the script to your CDE Files Resource. Create a new CDE Job of type Airflow and select the script from your CDE Resource.
+
+>**Note**
+>The SimpleHttpOperator Operator can be used to interact with 3rd party systems and exchange data to and from a CDE Airflow Job run. For example you could trigger the execution of jobs outside CDP or execute CDE Airflow DAG logic based on inputs from 3rd party systems.
+
+>**Note**  
+>You can use CDE Airflow to orchestrate SQL queries in CDW, the Cloudera Data Warehouse Data Service, with the Cloudera-supported  CDWOperator. If you want to learn more, please go to [Bonus Lab 1: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
+
+>**Note**  
+>Additionally, other operators including Python, HTTP, and Bash are available in CDE. If you want to learn more about Airflow in CDE, please reference [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
+
+
+### Bonus Lab 2: Using CDE Airflow with CDW
 
 You can use the CDWRunOperator to run CDW queries from a CDE Airflow DAG. This operator has been created and is fully supported by Cloudera.
 
@@ -728,7 +728,7 @@ Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the T
 ![alt text](../img/bonus1_step3.png)
 
 
-### Bonus Lab 2: Using the CDE CLI to Streamliine CDE Production Use Cases (In-Depth)
+### Bonus Lab 3: Using the CDE CLI to Streamliine CDE Production Use Cases (In-Depth)
 
 #### Summary
 
@@ -853,7 +853,7 @@ cde resource --help
 To learn more about the CDE CLI please visit [Using the Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html) in the CDE Documentation.
 
 
-### Bonus Lab 3: Using Python with the CDE API
+### Bonus Lab 4: Using Python with the CDE API
 
 Cloudera Data Engineering (CDE) provides a robust API for integration with your existing continuous integration/continuous delivery platforms. In this example we will use Python to create and deploy Spark Jobs in CDE from your local machine. The same code can execute on other platforms and 3rd party tools.
 
@@ -941,7 +941,6 @@ myobj = {"name": "cml2cde_python"}
 headers = {"Authorization": f'Bearer {tok}',
           "Content-Type": "application/json"}
 
-## Only showing the latest two resources
 x = requests.get(url, headers=headers)
 x.json()["resources"][-3:-1]
 ```
@@ -984,7 +983,6 @@ pip install -r requirements.txt #Optionally use pip3 install
 
 ![alt text](img/alerter_img01.png)
 
-
 #### Step 2: Test CDE Connection
 
 To test if your VM can reach the CDE Virtual Cluster, open your terminal and run the following command:
@@ -1008,7 +1006,7 @@ Before you can run the script you will need:
 To run the script, run the following python command in the directory where you cloned your project.
 
 ```
-python3 alerter.py https://z4xgdztf.cde-6fr6l74r.go01-dem.ylcu-atmi.cloudera.site/dex/api/v1 cdpusername cdppwdhere mysecregapppwdhere 1800 me@myco.com mycolleague@myco.com
+python3 alerter.py https://z4xgdztf.cde-6fr6l74r.go01-dem.ylcu-atmi.cloudera.site/dex/api/v1 cdpusername cdppwd mysecregapppwdhere 1800 me@myco.com mycolleague@myco.com
 ```
 
 The Gmail App password should be entered as the fourth argument (for example replacing "mysecregapppwdhere" above).
