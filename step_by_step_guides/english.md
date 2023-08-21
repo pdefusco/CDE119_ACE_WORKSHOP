@@ -384,7 +384,7 @@ CDE Sessions allow you to spin up CDE 1.19
 
 
 
-#### Creating a CDE Spark Job that uses Apache Iceberg
+#### Creating a CDE Spark Job with Apache Iceberg
 
 
 
@@ -393,13 +393,15 @@ To learn more about Iceberg in CDE please visit [Using Apache Iceberg in Clouder
 To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-create-job.html) in the CDE Documentation.
 
 
-## Part 2: Orchestrating Pipelines with Airflow
+## Part 2: Orchestrating Pipelines with Airflow and the Cloudera Airflow Editor
 
 #### Summary
 
-In this section you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more.
+CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
 
-##### Airflow Concepts
+This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
+
+#### Airflow Concepts
 
 In Airflow, a DAG (Directed Acyclic Graph) is defined in a Python script that represents the DAGs structure (tasks and their dependencies) as code.
 
@@ -513,133 +515,42 @@ Finally, reupload the script to your CDE Files Resource. Create a new CDE Job of
 
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
+##### Using the No-Code CDE Airflow Editor to Build Airflow DAGs in the UI
 
-## Part 3: Using the CDE CLI
+You can use the CDE Airflow Editor to build DAGs without writing code. This is a great option if your DAG consists of a long sequence of CDE Spark or CDW Hive jobs.
 
-#### Summary
+From the CDE Jobs UI, create a new CDE Job of type Airflow as shown below. Ensure to select the "Editor" option. Then click create.
 
-The majority of CDE Production use cases rely on the CDE API and CLI. With them, you can easily interact with CDE from a local IDE and build integrations with external 3rd party systems. For example, you can implement multi-CDE cluster workflows with GitLabCI or Python.  
+![alt text](../img/bonus2_step00.png)
 
-In this part of the workshop you will gain familiarity with the CDE CLI by rerunning the same jobs and interacting with the service remotely.
+From the Editor Canvas drag and drop the Shell Script action. This is equivalent to instantiating the BashOperator. Click on the icon on the canvas and an option window will appear on the right side. Enter the "dag start" in the Bash Command section.
 
-You can use the CDE CLI or API to execute Spark and Airflow jobs remotely rather than via the CDE UI as shown up to this point. In general, the CDE CLI is recommended over the UI when running spark submits from a local machine. The API is instead recommended when integrating CDE Spark Jobs or Airflow Jobs (or both) with 3rd party orchestration systems. For example you can use GitLab CI to build CDE Pipelines across multiple Virtual Clusters. For a detailed example, please reference [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE).
+![alt text](../img/bonus2_step01.png)
 
-##### Manual CLI Installation
+From the Canvas, drop two CDE Job Actions. Configure them with Job Name "sql_job". You already created this CDE Spark Job in part 2.
 
-You can download the CDE CLI to your local machine following the instructions provided in the [official documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html).
+![alt text](../img/bonus2_step02.png)
 
-##### Automated CLI Installation
+Next, drag and drop a Python action. In the code section, add *print("DAG Terminated")* as shown below.
 
-Alternatively, you can use the "00_cde_cli_install.py" automation script located in the "cde_cli_jobs" folder. This will install the CDE CLI in your local machine if you have a Mac.
+![alt text](../img/bonus2_step03.png)
 
->**⚠ Warning**  
-> The Automated CLI Installation script is not supported by Cloudera. It is just a utility which may not be compatible with your laptop settings. If you are having trouble using this script please follow the documentation to install the CLI Manually.
+Finally, complete the DAG by connecting each action.
 
-In order to use the automated installation script, please follow the steps below.
+![alt text](../img/bonus2_step04.png)
 
-First, create a Python virtual environment and install the requirements.
+For each of the two CDE Jobs, open the action by clicking on the icon on the canvas. Select "Depends on Past" and then "all_success" in the "Trigger Rule" section.
 
-```
-#Create
-python3 -m venv venv
+![alt text](../img/bonus2_step05.png)
 
-#Activate
-source venv/bin/activate
+Execute the DAG and observe it from the CDE Job Runs UI.
 
-#Install requirements
-pip install -r requirements.txt #Optionally use pip3 install
-```
+![alt text](../img/bonus2_step06.png)
 
-Then, execute the script with the following commands:
-
-```
-python cde_cli_jobs/00_cde_cli_install.py JOBS_API_URL CDP_WORKLOAD_USER
-```
-
-#### Using the CDE CLI
-
-###### Run Spark Job:
-
-This command will run the script as a simple Spark Submit. This is slightly different from creating a CDE Job of type Spark as the Job definition will not become reusable.
-
->**⚠ Warning**  
-> The CLI commands below are meant to be copy/pasted in your terminal as-is and run from the "cde_tour_ace_hol" directory. However, you may have to update the script path in each command if you're running these from a different folder.
-
-```
-cde spark submit --conf "spark.pyspark.python=python3" cde_cli_jobs/01_pyspark-sql.py
-```
-
-###### Check Job Status:
-
-This command will allow you to obtain information related to the above spark job. Make sure to replace the id flag with the id provided when you executed the last script e.g. 199.
-
-```
-cde run describe --id 199
-```
-
-###### Review the Output:
-
-This command shows the logs for the above job. Make sure to replace the id flag with the id provided when you executed the last script.  
-
-```
-cde run logs --type "driver/stdout" --id 199
-```
-
-###### Create a CDE Resource:
-
-This command creates a CDE Resource of type File:
-
-```
-cde resource create --name "my_CDE_Resource"
-```
-
-###### Upload file(s) to resource:
-
-This command uploads the "01_pyspark-sql.py" script into the CDE Resource.
-
-```
-cde resource upload --local-path "cde_cli_jobs/01_pyspark-sql.py" --name "my_CDE_Resource"
-```
-
-###### Validate CDE Resource:
-
-This command obtains information related to the CDE Resource.
-
-```
-cde resource describe --name "my_CDE_Resource"
-```
-
-###### Schedule CDE Spark Job with the File Uploaded to the CDE Resource
-
-This command creates a CDE Spark Job using the file uploaded to the CDE Resource.
-
-```
-cde job create --name "PySparkJob_from_CLI" --type spark --conf "spark.pyspark.python=python3" --application-file "/app/mount/01_pyspark-sql.py" --cron-expression "0 */1 * * *" --schedule-enabled "true" --schedule-start "2022-11-28" --schedule-end "2023-08-18" --mount-1-resource "my_CDE_Resource"
-```
-
-###### Validate Job:
-
-This command obtains information about CDE Jobs whose name contains the string "PySparkJob".
-
-```
-cde job list --filter 'name[like]%PySparkJob%'
-```
-
-###### Learning to use the CDE CLI
-
-The CDE CLI offers many more commands. To become familiarized with it you can use the "help" command and learn as you go. Here are some examples:
-
-```
-cde --help
-cde job --help
-cde run --help
-cde resource --help
-```
-
-To learn more about the CDE CLI please visit [Using the Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html) in the CDE Documentation.
+![alt text](../img/bonus2_step07.png)
 
 
-## Part 4: Using the Spark Migration Tool
+## Part 3: Using the Spark Migration Tool to Convert Spark Submits to CDE Spark Submits
 
 #### Summary
 
@@ -817,39 +728,311 @@ Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the T
 ![alt text](../img/bonus1_step3.png)
 
 
-### Bonus Lab 2: Using the CDE Airflow Editor to Build Airflow DAGs without Coding
+### Bonus Lab 2: Using the CDE CLI to Streamliine CDE Production Use Cases (In-Depth)
 
-You can use the CDE Airflow Editor to build DAGs without writing code. This is a great option if your DAG consists of a long sequence of CDE Spark or CDW Hive jobs.
+#### Summary
 
-From the CDE Jobs UI, create a new CDE Job of type Airflow as shown below. Ensure to select the "Editor" option. Then click create.
+The majority of CDE Production use cases rely on the CDE API and CLI. With them, you can easily interact with CDE from a local IDE and build integrations with external 3rd party systems. For example, you can implement multi-CDE cluster workflows with GitLabCI or Python.  
 
-![alt text](../img/bonus2_step00.png)
+In this part of the workshop you will gain familiarity with the CDE CLI by rerunning the same jobs and interacting with the service remotely.
 
-From the Editor Canvas drag and drop the Shell Script action. This is equivalent to instantiating the BashOperator. Click on the icon on the canvas and an option window will appear on the right side. Enter the "dag start" in the Bash Command section.
+You can use the CDE CLI or API to execute Spark and Airflow jobs remotely rather than via the CDE UI as shown up to this point. In general, the CDE CLI is recommended over the UI when running spark submits from a local machine. The API is instead recommended when integrating CDE Spark Jobs or Airflow Jobs (or both) with 3rd party orchestration systems. For example you can use GitLab CI to build CDE Pipelines across multiple Virtual Clusters. For a detailed example, please reference [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE).
 
-![alt text](../img/bonus2_step01.png)
+##### Manual CLI Installation
 
-From the Canvas, drop two CDE Job Actions. Configure them with Job Name "sql_job". You already created this CDE Spark Job in part 2.
+You can download the CDE CLI to your local machine following the instructions provided in the [official documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html).
 
-![alt text](../img/bonus2_step02.png)
+##### Automated CLI Installation
 
-Next, drag and drop a Python action. In the code section, add *print("DAG Terminated")* as shown below.
+Alternatively, you can use the "00_cde_cli_install.py" automation script located in the "cde_cli_jobs" folder. This will install the CDE CLI in your local machine if you have a Mac.
 
-![alt text](../img/bonus2_step03.png)
+>**⚠ Warning**  
+> The Automated CLI Installation script is not supported by Cloudera. It is just a utility which may not be compatible with your laptop settings. If you are having trouble using this script please follow the documentation to install the CLI Manually.
 
-Finally, complete the DAG by connecting each action.
+In order to use the automated installation script, please follow the steps below.
 
-![alt text](../img/bonus2_step04.png)
+First, create a Python virtual environment and install the requirements.
 
-For each of the two CDE Jobs, open the action by clicking on the icon on the canvas. Select "Depends on Past" and then "all_success" in the "Trigger Rule" section.
+```
+#Create
+python3 -m venv venv
 
-![alt text](../img/bonus2_step05.png)
+#Activate
+source venv/bin/activate
 
-Execute the DAG and observe it from the CDE Job Runs UI.
+#Install requirements
+pip install -r requirements.txt #Optionally use pip3 install
+```
 
-![alt text](../img/bonus2_step06.png)
+Then, execute the script with the following commands:
 
-![alt text](../img/bonus2_step07.png)
+```
+python cde_cli_jobs/00_cde_cli_install.py JOBS_API_URL CDP_WORKLOAD_USER
+```
+
+#### Using the CDE CLI
+
+###### Run Spark Job:
+
+This command will run the script as a simple Spark Submit. This is slightly different from creating a CDE Job of type Spark as the Job definition will not become reusable.
+
+>**⚠ Warning**  
+> The CLI commands below are meant to be copy/pasted in your terminal as-is and run from the "cde_tour_ace_hol" directory. However, you may have to update the script path in each command if you're running these from a different folder.
+
+```
+cde spark submit --conf "spark.pyspark.python=python3" cde_cli_jobs/01_pyspark-sql.py
+```
+
+###### Check Job Status:
+
+This command will allow you to obtain information related to the above spark job. Make sure to replace the id flag with the id provided when you executed the last script e.g. 199.
+
+```
+cde run describe --id 199
+```
+
+###### Review the Output:
+
+This command shows the logs for the above job. Make sure to replace the id flag with the id provided when you executed the last script.  
+
+```
+cde run logs --type "driver/stdout" --id 199
+```
+
+###### Create a CDE Resource:
+
+This command creates a CDE Resource of type File:
+
+```
+cde resource create --name "my_CDE_Resource"
+```
+
+###### Upload file(s) to resource:
+
+This command uploads the "01_pyspark-sql.py" script into the CDE Resource.
+
+```
+cde resource upload --local-path "cde_cli_jobs/01_pyspark-sql.py" --name "my_CDE_Resource"
+```
+
+###### Validate CDE Resource:
+
+This command obtains information related to the CDE Resource.
+
+```
+cde resource describe --name "my_CDE_Resource"
+```
+
+###### Schedule CDE Spark Job with the File Uploaded to the CDE Resource
+
+This command creates a CDE Spark Job using the file uploaded to the CDE Resource.
+
+```
+cde job create --name "PySparkJob_from_CLI" --type spark --conf "spark.pyspark.python=python3" --application-file "/app/mount/01_pyspark-sql.py" --cron-expression "0 */1 * * *" --schedule-enabled "true" --schedule-start "2022-11-28" --schedule-end "2023-08-18" --mount-1-resource "my_CDE_Resource"
+```
+
+###### Validate Job:
+
+This command obtains information about CDE Jobs whose name contains the string "PySparkJob".
+
+```
+cde job list --filter 'name[like]%PySparkJob%'
+```
+
+###### Learning to use the CDE CLI
+
+The CDE CLI offers many more commands. To become familiarized with it you can use the "help" command and learn as you go. Here are some examples:
+
+```
+cde --help
+cde job --help
+cde run --help
+cde resource --help
+```
+
+To learn more about the CDE CLI please visit [Using the Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html) in the CDE Documentation.
+
+
+### Bonus Lab 3: Using Python with the CDE API
+
+Cloudera Data Engineering (CDE) provides a robust API for integration with your existing continuous integration/continuous delivery platforms. In this example we will use Python to create and deploy Spark Jobs in CDE from your local machine. The same code can execute on other platforms and 3rd party tools.
+
+##### Introduction to the CDE API
+
+The Cloudera Data Engineering service API is documented in Swagger. You can view the API documentation and try out individual API calls by accessing the API DOC link in any virtual cluster:
+
+In the Data Engineering web console, select an environment.
+Click the Cluster Details icon in any of the listed virtual clusters.
+Click the link under API DOC.
+
+##### Basic API Workflow
+
+Obtain CDE Token and Set Environment Variable:
+
+```
+export CDE_TOKEN=$(curl -u <workload_user> $(echo '<grafana_charts>' | cut -d'/' -f1-3 | awk '{print $1"/gateway/authtkn/knoxtoken/api/v1/token"}') | jq -r '.access_token')
+```
+
+Create a sample CDE Resource
+
+```
+curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST \
+  "$JOBS_API_URL/resources" -H "Content-Type: application/json" \
+  -d "{ \"name\": \"cml2cde_api_resource\"}"
+```
+
+Validate CDE Resource Creation
+
+```
+curl -H "Authorization: Bearer $ACCESS_TOKEN" -X GET "$JOBS_API_URL/resources/cml2cde_api_resource"
+```
+
+Upload Spark Job Script
+
+```
+curl -H "Authorization: Bearer $ACCESS_TOKEN" -X PUT \
+  "$JOBS_API_URL/resources/cml2cde_api_resource/Data_Extraction_Sub_150k.py" \
+  -F "file=@/home/cdsw/cml2cde_tutorial_code/Data_Extraction_Sub_150k.py"
+```
+
+Create CDE Spark Job
+
+```
+curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs" \
+          -H "accept: application/json" \
+          -H "Content-Type: application/json" \
+          -d "{ \"name\": \"cml2cde_api_job\", \"type\": \"spark\", \"retentionPolicy\": \"keep_indefinitely\", \"mounts
+```
+
+Run CDE Spark Job
+
+```
+curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs/cml2cde_api_job/run"
+```
+
+##### Using Python
+
+You can use the Python Requests library to wrap the above methods. For example you can build a function to download the CDE Token via:
+
+```
+import requests
+
+def set_cde_token():
+    rep = os.environ["JOBS_API_URL"].split("/")[2].split(".")[0]
+    os.environ["GET_TOKEN_URL"] = os.environ["JOBS_API_URL"].replace(rep, "service").replace("dex/api/v1", "gateway/authtkn/knoxtoken/api/v1/token")
+    token_json = !curl -u $WORKLOAD_USER:$WORKLOAD_PASSWORD $GET_TOKEN_URL
+    os.environ["ACCESS_TOKEN"] = json.loads(token_json[5])["access_token"]
+    return json.loads(token_json[5])["access_token"]
+```
+
+Once you set the JOBS_API_URL correctly you can run the following code to download the CDE Token:
+
+```
+JOBS_API_URL = "https://ewefwfw.cde-6fhtj4hthr.my-cluster.ylcu-atmi.cloudera.site/dex/api/v1"
+
+tok = set_cde_token()
+```
+
+Although this can work in an interactive setting, we recommend using CDE Sessions as they allow you to directly use the PySpark and Spark Scala shells. In general, the API is a great choice for building applications. For example, you could use Python to issue a CDE API Request in order to monitor CDE Resources:
+
+```
+url = os.environ["JOBS_API_URL"] + "/resources"
+myobj = {"name": "cml2cde_python"}
+headers = {"Authorization": f'Bearer {tok}',
+          "Content-Type": "application/json"}
+
+## Only showing the latest two resources
+x = requests.get(url, headers=headers)
+x.json()["resources"][-3:-1]
+```
+
+As an exmaple we built [CDE Alerter](https://github.com/pdefusco/CDE_Alerter) and the cde_python module. CDE Alerter is a Python App to continuously monitor the status of CDE Jobs across multiple CDE Virtual Clusters. It allows you to implement a set of rules to notify a set of recipients in case of a particular event. It uses cde_python, a custom Python wrapper for the CDE API, to issue requests to the CDE Virtual Cluster.
+
+In order to run this App in your local machine little to none code changes are required. You will need Python 3.6 or above, a Gmail account with 2-step authentication and an App password. Steps to set up a Gmail account correctly are provided below. We recommend creating a new one and not using your personal Gmail account if you have one.
+
+## Instructions
+
+#### Step 0: Project setup
+
+Clone this GitHub repository to your local machine or the VM where you will be running the script.
+
+```
+mkdir ~/Documents/CDE_Alerter
+cd ~/Documents/CDE_Alerter
+git clone https://github.com/pdefusco/CDE_Alerter.git
+```
+
+Alternatively, if you don't have GitHub create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE_Alerter.git) and download the files.
+
+#### Step 1: Create a Python Virtual Environment and Install Requirements
+
+Although a Python Virtual Environment is optional, it is highly recommended. To create one and install requirements execute the following commands:
+
+```
+#Create
+python3 -m venv venv
+
+#Activate
+source venv/bin/activate
+
+#Install single package
+pip install pandas #Optionally use pip3 install
+
+#Install requirements
+pip install -r requirements.txt #Optionally use pip3 install
+```
+
+![alt text](img/alerter_img01.png)
+
+
+#### Step 2: Test CDE Connection
+
+To test if your VM can reach the CDE Virtual Cluster, open your terminal and run the following command:
+
+```
+python3 connection_tester.py jobs_api_url cdpusername cdppassword
+```
+
+The output in the terminal should confirm that a test resource has been created successfully.
+
+
+#### Step 3: Run the script
+
+Before you can run the script you will need:
+* The CDE JOBS API URL for the intended CDE Virtual Cluster you want to monitor.
+* The Gmail APP password (not just the account login password). If you need help setting this up for the first time:
+  1. Recommended: [Create a New Gmail Account](https://support.google.com/mail/answer/56256?hl=en)
+  2. [Enable 2-step Authentication and Create an App Password](https://www.youtube.com/watch?v=hXiPshHn9Pw)
+* The CDP User and Password you will authenticate into the CDE Virtual Cluster with.
+
+To run the script, run the following python command in the directory where you cloned your project.
+
+```
+python3 alerter.py https://z4xgdztf.cde-6fr6l74r.go01-dem.ylcu-atmi.cloudera.site/dex/api/v1 cdpusername cdppwdhere mysecregapppwdhere 1800 me@myco.com mycolleague@myco.com
+```
+
+The Gmail App password should be entered as the fourth argument (for example replacing "mysecregapppwdhere" above).
+
+The script will automatically detect whether more than 1800 seconds (30 minutes) have expired between the start and end time of any of your CDE Jobs.
+
+If any CDE Jobs meet the criteria, the script will automatically send a notification to the provided emails. You can enter two email recipients by adding them as the last two arguments at script execution.
+
+As an example, if we lower the time window from 1800 seconds to 18 seconds the script will detect some jobs and output the following to the terminal.
+
+![alt text](img/alerter_img_02A.png)
+
+If no CDE Jobs meet the criteria, nothing is done.
+
+![alt text](img/alerter_img02.png)
+
+
+#### Step 4: Schedule the Script as a Cron Job
+
+The script can run as often as you would like. For example, you could schedule a cron job to execute the script every minute with the following command:
+
+```
+* * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
+```
 
 
 ### Conclusion
