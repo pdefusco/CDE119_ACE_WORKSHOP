@@ -58,7 +58,22 @@ A logical subset of your cloud provider account including a specific virtual net
 The long-running Kubernetes cluster and services that manage the virtual clusters. The CDE service must be enabled on an environment before you can create any virtual clusters.
 
 ##### Virtual Cluster
-An individual auto-scaling cluster with defined CPU and memory ranges. Virtual Clusters in CDE can be created and deleted on demand. Jobs are associated with clusters.
+An individual auto-scaling cluster with defined CPU and memory ranges. Virtual Clusters in CDE can be created and deleted on demand. Jobs are associated with clusters. Up until CDE 1.18 all Virtual Clusters provided the same capabilities. With Version 1.19 you can choose between two Cluster Tiers:
+
+Core (Tier 1): Batch-based transformation and engineering options include:
+* Autoscaling Cluster
+* Spot Instances
+* SDX/Lakehouse
+* Job Lifecycle
+* Monitoring
+* Workflow Orchestration
+All Purpose (Tier 2) - Develop using interactive sessions and deploy both batch and streaming workloads. This option includes all options in Tier 1 with the following:
+* Shell Sessions - CLI and Web
+* JDBC/SparkSQL (Coming soon)
+* IDE (Coming Soon)
+
+Core clusters are recommended as Production environments. All Purpose clusters are instead designed to be used as Development and Testing environments.
+For more information on the CDE 1.19.1 and 1.19.2 releases please visit this page in the [documentation](https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-whats-new-1.19.html).
 
 ##### Jobs
 Application code along with defined configurations and resources. Jobs can be run on demand or scheduled. An individual job execution is called a job run.
