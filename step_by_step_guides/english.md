@@ -1099,11 +1099,11 @@ If any CDE Jobs meet the criteria, the script will automatically send a notifica
 
 As an example, if we lower the time window from 1800 seconds to 18 seconds the script will detect some jobs and output the following to the terminal.
 
-![alt text](img/alerter_img_02A.png)
+![alt text](../img/alerter_img_02A.png)
 
 If no CDE Jobs meet the criteria, nothing is done.
 
-![alt text](img/alerter_img02.png)
+![alt text](../img/alerter_img02.png)
 
 
 #### Step 4: Schedule the Script as a Cron Job
