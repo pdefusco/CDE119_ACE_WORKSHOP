@@ -67,6 +67,7 @@ Core (Tier 1): Batch-based transformation and engineering options include:
 * Job Lifecycle
 * Monitoring
 * Workflow Orchestration
+
 All Purpose (Tier 2) - Develop using interactive sessions and deploy both batch and streaming workloads. This option includes all options in Tier 1 with the following:
 * Shell Sessions - CLI and Web
 * JDBC/SparkSQL (Coming soon)
@@ -87,6 +88,16 @@ An individual job run.
 ##### CDE Session
 
 CDE interactive sessions give data engineers flexible end-points to start developing Spark applications from anywhere -- in a web-based terminal, local CLI, favorite IDE, and even via JDBC from third-party tools.
+
+##### Apache Iceberg
+
+Apache Iceberg is a cloud-native, high-performance open table format for organizing petabyte-scale analytic datasets on a file system or object store. Combined with Cloudera Data Platform (CDP), users can build an open data lakehouse architecture for multi-function analytics and to deploy large scale end-to-end pipelines.
+
+Open Data Lakehouse on CDP simplifies advanced analytics on all data with a unified platform for structured and unstructured data and integrated data services to enable any analytics use case from ML, BI to stream analytics and real-time analytics. Apache Iceberg is the secret sauce of the open lakehouse.
+
+Iceberg is compatible with a variety of compute engines including Spark. CDE allows you to deploy Iceberg-enabled Virtual Clusters. 
+
+For more information please visit the [documentation](https://iceberg.apache.org/).
 
 ##### CDE User Interface
 
@@ -152,7 +163,7 @@ To learn more about CDE Architecture please visit [Creating and Managing Virtual
 
 #### Summary
 
-In this section you will create and refine three Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
+In this section you will create four Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse Python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
 
 #### Editing Files and Creating CDE Resources
 
