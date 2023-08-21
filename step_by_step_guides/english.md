@@ -412,9 +412,9 @@ A CDE Session is an interactive short-lived development environment for running 
 
 From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
 
-![alt text](img/cde_session_0.png)
+![alt text](../img/cde_session_0.png)
 
-![alt text](img/cde_session_0_b.png)
+![alt text](../img/cde_session_0_b.png)
 
 The session will be in "starting" state for a few moments. When it's ready, launch it and open the Spark Shell by clicking on the "Interact" tab.
 
@@ -464,7 +464,7 @@ for each in another_df.collect():
     print(each[0])
 ```
 
-![alt text](img/cde_session_1.png)
+![alt text](../img/cde_session_1.png)
 
 ##### Using Interactive Sessions with the CDE CLI
 
@@ -474,13 +474,13 @@ Open your terminal and enter ```cde session interact --name InteractiveSession``
 
 Run the same PySpark code into the shell.
 
-![alt text](img/sparkshell1.png)
+![alt text](../img/sparkshell1.png)
 
-![alt text](img/sparkshell2_a.png)
+![alt text](../img/sparkshell2_a.png)
 
 Navigate back to the CDE Session and validate that the code has run from the UI.
 
-![alt text](img/sparkshell_2b.png)
+![alt text](../img/sparkshell_2b.png)
 
 You can also create a session directly from the CLI. In your local terminal, exit out of your current Spark Shell with "ctrl+D" and then run the following command:
 
@@ -488,9 +488,9 @@ You can also create a session directly from the CLI. In your local terminal, exi
 
 Notice that you can pass CDE Compute Options such as number of executors and executor-cores when using the command.
 
-![alt text](img/sparkshell3.png)
+![alt text](../img/sparkshell3.png)
 
-![alt text](img/sparkshell4_cdeui.png)
+![alt text](../img/sparkshell4_cdeui.png)
 
 
 ###### 4. Creating a CDE Spark Job with Apache Iceberg
@@ -619,17 +619,17 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 
 Navigate to the CDP Management Console and download your user credentials file. The credentials file includes a CDP Access Key ID and a CDP Private Key.
 
-![alt text](../img/mgt_console1.png)
+![alt text](img/mgt_console1.png)
 
-![alt text](../img/mgt_console2.png)
+![alt text](img/mgt_console2.png)
 
-![alt text](../img/mgt_console3.png)
+![alt text](img/mgt_console3.png)
 
-![alt text](../img/mgt_console4.png)
+![alt text](img/mgt_console4.png)
 
 Next, navigate to the CDE Virtual Cluster Details and copy the JOBS_API_URL.
 
-![alt text](../img/jobsapiurl.png)
+![alt text](img/jobsapiurl.png)
 
 Launch the example Docker container.
 
@@ -665,11 +665,11 @@ spark-submit \
 
 Shortly you should get output in your terminal including a Job Run ID confirming successful job submission to CDE. In the screenshot example below the Job Run ID is 9.
 
-![alt text](../img/job_submit_confirm1.png)
+![alt text](img/job_submit_confirm1.png)
 
 Navigate to your CDE Virtual Cluster Job Runs page and validate the job is running or has run successfully.
 
-![alt text](../img/job_submit_confirm3.png)
+![alt text](img/job_submit_confirm3.png)
 
 >**⚠ Warning**  
 >If you are unable to run the spark-submit you may have to remove the tls setting from config.yaml. In other words, completely erase line 4.
@@ -681,7 +681,7 @@ So far you explored the core aspects of CDE Spark, Airflow and Iceberg. The foll
 
 Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
 
-### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
+#### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 
 Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.
 
@@ -689,17 +689,17 @@ Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other
 
 First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
 
-![alt text](../img/airflow_connection_0.png)
+![alt text](img/airflow_connection_0.png)
 
-![alt text](../img/airflow_connection_1.png)
+![alt text](img/airflow_connection_1.png)
 
 Open Airflow Connections under the Admin dropdown as shown below.
 
-![alt text](../img/airflow_connection_2.png)
+![alt text](img/airflow_connection_2.png)
 
 Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
 
-![alt text](../img/airflow_connection_3.png)
+![alt text](img/airflow_connection_3.png)
 
 Fill out the following fields as shown below and save.
 
