@@ -68,22 +68,22 @@ step5 = PythonOperator(
 )
 ```
 
-* Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 89 and 95 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing two variables at lines 52 and 53.
+* Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 89 and 95 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing the values assigned at lines 55 and 56.
 
-```
+<pre>
 #Using the CDEJobRunOperator
 step1 = CDEJobRunOperator(
   task_id='etl',
   dag=intro_dag,
-  ** job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI **
+  <b>job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI</b>
 )
 
 step2 = CDEJobRunOperator(
     task_id='report',
     dag=intro_dag,
-    __ job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI __
+    <b>job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI</b>
 )
-```
+</pre>
 
 * Finally, task dependencies are specified at line 109. Steps 1 - 5 are executed in sequence, one when the other completes. If any of them fails, the remaining CDE Jobs will not be triggered.
 
