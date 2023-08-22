@@ -31,7 +31,9 @@ Alternatively, if you don't have `git` installed on your machine, create a folde
 
 ## Index
 
-* In Part 1 you will develop four Spark Jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. One of the Jobs will focus on Apache Iceberg.
-* In Part 2 you will create an Airflow Pipeline to orchestrate multiple Spark Jobs.
-* In Part 3 you will use the CDE Spark Migration tool to convert Spark Jobs into CDE Spark Jobs.
-* In Part 4 you will be able to explore a variety of topics in more detail including the CDE CLI, Airflow, and the CDE API.
+* Part 1 provides an introduction to the Architecture of the CDE Service. You will learn about the main components of CDE including the Environment, the Virtual Cluster, and more.
+* In Part 2 you will develop and deploy four Spark Jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. One of the Jobs will focus on Apache Iceberg.
+* In Part 3 you will create an Airflow Pipeline to orchestrate multiple Spark Jobs.
+* In Part 4 you will use the CDE Spark Migration tool to convert Spark Jobs into CDE Spark Jobs.
+* In Part 5 you will be able to explore a variety of topics in more detail including the CDE CLI, Airflow, and the CDE API.
+* Part 6 provides a summary and a few related projects. If you are using or evaluating CDE today, please make sure to visit this page to learn about related projects.
