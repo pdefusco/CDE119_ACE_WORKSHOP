@@ -71,17 +71,21 @@ step5 = PythonOperator(
 * Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 89 and 95 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing the values assigned at lines 55 and 56.
 
 <pre>
+
+<b>cde_job_name_03_A = "job3A"
+cde_job_name_03_B = "job3B"</b>
+
 #Using the CDEJobRunOperator
 step1 = CDEJobRunOperator(
   task_id='etl',
   dag=intro_dag,
-  <b>job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI</b>
+  <b>job_name=cde_job_name_03_A</b>
 )
 
 step2 = CDEJobRunOperator(
     task_id='report',
     dag=intro_dag,
-    <b>job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI</b>
+    <b>job_name=cde_job_name_03_B</b>
 )
 </pre>
 
