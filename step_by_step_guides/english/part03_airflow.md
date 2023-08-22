@@ -72,8 +72,8 @@ step5 = PythonOperator(
 
 <pre>
 
-<b>cde_job_name_03_A = "job3A"
-cde_job_name_03_B = "job3B"</b>
+<span style="color:blue"><b>*cde_job_name_03_A = "job3A"*,/b></span>
+<span style="color:green"><b>*cde_job_name_03_B = "job3B"*</b></span>
 
 #Using the CDEJobRunOperator
 step1 = CDEJobRunOperator(
