@@ -54,9 +54,6 @@ print("Running as Username: ", username)
 
 cde_job_name_03_A = "job3A" #Replace with CDE Job Name you used in the UI
 cde_job_name_03_B = "job3B" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_C = "job3C" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_D = "job3D" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_E = "job3E" #Replace with CDE Job Name you used in the UI
 
 #DAG instantiation
 default_args = {
