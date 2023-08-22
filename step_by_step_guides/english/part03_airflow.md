@@ -1,4 +1,3 @@
-
 # Part 3: Orchestrating Pipelines with Airflow
 
 ### Summary
@@ -21,10 +20,71 @@ The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. Fo
 
 Open "05-Airflow-Basic-DAG.py", familiarize yourself with the code, and notice the following:
 
-* Airflow allows you to break up complex Spark Pipelines in different steps, isolating issues and optionally providing retry options.
-* The CDEJobRunOperator, BashOperator and PythonOperator are imported at lines 44-46. These allow you to execute a CDE Spark Job, Bash, and Python Code respectively all within the same workflow.
+* Airflow allows you to break up complex Spark Pipelines in different steps, isolating issues and optionally providing retry options. The CDEJobRunOperator, BashOperator and PythonOperator are imported at lines 44-46. These allow you to execute a CDE Spark Job, Bash, and Python Code respectively all within the same workflow.
+
+```
+from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
+from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.http_operator import SimpleHttpOperator
+```
+
 * Each code block at lines 74, 80, 86, 92 and 102 instantiates an Operator. Each of them is stored as a variable named Step 1 through 5.
-* Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 77 and 83 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing two variables at lines 52 and 53.
+
+```
+step1 = CDEJobRunOperator(
+  task_id='etl',
+  dag=intro_dag,
+  job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
+)
+
+step2 = CDEJobRunOperator(
+    task_id='report',
+    dag=intro_dag,
+    job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
+)
+
+step3 = BashOperator(
+        task_id='bash',
+        dag=intro_dag,
+        bash_command='echo "Hello Airflow" '
+        )
+
+step4 = BashOperator(
+    task_id='bash_with_jinja',
+    dag=intro_dag,
+    bash_command='echo "yesterday={{ yesterday_ds }} | today={{ ds }}| tomorrow={{ tomorrow_ds }}"',
+)
+
+#Custom Python Method
+def _print_context(**context):
+    print(context)
+
+step5 = PythonOperator(
+    task_id="print_context_vars",
+    python_callable=_print_context,
+    dag=intro_dag
+)
+```
+
+* Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 89 and 95 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing two variables at lines 52 and 53.
+
+```
+#Using the CDEJobRunOperator
+step1 = CDEJobRunOperator(
+  task_id='etl',
+  dag=intro_dag,
+  *job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI
+)
+
+step2 = CDEJobRunOperator(
+    task_id='report',
+    dag=intro_dag,
+    *job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI*
+)
+```
+
 * Finally, task dependencies are specified at line 109. Steps 1 - 5 are executed in sequence, one when the other completes. If any of them fails, the remaining CDE Jobs will not be triggered.
 
 Create two CDE Spark Jobs using scripts "05-A-ETL.py" and "05-B-Reports.py" but do not run them.
@@ -83,7 +143,7 @@ From the Canvas, drop two CDE Job Actions. Configure them with Job Name "sql_job
 
 Next, drag and drop a Python action. In the code section, add *print("DAG Terminated")* as shown below.
 
-![alt text](../img/bonus2_step03.png)
+![alt text](../../img/bonus2_step03.png)
 
 Finally, complete the DAG by connecting each action.
 

@@ -116,7 +116,55 @@ step5 = PythonOperator(
     python_callable=_print_context,
     dag=intro_dag
 )
+
+step6a = CDEJobRunOperator(
+        task_id='create-left-table',
+        dag=airflow_tour_dag,
+        job_name=cde_job_name_03_C
+        )
+
+step6b = CDEJobRunOperator(
+        task_id='create-right-table',
+        dag=airflow_tour_dag,
+        job_name=cde_job_name_03_D
+        )
+
+step6c = CDEJobRunOperator(
+        task_id='join-tables',
+        dag=airflow_tour_dag,
+        job_name=cde_job_name_03_E
+        )
+
+#api_host = Variable.get("ran")
+def handle_response(response):
+    if response.status_code == 200:
+        print("Received 200 Ok")
+        return True
+    else:
+        print("Error")
+        return False
+
+step7 = SimpleHttpOperator(
+    task_id="random_joke_api",
+    method="GET",
+    http_conn_id="random_joke_connection",
+    endpoint="/jokes/programming/random",
+    headers={"Content-Type":"application/json"},
+    response_check=lambda response: handle_response(response),
+    dag=airflow_tour_dag,
+    do_xcom_push=True
+)
+
+def _print_random_joke(**context):
+    return context['ti'].xcom_pull(task_ids='random_joke_api')
+
+step8 = PythonOperator(
+    task_id="print_random_joke",
+    python_callable=_print_random_joke,
+    dag=airflow_tour_dag
+)
+
 #Execute tasks in the below order
 
 # step6c only executes when both step6a and step6b have completed
-step1 >> step2 >> step3 >> step4 >> step5
+step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8

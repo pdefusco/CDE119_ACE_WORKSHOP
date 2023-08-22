@@ -37,86 +37,55 @@
 # #  Author(s): Paul de Fusco
 #***************************************************************************/
 
-from dateutil import parser
+# Airflow DAG
 from datetime import datetime, timedelta
-from datetime import timezone
+from dateutil import parser
+import pendulum
 from airflow import DAG
 from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
+from cloudera.cdp.airflow.operators.cdw_operator import CDWOperator
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
-from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.http_operator import SimpleHttpOperator
-import pendulum
 
-username = "pdefusco_061423"
+username = "pdefusco_061523"
 
 print("Running as Username: ", username)
 
-cde_job_name_03_A = "job3A" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_B = "job3B" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_C = "job3C" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_D = "job3D" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_E = "job3E" #Replace with CDE Job Name you used in the UI
+dag_name = '{}-bonus-01-airflow-dag'.format(username)
 
-#DAG instantiation
 default_args = {
-    'owner': "pauldefusco",
-    'retry_delay': timedelta(seconds=10),
-    'depends_on_past': False,
-    'start_date': datetime(2022,11,22,8), #Start Date must be in the past
-    'end_date': datetime(2023,9,30,8) #End Date must be in the future
-}
+        'owner': 'pauldefusco',
+        'retry_delay': timedelta(seconds=5),
+        'depends_on_past': False,
+        'start_date': pendulum.datetime(2020, 1, 1, tz="Europe/Amsterdam"),
+        'end_date': datetime(2023,9,30,8)
+        }
 
-dag_name = '{}-03-airflow-pipeline'.format(username)
-
-intro_dag = DAG(
-    dag_name,
-    default_args=default_args,
-    schedule_interval='@yearly',
-    catchup=False,
-    is_paused_upon_creation=False
-)
-
-start = DummyOperator(
-    task_id="start",
-    dag=airflow_tour_dag
-)
-
-#Using the CDEJobRunOperator
-step1 = CDEJobRunOperator(
-  task_id='etl',
-  dag=intro_dag,
-  job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
-)
-
-step2 = CDEJobRunOperator(
-    task_id='report',
-    dag=intro_dag,
-    job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
-)
-
-step3 = BashOperator(
-        task_id='bash',
-        dag=intro_dag,
-        bash_command='echo "Hello Airflow" '
+airflow_cdw_dag = DAG(
+        dag_name,
+        default_args=default_args,
+        schedule_interval='@daily',
+        catchup=False,
+        is_paused_upon_creation=False
         )
 
-step4 = BashOperator(
-    task_id='bash_with_jinja',
-    dag=intro_dag,
-    bash_command='echo "yesterday={{ yesterday_ds }} | today={{ ds }}| tomorrow={{ tomorrow_ds }}"',
+spark_step = CDEJobRunOperator(
+        task_id='sql_job',
+        dag=airflow_cdw_dag,
+        job_name='sql_job' #Must match name of CDE Spark Job in the CDE Jobs UI
+        )
+
+cdw_query = """
+show databases;
+"""
+
+dw_step = CDWOperator(
+    task_id='dataset-etl-cdw',
+    dag=airflow_cdw_dag,
+    cli_conn_id='azure_cdw_connection',
+    hql=cdw_query,
+    schema='default',
+    use_proxy_user=False,
+    query_isolation=True
 )
 
-#Custom Python Method
-def _print_context(**context):
-    print(context)
-
-step5 = PythonOperator(
-    task_id="print_context_vars",
-    python_callable=_print_context,
-    dag=intro_dag
-)
-#Execute tasks in the below order
-
-# step6c only executes when both step6a and step6b have completed
-step1 >> step2 >> step3 >> step4 >> step5
+spark_step >> dw_step

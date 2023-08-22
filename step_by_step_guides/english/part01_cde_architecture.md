@@ -1,4 +1,4 @@
-# CDE Architecture
+# Part 1: CDE Architecture
 
 Cloudera Data Engineering (CDE) is a serverless service for Cloudera Data Platform that allows you to submit batch jobs to auto-scaling virtual clusters. CDE enables you to spend more time on your applications, and less time on infrastructure.
 
