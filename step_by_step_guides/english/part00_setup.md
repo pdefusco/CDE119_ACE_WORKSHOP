@@ -17,7 +17,7 @@ Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage
 
 Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
 
-## Project Setup
+## Project Download
 
 Clone this GitHub repository to your local machine or the VM where you will be running the script.
 
@@ -28,6 +28,13 @@ git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 ```
 
 Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) and manually download the files.
+
+## CDP User & Credentials
+
+This HOL uses a parameters.conf file to store the necessary credentials. Each user is asked to enter their Workload Username at line 4 and Datalake paths at lines 2 and 3. The Workload Password is automatically inherited at the CDP Environment level and does not be set.
+
+If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials. The data will already have been uplaoded by your Workshop Lead.
+If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload Username from your CDP Admin.
 
 ## Index
 

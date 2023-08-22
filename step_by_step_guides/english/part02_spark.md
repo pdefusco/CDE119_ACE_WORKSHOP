@@ -1,4 +1,4 @@
-# Part 2: Developing Spark Jobs in CDE
+# Part 2: Developing and Deploying Spark Jobs in CDE
 
 ## Objective
 
@@ -10,15 +10,15 @@ CDE Resources can be of type "File", "Python", or "Custom Runtime". You will sta
 
 To create a File Resource, from the CDE Home Page click on "Create New" in the "Resources" -> "File" section.
 
-![alt text](../../img/cde_res_1.png)
+![alt text](../../img/create_new_res119.png)
 
 Pick your Spark 3 / Iceberg enabled CDE Virtual Cluster and name your Resource after your username or a unique ID.
 
-![alt text](../../img/cde_res_2.png)
+![alt text](../../img/create_new_res119_2.png)
 
 Upload the following files located in the "cde_ace_hol/cde_spark_jobs" and "cde_ace_hol/resources_files" folders.
 
-When you are done, ensure that the following files are located in your File Resource:
+When you have finished ensure that the following files are located in your File Resource:
 
 ```
 01_PySpark_ETL.py
@@ -30,21 +30,21 @@ utils.py
 
 To create a Python Resource, navigate back to the CDE Home Page and click on "Create New" in the "Resources" -> "Python" section.
 
-![alt text](../../img/cde_res_4.png)
+![alt text](../../img/create_new_pres_119.png)
 
 Ensure to select the same CDE Virtual Cluster. Name the Python CDE Resource and leave the pipy mirror field blank.
 
-![alt text](../../img/cde_res_5.png)
+![alt text](../../img/create_new_pres_119_2.png)
 
 Upload the "requirements.txt" file provided in the "cde_ace_hol/resources_files" folder.
 
-![alt text](../../img/cde_res_6.png)
+![alt text](../../img/create_new_pres_119_3.png)
 
 Notice the CDE Resource is now building the Python Virtual Environment. After a few moments the build will complete and you will be able to validate the libraries used.
 
-![alt text](../../img/cde_res_7.png)
+![alt text](../../img/create_new_pres_119_4.png)
 
-![alt text](../../img/cde_res_8.png)
+![alt text](../../img/create_new_pres_119_5.png)
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
