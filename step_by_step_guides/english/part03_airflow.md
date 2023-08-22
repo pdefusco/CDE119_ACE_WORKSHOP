@@ -81,7 +81,7 @@ step1 = CDEJobRunOperator(
 step2 = CDEJobRunOperator(
     task_id='report',
     dag=intro_dag,
-    **job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI**
+    __job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI__
 )
 ```
 
