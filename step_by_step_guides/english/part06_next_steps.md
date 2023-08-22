@@ -1,4 +1,8 @@
-# Summary and Next Steps
+# Conclusions and Next Steps
+
+Congratulations for making it to the end of this Hands On Lab! We hope you enjoyed using CDE first hand.
+
+### CDE Recap
 
 CDE is the Cloudera Data Engineering Service, a containerized managed service for Spark and Airflow.
 
@@ -6,7 +10,9 @@ CDP Data Engineering is the only cloud-native service purpose-built for enterpri
 
 Data Engineering is fully integrated with Cloudera Data Platform, enabling end-to-end visibility and security with SDX as well as seamless integrations with CDP services such as Data Warehouse and Machine Learning. Data Engineering on CDP powers consistent, repeatable, and automated data engineering workflows on a hybrid cloud platform anywhere.
 
-If you are exploring CDE you may find the following tutorials relevant:
+### CDE Relevant Projects
+
+If you are exploring or using CDE today you may find the following tutorials relevant:
 
 * [Spark 3 & Iceberg](https://github.com/pdefusco/Spark3_Iceberg_CML): A quick intro of Time Travel Capabilities with Spark 3.
 
@@ -31,3 +37,5 @@ For more information on the Cloudera Data Platform and its form factors please v
 For more information on migrating Spark jobs to CDE, please reference [this guide](https://docs.cloudera.com/cdp-private-cloud-upgrade/latest/cdppvc-data-migration-spark/topics/cdp-migration-spark-cdp-cde.html).
 
 If you have any questions about CML or would like to see a demo, please reach out to your Cloudera Account Team or send a message [through this portal](https://www.cloudera.com/contact-sales.html) and we will be in contact with you soon.
+
+![alt text](../../img/cde_thankyou.png)

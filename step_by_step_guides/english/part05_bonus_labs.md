@@ -440,10 +440,3 @@ The script can run as often as you would like. For example, you could schedule a
 ```
 * * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
 ```
-
-
-### Conclusion
-
-Congratulations for making it to the end of this tutorial! We hope you enjoyed using CDE first hand. We recommend visiting the [Next Steps Section](https://github.com/pdefusco/CDE_Tour_ACE_HOL#next-steps) to continue your journey with CDE.
-
-![alt text](../../img/cde_thankyou.png)
