@@ -1,5 +1,11 @@
 # Part 1: CDE Architecture
 
+## Objective
+
+In this section you will learn about CDE's flexible architecture and its main components. This is just a recommended reading and there are no jobs associated with it.
+
+## Introduction to the CDE Service
+
 Cloudera Data Engineering (CDE) is a service for Cloudera Data Platform that allows you to submit batch jobs to auto-scaling virtual clusters. CDE enables you to spend more time on your applications, and less time on infrastructure.
 
 Cloudera Data Engineering allows you to create, manage, and schedule Apache Spark jobs without the overhead of creating and maintaining Spark clusters. With Cloudera Data Engineering, you define virtual clusters with a range of CPU and memory resources, and the cluster scales up and down as needed to run your Spark workloads, helping to control your cloud costs.
@@ -118,7 +124,7 @@ CDE supports Spark 2.4.8, 3.2.3 and 3.3.0.
 
 To learn more about CDE Architecture please visit [Creating and Managing Virtual Clusters](https://docs.cloudera.com/data-engineering/cloud/manage-clusters/topics/cde-create-cluster.html) and [Recommendations for Scaling CDE Deployments](https://docs.cloudera.com/data-engineering/cloud/deployment-architecture/topics/cde-general-scaling.html)
 
-# Summary
+## Summary
 
 A CDE Service defines compute instance types, instance autoscale ranges and the associated CDP Data Lake. The Data and Users associated with the Service are subjected by SDX and the CDP Environment settings. You can leverage SDX Atlas and Ranger to visualize table and job metadata and secure user and data access with fine-grained policies.
 
@@ -131,3 +137,5 @@ This flexible architecture allows you to isolate your workloads and limit access
 CDE takes advantage of YuniKorn resource scheduling and sorting policies, such as gang scheduling and bin packing, to optimize resource utilization and improve cost efficiency. For more information on gang scheduling, see the Cloudera blog post [Spark on Kubernetes – Gang Scheduling with YuniKorn](https://blog.cloudera.com/spark-on-kubernetes-gang-scheduling-with-yunikorn/).
 
 CDE Spark Job auto-scaling is controlled by Apache Spark dynamic allocation. Dynamic allocation scales job executors up and down as needed for running jobs. This can provide large performance benefits by allocating as many resources as needed by the running job, and by returning resources when they are not needed so that concurrent jobs can potentially run faster.
+
+[In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) you will develop and deploy your first Spark Jobs in CDE to start building an ETL and Reporting Pipeline at scale.
