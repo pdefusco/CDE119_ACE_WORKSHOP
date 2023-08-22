@@ -1,12 +1,12 @@
 # Part 3: Orchestrating Pipelines with Airflow
 
-### Summary
+## Summary
 
 CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
 
 This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
 
-#### Airflow Concepts
+## Airflow Concepts
 
 In Airflow, a DAG (Directed Acyclic Graph) is defined in a Python script that represents the DAGs structure (tasks and their dependencies) as code.
 
@@ -16,7 +16,10 @@ For more information about Airflow DAGs, see Apache Airflow documentation [here]
 
 The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. For a complete overview of the Airflow UI, see  Apache Airflow UI documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
 
-##### Executing Airflow Basic DAG
+
+## Deploying Orchestration Pipeline with Airflow
+
+#### Review Airflow Basic DAG Code
 
 Open "05-Airflow-Basic-DAG.py", familiarize yourself with the code, and notice the following:
 
@@ -89,7 +92,13 @@ step2 = CDEJobRunOperator(
 )
 </pre>
 
-* Finally, task dependencies are specified at line 109. Steps 1 - 5 are executed in sequence, one when the other completes. If any of them fails, the remaining CDE Jobs will not be triggered.
+* Finally, task dependencies are specified at line 119. Steps 1 - 5 are executed in sequence, one when the other completes. If any of them fails, the remaining CDE Jobs will not be triggered.
+
+```
+step1 >> step2 >> step3 >> step4 >> step5
+```
+
+#### Deploy Airflow Basic DAG Code
 
 Create two CDE Spark Jobs using scripts "05-A-ETL.py" and "05-B-Reports.py" but do not run them.
 
@@ -129,7 +138,8 @@ Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and valid
 
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
-##### Using the No-Code CDE Airflow Editor to Build Airflow DAGs in the UI
+
+## Deploying Orchestration Pipeline with Cloudera Airflow Editor
 
 You can use the CDE Airflow Editor to build DAGs without writing code. This is a great option if your DAG consists of a long sequence of CDE Spark or CDW Hive jobs.
 
