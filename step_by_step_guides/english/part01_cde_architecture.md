@@ -118,7 +118,7 @@ CDE supports Spark 2.4.8, 3.2.3 and 3.3.0.
 
 To learn more about CDE Architecture please visit [Creating and Managing Virtual Clusters](https://docs.cloudera.com/data-engineering/cloud/manage-clusters/topics/cde-create-cluster.html) and [Recommendations for Scaling CDE Deployments](https://docs.cloudera.com/data-engineering/cloud/deployment-architecture/topics/cde-general-scaling.html)
 
-# Part 1 Key Takeaways
+# Summary
 
 A CDE Service defines compute instance types, instance autoscale ranges and the associated CDP Data Lake. The Data and Users associated with the Service are subjected by SDX and the CDP Environment settings. You can leverage SDX Atlas and Ranger to visualize table and job metadata and secure user and data access with fine-grained policies.
 
