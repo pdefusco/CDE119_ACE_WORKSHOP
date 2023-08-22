@@ -48,7 +48,7 @@ Notice the CDE Resource is now building the Python Virtual Environment. After a 
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
-#### Creating CDE Spark Jobs in the UI
+### Creating CDE Spark Jobs in the UI
 
 Next we will create a CDE Job of type Spark using the script "01_PySpark_ETL.py" which you have already uploaded to your CDE File Resource in the prior step.
 
@@ -60,7 +60,7 @@ Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name.
 
 ![alt text](../../img/cde_jobs_2.png)
 
-###### 1. Set Application File
+#### 1. Set Application File
 
 The Application File is the code that will run as the Spark Job. This could be a PySpark file or a Jar.
 
@@ -70,17 +70,17 @@ Scroll down; ensure to select "File" from the radio button and click on "Select 
 
 ![alt text](../../img/cde_jobs_4.png)
 
-###### 2. Set Spark Configurations
+#### 2. Set Spark Configurations
 
 The Configurations section allows you to set Spark Application Configurations such as Driver and Executor settings, Jars, Spark properties, and many more. In other words, virtually most properties available in the [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) can be applied here.
 
 In this job we will set the "spark.executorEnv.PYTHONPATH" configuration to "/app/mount/simple_udf.zip" so it can read the UDF from the CDE File Resource.
 
-###### 3. Set Python Environment
+#### 3. Set Python Environment
 
 Set the Python environment to the CDE Python Resource you created in the previous step.
 
-###### 4. Set Advanced Options
+#### 4. Set Advanced Options
 
 The Python, Egg, Zip Files section allows you to load dependencies onto your job. This can be used for a variety of use cases including mounting Python files to the Executors, using Wheel files, and more.
 
@@ -88,7 +88,7 @@ In the Python, Egg, Zip Files section select the "utils.py" and "simple_udf.zip"
 
 Scroll down again to the "Resources" section and notice that your File Resource has been mapped to the Job by default. This allows the PySpark script to load modules in the same Resource such as the ones contained in the "utils.py" file.
 
-###### 5. Set Compute Options
+#### 5. Set Compute Options
 
 Compute Options allow you to set important Spark Resource Configs.
 
@@ -99,7 +99,7 @@ Compute Options allow you to set important Spark Resource Configs.
 
 Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 4, Driver Memory to 2, and Executor Memory to 4. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
 
-###### 6. Trigger and Monitor the Job
+#### 6. Trigger and Monitor the Job
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
@@ -139,13 +139,13 @@ The Spark UI allows you to visualize resources, optimize performance and trouble
 >Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
 
 
-#### Creating CDE Spark Jobs with the CLI
+### Creating CDE Spark Jobs with the CLI
 
 So far we have created a Spark Job via the CDE UI. However, CDE use cases involving more than just a few jobs normally benefit in numerous ways from the CDE CLI or CDE API. The CLI allows you to more quickly iterate through different Spark Submits and CDE Resources. The API is an excellent access point to CDE from other tools including 3rd party DevOps and CI/CD solutions.
 
 In this section we will create a CDE Spark Submit and a CDE Spark Job via the CLI. In the process we will explain the difference.
 
-###### 0. Installing the CDE CLI
+#### 0. Installing the CDE CLI
 
 Step 1: Download the CLI Client:
 
@@ -176,7 +176,7 @@ Step 5: Save the configuration file. If you have not done so already, make sure 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
 
-### 1. CDE Spark Submit via the CDE CLI.
+#### 1. CDE Spark Submit via the CDE CLI.
 
 A CDE Spark Submit is the fastest way to prototype a Spark Job. It allows you to submit Spark Application Code and monitor results with CDE's logging and observability features but it does not allow you to save the Code as a reusable CDE Job Definition. This is beneficial for example in case you want to reschedule the job to run on a recurrent basis or include it in a CDE Airflow Job.
 
@@ -203,7 +203,7 @@ cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl c
 The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
 
 
-### 2. CDE Spark Job via the CDE CLI.
+#### 2. CDE Spark Job via the CDE CLI.
 
 Similar to a CDE Spark Submit a CDE Spark Job is Application code to execute a Spark (or Airflow) Job in a CDE Virtual Cluster. However, the CDE Job allows you to easily define, edit and reuse configurations and resources in future runs. Jobs can be run on demand or scheduled. An individual job execution is called a Job Run.
 
@@ -243,7 +243,7 @@ Notice the Job Run ID output to the terminal and validate the Job in the Job Run
 Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice that the Definition can be edited and is reusable.
 
 
-### 3. Exploring Data Interactively with CDE Sessions
+### Exploring Data Interactively with CDE Sessions
 
 A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
 
@@ -332,7 +332,7 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 ![alt text](../../img/sparkshell4_cdeui.png)
 
 
-### 4. Creating a CDE Spark Job with Apache Iceberg
+### Creating a CDE Spark Job with Apache Iceberg
 
 In this final section of Part 2 you will finish by deploying a CDE Job of type Spark in the CDE UI using PySpark script "03_PySpark_Iceberg.py".
 
