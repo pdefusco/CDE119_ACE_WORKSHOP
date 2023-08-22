@@ -34,17 +34,17 @@ To create a Python Resource, navigate back to the CDE Home Page and click on "Cr
 
 Ensure to select the same CDE Virtual Cluster. Name the Python CDE Resource and leave the pipy mirror field blank.
 
-![alt text](../../img/create_new_pres_119_2.png)
+![alt text](../../img/create_new_pres119_2.png)
 
 Upload the "requirements.txt" file provided in the "cde_ace_hol/resources_files" folder.
 
-![alt text](../../img/create_new_pres_119_3.png)
+![alt text](../../img/create_new_pres119_3.png)
 
 Notice the CDE Resource is now building the Python Virtual Environment. After a few moments the build will complete and you will be able to validate the libraries used.
 
-![alt text](../../img/create_new_pres_119_4.png)
+![alt text](../../img/create_new_pres119_4.png)
 
-![alt text](../../img/create_new_pres_119_5.png)
+![alt text](../../img/create_new_pres119_5.png)
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
