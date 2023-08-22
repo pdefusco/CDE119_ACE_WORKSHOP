@@ -68,11 +68,11 @@ Now that you have covered the basics of CDE, spend a few moments familiarizing y
 
 The Home Page provides a high level overview of all CDE Services and Clusters. At the top, you have shortcuts to creating CDE Jobs and Resources. Scroll down to the CDE Virtual Clusters section and notice that all Virtual Clusters and each associated CDP Environment / CDE Service are shown.
 
-![alt text](../img/cde_lp_1.png)
+![alt text](../../img/cde_lp_1.png)
 
 Next, open the Administration page on the left tab. This page also shows CDE Services on the left and associated Virtual Clusters on the right.
 
-![alt text](../img/cde_service_1.png)
+![alt text](../../img/cde_service_1.png)
 
 Open the CDE Service Details page and notice the following key information and links:
 
@@ -82,17 +82,17 @@ Open the CDE Service Details page and notice the following key information and l
 * Graphana Charts. Click on this link to obtain a dashboard of running Service Kubernetes resources.
 * Resource Scheduler. Click on this link to view the Yunikorn Web UI.
 
-![alt text](../img/cde_service_2.png)
+![alt text](../../img/cde_service_2.png)
 
 Scroll down and open the Configurations tab. Notice that this is where Instance Types and Instance Autoscale ranges are defined.
 
-![alt text](../img/cde_service_3a.png)
+![alt text](../../img/cde_service_3a.png)
 
 To learn more about other important service configurations please visit [Enabling a CDE Service](https://docs.cloudera.com/data-engineering/cloud/enable-data-engineering/topics/cde-enable-data-engineering.html) in the CDE Documentation.
 
 Navigate back to the Administration page and open a Virtual Cluster's Cluster Details page.
 
-![alt text](../img/cde_lp_2.png)
+![alt text](../../img/cde_lp_2.png)
 
 This view includes other important cluster management information. From here you can:
 
@@ -102,7 +102,7 @@ This view includes other important cluster management information. From here you
 
 Open the Configuration tab. Notice that CPU and Memory autoscale ranges, Spark version, and Iceberg options are set here.
 
-![alt text](../img/cde_lp_3.png)
+![alt text](../../img/cde_lp_3.png)
 
 To learn more about CDE Architecture please visit [Creating and Managing Virtual Clusters](https://docs.cloudera.com/data-engineering/cloud/manage-clusters/topics/cde-create-cluster.html) and [Recommendations for Scaling CDE Deployments](https://docs.cloudera.com/data-engineering/cloud/deployment-architecture/topics/cde-general-scaling.html)
 
