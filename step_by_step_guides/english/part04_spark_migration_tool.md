@@ -16,17 +16,17 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 
 Navigate to the CDP Management Console and download your user credentials file. The credentials file includes a CDP Access Key ID and a CDP Private Key.
 
-![alt text](../img/mgt_console1.png)
+![alt text](../../img/mgt_console1.png)
 
-![alt text](../img/mgt_console2.png)
+![alt text](../../img/mgt_console2.png)
 
-![alt text](../img/mgt_console3.png)
+![alt text](../../img/mgt_console3.png)
 
-![alt text](../img/mgt_console4.png)
+![alt text](../../img/mgt_console4.png)
 
 Next, navigate to the CDE Virtual Cluster Details and copy the JOBS_API_URL.
 
-![alt text](../img/jobsapiurl.png)
+![alt text](../../img/jobsapiurl.png)
 
 Launch the example Docker container.
 
@@ -62,11 +62,11 @@ spark-submit \
 
 Shortly you should get output in your terminal including a Job Run ID confirming successful job submission to CDE. In the screenshot example below the Job Run ID is 9.
 
-![alt text](../img/job_submit_confirm1.png)
+![alt text](../../img/job_submit_confirm1.png)
 
 Navigate to your CDE Virtual Cluster Job Runs page and validate the job is running or has run successfully.
 
-![alt text](../img/job_submit_confirm3.png)
+![alt text](../../img/job_submit_confirm3.png)
 
 >**⚠ Warning**  
 >If you are unable to run the spark-submit you may have to remove the tls setting from config.yaml. In other words, completely erase line 4.

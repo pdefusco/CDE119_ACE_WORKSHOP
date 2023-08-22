@@ -45,23 +45,23 @@ Finally, modify lines 60 and 61 to assign a start and end date that takes place 
 
 Upload the updated script to your CDE Files Resource. Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
 
-![alt text](../img/cde_airflow_1.png)
+![alt text](../../img/cde_airflow_1.png)
 
 As before, select your Virtual Cluster and Job name. Then create and execute.
 
-![alt text](../img/cde_airflow_2.png)
+![alt text](../../img/cde_airflow_2.png)
 
-![alt text](../img/cde_airflow_3.png)
+![alt text](../../img/cde_airflow_3.png)
 
 Navigate to the Job Runs tab and notice that the Airflow DAG is running. While in progress, navigate back to the CDE Home Page, scroll down to the Virtual Clusters section and open the Virtual Cluster Details. Then, open the Airflow UI.
 
-![alt text](../img/cde_airflow_4.png)
+![alt text](../../img/cde_airflow_4.png)
 
 Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and validate the CDE Airflow Job's execution.
 
-![alt text](../img/cde_airflow_5.png)
+![alt text](../../img/cde_airflow_5.png)
 
-![alt text](../img/cde_airflow_6.png)
+![alt text](../../img/cde_airflow_6.png)
 
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
@@ -71,15 +71,15 @@ You can use the CDE Airflow Editor to build DAGs without writing code. This is a
 
 From the CDE Jobs UI, create a new CDE Job of type Airflow as shown below. Ensure to select the "Editor" option. Then click create.
 
-![alt text](../img/bonus2_step00.png)
+![alt text](../../img/bonus2_step00.png)
 
 From the Editor Canvas drag and drop the Shell Script action. This is equivalent to instantiating the BashOperator. Click on the icon on the canvas and an option window will appear on the right side. Enter the "dag start" in the Bash Command section.
 
-![alt text](../img/bonus2_step01.png)
+![alt text](../../img/bonus2_step01.png)
 
 From the Canvas, drop two CDE Job Actions. Configure them with Job Name "sql_job". You already created this CDE Spark Job in part 2.
 
-![alt text](../img/bonus2_step02.png)
+![alt text](../../img/bonus2_step02.png)
 
 Next, drag and drop a Python action. In the code section, add *print("DAG Terminated")* as shown below.
 
@@ -87,14 +87,14 @@ Next, drag and drop a Python action. In the code section, add *print("DAG Termin
 
 Finally, complete the DAG by connecting each action.
 
-![alt text](../img/bonus2_step04.png)
+![alt text](../../img/bonus2_step04.png)
 
 For each of the two CDE Jobs, open the action by clicking on the icon on the canvas. Select "Depends on Past" and then "all_success" in the "Trigger Rule" section.
 
-![alt text](../img/bonus2_step05.png)
+![alt text](../../img/bonus2_step05.png)
 
 Execute the DAG and observe it from the CDE Job Runs UI.
 
-![alt text](../img/bonus2_step06.png)
+![alt text](../../img/bonus2_step06.png)
 
-![alt text](../img/bonus2_step07.png)
+![alt text](../../img/bonus2_step07.png)

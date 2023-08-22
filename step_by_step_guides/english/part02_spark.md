@@ -10,11 +10,11 @@ CDE Resources can be of type "File", "Python", or "Custom Runtime". You will sta
 
 To create a File Resource, from the CDE Home Page click on "Create New" in the "Resources" -> "File" section.
 
-![alt text](../img/cde_res_1.png)
+![alt text](../../img/cde_res_1.png)
 
 Pick your Spark 3 / Iceberg enabled CDE Virtual Cluster and name your Resource after your username or a unique ID.
 
-![alt text](../img/cde_res_2.png)
+![alt text](../../img/cde_res_2.png)
 
 Upload the following files located in the "cde_ace_hol/cde_spark_jobs" and "cde_ace_hol/resources_files" folders.
 
@@ -30,21 +30,21 @@ utils.py
 
 To create a Python Resource, navigate back to the CDE Home Page and click on "Create New" in the "Resources" -> "Python" section.
 
-![alt text](../img/cde_res_4.png)
+![alt text](../../img/cde_res_4.png)
 
 Ensure to select the same CDE Virtual Cluster. Name the Python CDE Resource and leave the pipy mirror field blank.
 
-![alt text](../img/cde_res_5.png)
+![alt text](../../img/cde_res_5.png)
 
 Upload the "requirements.txt" file provided in the "cde_ace_hol/resources_files" folder.
 
-![alt text](../img/cde_res_6.png)
+![alt text](../../img/cde_res_6.png)
 
 Notice the CDE Resource is now building the Python Virtual Environment. After a few moments the build will complete and you will be able to validate the libraries used.
 
-![alt text](../img/cde_res_7.png)
+![alt text](../../img/cde_res_7.png)
 
-![alt text](../img/cde_res_8.png)
+![alt text](../../img/cde_res_8.png)
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
@@ -54,11 +54,11 @@ Next we will create a CDE Job of type Spark using the script "01_PySpark_ETL.py"
 
 Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
 
-![alt text](../img/cde_jobs_1.png)
+![alt text](../../img/cde_jobs_1.png)
 
 Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name.
 
-![alt text](../img/cde_jobs_2.png)
+![alt text](../../img/cde_jobs_2.png)
 
 ###### 1. Set Application File
 
@@ -66,9 +66,9 @@ The Application File is the code that will run as the Spark Job. This could be a
 
 Scroll down; ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
 
-![alt text](../img/cde_jobs_3.png)
+![alt text](../../img/cde_jobs_3.png)
 
-![alt text](../img/cde_jobs_4.png)
+![alt text](../../img/cde_jobs_4.png)
 
 ###### 2. Set Spark Configurations
 
@@ -103,31 +103,31 @@ Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
-![alt text](../img/cde_jobs_5.png)
+![alt text](../../img/cde_jobs_5.png)
 
 You will be automatically taken to the Jobs tab where the Job will now be listed at the top. Open the Job Runs tab on the left pane and validate that the CDE Spark Job is executing.
 
-![alt text](../img/cde_jobs_6.png)
+![alt text](../../img/cde_jobs_6.png)
 
-![alt text](../img/cde_jobs_7.png)
+![alt text](../../img/cde_jobs_7.png)
 
 When complete, a green checkmark will appear on the left side. Click on the Job Run number to explore further.
 
-![alt text](../img/cde_jobs_8.png)
+![alt text](../../img/cde_jobs_8.png)
 
 The Job Run is populated with Metadata, Logs, and the Spark UI. This information is persisted and can be referenced at a later point in time.
 
 The Configuration tab allows you to verify the script and resources used by the CDE Spark Job.
 
-![alt text](../img/cde_jobs_8a.png)
+![alt text](../../img/cde_jobs_8a.png)
 
 The Logs tab contains rich logging information. For example, you can verify your code output under "Logs" -> "Driver" -> "StdOut".
 
-![alt text](../img/cde_jobs_9.png)
+![alt text](../../img/cde_jobs_9.png)
 
 The Spark UI allows you to visualize resources, optimize performance and troubleshoot your Spark Jobs.
 
-![alt text](../img/cde_jobs_10.png)
+![alt text](../../img/cde_jobs_10.png)
 
 >**Note**  
 >Your credentials are stored in parameters.conf
@@ -188,11 +188,11 @@ cde spark submit cde_spark_jobs/simple-pyspark-sql.py
 
 Shortly after running this you will notice confirmation of sibmission in the terminal. As the Spark Application runs the terminal will show logs and job outputs.
 
-![alt text](../img/cde_jobs_10.png)
+![alt text](../../img/cde_jobs_10.png)
 
 The above created a "cli-submit-username-timestamp" entry in the Job Runs page of your CDE Cluster. Open the Job Run and explore the logs. Notice the Job Definition is not reusable.
 
-![alt text](../img/cde_jobs_10.png)
+![alt text](../../img/cde_jobs_10.png)
 
 The first Spark Submit ran a simple PySpark job but notice we didn't specify any Spark Options. Next, create a more advanced Spark Submit by running the following command in your terminal:
 
@@ -251,9 +251,9 @@ A CDE Session is an interactive short-lived development environment for running 
 
 From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
 
-![alt text](../img/cde_session_0.png)
+![alt text](../../img/cde_session_0.png)
 
-![alt text](../img/cde_session_0_b.png)
+![alt text](../../img/cde_session_0_b.png)
 
 The session will be in "starting" state for a few moments. When it's ready, launch it and open the Spark Shell by clicking on the "Interact" tab.
 
@@ -303,7 +303,7 @@ for each in another_df.collect():
     print(each[0])
 ```
 
-![alt text](../img/cde_session_1.png)
+![alt text](../../img/cde_session_1.png)
 
 ##### Using Interactive Sessions with the CDE CLI
 
@@ -313,13 +313,13 @@ Open your terminal and enter ```cde session interact --name InteractiveSession``
 
 Run the same PySpark code into the shell.
 
-![alt text](../img/sparkshell1.png)
+![alt text](../../img/sparkshell1.png)
 
-![alt text](../img/sparkshell2_a.png)
+![alt text](../../img/sparkshell2_a.png)
 
 Navigate back to the CDE Session and validate that the code has run from the UI.
 
-![alt text](../img/sparkshell_2b.png)
+![alt text](../../img/sparkshell_2b.png)
 
 You can also create a session directly from the CLI. In your local terminal, exit out of your current Spark Shell with "ctrl+D" and then run the following command:
 
@@ -327,9 +327,9 @@ You can also create a session directly from the CLI. In your local terminal, exi
 
 Notice that you can pass CDE Compute Options such as number of executors and executor-cores when using the command.
 
-![alt text](../img/sparkshell3.png)
+![alt text](../../img/sparkshell3.png)
 
-![alt text](../img/sparkshell4_cdeui.png)
+![alt text](../../img/sparkshell4_cdeui.png)
 
 
 ###### 4. Creating a CDE Spark Job with Apache Iceberg

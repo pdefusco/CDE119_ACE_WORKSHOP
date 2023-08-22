@@ -12,17 +12,17 @@ Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other
 
 First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
 
-![alt text](../img/airflow_connection_0.png)
+![alt text](../../img/airflow_connection_0.png)
 
-![alt text](../img/airflow_connection_1.png)
+![alt text](../../img/airflow_connection_1.png)
 
 Open Airflow Connections under the Admin dropdown as shown below.
 
-![alt text](../img/airflow_connection_2.png)
+![alt text](../../img/airflow_connection_2.png)
 
 Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
 
-![alt text](../img/airflow_connection_3.png)
+![alt text](../../img/airflow_connection_3.png)
 
 Fill out the following fields as shown below and save.
 
@@ -32,7 +32,7 @@ Connection Type: HTTP
 Host: https://official-joke-api.appspot.com/
 ```
 
-![alt text](../img/airflow_connection_4.png)
+![alt text](../../img/airflow_connection_4.png)
 
 Now open "07-Airflow-Logic-DAG.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
 
@@ -73,15 +73,15 @@ CDE currently supports CDW operations for ETL workloads in Apache Hive virtual w
 
 Navigate to the Cloudera Data Warehouse Overview page by clicking the Data Warehouse tile in the Cloudera Data Platform (CDP) management console.
 
-![alt text](../img/bonus1_step00_A.png)
+![alt text](../../img/bonus1_step00_A.png)
 
 In the Virtual Warehouses column, find the warehouse you want to connect to.
 
-![alt text](../img/bonus1_step00_B.png)
+![alt text](../../img/bonus1_step00_B.png)
 
 Click the three-dot menu for the selected warehouse, and then click Copy JDBC URL.
 
-![alt text](../img/bonus1_step00_C.png)
+![alt text](../../img/bonus1_step00_C.png)
 
 Paste the URL into a text editor, and make note of the hostname. For example, starting with the following url the hostname would be:
 
@@ -97,11 +97,11 @@ Navigate to the Cloudera Data Engineering Overview page by clicking the Data Eng
 
 In the CDE Services column, select the service containing the virtual cluster you are using, and then in the Virtual Clusters column, click  Cluster Details for the virtual cluster. Click AIRFLOW UI.
 
-![alt text](../img/bonus1_step00_D.png)
+![alt text](../../img/bonus1_step00_D.png)
 
 From the Airflow UI, click the Connection link from the Admin tab.
 
-![alt text](../img/bonus1_step00_E.png)
+![alt text](../../img/bonus1_step00_E.png)
 
 Click the plus sign to add a new record, and then fill in the fields:
 
@@ -113,7 +113,7 @@ Click the plus sign to add a new record, and then fill in the fields:
 
 6. Click Save.
 
-![alt text](../img/bonus1_step1.png)
+![alt text](../../img/bonus1_step1.png)
 
 ##### Editing the DAG Python file
 
@@ -153,11 +153,11 @@ spark_step >> dw_step
 
 Next, create a new Airflow CDE Job named "CDW Dag". Upload the new DAG file to the same or a new CDE resource as part of the creation process.
 
-![alt text](../img/bonus1_step2.png)
+![alt text](../../img/bonus1_step2.png)
 
 Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the Tree View and validate that the job has succeeded.
 
-![alt text](../img/bonus1_step3.png)
+![alt text](../../img/bonus1_step3.png)
 
 
 ### Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
@@ -387,7 +387,7 @@ pip install pandas #Optionally use pip3 install
 pip install -r requirements.txt #Optionally use pip3 install
 ```
 
-![alt text](../img/alerter_img01.png)
+![alt text](../../img/alerter_img01.png)
 
 
 #### Step 2: Edit Clusters.txt and Test CDE Connection
@@ -426,11 +426,11 @@ If any CDE Jobs meet the criteria, the script will automatically send a notifica
 
 As an example, if we lower the time window from 1800 seconds to 18 seconds the script will detect some jobs and output the following to the terminal.
 
-![alt text](../img/alerter_img_02A.png)
+![alt text](../../img/alerter_img_02A.png)
 
 If no CDE Jobs meet the criteria, nothing is done.
 
-![alt text](../img/alerter_img02.png)
+![alt text](../../img/alerter_img02.png)
 
 
 #### Step 4: Schedule the Script as a Cron Job
@@ -446,4 +446,4 @@ The script can run as often as you would like. For example, you could schedule a
 
 Congratulations for making it to the end of this tutorial! We hope you enjoyed using CDE first hand. We recommend visiting the [Next Steps Section](https://github.com/pdefusco/CDE_Tour_ACE_HOL#next-steps) to continue your journey with CDE.
 
-![alt text](../img/cde_thankyou.png)
+![alt text](../../img/cde_thankyou.png)
