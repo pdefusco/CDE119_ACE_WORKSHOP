@@ -75,13 +75,13 @@ step5 = PythonOperator(
 step1 = CDEJobRunOperator(
   task_id='etl',
   dag=intro_dag,
-  **job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI**
+  ** job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE* Job in the CDE UI **
 )
 
 step2 = CDEJobRunOperator(
     task_id='report',
     dag=intro_dag,
-    __job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI__
+    __ job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI __
 )
 ```
 
