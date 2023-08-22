@@ -300,7 +300,7 @@ The Spark UI allows you to visualize resources, optimize performance and trouble
 >Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
 
 
-#### Creating CDE Spark Jobs in the CLI
+#### Creating CDE Spark Jobs with the CLI
 
 So far we have created a Spark Job via the CDE UI. However, CDE use cases involving more than just a few jobs normally benefit in numerous ways from the CDE CLI or CDE API. The CLI allows you to more quickly iterate through different Spark Submits and CDE Resources. The API is an excellent access point to CDE from other tools including 3rd party DevOps and CI/CD solutions.
 
@@ -495,7 +495,21 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 
 ###### 4. Creating a CDE Spark Job with Apache Iceberg
 
+In this last section of Part 1 you will create a CDE Job of type Spark in the CDE UI using PySpark script "03_PySpark_Iceberg.py".
 
+The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
+
+* Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog replaces the Hive Metastore for tracking table metadata.     
+* Lines 82 - 98: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" syntax.
+* Lines 125-126: Iceberg allows you to query Table metadata including history of changes and table snapshots.
+* Lines 146 and 150: You can create/update/append Iceberg tables from a Spark Dataframe via the Iceberg Dataframe API. At line 146 we append the Dataframe to the pre-existing table. At line 150 we create a new Iceberg table from the Spark Dataframe.
+* Line 171: You can query tables as of a particular timestamp or snapshot. In this case we use the timestamp. This information is available in the history and snapshots table we queries at lines 125-126. The metadata tables are updated in real time as tables are modified.
+* Lines 193-197: You can query Iceberg table by selecting only data that has changed between two points in time or two snaphots. This is referred to as an "Iceberg Incremental Read".
+* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all table / dataframe partitions. Iceberg introduces Partition Evolution i.e. the ability to change the partitoning scheme on new data without modifying it on the initial dataset. This way tables / dataframes are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata.
+* Line 260: similarly to partition evolution, Spark does not allow you to change table schema without recreating the table. Iceberg allows you to more flexibily ADD and DROP table columns via the ALTER TABLE statement.
+* Line 275: The MERGE INTO statment allows you to more easily compare data between tables and proceed with flexible updates based on intricate logic. In comparison, Spark table inserts and updates are rigid as the MERGE INTO statement is not allowed in Spark SQL.
+
+Once you have finished going through the code, run the script as a CDE Spark Job from the CDE UI. Monitor outputs and results from the CDE Job Runs page.
 
 To learn more about Iceberg in CDE please visit [Using Apache Iceberg in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-using-iceberg.html).
 
