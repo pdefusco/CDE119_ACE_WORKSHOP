@@ -176,7 +176,7 @@ Step 5: Save the configuration file. If you have not done so already, make sure 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
 
-###### 1. CDE Spark Submit via the CDE CLI.
+##### 1. CDE Spark Submit via the CDE CLI.
 
 A CDE Spark Submit is the fastest way to prototype a Spark Job. It allows you to submit Spark Application Code and monitor results with CDE's logging and observability features but it does not allow you to save the Code as a reusable CDE Job Definition. This is beneficial for example in case you want to reschedule the job to run on a recurrent basis or include it in a CDE Airflow Job.
 
@@ -203,7 +203,7 @@ cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl c
 The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
 
 
-###### 2. CDE Spark Job via the CDE CLI.
+##### 2. CDE Spark Job via the CDE CLI.
 
 Similar to a CDE Spark Submit a CDE Spark Job is Application code to execute a Spark (or Airflow) Job in a CDE Virtual Cluster. However, the CDE Job allows you to easily define, edit and reuse configurations and resources in future runs. Jobs can be run on demand or scheduled. An individual job execution is called a Job Run.
 
@@ -243,7 +243,7 @@ Notice the Job Run ID output to the terminal and validate the Job in the Job Run
 Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice that the Definition can be edited and is reusable.
 
 
-###### 3. Exploring Data Interactively with CDE Sessions
+##### 3. Exploring Data Interactively with CDE Sessions
 
 A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
 
@@ -332,21 +332,91 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 ![alt text](../../img/sparkshell4_cdeui.png)
 
 
-###### 4. Creating a CDE Spark Job with Apache Iceberg
+##### 4. Creating a CDE Spark Job with Apache Iceberg
 
-In this last section of Part 1 you will create a CDE Job of type Spark in the CDE UI using PySpark script "03_PySpark_Iceberg.py".
+In this final section of Part 2 you will finish by deploying a CDE Job of type Spark in the CDE UI using PySpark script "03_PySpark_Iceberg.py".
 
 The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
 
 * Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog replaces the Hive Metastore for tracking table metadata.     
-* Lines 82 - 98: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" syntax.
+
+```
+spark = SparkSession \
+    .builder \
+    .appName("ICEBERG LOAD") \
+    .config("spark.sql.catalog.spark_catalog", "org.apache.iceberg.spark.SparkSessionCatalog")\
+    .config("spark.sql.catalog.spark_catalog.type", "hive")\
+    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")\
+    .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
+    .getOrCreate()
+```
+
+* Lines 82 - 98: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" and "CALL" SQL statements as shown below.
+
+```
+spark.sql("ALTER TABLE CDE_WORKSHOP.CAR_SALES_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
+
+spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".format(username))
+
+```
+
 * Lines 125-126: Iceberg allows you to query Table metadata including history of changes and table snapshots.
-* Lines 146 and 150: You can create/update/append Iceberg tables from a Spark Dataframe via the Iceberg Dataframe API. At line 146 we append the Dataframe to the pre-existing table. At line 150 we create a new Iceberg table from the Spark Dataframe.
+
+```
+spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
+
+spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots".format(username)).show(20, False)
+```
+
+* Lines 146 and 150: You can create/update/append Iceberg tables from a Spark Dataframe via the Iceberg Dataframe API "writeTo" command.
+At line 146 we append the Dataframe to the pre-existing table.
+At line 150 we create a new Iceberg table from the Spark Dataframe.
+
+```
+temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).append()
+
+temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username)).create()
+```
+
 * Line 171: You can query tables as of a particular timestamp or snapshot. In this case we use the timestamp. This information is available in the history and snapshots table we queries at lines 125-126. The metadata tables are updated in real time as tables are modified.
+
+```
+df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
+```
+
 * Lines 193-197: You can query Iceberg table by selecting only data that has changed between two points in time or two snaphots. This is referred to as an "Iceberg Incremental Read".
-* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all table / dataframe partitions. Iceberg introduces Partition Evolution i.e. the ability to change the partitoning scheme on new data without modifying it on the initial dataset. This way tables / dataframes are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata.
+
+```
+spark.read\
+    .format("iceberg")\
+    .option("start-snapshot-id", first_snapshot)\
+    .option("end-snapshot-id", last_snapshot)\
+    .load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+```
+
+* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all table / dataframe partitions.
+
+Iceberg introduces Partition Evolution i.e. the ability to change the partitoning scheme on new data without modifying it on the initial dataset. Thanks to this tables / dataframes are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata in the Iceberg Metadata Layer.
+
+In this example, the data present in the CAR_SALES table is initially partitioned by Month. As more data flows into our table, we decided that partitioning by Day provides Spark with better opportunities for job parallelism. Thus we simply change the partitioning scheme to Day. The old data is still partitioned by Month, while the new data added to the table from this point in time and onwards will be partitioned by Day.  
+
+```
+spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION FIELD month WITH day".format(username))
+```
+
 * Line 260: similarly to partition evolution, Spark does not allow you to change table schema without recreating the table. Iceberg allows you to more flexibily ADD and DROP table columns via the ALTER TABLE statement.
+
+```
+spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
+```
+
 * Line 275: The MERGE INTO statment allows you to more easily compare data between tables and proceed with flexible updates based on intricate logic. In comparison, Spark table inserts and updates are rigid as the MERGE INTO statement is not allowed in Spark SQL.
+
+```
+ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON t.customer_id = s.customer_id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *".format(username)
+
+spark.sql(ICEBERG_MERGE_INTO)
+```
 
 Once you have finished going through the code, run the script as a CDE Spark Job from the CDE UI. Monitor outputs and results from the CDE Job Runs page.
 
