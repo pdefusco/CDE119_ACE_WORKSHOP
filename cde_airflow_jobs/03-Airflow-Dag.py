@@ -76,7 +76,7 @@ intro_dag = DAG(
 
 start = DummyOperator(
     task_id="start",
-    dag=airflow_tour_dag
+    dag=intro_dag
 )
 
 #Using the CDEJobRunOperator
