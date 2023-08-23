@@ -123,7 +123,7 @@ You will be automatically taken to the Jobs tab where the Job will now be listed
 
 When complete, a green checkmark will appear on the left side. Click on the Job Run number to explore further.
 
-![alt text](../../img/cde_jobs_8.png)
+![alt text](../../img/sparkjob_ui_14.png)
 
 The Job Run is populated with Metadata, Logs, and the Spark UI. This information is persisted and can be referenced at a later point in time.
 
