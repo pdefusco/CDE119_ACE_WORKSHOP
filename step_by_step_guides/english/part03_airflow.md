@@ -215,6 +215,8 @@ Apache Airflow is a platform to author, schedule and execute Data Engineering pi
 
 CDE embeds Apache Airflow at the CDE Virtual Cluster level. It is automatically deployed for the CDE user during CDE Virtual Cluster creation and requires no maintenance on the part of the CDE Admin.
 
-A CDE Airflow Job allows you to deploy an Airflow DAG as a CDE Job. The primary use case is the orchestration of CDE Spark Jobs but it can also be used to leverage other operators. If you would like to experiment with a more advanced Airflow use case in CDE please visit [Bonus Lab 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth).
+A CDE Airflow Job allows you to deploy an Airflow DAG as a CDE Job. The primary use case is the orchestration of CDE Spark Jobs. The Cloudera Airflow Editor simplifies DAG code by providing a no-code / low-code interface for building DAGs. If you primarily use CDE to productionize many CDE Spark Jobs the Airflow Editor can be a great choice. The Airflow DAG instead leveeages Python to construct DAG logic. It is a bery good option if you use Airflow open source operators or need to apply complex business logic to your workflow.
+
+If you would like to experiment with a more advanced Airflow use case in CDE please visit [Bonus Lab 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth).
 
 [In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) you will learn the basics of Airflow Orchestration in CDE in order to deploy a pipeline of dependent CDE Jobs.
