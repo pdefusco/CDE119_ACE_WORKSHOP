@@ -1,5 +1,7 @@
 # Part 5: Bonus Labs
 
+## Objective
+
 So far you explored the core aspects of Spark, Airflow and Iceberg in CDE. The following labs give you an opportunity to explore CDE in more detail.
 
 Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
@@ -440,3 +442,16 @@ The script can run as often as you would like. For example, you could schedule a
 ```
 * * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
 ```
+
+
+## Summary
+
+In this section we reviewed three more advanced CDE use cases: a more advanced CDE Airflow DAG, an Airflow DAG leveraging the CDW Operator and a more in-depth view of the CDE CLI.
+
+You can use CDE Airflow with Open Source operators to implement advanced business logic to your DAGs. CDE Version 1.20 will further this functionality by providing the ability to utilize a broader set of Airflow Operators, Plugins, and other open source features.
+
+The CDWOperator has been contributed by Cloudera to allow users to orchestrate CDW queries from an Airflow DAG. You can connect to one or more CDW Virtual Warehouses from within the same CDE Airflow DAG.
+
+Finally, the CDE CLI is the ideal choice for those who use CDE at scale. While the CDE Jobs UI is a great observability tool we do not recommend building your Spark Jobs with the UI too frequently. The CLI provides more options including the ability to submit CDE Jobs to more than one CDE Virtual Cluster from the same terminal program. In general, you can use the CLI to build more CDE Jobs more quickly once you become familiar with it.
+
+Thank you for going through the Bonus Labs! Before visit the [Conclusion and Next Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#part-6-conclusions-and-next-steps) page for a brief recap and recommended projects and articles. These are particularly useful if you are already using or will be using CDE in the future.
