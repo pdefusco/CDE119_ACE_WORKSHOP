@@ -150,9 +150,9 @@ Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and valid
 
 ![alt text](../../img/cdeairflow119.png)
 
-![alt text](../../img/cdeairflow119_1.png)
-
 ![alt text](../../img/cdeairflow119_2.png)
+
+![alt text](../../img/cdeairflow119_3.png)
 
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
