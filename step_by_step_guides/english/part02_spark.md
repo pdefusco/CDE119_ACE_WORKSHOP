@@ -438,7 +438,7 @@ To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https
 
 ## Summary
 
-CDE provides multiple media for running Spark Application code at scale.
+CDE provides multiple options for running Spark Application code at scale.
 
 The easiest way to create and deploy a Spark Job is by leveraging the UI. Each section in the UI corresponds to a piece of a spark-submit. However, if you are planning to use CDE on a daily basis we recommend learning the CLI as it provides a richer set of options and the abolity to iterate through multiple job runs faster.
 
