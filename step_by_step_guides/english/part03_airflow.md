@@ -1,12 +1,12 @@
 # Part 3: Orchestrating Pipelines with Airflow
 
-## Summary
+## Objective
 
 CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
 
 This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
 
-## Airflow Concepts
+### Airflow Concepts
 
 In Airflow, a DAG (Directed Acyclic Graph) is defined in a Python script that represents the DAGs structure (tasks and their dependencies) as code.
 
@@ -17,11 +17,11 @@ For more information about Airflow DAGs, see Apache Airflow documentation [here]
 The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. For a complete overview of the Airflow UI, see  Apache Airflow UI documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
 
 
-## Deploying Orchestration Pipeline with Airflow
+### Deploying Orchestration Pipeline with Airflow
 
 #### Review Airflow Basic DAG Code
 
-Open "05-Airflow-Basic-DAG.py", familiarize yourself with the code, and notice the following:
+Open "03-Airflow-Dag.py" from the "cde_airflow_jobs" folder, familiarize yourself with the code, and notice the following:
 
 * Airflow allows you to break up complex Spark Pipelines in different steps, isolating issues and optionally providing retry options. The CDEJobRunOperator, BashOperator and PythonOperator are imported at lines 44-46. These allow you to execute a CDE Spark Job, Bash, and Python Code respectively all within the same workflow.
 
@@ -100,35 +100,47 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 #### Deploy Airflow Basic DAG Code
 
-Create two CDE Spark Jobs using scripts "05-A-ETL.py" and "05-B-Reports.py" but do not run them.
+Create two CDE Spark Jobs (in the UI or with the CLI) using scripts "04-A-ETL.py" and "04-B-Reports.py" but *do not run them yet*.
 
-Then, open "05-Airflow-Basic-DAG.py" and enter the names of the two CDE Spark Jobs as they appear in the CDE Jobs UI at lines 52 and 53.
+Upload the scripts from your local machine and create a new File Resource. Make sure to name it after yourself so it doesn't collide with other workshop participants.
 
-In addition, notice that credentials stored in parameters.conf are not available to CDE Airflow jobs. Therefore, update the "username" variable at line 48 in "05-Airflow-Basic-DAG.py".
+![alt text](../../img/newjobs_1.png)
 
-The "username" variable is read at line 64 to create a dag_name variable which in turn will be used at line 67 to assign a unique DAG name when instantiating the DAG object.
+![alt text](../../img/newjobs_2.png)
 
-Finally, modify lines 60 and 61 to assign a start and end date that takes place in the future.
+![alt text](../../img/newjobs_3.png)
+
+Then, open "03-Airflow-Dag.py" and enter the names of the two CDE Spark Jobs as they appear in the CDE Jobs UI at lines 55 and 56.
+
+In addition, notice that credentials stored in parameters.conf are not available to CDE Airflow jobs. Therefore, update the "username" variable at line 51 with something unique.
+
+The "username" variable is read at line 67 to create a dag_name variable which in turn will be used at line 70 to assign a unique DAG name when instantiating the DAG object.
 
 >**⚠ Warning**  
 >CDE requires a unique DAG name for each CDE Airflow Job or will otherwise return an error upon job creation.
+
+Finally, modify lines 63 and 64 to assign a start and end date that takes place in the future.
 
 >**⚠ Warning**   
 > If you don't edit the start and end date, the CDE Airflow Job might fail. The Start Date parameter must reflect a date in the past while the End Date must be in the future. If you are getting two identical Airflow Job runs you have set both dates in the past.  
 
 Upload the updated script to your CDE Files Resource. Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
 
-![alt text](../../img/cde_airflow_1.png)
+![alt text](../../img/cdeairflowdag_1.png)
 
 As before, select your Virtual Cluster and Job name. Then create and execute.
 
-![alt text](../../img/cde_airflow_2.png)
+![alt text](../../img/cdeairflowdag_2.png)
 
-![alt text](../../img/cde_airflow_3.png)
+Create a new CDE File Resource for this or reuse your existing resource if you have one from a previous step.
+
+![alt text](../../img/cdeairflowdag_3.png)
+
+![alt text](../../img/cdeairflowdag_4.png)
 
 Navigate to the Job Runs tab and notice that the Airflow DAG is running. While in progress, navigate back to the CDE Home Page, scroll down to the Virtual Clusters section and open the Virtual Cluster Details. Then, open the Airflow UI.
 
-![alt text](../../img/cde_airflow_4.png)
+![alt text](../../img/cdeairflowdag_2.png)
 
 Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and validate the CDE Airflow Job's execution.
 
@@ -172,3 +184,10 @@ Execute the DAG and observe it from the CDE Job Runs UI.
 ![alt text](../../img/bonus2_step06.png)
 
 ![alt text](../../img/bonus2_step07.png)
+
+## Summary
+
+
+
+
+[In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) you will learn the basics of Airflow Orchestration in CDE in order to deploy a pipeline of dependent CDE Jobs.

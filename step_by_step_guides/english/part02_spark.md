@@ -12,9 +12,12 @@ To create a File Resource, from the CDE Home Page click on "Create New" in the "
 
 ![alt text](../../img/create_new_res119.png)
 
-Pick your Spark 3 / Iceberg enabled CDE Virtual Cluster and name your Resource after your username or a unique ID.
+Pick your Spark 3 / Iceberg enabled CDE Virtual Cluster and name your *Resource after your username or a unique ID.*
 
 ![alt text](../../img/create_new_res119_2.png)
+
+>**⚠ Warning**  
+>Each Workshop user should create a separate File Resource with a unique name.  
 
 Upload the following files located in the "cde_ace_hol/cde_spark_jobs" and "cde_ace_hol/resources_files" folders.
 

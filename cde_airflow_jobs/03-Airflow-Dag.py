@@ -48,12 +48,12 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.http_operator import SimpleHttpOperator
 import pendulum
 
-username = "pdefusco_061423"
+username = "pdefusco_082223"
 
 print("Running as Username: ", username)
 
-cde_job_name_03_A = "job3A" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_B = "job3B" #Replace with CDE Job Name you used in the UI
+cde_job_name_03_A = "04-A-ETL" #Replace with CDE Job Name you used in the UI
+cde_job_name_03_B = "04-B-Reports" #Replace with CDE Job Name you used in the UI
 
 #DAG instantiation
 default_args = {
