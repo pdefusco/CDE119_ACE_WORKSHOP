@@ -2,7 +2,7 @@
 
 Congratulations for making it to the end of this Hands On Lab! We hope you enjoyed using CDE first hand.
 
-### CDE Recap
+### Conclusions
 
 CDE is the Cloudera Data Engineering Service, a containerized managed service for Spark and Airflow.
 
