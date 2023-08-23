@@ -438,14 +438,20 @@ To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https
 
 ## Summary
 
->**Note**  
->Your credentials are stored in parameters.conf
+CDE provides multiple media for running Spark Application code at scale.
 
->**Note**  
->The Iceberg Jars did not have to be loaded in the Spark Configurations. Iceberg is enabled at the Virtual Cluster level.
+The easiest way to create and deploy a Spark Job is by leveraging the UI. Each section in the UI corresponds to a piece of a spark-submit. However, if you are planning to use CDE on a daily basis we recommend learning the CLI as it provides a richer set of options and the abolity to iterate through multiple job runs faster.
 
->**Note**  
->Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
+Both the CLI and the UI allow you to create and deploy a CDE Job of type Spark. The CLI also allows you to run a spark-submit. The CDE Job wraps the Spark Application code with a reusable entity. The CDE Job is associated with an editable configuration and a detailed run history including logs, dependencies, user, and even a long-lived Spark UI. The simple spark-submit doesn't provide any of the above and is rather recommended when prototyping Spark Applications without the need to worry about the future. The spark-submit can also be converted into a CDE Spark Job via the UI or CLI.
 
+Another advantage of CDE Jobs is that they can be associated with CDE Resources. Resources can be of type File or Python. File Resources allow you to store file dependencies at the cluster level and mount them at runtime. Similarly, Python Resources make it possible to apply custom Python Environments to a given job or job run. By decoupling Spark Applications from their dependencies, CDE allows users to iterate faster while achieving high job observability.
+
+Finally, CDE Sessions allow you to connect to CDE remotely by entering an interactive Spark Shell. Users can choose between Scala and PySpark. Sessions are recommended for interactive data exploration and quick tests in general.
+
+If allowed access to the Virtual Cluster, CDP Users can run CDE Jobs. The Workload User is inherited from the CDP Environment while the Workload Password is set automatically. Data is secured by default via SDX and can be easily accessed from Cloud Storage or other sources.  
+
+Apache Iceberg is a new open table format designed for managing, organizing, and tracking all the files that make up a table. The table format helps break down complex datasets stored in popular file formats like Apache Parquet, Optimized row columnar, and AVRO, among others. Apache Iceberg architecture keeps track of all the files using tree structures. The table format consists of a clear path to the metadata file that stores all individual data files. Iceberg was introduced by Netflix to solve several data consistency and performance issues in Apache Hive.
+
+CDE Virtual Clusters are automatically enabled with Iceberg at Cluster deployment time. CDE Users need only apply the SparkSession configurations shown above to launch an Iceberg-compatible Spark Job. No extra jars are needed.
 
 [In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#part-3-orchestrating-pipelines-with-airflow) you will learn the basics of Airflow Orchestration in CDE in order to deploy a pipeline of dependent CDE Jobs.
