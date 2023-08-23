@@ -64,7 +64,7 @@ spark = SparkSession\
 car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_INSTALLS_{}".format(username))
 factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}".format(username))
 
-installs_report_df = car_installs_df.join(factory_data_df, "serial_no")
+installs_report_df = car_installs_df.join(factory_data_df, "serial_no").drop(car_installs_df.id)
 
 print("Car Installs and Factory Data Dataframe")
 installs_report_df.show()

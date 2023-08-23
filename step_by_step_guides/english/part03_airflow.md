@@ -144,13 +144,15 @@ Create a new CDE File Resource for this or reuse your existing resource if you h
 
 Navigate to the Job Runs tab and notice that the Airflow DAG is running. While in progress, navigate back to the CDE Home Page, scroll down to the Virtual Clusters section and open the Virtual Cluster Details. Then, open the Airflow UI.
 
-![alt text](../../img/reacairflowui.png)
+![alt text](../../img/reachairflowui.png)
 
 Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and validate the CDE Airflow Job's execution.
 
-![alt text](../../img/cde_airflow_5.png)
+![alt text](../../img/cdeairflow119.png)
 
-![alt text](../../img/cde_airflow_6.png)
+![alt text](../../img/cdeairflow119_1.png)
+
+![alt text](../../img/cdeairflow119_2.png)
 
 To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
 
