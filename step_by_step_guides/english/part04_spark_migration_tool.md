@@ -1,6 +1,6 @@
 # Part 4: Using the CDE Spark Migration Tool to Convert Spark Submits to CDE Spark Submits
 
-### Summary
+## Objective
 
 The spark-submit command is a utility to run or submit a Spark or PySpark application program (or job) to the cluster by specifying options and configurations, the application you are submitting can be written in Scala, Java, or Python (PySpark).
 
@@ -70,3 +70,11 @@ Navigate to your CDE Virtual Cluster Job Runs page and validate the job is runni
 
 >**⚠ Warning**  
 >If you are unable to run the spark-submit you may have to remove the tls setting from config.yaml. In other words, completely erase line 4.
+
+## Summary
+
+The spark-submit is the single command used to submit a Spark Application to a cluster. The command provides with a wide variety of options and configurations for running the Application as a Job, for example the number and resources assigned to Spark Driver and Executors.
+
+The CDE CLI provides a very similar command, the CDE spark-submit, which can be used to submit Spark Applications to CDE Virtual Clusters. The CDE Spark Submit Migration Tool was created to allow you to convert one or more spark-submit commands to CDE spark-submit. This requires a brief installation and is available to you from the Virtual Cluster Service Details page.
+
+Congratulations for making it to the end of the core labs of this workshop! In [the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#part-5-bonus-labs) you can expand on CDE with three additional topics: a [more advanced CDE Airflow use case](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth); an [Airflow DAG leveraging the CDW Operator](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-2-using-cde-airflow-with-cdw) to orchestrate CDW queries from a CDE Airflow DAG; and a more [in-depth view of the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth).
