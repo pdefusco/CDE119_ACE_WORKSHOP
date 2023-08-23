@@ -50,25 +50,23 @@ To learn more about CDE Resources please visit [Using CDE Resources](https://doc
 
 ### Creating CDE Spark Jobs in the UI
 
-Next we will create a CDE Job of type Spark using the script "01_PySpark_ETL.py" which you have already uploaded to your CDE File Resource in the prior step.
+Next we will run and deploy a Spark script as a CDE Job of type Spark using the "01_PySpark_ETL.py" script. Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
 
-Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
+![alt text](../../img/sparkjob_ui_1.png)
 
-![alt text](../../img/cde_jobs_1.png)
+#### 1. Set Job Name, Virtual Cluster and Application File
 
-Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name.
+Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name. Append your name to distinguish your job's name from others'.
 
-![alt text](../../img/cde_jobs_2.png)
-
-#### 1. Set Application File
+![alt text](../../img/sparkjob_ui_2.png)
 
 The Application File is the code that will run as the Spark Job. This could be a PySpark file or a Jar.
 
-Scroll down; ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
+Because you already uploaded the script to the CDE File Resource in the prior step this can be easily selected in the Job Configuration build: ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
 
-![alt text](../../img/cde_jobs_3.png)
+![alt text](../../img/sparkjob_ui_3.png)
 
-![alt text](../../img/cde_jobs_4.png)
+![alt text](../../img/sparkjob_ui_4.png)
 
 #### 2. Set Spark Configurations
 
@@ -76,9 +74,15 @@ The Configurations section allows you to set Spark Application Configurations su
 
 In this job we will set the "spark.executorEnv.PYTHONPATH" configuration to "/app/mount/simple_udf.zip" so it can read the UDF from the CDE File Resource.
 
+![alt text](../../img/sparkjob_ui_5.png)
+
 #### 3. Set Python Environment
 
 Set the Python environment to the CDE Python Resource you created in the previous step.
+
+![alt text](../../img/sparkjob_ui_6.png)
+
+![alt text](../../img/sparkjob_ui_7.png)
 
 #### 4. Set Advanced Options
 
@@ -86,7 +90,13 @@ The Python, Egg, Zip Files section allows you to load dependencies onto your job
 
 In the Python, Egg, Zip Files section select the "utils.py" and "simple_udf.zip" file dependencies to load the UDF to the Spark Job. Notice the files have already been uploaded to the File Resource so you just need to select them from there.
 
+![alt text](../../img/sparkjob_ui_8.png)
+
+![alt text](../../img/sparkjob_ui_9.png)
+
 Scroll down again to the "Resources" section and notice that your File Resource has been mapped to the Job by default. This allows the PySpark script to load modules in the same Resource such as the ones contained in the "utils.py" file.
+
+![alt text](../../img/sparkjob_ui_10.png)
 
 #### 5. Set Compute Options
 
@@ -97,19 +107,19 @@ Compute Options allow you to set important Spark Resource Configs.
 * Driver Cores and Driver Memory allow you to set "spark.driver.cores" and "spark.driver.memory". Increasing Driver Cores and Memory can be useful when your queries compile slowly or in case you call lots of collect() or take(N) actions especially on large RDD's.
 * Executor Cores and Executor Memory allow you to set "spark.executor.cores" and "spark.executor.memory". These properties are used heavily in the context of Spark Tuning as they provide you with the ability to influence the degree of parallelism and storage capacity available in each Executor.
 
-Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 4, Driver Memory to 2, and Executor Memory to 4. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
+Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 2, Driver Memory to 2, and Executor Memory to 2. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
+
+![alt text](../../img/sparkjob_ui_11.png)
 
 #### 6. Trigger and Monitor the Job
 
 Scroll to the bottom and click on the "Create and Run" blue icon.
 
-![alt text](../../img/cde_jobs_5.png)
+![alt text](../../img/sparkjob_ui_12.png)
 
 You will be automatically taken to the Jobs tab where the Job will now be listed at the top. Open the Job Runs tab on the left pane and validate that the CDE Spark Job is executing.
 
-![alt text](../../img/cde_jobs_6.png)
-
-![alt text](../../img/cde_jobs_7.png)
+![alt text](../../img/sparkjob_ui_13.png)
 
 When complete, a green checkmark will appear on the left side. Click on the Job Run number to explore further.
 
