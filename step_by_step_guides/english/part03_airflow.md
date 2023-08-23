@@ -124,7 +124,11 @@ Finally, modify lines 63 and 64 to assign a start and end date that takes place 
 >**⚠ Warning**   
 > If you don't edit the start and end date, the CDE Airflow Job might fail. The Start Date parameter must reflect a date in the past while the End Date must be in the future. If you are getting two identical Airflow Job runs you have set both dates in the past.  
 
-Upload the updated script to your CDE Files Resource. Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
+Upload the updated script to your CDE Files Resource along with the parameters.conf file. The new File Resource should now have four files in total.
+
+![alt text](../../img/fileinnewresource.png)
+
+Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
 
 ![alt text](../../img/cdeairflowdag_1.png)
 
@@ -140,7 +144,7 @@ Create a new CDE File Resource for this or reuse your existing resource if you h
 
 Navigate to the Job Runs tab and notice that the Airflow DAG is running. While in progress, navigate back to the CDE Home Page, scroll down to the Virtual Clusters section and open the Virtual Cluster Details. Then, open the Airflow UI.
 
-![alt text](../../img/cdeairflowdag_2.png)
+![alt text](../../img/reacairflowui.png)
 
 Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and validate the CDE Airflow Job's execution.
 
