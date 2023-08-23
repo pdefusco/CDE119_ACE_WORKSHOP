@@ -263,9 +263,9 @@ A CDE Session is an interactive short-lived development environment for running 
 
 From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
 
-![alt text](../../img/cde_session_0.png)
+![alt text](../../img/cdesessions_1.png)
 
-![alt text](../../img/cde_session_0_b.png)
+![alt text](../../img/cdesessions_2.png)
 
 The session will be in "starting" state for a few moments. When it's ready, launch it and open the Spark Shell by clicking on the "Interact" tab.
 
