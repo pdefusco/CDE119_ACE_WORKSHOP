@@ -127,26 +127,19 @@ When complete, a green checkmark will appear on the left side. Click on the Job 
 
 The Job Run is populated with Metadata, Logs, and the Spark UI. This information is persisted and can be referenced at a later point in time.
 
-The Configuration tab allows you to verify the script and resources used by the CDE Spark Job.
+The Configuration tab allows you to verify the script and resources used by the CDE Spark Job. From here you can edit the Configuration to change files, dependencies, run schedule, and more. For example the developer can reuse an existing job (or optionally create a clone) and make changes to its dependencies, schedule, etc. from the UI.
 
-![alt text](../../img/cde_jobs_8a.png)
+This also serves as an important CDE Observability feature. CDE maintains a historical trail of all runs and the respective job configurations associated with them. In other words, in traditional clusters when a Spark Job fails the developer had to manually investigate logs or, in a best case scenario, maintain DevOps processes to back up logs and runs. In CDE all of this is done automatically.   
 
-The Logs tab contains rich logging information. For example, you can verify your code output under "Logs" -> "Driver" -> "StdOut".
+![alt text](../../img/sparkjob_ui_15.png)
 
-![alt text](../../img/cde_jobs_9.png)
+The Logs tab contains rich logging information. For example, you can verify code output under "Logs" -> "Driver" -> "StdOut".
+
+![alt text](../../img/sparkjob_ui_16.png)
 
 The Spark UI allows you to visualize resources, optimize performance and troubleshoot your Spark Jobs.
 
-![alt text](../../img/cde_jobs_10.png)
-
->**Note**  
->Your credentials are stored in parameters.conf
-
->**Note**  
->The Iceberg Jars did not have to be loaded in the Spark Configurations. Iceberg is enabled at the Virtual Cluster level.
-
->**Note**  
->Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
+![alt text](../../img/sparkjob_ui_17.png)
 
 
 ### Creating CDE Spark Jobs with the CLI
@@ -436,6 +429,14 @@ To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https
 
 ## Summary
 
+>**Note**  
+>Your credentials are stored in parameters.conf
+
+>**Note**  
+>The Iceberg Jars did not have to be loaded in the Spark Configurations. Iceberg is enabled at the Virtual Cluster level.
+
+>**Note**  
+>Job 04_Sales_Report uses the Quinn Python library. The methods are implemented in utils.py which is loaded via the File Resource.   
 
 
 [In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#part-3-orchestrating-pipelines-with-airflow) you will learn the basics of Airflow Orchestration in CDE in order to deploy a pipeline of dependent CDE Jobs.
