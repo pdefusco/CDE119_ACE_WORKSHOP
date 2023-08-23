@@ -191,11 +191,13 @@ cde spark submit cde_spark_jobs/simple-pyspark-sql.py
 
 Shortly after running this you will notice confirmation of sibmission in the terminal. As the Spark Application runs the terminal will show logs and job outputs.
 
-![alt text](../../img/cde_jobs_10.png)
+![alt text](../../img/cdeclijob_1.png)
+
+![alt text](../../img/cdeclijob_2.png)
 
 The above created a "cli-submit-username-timestamp" entry in the Job Runs page of your CDE Cluster. Open the Job Run and explore the logs. Notice the Job Definition is not reusable.
 
-![alt text](../../img/cde_jobs_10.png)
+![alt text](../../img/cdeclijob_3.png)
 
 The first Spark Submit ran a simple PySpark job but notice we didn't specify any Spark Options. Next, create a more advanced Spark Submit by running the following command in your terminal:
 
@@ -203,7 +205,7 @@ The first Spark Submit ran a simple PySpark job but notice we didn't specify any
 cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl cde_spark_jobs/mywheel/__main__.py --executor-cores 2 --executor-memory 2g
 ```
 
-The above CDE Spark Submit ran with Spark Applicaiton code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
+The above CDE Spark Submit ran with Spark Application code packaged in a Wheel file. Notice that the CDE Spark Submit included the ```--py-files```, ```--exeutor-cores``` and ```--executor-memory``` flags. These correspond to the same options available for a Spark Submit. For more on building Spark Submits commands, please visit the [Spark Documentation](https://spark.apache.org/docs/latest/submitting-applications.html)
 
 
 #### 2. CDE Spark Job via the CDE CLI.
@@ -221,6 +223,8 @@ Upload Application Code to the Resource:
 ```
 cde resource upload --name my_user_resource --local-path cde_spark_jobs/cdejobjar_2.12-1.0.jar
 ```
+
+![alt text](../../img/cdeclijob_4.png)
 
 Now create a CDE Job of type Spark mounting the uploaded Resource files:
 
@@ -243,8 +247,13 @@ Finally, run the Job :
 
 Notice the Job Run ID output to the terminal and validate the Job in the Job Runs page of your cluster.
 
+![alt text](../../img/cdeclijob_5.png)
+
 Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice that the Definition can be edited and is reusable.
 
+![alt text](../../img/cdeclijob_6.png)
+
+![alt text](../../img/cdeclijob_7.png)
 
 ### Exploring Data Interactively with CDE Sessions
 
