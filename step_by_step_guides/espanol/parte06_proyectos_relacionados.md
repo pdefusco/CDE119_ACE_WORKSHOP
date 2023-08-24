@@ -1,41 +1,41 @@
-# Part 6: Conclusions and Next Steps
+# Parte 6: Conclusiones y Próximos Pasos
 
-Congratulations for making it to the end of this Hands On Lab! We hope you enjoyed using CDE first hand.
+¡Felicitaciones por llegar al final de este Laboratorio Práctico! Esperamos que hayas disfrutado usando CDE de primera mano.
 
-### Conclusions
+### Conclusiones
 
-CDE is the Cloudera Data Engineering Service, a containerized managed service for Spark and Airflow.
+CDE es el Servicio de Ingeniería de Datos de Cloudera, un servicio gestionado y en contenedores para Spark y Airflow.
 
-CDP Data Engineering is the only cloud-native service purpose-built for enterprise data engineering teams. Building on Apache Spark, Data Engineering is an all-inclusive data engineering toolset that enables orchestration automation with Apache Airflow, advanced pipeline monitoring, visual troubleshooting, and comprehensive management tools to streamline ETL processes across enterprise analytics teams.
+CDP Data Engineering es el único servicio nativo de la nube diseñado específicamente para equipos de ingeniería de datos empresariales. Basado en Apache Spark, Data Engineering es un conjunto completo de herramientas de ingeniería de datos que permite la automatización de la orquestación con Apache Airflow, un monitoreo avanzado de tuberías, solución visual de problemas y herramientas integrales de gestión para agilizar los procesos ETL en los equipos de análisis empresarial.
 
-Data Engineering is fully integrated with Cloudera Data Platform, enabling end-to-end visibility and security with SDX as well as seamless integrations with CDP services such as Data Warehouse and Machine Learning. Data Engineering on CDP powers consistent, repeatable, and automated data engineering workflows on a hybrid cloud platform anywhere.
+Data Engineering está completamente integrado con la Plataforma de Datos de Cloudera (CDP), lo que permite visibilidad y seguridad de extremo a extremo con SDX, así como integraciones perfectas con servicios de CDP como Almacén de Datos (Data Warehouse) y Aprendizaje Automático (Machine Learning). Data Engineering en CDP impulsa flujos de job de ingeniería de datos coherentes, repetibles y automatizados en cualquier plataforma híbrida de nube.
 
-### CDE Relevant Projects
+### Proyectos Relevantes de CDE
 
-If you are exploring or using CDE today you may find the following tutorials relevant:
+Si estás explorando o utilizando CDE en la actualidad, es posible que encuentres relevantes los siguientes tutoriales:
 
-* [Spark 3 & Iceberg](https://github.com/pdefusco/Spark3_Iceberg_CML): A quick intro of Time Travel Capabilities with Spark 3.
+* [Spark 3 & Iceberg](https://github.com/pdefusco/Spark3_Iceberg_CML): Una introducción rápida a las capacidades de Time Travel con Spark 3.
 
-* [Simple Intro to the CDE CLI](https://github.com/pdefusco/CDE_CLI_Simple): An introduction to the CDE CLI for the CDE beginner.
+* [Simple Intro to the CDE CLI](https://github.com/pdefusco/CDE_CLI_Simple): Una introducción a la CLI de CDE para principiantes en CDE.
 
-* [CDE CLI Demo](https://github.com/pdefusco/CDE_CLI_demo): A more advanced CDE CLI reference with additional details for the CDE user who wants to move beyond the basics.
+* [CDE CLI Demo](https://github.com/pdefusco/CDE_CLI_demo): Una referencia más avanzada de la CLI de CDE con detalles adicionales para el usuario de CDE que desea ir más allá de lo básico.
 
-* [CDE Resource 2 ADLS](https://github.com/pdefusco/CDEResource2ADLS): An example integration between ADLS and CDE Resource. This pattern is applicable to AWS S3 as well and can be used to pass execution scripts, dependencies, and virtually any file from CDE to 3rd party systems and viceversa.
+* [CDE Resource 2 ADLS](https://github.com/pdefusco/CDEResource2ADLS): Un ejemplo de integración entre ADLS y Resources de CDE. Este patrón también es aplicable a AWS S3 y se puede utilizar para enviar scripts de ejecución, dependencias y prácticamente cualquier archivo desde CDE hacia sistemas de terceros y viceversa.
 
-* [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow): A guide to Airflow in CDE including examples to integrate with 3rd party systems via Airflow Operators such as BashOperator, HttpOperator, PythonOperator, and more.
+* [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow): Una guía para Airflow en CDE que incluye ejemplos para integrarse con sistemas de terceros a través de Operadores de Airflow como BashOperator, HttpOperator, PythonOperator y más.
 
-* [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE): a CI/CD pipeline to orchestrate Cross-Cluster Workflows for Hybrid/Multicloud Data Engineering.
+* [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE): Un ejemplo de CI/CD para orquestar procesos interclúster para Ingeniería de Datos Híbrida/Multinube.
 
-* [CML2CDE](https://github.com/pdefusco/cml2cde_api_example): an API to create and orchestrate CDE Jobs from any Python based environment including CML. Relevant for ML Ops or any Python Users who want to leverage the power of Spark in CDE via Python requests.
+* [CML2CDE](https://github.com/pdefusco/cml2cde_api_example): Una API para crear y orquestar jobs de CDE desde cualquier entorno basado en Python, incluido CML. Relevante para ML Ops o cualquier usuario de Python que quiera aprovechar el poder de Spark en CDE a través de solicitudes en Python.
 
-* [Postman2CDE](https://github.com/pdefusco/Postman2CDE): An example of the Postman API to bootstrap CDE Services with the CDE API.
+* [Postman2CDE](https://github.com/pdefusco/Postman2CDE): Un ejemplo de la API de Postman para configurar servicios de CDE con la API de CDE.
 
-* [Oozie2CDEAirflow API](https://github.com/pdefusco/Oozie2CDE_Migration): An API to programmatically convert Oozie workflows and dependencies into CDE Airflow and CDE Jobs. This API is designed to easily migrate from Oozie to CDE Airflow and not just Open Source Airflow.
+* [Oozie2CDEAirflow API](https://github.com/pdefusco/Oozie2CDE_Migration): Una API para convertir de manera programática pipeline de job y dependencias de Oozie a CDE Airflow y jobs de CDE. Esta API está diseñada para migrar fácilmente de Oozie a CDE Airflow y no solo a Airflow de código abierto.
 
-For more information on the Cloudera Data Platform and its form factors please visit [this site](https://docs.cloudera.com/).
+Para obtener más información sobre la Plataforma de Datos de Cloudera y sus factores de forma, visita [este sitio](https://docs.cloudera.com/).
 
-For more information on migrating Spark jobs to CDE, please reference [this guide](https://docs.cloudera.com/cdp-private-cloud-upgrade/latest/cdppvc-data-migration-spark/topics/cdp-migration-spark-cdp-cde.html).
+FPara obtener más información sobre la migración de jobs de Spark a CDE, consulta [esta guía](https://docs.cloudera.com/cdp-private-cloud-upgrade/latest/cdppvc-data-migration-spark/topics/cdp-migration-spark-cdp-cde.html).
 
-If you have any questions about CML or would like to see a demo, please reach out to your Cloudera Account Team or send a message [through this portal](https://www.cloudera.com/contact-sales.html) and we will be in contact with you soon.
+Si tienes alguna pregunta sobre CML o deseas ver una demostración, comunícate con tu equipo de cuenta de Cloudera o envía un mensaje [a través de este portal](https://www.cloudera.com/contact-sales.html) y nos pondremos en contacto contigo pronto.
 
 ![alt text](../../img/cde_thankyou.png)
