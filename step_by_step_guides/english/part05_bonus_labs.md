@@ -14,9 +14,9 @@ Using "bonus-01_Airflow_Operators.py" you will create a new CDE Airflow Job with
 
 First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
 
-![alt text](../../img/airflow_connection_0.png)
+![alt text](../../img/cde_bonusairflow_1.png)
 
-![alt text](../../img/airflow_connection_1.png)
+![alt text](../../img/cde_bonusairflow_2.png)
 
 Open Airflow Connections under the Admin dropdown as shown below.
 

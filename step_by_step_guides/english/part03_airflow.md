@@ -122,11 +122,11 @@ Create two CDE Spark Jobs (in the UI or with the CLI) using scripts "04-A-ETL.py
 
 Upload the scripts from your local machine and create a new File Resource. Make sure to name it after yourself so it doesn't collide with other workshop participants.
 
-![alt text](../../img/newjobs_1.png)
+![alt text](../../img/part3_airflow_1.png)
 
 ![alt text](../../img/newjobs_2.png)
 
-![alt text](../../img/newjobs_3.png)
+![alt text](../../img/part3_airflow_2.png)
 
 Then, open "03-Airflow-Dag.py" and enter the names of the two CDE Spark Jobs as they appear in the CDE Jobs UI at lines 55 and 56.
 
