@@ -1,20 +1,20 @@
-# Part 4: Using the CDE Spark Migration Tool to Convert Spark Submits to CDE Spark Submits
+# Parte 4: Utilizzo Spark Migration Tool di CDE per Convertire Spark Submits in CDE Spark Submits
 
-## Objective
+## Obbiettivo
 
-The spark-submit command is a utility to run or submit a Spark or PySpark application program (or job) to the cluster by specifying options and configurations, the application you are submitting can be written in Scala, Java, or Python (PySpark).
+Il comando spark-submit è un'utilità per eseguire o inviare un programma di applicazione Spark o PySpark (o job) al cluster specificando opzioni e configurazioni. L'applicazione che stai inviando può essere scritta in Scala, Java o Python (PySpark).
 
-The CDE CLI provides a similar although not identical way of running "spark-submits" in CDE. However, adapting many spark-submita to CDE might become an obstacle in your migration. The Cloudera Engineering team created a Spark Migration tool to facilitate the conversion.
+La CLI di CDE fornisce un modo simile, sebbene non identico, per eseguire "spark-submits" in CDE. Tuttavia, adattare molti spark-submit a CDE potrebbe diventare un ostacolo nella migrazione. Il team di ingegneria di Cloudera ha creato uno strumento di migrazione Spark per facilitare la conversione.
 
-#### Step By Step Instructions
+### Istruzioni Passo Per Passo
 
->**⚠ Warning**  
->The Spark Submit Migration tool requires having the CDE CLI installed on your machine. Please ensure you have completed the installation steps in Part 3.
+>**⚠ Avviso**  
+>Lo strumento di migrazione Spark Submit richiede di avere la CLI di CDE installata sulla tua macchina. Assicurati di aver completato i passaggi di installazione nella Parte 3.
 
->**⚠ Warning**  
->This tutorial utilizes Docker to streamline the installation process of the Spark Submit Migration tool. If you don't have Docker installed on your machine you will have to go through [this tutorial by Vish Rajagopalan](https://github.com/SuperEllipse/cde-spark-submit-migration) instead.
+>**⚠ Avviso**  
+>Questo tutorial utilizza Docker per semplificare il processo di installazione dello strumento di migrazione Spark Submit. Se non hai Docker installato sulla tua macchina, dovrai seguire [questo tutorial di Vish Rajagopalan](https://github.com/SuperEllipse/cde-spark-submit-migration) al suo posto.
 
-Navigate to the CDP Management Console and download your user credentials file. The credentials file includes a CDP Access Key ID and a CDP Private Key.
+Vai alla Console di Gestione CDP e scarica il file delle tue credenziali utente. Il file delle credenziali include un'ID di Chiave di Accesso CDP e una Chiave Privata CDP.
 
 ![alt text](../../img/mgt_console1.png)
 
@@ -24,28 +24,29 @@ Navigate to the CDP Management Console and download your user credentials file. 
 
 ![alt text](../../img/mgt_console4.png)
 
-Next, navigate to the CDE Virtual Cluster Details and copy the JOBS_API_URL.
+Successivamente, accedi ai Dettagli del Cluster Virtuale CDE e copia il JOBS_API_URL.
 
 ![alt text](../../img/jobsapiurl.png)
 
-Launch the example Docker container.
+Avvia il container Docker fornito per eseguire i comandi seguenti.
 
 ```
 docker run -it pauldefusco/cde_spark_submit_migration_tool:latest
 ```
 
-You are now inside the running container. Next, activate the Spark Submit Migration tool by running the following shell command.
+Ora sei all'interno del container in esecuzione. Successivamente, attiva lo strumento di migrazione Spark Submit eseguendo il seguente comando shell.
 
 ```
 cde-env.sh activate -p vc-1
 ```
 
-Navigate to the .cde folder and place the CDP Access Key ID and Private Key you downloaded earlier in the respective fields in the credentials file.
+Vai alla cartella .cde e inserisci l'ID della chiave di accesso CDP e la chiave privata scaricati in precedenza nei rispettivi campi nel file delle credenziali.
 
-Next, open the config.yaml file located in the same folder. Replace the cdp console value at line 3 with the CDP Console URL (e.g. `https://console.us-west-1.cdp.cloudera.com/`).
-Then, enter your JOBS_API_URL in the "vcluster-endpoint" field at line 8.
+Successivamente, apri il file config.yaml situato nella stessa cartella. Sostituisci il valore del cdp console alla riga 3 con l'URL della console CDP (ad esempio, `https://console.us-west-1.cdp.cloudera.com/`).
 
-Finally, run the following spark-submit. This is a sample submit taken from a legacy CDH cluster.
+Poi, inserisci il tuo JOBS_API_URL nel campo "vcluster-endpoint" alla riga 8.
+
+Infine, esegui il seguente spark-submit. Questo è un esempio di submit preso da un cluster CDH legacy.
 
 ```
 spark-submit \
@@ -60,21 +61,21 @@ spark-submit \
 06-pyspark-sql.py
 ```
 
-Shortly you should get output in your terminal including a Job Run ID confirming successful job submission to CDE. In the screenshot example below the Job Run ID is 9.
+Nel giro di poco dovresti ottenere un output nel tuo terminale, compreso un ID di esecuzione del job che conferma la corretta sottomissione del job a CDE. Nell'esempio di screenshot qui sotto, l'ID di esecuzione del job è 9.
 
 ![alt text](../../img/job_submit_confirm1.png)
 
-Navigate to your CDE Virtual Cluster Job Runs page and validate the job is running or has run successfully.
+Vai alla pagina Job Runs del tuo CDE Virtual Cluster e verifica che il job sia in esecuzione o sia stato eseguito con successo.
 
 ![alt text](../../img/job_submit_confirm3.png)
 
->**⚠ Warning**  
->If you are unable to run the spark-submit you may have to remove the tls setting from config.yaml. In other words, completely erase line 4.
+>**⚠ Avvertenza**  
+>Se non riesci a eseguire il comando spark-submit potrebbe essere necessario rimuovere l'impostazione tls dal file config.yaml. In altre parole, cancella completamente la riga 4.
 
-## Summary
+## Riepilogo
 
-The spark-submit is the single command used to submit a Spark Application to a cluster. The command provides with a wide variety of options and configurations for running the Application as a Job, for example the number and resources assigned to Spark Driver and Executors.
+Il comando spark-submit è l'unico comando utilizzato per sottomettere un'applicazione Spark a un cluster. Il comando fornisce una vasta varietà di opzioni e configurazioni per l'esecuzione dell'applicazione come job, ad esempio il numero e le risorse assegnate al driver e agli executor di Spark.
 
-The CDE CLI provides a very similar command, the CDE spark-submit, which can be used to submit Spark Applications to CDE Virtual Clusters. The CDE Spark Submit Migration Tool was created to allow you to convert one or more spark-submit commands to CDE spark-submit. This requires a brief installation and is available to you from the Virtual Cluster Service Details page.
+Il CDE CLI fornisce un comando molto simile, il CDE spark-submit, che può essere utilizzato per sottomettere applicazioni Spark ai cluster virtuali CDE. Lo Strumento di Migrazione CDE Spark Submit è stato creato per consentirti di convertire uno o più comandi spark-submit in CDE spark-submit. Questo richiede un'installazione breve ed è disponibile nella pagina dei Dettagli del Servizio Cluster Virtuale.
 
-Congratulations for making it to the end of the core labs of this workshop! In [the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#part-5-bonus-labs) you can expand on CDE with three additional topics: a [more advanced CDE Airflow use case](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth); an [Airflow DAG leveraging the CDW Operator](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-2-using-cde-airflow-with-cdw) to orchestrate CDW queries from a CDE Airflow DAG; and a more [in-depth view of the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth).
+Congratulazioni per aver completato le attività principali di questo workshop! Nella [sezione successiva](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#part-5-bonus-labs) puoi approfondire CDE con tre argomenti aggiuntivi: un [caso d'uso più avanzato di CDE Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth); un [Airflow DAG che utilizza l'operatore CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-2-using-cde-airflow-with-cdw) per orchestrare query CDW da un DAG Airflow di CDE; e un [Lab più approfondito sulla CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth).
