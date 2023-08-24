@@ -144,7 +144,7 @@ Finally, modify lines 63 and 64 to assign a start and end date that takes place 
 
 Upload the updated script to your CDE Files Resource along with the parameters.conf file. The new File Resource should now have four files in total.
 
-![alt text](../../img/fileinnewresource.png)
+![alt text](../../img/part3_airflow_resources.png)
 
 Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
 
