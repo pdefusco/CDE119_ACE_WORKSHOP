@@ -216,4 +216,4 @@ Un Job CDE Airflow le permite implementar un DAG de Airflow como un Job CDE. El 
 
 Si desea experimentar con un caso de uso de Airflow más avanzado en CDE, visite  [Bonus Lab 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth).
 
-[En la siguiente sección](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) aprenderá los conceptos básicos de la Orquestación de Airflow en CDE para desplegar una tubería de Jobs CDE dependientes.
+[En la próxima sección](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) experimentarás con la Spark Migration Tool de CDE para convertir Spark-Submits en CDE Spark-Submits de manera programática.

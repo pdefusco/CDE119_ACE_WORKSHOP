@@ -1,25 +1,38 @@
-# Introduction to the Hands On Labs
+# Introduzione
 
-This guide provides instructions for setting up the project in your local machine and a brief introduction to the main concepts related to the Cloudera Data Engineering Service.
+Il Hands On Lab è un'iniziativa di Cloudera per avvicinare gli utenti CDP a ciascun Data Service. I contenuti consistono in una serie di guide e esercizi per implementare un caso di uso simplificato.
 
-## Requirements
+Il HOL è generalmente un evento di tre ore organizzato da Cloudera per clienti CDP nel quale un piccolo team tecnico di Cloudera fornisce la infrastruttura cloud per i participanti e gli accompagna nel completare le guide attraverso una serie di presentazioni.
 
-In order to execute the Hands On Labs you need:
-* A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok).
-* Very few code changes are required but familiarity with Python and PySpark is highly recommended.
-* Bonus Lab 1 requires a Hive CDW Virtual Warehouse. This lab is optional.
+L'obbiettivo è apprtare una solida introduzione tecnica in tempi rapidi e fornire le conoscienze necessarie per implementare un caso di uso.
 
-## Recommendations Before you Start
+Il HOL contenuto in questo repository GitHub è dedicato a Cloudera Data Engineering 1.19, il Data Service di CDP per ingegneria dati conosciuto più comunemente per casi di uso Spark e Airflow nel Cloud Privato e Pubblico.
 
-Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
+Il contenuto è pensato principalemnte per sviluppatori, amministratori Cloud, architetti di software Big Data ma anche stakeholder di tipo non tecnico come project manager e analisti sono incoraggiati a partecipare.
 
-Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
+Se hai un Virtual Cluster CDE a disposizione ti invitiamo a utilizzare questa guida per apprendere gli stessi concetti senza dover necessariamente partecipare a un evento ufficiale di Cloudera.
 
-Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+## Requisiti
+
+Per eseguire i Lab, hai bisogno di:
+
+* Un Virtual Cluster CDE abilitato per Spark 3 e Iceberg (Azure, AWS e Private Cloud sono accettati).
+
+* Sono necessari pochi cambiamenti nel codice, ma è altamente consigliata la familiarità con Python e PySpark.
+
+* Il Bonus Lab 1 richiede un Hive CDW Virtual Warehouse. Questo Lab è opzionale.
+
+## Raccomandazioni Per L'Uso di Queste Guide
+
+Gli script sono pronti all'uso e richiedono minime modifiche. Questa guida ti indicherà di apportare modifiche minori a alcuni degli script. Preparati a effettuare modifiche in un editor e a ricaricarli nella stessa Risorsa File CDE dopo ogni modifica. È altamente consigliato avere tutti gli script aperti in ogni momento in un editor come Atom.
+
+Il tuo responsabile del workshop Cloudera ACE caricherà i dataset richiesti su Cloud Storage prima del workshop. Se stai riproducendo questi Lab da solo, assicurati di aver inserito tutti i contenuti della cartella dei dati in un percorso di Cloud Storage a tua scelta.
+
+Ad ogni utente verrà assegnato un nome utente e un percorso di Cloud Storage. Ogni script leggerà le tue credenziali da "parameters.conf", che avrai inserito nella tua Risorsa File CDE. Prima di iniziare i Lab, apri "parameters.conf" situato nella cartella "resources_files" e modifica tutti e tre i campi con i valori forniti dal tuo responsabile del workshop Cloudera ACE. Se stai riproducendo questi Lab da solo, dovrai anche assicurarti che questi valori riflettano il percorso di Cloud Storage in cui hai caricato i dati.
 
 ## Project Download
 
-Clone this GitHub repository to your local machine or the VM where you will be running the script.
+Clona questo repository GitHub nella tua macchina locale o nella macchina virtuale dove eseguirai lo script.
 
 ```
 mkdir ~/Documents/cde_ace_hol
@@ -27,20 +40,21 @@ cd ~/Documents/cde_ace_hol
 git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 ```
 
-Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) and manually download the files.
+In alternativa, se non hai git installato sulla tua macchina, crea una cartella sul tuo computer locale; vai a [questo URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) e scarica manualmente i file.
 
-## CDP User & Credentials
+## Utente e Credenziali CDP
 
-This HOL uses a parameters.conf file to store the necessary credentials. Each user is asked to enter their Workload Username at line 4 and Datalake paths at lines 2 and 3. The Workload Password is automatically inherited at the CDP Environment level and does not be set.
+Questo Hands On Lab utilizza un file parameters.conf per memorizzare le credenziali necessarie. A ciascun utente viene richiesto di inserire il proprio Workload User CDP alla riga 4 e i path Cloud per i dati alle righe 2 e 3. La Workload Password CDP è automaticamente ereditata a livello di Ambiente CDP e non deve essere impostata.
 
-If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials. The data will already have been uplaoded by your Workshop Lead.
-If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload Username from your CDP Admin.
+Se stai partecipando a un evento Cloudera, il tuo coordinatore del workshop ti fornirà le credenziali sopra indicate. I dati saranno già stati caricati dal coordinatore del workshop.
+
+Se stai riproducendo i laboratori nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload Usder CDP dal tuo amministratore CDP.
 
 ## Index
 
-* [Part 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part01_cde_architecture.md#cde-architecture) provides an introduction to the Architecture of the CDE Service. You will learn about the main components of CDE including the Environment, the Virtual Cluster, and more.
-* In [Part 2](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) you will develop and deploy four Spark Jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. One of the Jobs will focus on Apache Iceberg.
-* In [Part 3](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#part-3-orchestrating-pipelines-with-airflow) you will create an Airflow Pipeline to orchestrate multiple Spark Jobs.
-* In [Part 4](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) you will use the CDE Spark Migration tool to convert Spark Jobs into CDE Spark Jobs.
-* In [Part 5](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#part-5-bonus-labs) you will be able to explore a variety of topics in more detail including the CDE CLI, Airflow, and the CDE API.
-* [Part 6](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#conclusions-and-next-steps) provides a summary and a few related projects. If you are using or evaluating CDE today, please make sure to visit this page to learn about related projects.
+* La [Parte 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part01_cde_architecture.md#cde-architecture) fornisce un'introduzione all'Architettura del Servizio CDE. Imparerai sui principali componenti di CDE, inclusi l'Ambiente, il Cluster Virtuale e altro ancora.
+* Nella [Parte 2](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) svilupperai e dispiegherai quattro Spark Jobs utilizzando l'interfaccia di CDE, la CLI di CDE e le Sessioni Interattive di CDE. Uno dei Job si concentrerà su Apache Iceberg.
+* Nella [Parte 3](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#part-3-orchestrating-pipelines-with-airflow) creerai una Pipeline Airflow per orchestrare più Spark Jobs.
+* Nella [Parte 4](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) utilizzerai lo strumento di migrazione Spark di CDE per convertire Spark Jobs in CDE Spark Jobs.
+* Nella [Parte 5](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#part-5-bonus-labs) potrai esplorare una varietà di argomenti in maggiore dettaglio, inclusa la CLI di CDE, Airflow e l'API di CDE.
+* La [Parte 6](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#conclusions-and-next-steps)  fornisce un riassunto e alcuni progetti correlati. Se stai usando o valutando CDE oggi, assicurati di visitare questa pagina per conoscere i progetti correlati.

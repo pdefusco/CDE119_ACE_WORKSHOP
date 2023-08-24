@@ -18,7 +18,7 @@ Tu líder de taller Cloudera ACE cargará los conjuntos de datos requeridos en e
 
 A cada usuario se le asignará un nombre de usuario y una ruta de almacenamiento en la nube. Cada script leerá tus credenciales de "parameters.conf", el cual habrás colocado en tu Recurso de Archivo CDE. Antes de comenzar los laboratorios, abre "parameters.conf" ubicado en la carpeta "resources_files" y edita los tres campos con los valores proporcionados por tu líder de taller Cloudera ACE. Si estás reproduciendo estos laboratorios por tu cuenta, también debes asegurarte de que estos valores reflejen la ruta de Almacenamiento en la Nube donde cargaste los datos.
 
-## DEscarga del Proyecto
+## Descarga del Proyecto
 
 Clona este repositorio de GitHub en tu máquina local o en la máquina virtual donde ejecutarás LOSS script.
 

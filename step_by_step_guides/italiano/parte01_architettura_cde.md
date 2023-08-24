@@ -1,120 +1,119 @@
-# Part 1: CDE Architecture
+# Parte 1: Architettura di CDE
 
-## Objective
+## Obiettivo
 
-In this section you will learn about CDE's flexible architecture and its main components. This is just a recommended reading and there are no jobs associated with it.
+In questa sezione imparerai l'architettura flessibile di CDE e i suoi principali componenti. Questa è solo una lettura consigliata e non ci sono lavori associati ad essa.
 
-## Introduction to the CDE Service
+## Introduzione al Servizio CDE
 
-Cloudera Data Engineering (CDE) is a service for Cloudera Data Platform that allows you to submit batch jobs to auto-scaling virtual clusters. CDE enables you to spend more time on your applications, and less time on infrastructure.
+Cloudera Data Engineering (CDE) è un servizio per Cloudera Data Platform che consente di inviare lavori batch a cluster virtuali con ridimensionamento automatico. CDE ti consente di dedicare più tempo alle tue applicazioni e meno tempo all'infrastruttura.
 
-Cloudera Data Engineering allows you to create, manage, and schedule Apache Spark jobs without the overhead of creating and maintaining Spark clusters. With Cloudera Data Engineering, you define virtual clusters with a range of CPU and memory resources, and the cluster scales up and down as needed to run your Spark workloads, helping to control your cloud costs.
+Cloudera Data Engineering ti permette di creare, gestire e pianificare lavori Apache Spark senza l'onere di creare e mantenere cluster Spark. Con Cloudera Data Engineering, puoi definire cluster virtuali con una gamma di risorse CPU e memoria, e il cluster si ridimensiona in base alle necessità per eseguire i carichi di job Spark, contribuendo a controllare i costi cloud.
 
-The CDE Service can be reached from the CDP Home Page by clicking on the blue "Data Engineering" icon.
+Il Servizio CDE può essere raggiunto dalla Pagina Principale di CDP cliccando sull'icona blu "Data Engineering".
 
 ![alt text](../../img/cdp_lp_0.png)
 
-The CDE Landing Page allows you to access, create and manage CDE Virtual Clusters. Within each CDE Virtual Cluster you can  create, monitor and troubleshoot Spark and Airflow Jobs.
+La Pagina Principale di CDE ti consente di accedere, creare e gestire Cluster Virtuali di CDE. All'interno di ciascun Cluster Virtuale di CDE puoi creare, monitorare e risolvere problemi di lavori Spark e Airflow.
 
-The Virtual Cluster is pegged to the CDP Environment. Each CDE Virtual Cluster is mapped to at most one CDP Environment while a CDP Environment can map to one or more Virtual Cluster.
+Il Cluster Virtuale è associato all'Ambiente CDP. Ciascun Cluster Virtuale di CDE è mappato al massimo su un Ambiente CDP, mentre un Ambiente CDP può essere mappato su uno o più Cluster Virtuali.
 
-These are the most important components in the CDE Service:
+Questi sono i componenti più importanti nel Servizio CDE:
 
-##### CDP Environment
-A logical subset of your cloud provider account including a specific virtual network. CDP Environments can be in AWS, Azure, RedHat OCP and Cloudera ECS. For more information, see [CDP Environments](https://docs.cloudera.com/management-console/cloud/overview/topics/mc-core-concepts.html). Practically speaking, an environment is equivalent to a Data Lake as each environment is automatically associated with its own SDX services for Security, Governance and Lineage.
+##### Ambiente CDP
+Una sottoinsieme logico del tuo account provider cloud che include una rete virtuale specifica. Gli Ambienti CDP possono trovarsi in AWS, Azure, RedHat OCP e Cloudera ECS. Per ulteriori informazioni, consulta [Ambienti CDP][CDP Environments](https://docs.cloudera.com/management-console/cloud/overview/topics/mc-core-concepts.html). In termini pratici, un ambiente è equivalente a un Data Lake poiché ogni ambiente è automaticamente associato ai propri servizi SDX per la sicurezza, la governance e la tracciabilità.
 
-##### CDE Service
-The long-running Kubernetes cluster and services that manage the virtual clusters. The CDE service must be enabled on an environment before you can create any virtual clusters.
+##### Servizio CDE
+Il cluster Kubernetes a lunga durata e i servizi che gestiscono i cluster virtuali. Il servizio CDE deve essere abilitato su un ambiente prima che tu possa creare qualsiasi cluster virtuale.
 
-##### Virtual Cluster
-An individual auto-scaling cluster with defined CPU and memory ranges. Virtual Clusters in CDE can be created and deleted on demand. Jobs are associated with clusters. Up until CDE version 1.18 only one type of Virtual Clusters was available. Since Version 1.19 you can choose between two Cluster Tiers:
+##### Cluster Virtuale
+Un singolo cluster con ridimensionamento automatico con intervalli definiti di CPU e memoria. I Cluster Virtuali in CDE possono essere creati e eliminati su richiesta. I lavori sono associati ai cluster. Fino alla versione CDE 1.18 era disponibile solo un tipo di Cluster Virtuale. Dalla versione 1.19 puoi scegliere tra due Tipi di Cluster:
 
-*Core (Tier 1)*: Batch-based transformation and engineering options include:
-* Autoscaling Cluster
+*Core (Tier 1)*: Opzioni di trasformazione e ingegnerizzazione basate su batch che includono:
+* Cluster con Autoscaling Automatico
 * Spot Instances
 * SDX/Lakehouse
-* Job Lifecycle
-* Monitoring
-* Workflow Orchestration
+* Lifecycle dei Job
+* Monitoraggio dei Job
+* Orchestrazione Workflow
 
-*All Purpose (Tier 2)*: Develop using interactive sessions and deploy both batch and streaming workloads. This option includes all options in Tier 1 with the addition of the  following:
-* Shell Sessions - CLI and Web
-* JDBC/SparkSQL (Coming in October 2023 with CDE 1.20)
-* IDE (Coming in October 2023 with CDE 1.20)
+*All Purpose (Tier 2)*: Sviluppo tramite sessioni interattive e distribuzione di carichi di job batch e in streaming. Questa opzione include tutte le opzioni del Tier 1 con l'aggiunta delle seguenti:
+* Sessioni Shell - CLI e Web
+* JDBC/SparkSQL (Disponibile a partire da ottobre 2023 con CDE 1.20)
+* IDE (Disponibile a partire da ottobre 2023 con CDE 1.20)
 
-Core clusters are recommended as Production environments. All Purpose clusters are instead designed to be used as Development and Testing environments.
-For more information on the CDE 1.19.1 and 1.19.2 releases please visit this page in the [documentation](https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-whats-new-1.19.html).
+I cluster Core sono raccomandati come ambienti di produzione. I cluster All Purpose sono invece progettati per essere utilizzati come ambienti di sviluppo e test. Per ulteriori informazioni sulle versioni CDE 1.19.1 e 1.19.2, visita questa pagina nella [documentazione](https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-whats-new-1.19.html).
 
 ##### Jobs
-Application code along with defined configurations and resources. Jobs can be run on demand or scheduled. An individual job execution is called a job run.
+Codice dell'applicazione insieme a configurazioni e risorse definite. I lavori possono essere eseguiti su richiesta o pianificati. L'esecuzione individuale di un job è chiamata job run. I Job possono essere di tipo Spark o Airflow.
 
 ##### Resource
-A defined collection of files such as a Python file or application JAR, dependencies, and any other reference files required for a job.
+Una collezione definita di file, come un file Python o un file JAR dell'applicazione, dipendenze e qualsiasi altro file di riferimento necessario per un job. Le Resource possono essere di tipo File o Python.
 
 ##### Job Run
-An individual job run.
+Un'istanza individuale di esecuzione di un Job.
 
 ##### CDE Session
 
-CDE interactive sessions give data engineers flexible end-points to start developing Spark applications from anywhere -- in a web-based terminal, local CLI, favorite IDE, and even via JDBC from third-party tools.
+Le sessioni interattive CDE offrono agli ingegneri dei dati punti finali flessibili per iniziare a sviluppare applicazioni Spark ovunque, in un terminale basato sul web, nell'interfaccia della riga di comando locale, nell'IDE preferito e persino tramite JDBC da strumenti di terze parti.
 
 ##### Apache Iceberg
 
-Apache Iceberg is a cloud-native, high-performance open table format for organizing petabyte-scale analytic datasets on a file system or object store. Combined with Cloudera Data Platform (CDP), users can build an open data lakehouse architecture for multi-function analytics and to deploy large scale end-to-end pipelines.
+Apache Iceberg è un formato di tabella aperto nativo per il cloud, ad alte prestazioni, per l'organizzazione di set di dati analitici di scala petabyte su un sistema di file o uno store di oggetti. In combinazione con Cloudera Data Platform (CDP), gli utenti possono creare un'architettura open data lakehouse per l'analisi multi-funzione e per distribuire pipeline su larga scala end-to-end.
 
-Open Data Lakehouse on CDP simplifies advanced analytics on all data with a unified platform for structured and unstructured data and integrated data services to enable any analytics use case from ML, BI to stream analytics and real-time analytics. Apache Iceberg is the secret sauce of the open lakehouse.
+Open Data Lakehouse su CDP semplifica l'analisi avanzata su tutti i dati con una piattaforma unificata per dati strutturati e non strutturati e servizi dati integrati per abilitare qualsiasi caso di utilizzo di analisi, dalla ML (Machine Learning) all'BI, all'analisi di flussi e all'analisi in tempo reale. Apache Iceberg è il componente chiave del lakehouse open.
 
-Iceberg is compatible with a variety of compute engines including Spark. CDE allows you to deploy Iceberg-enabled Virtual Clusters.
+Iceberg è compatibile con una varietà di motori di calcolo, inclusi Spark. CDE ti consente di distribuire Cluster Virtuali abilitati per Iceberg.
 
-For more information please visit the [documentation](https://iceberg.apache.org/).
+Per ulteriori informazioni visita la [documentazione](https://iceberg.apache.org/).
 
-##### CDE User Interface
+##### Interfaccia CDE
 
-Now that you have covered the basics of CDE, spend a few moments familiarizing yourself with the CDE Landing page.
+Ora che hai acquisito le basi di CDE, dedica qualche momento a familiarizzare con la pagina di accesso di CDE.
 
-The Home Page provides a high level overview of all CDE Services and Clusters. It was redesigned in version 1.19 to also include shortcuts for different actions such as creating CDE Jobs and Resources or visiting the documentation.
+La Home Page fornisce una panoramica generale di tutti i servizi e cluster CDE. È stata ridisegnata nella versione 1.19 per includere anche collegamenti rapidi per diverse azioni, come la creazione di Job e Resource CDE o la visita alla documentazione.
 
-At the top, you have shortcuts to creating CDE Jobs and Resources.
+In alto, hai dei collegamenti rapidi per creare Jobs e Resources di CDE.
 
 ![alt text](../../img/new_home_119.png)
 
-Scroll down to the CDE Virtual Clusters section and notice that all Virtual Clusters and each associated CDP Environment / CDE Service are shown.
+Scorri verso il basso fino alla sezione dei Cluster Virtuali CDE e noterai che vengono mostrati tutti i Cluster Virtuali e ciascun Ambiente CDP / Servizio CDE associato.
 
 ![alt text](../../img/new_home_119_2.png)
 
-Next, open the Administration page on the left tab. This page also shows CDE Services on the left and associated Virtual Clusters on the right.
+Successivamente, apri la pagina di Amministrazione sulla scheda a sinistra. Anche questa pagina mostra i Servizi CDE a sinistra e i Cluster Virtuali associati a destra.
 
 ![alt text](../../img/service_cde.png)
 
-Open the CDE Service Details page and notice the following key information and links:
+Apri la pagina Dettagli del Servizio CDE e osserva le seguenti informazioni chiave e collegamenti:
 
-* CDE Version
-* Nodes Autoscale Range
-* CDP Data Lake and Environment
-* Graphana Charts. Click on this link to obtain a dashboard of running Service Kubernetes resources.
-* Resource Scheduler. Click on this link to view the Yunikorn Web UI.
+* Versione CDE
+* Intervallo di ridimensionamento dei nodi
+* Data Lake CDP e Ambiente
+* Grafici Graphana. Fai clic su questo link per ottenere un cruscotto delle risorse Kubernetes del servizio in esecuzione.
+* Resource Scheduler. Fai clic su questo link per visualizzare l'interfaccia utente Yunikorn.
 
 ![alt text](../../img/service_cde_2.png)
 
-Scroll down and open the Configurations tab. Notice that this is where Instance Types and Instance Autoscale ranges are defined.
+Scorri verso il basso e apri la scheda Configurazioni. Nota che qui vengono definite le Tipologie di Istanza e gli intervalli di ridimensionamento automatico delle istanze.
 
 ![alt text](../../img/cde_configs.png)
 
-To learn more about other important service configurations please visit [Enabling a CDE Service](https://docs.cloudera.com/data-engineering/cloud/enable-data-engineering/topics/cde-enable-data-engineering.html) in the CDE Documentation.
+Per saperne di più sulle altre importanti configurazioni del servizio, visita [Abilitazione di un Servizio CDE](https://docs.cloudera.com/data-engineering/cloud/enable-data-engineering/topics/cde-enable-data-engineering.html) nella Documentazione CDE.
 
-Navigate back to the Administration page and open a Virtual Cluster's Cluster Details page.
+Torna alla pagina di Amministrazione e apri la pagina Dettagli del Cluster Virtuale.
 
 ![alt text](../../img/cde_virtual_cluster_details.png)
 
-This view includes other important cluster management information. From here you can:
+Questa vista include altre importanti informazioni sulla gestione del cluster. Da qui puoi:
 
-* Download the CDE CLI binaries. The CLI is recommended to submit jobs and interact with CDE. It is covered in Part 3 of this guide.
-* Visit the API Docs to learn the CDE API and build sample requests on the Swagger page.
-* Access the Airflow UI to monitor your Airflow Jobs, set up custom connections, variables, and more.  
+* Scaricare i binari CLI CDE. La CLI è consigliata per inviare lavori e interagire con CDE. È trattata nella Parte 3 di questa guida.
+* Visitare la documentazione API per conoscere l'API CDE e creare richieste di esempio nella pagina Swagger.
+* Accedere all'interfaccia utente di Airflow per monitorare i tuoi lavori Airflow, configurare connessioni personalizzate, variabili e altro ancora.
 
-Open the Configuration tab. Notice that you can select between Core and All Purpose Tier Clusters.
-In addition, this view provides options to set CPU and Memory autoscale ranges, Spark version, and Iceberg options are set here.
-CDE supports Spark 2.4.8, 3.2.3 and 3.3.0.
+Apri la scheda Configurazioni. Nota che puoi selezionare tra Cluster Tier Core e All Purpose.
+Inoltre, questa vista offre opzioni per impostare intervalli di ridimensionamento automatico CPU e memoria, versione di Spark e opzioni Iceberg.
+CDE supporta Spark 2.4.8, 3.2.3 e 3.3.0.
 
 ![alt text](../../img/vc_details_1.png)
 
@@ -122,20 +121,20 @@ CDE supports Spark 2.4.8, 3.2.3 and 3.3.0.
 
 ![alt text](../../img/vc_details_3.png)
 
-To learn more about CDE Architecture please visit [Creating and Managing Virtual Clusters](https://docs.cloudera.com/data-engineering/cloud/manage-clusters/topics/cde-create-cluster.html) and [Recommendations for Scaling CDE Deployments](https://docs.cloudera.com/data-engineering/cloud/deployment-architecture/topics/cde-general-scaling.html)
+Per saperne di più sull'architettura CDE, visita [Creating and Managing Virtual Clusters](https://docs.cloudera.com/data-engineering/cloud/manage-clusters/topics/cde-create-cluster.html) e [Recommendations for Scaling CDE Deployments](https://docs.cloudera.com/data-engineering/cloud/deployment-architecture/topics/cde-general-scaling.html)
 
-## Summary
+## Riepilogo
 
-A CDE Service defines compute instance types, instance autoscale ranges and the associated CDP Data Lake. The Data and Users associated with the Service are subjected by SDX and the CDP Environment settings. You can leverage SDX Atlas and Ranger to visualize table and job metadata and secure user and data access with fine-grained policies.
+Un servizio CDE definisce i tipi di istanze di calcolo, gli intervalli di autoscaling delle istanze e il Data Lake associato a esso. I dati e gli utenti associati al servizio sono soggetti da SDX e dalle impostazioni dell'ambiente CDP. Puoi sfruttare SDX Atlas e Ranger per visualizzare i metadati delle tabelle e dei job e per garantire l'accesso utente e ai dati tramite politiche dettagliate di sicurezza.
 
-Within a CDE Service you can deploy one or more CDE Virtual Clusters. The Service Autoscale Range is a count of min/max allowed Compute Instances. The Virtual Cluster Autoscale Range is the min/max CPU and Memory that can be utilized by all CDE Jobs within the cluster. The Virtual Cluster Autoscale Range is naturally bounded by the CPU and Memory available at the Service level.
+All'interno di un servizio CDE è possibile distribuire uno o più cluster virtuali CDE. L'intervallo di autoscaling del servizio è il conteggio delle istanze di calcolo consentite min/max. L'intervallo di autoscaling del cluster virtuale è il CPU e la memoria min/max che possono essere utilizzati da tutti i job CDE all'interno del cluster. L'intervallo di autoscaling del cluster virtuale è naturalmente limitato dalla CPU e dalla memoria disponibili a livello di servizio.
 
-CDE supports Spark versions 2.4.8, 3.2.3 and 3.3.0. CDE Virtual Clusters are deployed with one Spark Version per Virtual Cluster.
+CDE supporta le versioni di Spark 2.4.8, 3.2.3 e 3.3.0. I cluster virtuali CDE vengono distribuiti con una sola versione di Spark per cluster virtuale.
 
-This flexible architecture allows you to isolate your workloads and limit access within different autoscaling compute clusters while predefining cost management guardrails at an aggregate level. For example, you can define Services at an organization level and Virtual Clusters within them as DEV, QA, PROD, etc.
+Questa architettura flessibile ti consente di isolare i tuoi carichi di job e limitare l'accesso all'interno di diversi cluster di calcolo in autoscaling, definendo contemporaneamente regole di controllo dei costi a livello aggregato. Ad esempio, puoi definire servizi a livello di organizzazione e cluster virtuali all'interno di essi come DEV, QA, PROD, ecc.
 
-CDE takes advantage of YuniKorn resource scheduling and sorting policies, such as gang scheduling and bin packing, to optimize resource utilization and improve cost efficiency. For more information on gang scheduling, see the Cloudera blog post [Spark on Kubernetes – Gang Scheduling with YuniKorn](https://blog.cloudera.com/spark-on-kubernetes-gang-scheduling-with-yunikorn/).
+CDE sfrutta la pianificazione delle risorse e le politiche di ordinamento YuniKorn, come la pianificazione gang e l'impacchettamento dei contenitori, per ottimizzare l'utilizzo delle risorse e migliorare l'efficienza dei costi. Per ulteriori informazioni sulla pianificazione gang, consulta l'articolo del blog Cloudera [Spark on Kubernetes – Gang Scheduling with YuniKorn](https://blog.cloudera.com/spark-on-kubernetes-gang-scheduling-with-yunikorn/).
 
-CDE Spark Job auto-scaling is controlled by Apache Spark dynamic allocation. Dynamic allocation scales job executors up and down as needed for running jobs. This can provide large performance benefits by allocating as many resources as needed by the running job, and by returning resources when they are not needed so that concurrent jobs can potentially run faster.
+L'autoscaling dei job CDE Spark è controllato dalla Dynamic Allocation di Apache Spark. La dynamic allocation scala gli executor dei job su e giù secondo necessità durante l'esecuzione dei job. Questo può fornire notevoli vantaggi in termini di prestazioni allocando tutte le risorse necessarie per l'esecuzione dei job e restituendo risorse quando non sono necessarie, consentendo così ai job concorrenti di potenzialmente eseguirsi più velocemente.
 
-[In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) you will develop and deploy your first Spark Jobs in CDE to start building an ETL and Reporting Pipeline at scale.
+[Nella prossima sezione](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) svilupperai e distribuirai i tuoi primi job Spark in CDE per iniziare a costruire una pipeline di ETL e Reporting su larga scala.
