@@ -1,47 +1,45 @@
-# Part 3: Orchestrating Pipelines with Airflow
+# Parte 3: Orquestación de Tuberías con Airflow
 
-## Objective
+## Objetivo
 
-CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
+CDE ofrece un servicio nativo de Airflow que te permite orquestar tuberías complejas en CDE. Aunque está diseñado principalmente para orquestar Jobs CDE Spark, CDE Airflow te permite ejecutar consultas en CDW e integrar herramientas de orquestación y DevOps de terceros.
 
-This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
+Este tutorial se divide en dos secciones. Primero construirás tres Jobs de Airflow para programar, orquestar y monitorear la ejecución de Jobs Spark y más. Luego construirás un DAG de Airflow con el Editor de Airflow de Cloudera, una herramienta sin código que te permite crear DAGs de Airflow de manera simplificada.
 
-### Airflow Concepts
+### Conceptos de Airflow
 
-In Airflow, a DAG (Directed Acyclic Graph) is defined in a Python script that represents the DAGs structure (tasks and their dependencies) as code.
+En Airflow, un DAG (Grafo Dirigido Acíclico) se define en un script de Python que representa la estructura del DAG (tareas y sus dependencias) como código.
 
-For example, for a simple DAG consisting of three tasks: A, B, and C. The DAG can specify that A has to run successfully before B can run, but C can run anytime. Also that task A times out after 5 minutes, and B can be restarted up to 5 times in case it fails. The DAG might also specify that the workflow runs every night at 10pm, but should not start until a certain date.
+Por ejemplo, para un DAG simple que consta de tres tareas: A, B y C. El DAG puede especificar que A debe ejecutarse correctamente antes de que B pueda ejecutarse, pero C puede ejecutarse en cualquier momento. También puede especificar que la tarea A debe finalizar después de 5 minutos, y que B puede reiniciarse hasta 5 veces en caso de fallos. El DAG también puede especificar que el flujo de Job se ejecuta todas las noches a las 10 p.m., pero no debe comenzar hasta una fecha determinada.
 
-For more information about Airflow DAGs, see Apache Airflow documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html). For an example DAG in CDE, see CDE Airflow DAG documentation [here](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html).
+Para obtener más información sobre los DAGs de Airflow, consulta la documentación de Apache Airflow [aquí](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html). Para un ejemplo de DAG en CDE, consulta la documentación de DAG de CDE Airflow [aquí](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html).
 
-The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. For a complete overview of the Airflow UI, see  Apache Airflow UI documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
+#### La interfaz de Airflow
 
-#### The Airflow UI
+La interfaz de Airflow facilita la supervisión y solución de problemas de tus canalizaciones de datos. Para obtener una descripción completa de la interfaz de usuario de Airflow, consulta la documentación de la interfaz de usuario de Apache Airflow [aquí](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
 
-The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. For a complete overview of the Airflow UI reference the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
+#### ¿Qué es un Job de Airflow en CDE?
 
-#### What is an Airflow CDE Job?
+Los Jobs de CDE pueden ser de dos tipos: Spark y Airflow. Los Jobs de Airflow en CDE se utilizan típicamente para orquestar Jobs de Spark en CDE, así como otras acciones de Ingeniería de Datos.
 
-CDE Jobs can be of two types: Spark and Airflow. Airflow CDE Jobs are typically used to orchestrate Spark CDE Jobs as well as other Data Engineering actions.
+Los Jobs de CDE de tipo Airflow consisten principalmente en DAGs de Airflow contenidos en un archivo Python. Más sobre los DAGs a continuación.
 
-CDE Jobs of type Airflow consist primarily of an Airflow DAGs contained in a Python file. More on DAGs below.
+Existen tres formas de construir un Job de Airflow en CDE:
 
-There are three ways to build an Airflow CDE Job:
+* Usando la interfaz web de CDE. Para obtener más información, consulta  [Running Jobs in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-run-job.html).
+* Usando la herramienta de línea de comandos de CDE. Para obtener más información, consulta [Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html).
+* Utilizando los puntos finales de la API REST de CDE. Para obtener más información, consulta [CDE API Jobs](https://docs.cloudera.com/data-engineering/cloud/jobs-rest-api-reference/index.html)
 
-* Using the CDE Web interface. For more information, see [Running Jobs in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-run-job.html).
-* Using the CDE CLI tool. For more information, see Using the [Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html).
-* Using CDE Rest API endpoints. For more information, see [CDE API Jobs](https://docs.cloudera.com/data-engineering/cloud/jobs-rest-api-reference/index.html)
-
-In addition, you can automate migrations from Oozie on CDP Public Cloud Data Hub, CDP Private Cloud Base, CDH and HDP to Spark and Airflow CDE Jobs with the [oozie2cde API](https://github.com/pdefusco/Oozie2CDE_Migration).
+Además, puedes automatizar las migraciones desde Oozie en CDP Public Cloud Data Hub, CDP Private Cloud Base, CDH y HDP a Jobs CDE de Spark y Airflow con la [oozie2cde API](https://github.com/pdefusco/Oozie2CDE_Migration).
 
 
-## Deploying Orchestration Pipeline with Airflow
+## Despliegue de una Tubería de Orquestación con Airflow
 
-#### Review Airflow Basic DAG Code
+#### Revisando el Código Básico del DAG de Airflow
 
-Open "03-Airflow-Dag.py" from the "cde_airflow_jobs" folder, familiarize yourself with the code, and notice the following:
+Abre "03-Airflow-Dag.py" en la carpeta "cde_airflow_jobs", familiarízate con el código y observa lo siguiente:
 
-* Airflow allows you to break up complex Spark Pipelines in different steps, isolating issues and optionally providing retry options. The CDEJobRunOperator, BashOperator and PythonOperator are imported at lines 44-46. These allow you to execute a CDE Spark Job, Bash, and Python Code respectively all within the same workflow.
+* Airflow te permite descomponer pipelines complejos de Spark en diferentes pasos, aislando problemas y proporcionando opciones de reintentos de ser necesario. Los operadores CDEJobRunOperator, BashOperator y PythonOperator se importan en las líneas 44-46. Esto te permite ejecutar un CDE Spark Job, un comando Bash y código Python, respectivamente, todo dentro del mismo flujo de Job.
 
 ```
 from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
@@ -51,7 +49,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.http_operator import SimpleHttpOperator
 ```
 
-* Each code block at lines 74, 80, 86, 92 and 102 instantiates an Operator. Each of them is stored as a variable named Step 1 through 5.
+* Cada bloque de código en las líneas 74, 80, 86, 92 y 102 instancia un Operador. Cada uno de ellos se almacena como una variable llamada "Step 1" a "Step 5".
 
 ```
 step1 = CDEJobRunOperator(
@@ -89,7 +87,7 @@ step5 = PythonOperator(
 )
 ```
 
-* Step 2 and 3 are CDEJobRunOperator instances and are used to execute CDE Spark Jobs. At lines 89 and 95 the CDE Spark Job names have to be declared as they appear in the CDE Jobs UI. In this case, the fields are referencing the values assigned at lines 55 and 56.
+* Los pasos 2 y 3 son instancias de CDEJobRunOperator y se utilizan para ejecutar Jobs de Spark en CDE. En las líneas 89 y 95, los nombres de los Jobs de Spark de CDE deben declararse tal como aparecen en la interfaz de usuario de Jobs de CDE. En este caso, los campos hacen referencia a los valores asignados en las líneas 55 y 56.
 
 <pre>
 
@@ -110,17 +108,17 @@ step2 = CDEJobRunOperator(
 )
 </pre>
 
-* Finally, task dependencies are specified at line 119. Steps 1 - 5 are executed in sequence, one when the other completes. If any of them fails, the remaining CDE Jobs will not be triggered.
+* Finalmente, las dependencias entre tareas se especifican en la línea 119. Los pasos del 1 al 5 se ejecutan en secuencia, uno después de que el otro se complete. Si alguno de ellos falla, los Jobs restantes de CDE no se activarán.
 
 ```
 step1 >> step2 >> step3 >> step4 >> step5
 ```
 
-#### Deploy Airflow Basic DAG Code
+#### Implementación del Código Básico del DAG de Airflow
 
-Create two CDE Spark Jobs (in the UI or with the CLI) using scripts "04-A-ETL.py" and "04-B-Reports.py" but *do not run them yet*.
+Crea dos Jobs de CDE Spark (en la interfaz de usuario o con la CLI) utilizando los scripts "04-A-ETL.py" y "04-B-Reports.py", *pero no los ejecutes aún.*
 
-Upload the scripts from your local machine and create a new File Resource. Make sure to name it after yourself so it doesn't collide with other workshop participants.
+Carga los scripts desde tu máquina local y crea un nuevo recurso de archivo. Asegúrate de nombrarlo con tu nombre para que no choque con otros participantes del taller.
 
 ![alt text](../../img/newjobs_1.png)
 
@@ -128,43 +126,43 @@ Upload the scripts from your local machine and create a new File Resource. Make 
 
 ![alt text](../../img/newjobs_3.png)
 
-Then, open "03-Airflow-Dag.py" and enter the names of the two CDE Spark Jobs as they appear in the CDE Jobs UI at lines 55 and 56.
+Luego, abre "03-Airflow-Dag.py" e ingresa los nombres de los dos Jobs de CDE Spark tal como aparecen en la interfaz de usuario de CDE Jobs en las líneas 55 y 56.
 
-In addition, notice that credentials stored in parameters.conf are not available to CDE Airflow jobs. Therefore, update the "username" variable at line 51 with something unique.
+Además, ten en cuenta que las credenciales almacenadas en parameters.conf no están disponibles para los Jobs de CDE Airflow. Por lo tanto, actualiza la variable "username" en la línea 51 con algo único.
 
-The "username" variable is read at line 67 to create a dag_name variable which in turn will be used at line 70 to assign a unique DAG name when instantiating the DAG object.
+La variable "username" se lee en la línea 67 para crear una variable dag_name que a su vez se usará en la línea 70 para asignar un nombre de DAG único al instanciar el objeto DAG.
 
->**⚠ Warning**  
->CDE requires a unique DAG name for each CDE Airflow Job or will otherwise return an error upon job creation.
+>**⚠ Advertimiento**  
+>CDE requiere un nombre de DAG único para cada Job de CDE Airflow, de lo contrario, devolverá un error al crear el Job.
 
-Finally, modify lines 63 and 64 to assign a start and end date that takes place in the future.
+Finalmente, modifica las líneas 63 y 64 para asignar una fecha de inicio y finalización que tenga lugar en el futuro.
 
->**⚠ Warning**   
-> If you don't edit the start and end date, the CDE Airflow Job might fail. The Start Date parameter must reflect a date in the past while the End Date must be in the future. If you are getting two identical Airflow Job runs you have set both dates in the past.  
+>**⚠ Advertimiento**   
+> Si no editas la fecha de inicio y finalización, el Job de CDE Airflow podría fallar. El parámetro de Fecha de Inicio debe reflejar una fecha pasada, mientras que la Fecha de Finalización debe estar en el futuro. Si estás obteniendo dos ejecuciones idénticas del Job de Airflow, has configurado ambas fechas en el pasado.
 
-Upload the updated script to your CDE Files Resource along with the parameters.conf file. The new File Resource should now have four files in total.
+Carga el guión actualizado en tu Recurso de Archivos de CDE junto con el archivo parameters.conf. El nuevo Recurso de Archivos debería tener ahora un total de cuatro archivos.
 
 ![alt text](../../img/fileinnewresource.png)
 
-Then navigate back to the CDE Home Page and create a new CDE Job of type Airflow.
+Luego, regresa a la Home Page de CDE y crea un nuevo Job de CDE de tipo Airflow.
 
 ![alt text](../../img/cdeairflowdag_1.png)
 
-As before, select your Virtual Cluster and Job name. Then create and execute.
+Como antes, selecciona tu Clúster Virtual y nombre del Job. Luego, crea y ejecuta.
 
 ![alt text](../../img/cdeairflowdag_2.png)
 
-Create a new CDE File Resource for this or reuse your existing resource if you have one from a previous step.
+Crea un nuevo File Resource para esto o reutiliza tu recurso existente si ya tienes uno de un paso anterior.
 
 ![alt text](../../img/cdeairflowdag_3.png)
 
 ![alt text](../../img/cdeairflowdag_4.png)
 
-Navigate to the Job Runs tab and notice that the Airflow DAG is running. While in progress, navigate back to the CDE Home Page, scroll down to the Virtual Clusters section and open the Virtual Cluster Details. Then, open the Airflow UI.
+Dirígete a la pestaña "Job Runs" y observa que el DAG de Airflow se está ejecutando. Mientras está en progreso, regresa a la Home Page de CDE, baja hasta la sección de Clústeres Virtuales y abre los Detalles del Clúster Virtual. Luego, abre la Interfaz de Usuario de Airflow.
 
 ![alt text](../../img/reachairflowui.png)
 
-Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and validate the CDE Airflow Job's execution.
+Familiarízate con la Interfaz de Usuario de Airflow. Luego, abre la página de "DAR Runs" y valida la ejecución del Job de CDE Airflow.
 
 ![alt text](../../img/cdeairflow119.png)
 
@@ -172,51 +170,50 @@ Familiarize yourself with the Airflow UI. Then, open the Dag Runs page and valid
 
 ![alt text](../../img/cdeairflow119_3.png)
 
-To learn more about CDE Airflow please visit [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) in the CDE Documentation.
+Para obtener más información sobre CDE Airflow, por favor visita [Orchestrating Workflows and Pipelines](https://docs.cloudera.com/data-engineering/cloud/orchestrate-workflows/topics/cde-airflow-editor.html) en la documentación de CDE.
 
 
-## Deploying Orchestration Pipeline with Cloudera Airflow Editor
+## Despliegue de Pipeline de Orquestación con el Airflow Editor de Cloudera
 
-You can use the CDE Airflow Editor to build DAGs without writing code. This is a great option if your DAG consists of a long sequence of CDE Spark or CDW Hive jobs.
+Puede utilizar el Editor de Airflow de CDE para construir DAGs sin escribir código. Esta es una excelente opción si su DAG consiste en una larga secuencia de Jobs CDE Spark o Jobs CDW Hive.
 
-From the CDE Jobs UI, create a new CDE Job of type Airflow as shown below. Ensure to select the "Editor" option. Then click create.
+Desde la interfaz de usuario de Jobs de CDE, cree un nuevo Job CDE de tipo Airflow como se muestra a continuación. Asegúrese de seleccionar la opción "Editor". Luego haga clic en crear.
 
 ![alt text](../../img/bonus2_step00.png)
 
-From the Editor Canvas drag and drop the Shell Script action. This is equivalent to instantiating the BashOperator. Click on the icon on the canvas and an option window will appear on the right side. Enter the "dag start" in the Bash Command section.
+Desde el Lienzo del Editor, arrastre y suelte la acción de Script de Shell. Esto es equivalente a instanciar el BashOperator. Haga clic en el icono en el lienzo y aparecerá una ventana de opciones en el lado derecho. Ingrese "dag start" en la sección de Comando Bash.
 
 ![alt text](../../img/bonus2_step01.png)
 
-From the Canvas, drop two CDE Job Actions. Configure them with Job Name "sql_job". You already created this CDE Spark Job in part 2.
+Desde el Lienzo, coloque dos Acciones de Job CDE. Configúrelas con el Nombre del Job "sql_job". Ya creó este Job CDE Spark en la parte 2.
 
 ![alt text](../../img/bonus2_step02.png)
 
-Next, drag and drop a Python action. In the code section, add *print("DAG Terminated")* as shown below.
+A continuación, arrastre y suelte una acción de Python. En la sección de código, agregue *print("DAG Terminated")* como se muestra a continuación.
 
 ![alt text](../../img/bonus2_step03.png)
 
-Finally, complete the DAG by connecting each action.
+Finalmente, complete el DAG conectando cada acción.
 
 ![alt text](../../img/bonus2_step04.png)
 
-For each of the two CDE Jobs, open the action by clicking on the icon on the canvas. Select "Depends on Past" and then "all_success" in the "Trigger Rule" section.
+Para cada uno de los dos Jobs CDE, abra la acción haciendo clic en el icono en el lienzo. Seleccione "Depende del Anterior" y luego "todos_exitosos" en la sección "Regla de Disparo".
 
 ![alt text](../../img/bonus2_step05.png)
 
-Execute the DAG and observe it from the CDE Job Runs UI.
+Ejecute el DAG y obsérvelo desde la interfaz de usuario de Ejecuciones de Job CDE.
 
 ![alt text](../../img/bonus2_step06.png)
 
 ![alt text](../../img/bonus2_step07.png)
 
-## Summary
+## Resumen
+Apache Airflow es una plataforma para crear, programar y ejecutar tuberías de Ingeniería de Datos. Es ampliamente utilizado por la comunidad para crear flujos de Job dinámicos y robustos para casos de uso de Ingeniería de Datos por lotes.
 
-Apache Airflow is a platform to author, schedule and execute Data Engineering pipelines. It is widely used by the community to create dynamic and robust workflows for batch Data Engineering use cases.
+CDE incrusta Apache Airflow a nivel de Clúster Virtual de CDE. Se despliega automáticamente para el usuario de CDE durante la creación del Clúster Virtual de CDE y no requiere mantenimiento por parte del Administrador de CDE.
 
-CDE embeds Apache Airflow at the CDE Virtual Cluster level. It is automatically deployed for the CDE user during CDE Virtual Cluster creation and requires no maintenance on the part of the CDE Admin.
+Un Job CDE Airflow le permite implementar un DAG de Airflow como un Job CDE. El caso de uso principal es la orquestación de Jobs CDE Spark. El Editor de Airflow de Cloudera simplifica el código DAG al proporcionar una interfaz sin código / con bajo código para construir DAGs. Si utiliza principalmente CDE para poner en producción muchos Jobs CDE Spark, el Editor de Airflow puede ser una excelente elección. El DAG de Airflow, en cambio, utiliza Python para construir la lógica del DAG. Es una opción muy buena si utiliza operadores de código abierto de Airflow o necesita aplicar lógica empresarial compleja a su flujo de Job.
 
-A CDE Airflow Job allows you to deploy an Airflow DAG as a CDE Job. The primary use case is the orchestration of CDE Spark Jobs. The Cloudera Airflow Editor simplifies DAG code by providing a no-code / low-code interface for building DAGs. If you primarily use CDE to productionize many CDE Spark Jobs the Airflow Editor can be a great choice. The Airflow DAG instead leveeages Python to construct DAG logic. It is a bery good option if you use Airflow open source operators or need to apply complex business logic to your workflow.
+Si desea experimentar con un caso de uso de Airflow más avanzado en CDE, visite  [Bonus Lab 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth).
 
-If you would like to experiment with a more advanced Airflow use case in CDE please visit [Bonus Lab 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth).
-
-[In the next section](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) you will learn the basics of Airflow Orchestration in CDE in order to deploy a pipeline of dependent CDE Jobs.
+[En la siguiente sección](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#part-4-using-the-cde-spark-migration-tool-to-convert-spark-submits-to-cde-spark-submits) aprenderá los conceptos básicos de la Orquestación de Airflow en CDE para desplegar una tubería de Jobs CDE dependientes.
