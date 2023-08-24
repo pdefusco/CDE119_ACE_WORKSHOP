@@ -1,32 +1,32 @@
-# Part 5: Bonus Labs
+# Parte 5: Laboratori Bonus
 
-## Objective
+## Obbiettivo
 
-So far you explored the core aspects of Spark, Airflow and Iceberg in CDE. The following labs give you an opportunity to explore CDE in more detail.
+Finora hai esplorato gli aspetti fondamentali di Spark, Airflow e Iceberg in CDE. I seguenti laboratori ti offrono l'opportunità di esplorare CDE in maggior dettaglio.
 
-Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
+Ogni laboratorio bonus può essere eseguito indipendentemente dagli altri. In altre parole, puoi eseguirne tutti o solo alcuni di essi, in qualsiasi ordine preferisci.
 
-### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
+### Bonus Lab 1: Orchestrazione CDE Airflow (Approfondimento)
 
-Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.
+La parte 2 del HOL ti ha introdotto a un DAG di base in Airflow in CDE. Tuttavia, le capacità di Airflow includono una vasta varietà di operatori, la possibilità di memorizzare valori di contesto temporanei, la connessione a sistemi di terze parti e in generale la capacità di implementare casi di orchestrazione più avanzati.
 
-Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other popular Operators such as the SimpleHttpOperator Operator to send/receive API requests.
+Utilizzando "07-Airflow-Logic-DAG.py", creerai un nuovo Job CDE Airflow con altri operatori popolari come il SimpleHttpOperator per inviare/ricevere richieste API.
 
-First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
+Prima devi configurare una Connessione all'endpoint API cui farai riferimento nel codice del DAG. Torna alla scheda Amministrazione CDE, apri i "Dettagli del Cluster Virtuale" e quindi fai clic sull'icona "Airflow" per accedere all'interfaccia Airflow.
 
 ![alt text](../../img/airflow_connection_0.png)
 
 ![alt text](../../img/airflow_connection_1.png)
 
-Open Airflow Connections under the Admin dropdown as shown below.
+Apri le Connessioni Airflow nel menu a discesa Amministrazione come mostrato di seguito.
 
 ![alt text](../../img/airflow_connection_2.png)
 
-Airflow Connections allow you to predefine connection configurations so that they can be referenced within a DAG for various purposes. In our case, we will create a new connection to access the "Random Joke API" and in particular the "Programming" endpoint.
+Le Connessioni Airflow ti consentono di predefinire configurazioni di connessione in modo che possano essere utilizzate in un DAG per vari scopi. Nel nostro caso, creeremo una nuova connessione per accedere all'API "Random Joke" e in particolare all'endpoint "Programming".
 
 ![alt text](../../img/airflow_connection_3.png)
 
-Fill out the following fields as shown below and save.
+Compila i seguenti campi come mostrato di seguito e salva.
 
 ```
 Connection Id: random_joke_connection
@@ -36,56 +36,63 @@ Host: https://official-joke-api.appspot.com/
 
 ![alt text](../../img/airflow_connection_4.png)
 
-Now open "07-Airflow-Logic-DAG.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
+Ora apri "07-Airflow-Logic-DAG.py" e familiarizza con il codice. Alcuni degli aspetti più rilevanti di questo DAG includono:
 
-* Review line 127. Task Execution no longer follows a linear sequence. Step 3 only executes when both Step 1 and 2 have completed successfully.
-* At lines 75-77, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
-* At lines 106-115, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
-* At line 109 the connection id value is the same as the one used in the Airflow Connection you just created.
-* At line 110 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
-* At line 112 the response is captured and parsed by the "handle_response" method specified between lines 98-104.
-* At line 114 we use the "do_xcom_push" option to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
-* At lines 120-124 the Python Operator executes the "_print_random_joke" method declared at lines 117-118 and outputs the response of the API call.
+* Rivedi la riga 127. L'esecuzione del task non segue più una sequenza lineare. Lo Step 3 viene eseguito solo quando sia lo Step 1 che lo Step 2 sono stati completati con successo.
 
-As in the previous example, first create (but don't run) three CDE Spark Jobs using "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" and  "07_C_pyspark_JOIN.py".
+* Alle righe 75-77, l'operatore DummyOperator viene utilizzato come segnaposto e punto di partenza per l'esecuzione dei task.
 
-Then, open "07-Airflow-Logic-DAG.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
+* Alle righe 106-115, l'operatore SimpleHttpOperator viene utilizzato per inviare una richiesta a un endpoint API. Questo fornisce un punto di integrazione opzionale tra CDE Airflow e sistemi di terze parti o altri servizi Airflow in quanto le richieste e le risposte possono essere elaborate dal DAG.
 
-Finally, reupload the script to your CDE Files Resource. Create a new CDE Job of type Airflow and select the script from your CDE Resource.
+* Alla riga 109, il valore dell'ID di connessione è lo stesso utilizzato nella Connessione Airflow appena creata.
 
->**Note**
->The SimpleHttpOperator Operator can be used to interact with 3rd party systems and exchange data to and from a CDE Airflow Job run. For example you could trigger the execution of jobs outside CDP or execute CDE Airflow DAG logic based on inputs from 3rd party systems.
+* Alla riga 110, il valore dell'endpoint determina l'endpoint API a cui verranno indirizzate le tue richieste. Questo viene aggiunto all'URL di base impostato nella Connessione Airflow.
 
->**Note**  
->You can use CDE Airflow to orchestrate SQL queries in CDW, the Cloudera Data Warehouse Data Service, with the Cloudera-supported  CDWOperator. If you want to learn more, please go to [Bonus Lab 1: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
+* Alla riga 112, la risposta viene catturata e analizzata dal metodo "handle_response" specificato tra le righe 98-104.
 
->**Note**  
->Additionally, other operators including Python, HTTP, and Bash are available in CDE. If you want to learn more about Airflow in CDE, please reference [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
+* Alla riga 114, utilizziamo l'opzione "do_xcom_push" per scrivere la risposta come variabile di contesto del DAG. Ora la risposta è temporaneamente memorizzata per la durata del Job di Airflow e può essere riutilizzata da altri operatori.
+
+* Alle righe 120-124, l'operatore Python esegue il metodo "_print_random_joke" dichiarato alle righe 117-118 e restituisce la risposta della chiamata API.
+
+Come nell'esempio precedente, crea prima (senza eseguire) tre Job CDE Spark usando "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" e "07_C_pyspark_JOIN.py".
+
+Quindi, apri "07-Airflow-Logic-DAG.py" nel tuo editor e aggiorna il tuo nome utente alla riga 50. Assicurati che i nomi dei job alle righe 54 - 56 riflettano i nomi dei tre Job CDE Spark come li hai inseriti nell'interfaccia CDE Job.
+
+Infine, carica nuovamente lo script nella tua risorsa File CDE. Crea un nuovo Job CDE di tipo Airflow e seleziona lo script dalla tua risorsa CDE.
+
+>**Nota Bene**
+>L'operatore SimpleHttpOperator può essere utilizzato per interagire con sistemi di terze parti e scambiare dati da e verso l'esecuzione di un Job CDE Airflow. Ad esempio, potresti attivare l'esecuzione di job al di fuori di CDP o eseguire la logica del DAG CDE Airflow in base agli input provenienti dai sistemi di terze parti.
+
+>**Nota Bene**  
+>Puoi utilizzare CDE Airflow per orchestrare query SQL in CDW, il servizio Cloudera Data Warehouse Data, con l'operatore CDWOperator supportato da Cloudera. Se vuoi saperne di più, vai al [Bonus Lab 1: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
+
+>**Nota Bene**  
+>Inoltre, sono disponibili in CDE altri operatori tra cui Python, HTTP e Bash. Se desideri saperne di più su Airflow in CDE, consulta [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
 
 
-### Bonus Lab 2: Using CDE Airflow with CDW
+### Bonus Lab 2: Utilizzo di CDE Airflow con CDW
 
-You can use the CDWRunOperator to run CDW queries from a CDE Airflow DAG. This operator has been created and is fully supported by Cloudera.
+Puoi utilizzare il CDWRunOperator per eseguire query CDW da un DAG CDE Airflow. Questo operatore è stato creato ed è completamente supportato da Cloudera.
 
-##### CDW Setup Steps
+##### Passaggi per la Configurazione di CDW
 
-Before we can use the operator in a DAG you need to establish a connection between CDE Airflow to CDW. To complete these steps, you must have access to a CDW virtual warehouse.
+Prima di poter utilizzare l'operatore in un DAG, è necessario stabilire una connessione tra CDE Airflow e CDW. Per completare questi passaggi, è necessario avere accesso a un data warehouse virtuale CDW.
 
-CDE currently supports CDW operations for ETL workloads in Apache Hive virtual warehouses. To determine the CDW hostname to use for the connection:
+Attualmente, CDE supporta operazioni CDW per carichi di lavoro ETL nei data warehouse virtuali Apache Hive. Per determinare l'hostname CDW da utilizzare per la connessione:
 
-Navigate to the Cloudera Data Warehouse Overview page by clicking the Data Warehouse tile in the Cloudera Data Platform (CDP) management console.
+Accedi alla pagina Panoramica del Data Warehouse Cloudera facendo clic sulla tessera Data Warehouse nella console di gestione della piattaforma Cloudera Data Platform (CDP).
 
 ![alt text](../../img/bonus1_step00_A.png)
 
-In the Virtual Warehouses column, find the warehouse you want to connect to.
+Nella colonna "Virtual Warehouses", trova il data warehouse a cui desideri connetterti.
 
 ![alt text](../../img/bonus1_step00_B.png)
 
-Click the three-dot menu for the selected warehouse, and then click Copy JDBC URL.
+Clicca sul menu a tre punti per il data warehouse selezionato, quindi clicca su "Copia URL JDBC".
 
 ![alt text](../../img/bonus1_step00_C.png)
 
-Paste the URL into a text editor, and make note of the hostname. For example, starting with the following url the hostname would be:
+Incolla l'URL in un editor di testo e prendi nota dell'hostname. Ad esempio, partendo dall'URL seguente, l'hostname sarebbe:
 
 ```
 Original URL: jdbc:hive2://hs2-aws-2-hive.env-k5ip0r.dw.ylcu-atmi.cloudera.site/default;transportMode=http;httpPath=cliservice;ssl=true;retries=3;
@@ -93,41 +100,41 @@ Original URL: jdbc:hive2://hs2-aws-2-hive.env-k5ip0r.dw.ylcu-atmi.cloudera.site/
 Hostname: hs2-aws-2-hive.env-k5ip0r.dw.ylcu-atmi.cloudera.site
 ```
 
-##### CDE Setup Steps
+##### Passaggi di Configurazione CDE
 
-Navigate to the Cloudera Data Engineering Overview page by clicking the Data Engineering tile in the Cloudera Data Platform (CDP) management console.
+Accedi alla pagina di panoramica di Cloudera Data Engineering cliccando sulla sezione Data Engineering nella console di gestione di Cloudera Data Platform (CDP).
 
-In the CDE Services column, select the service containing the virtual cluster you are using, and then in the Virtual Clusters column, click  Cluster Details for the virtual cluster. Click AIRFLOW UI.
+Nella colonna "CDE Services", seleziona il servizio che contiene il virtual cluster che stai utilizzando e quindi, nella colonna "Virtual Clusters", fai clic su "Cluster Details" per il virtual cluster. Fai clic su "AIRFLOW UI".
 
 ![alt text](../../img/bonus1_step00_D.png)
 
-From the Airflow UI, click the Connection link from the Admin tab.
+Dall'interfaccia utente di Airflow, fai clic sul collegamento "Connection" dalla scheda "Admin".
 
 ![alt text](../../img/bonus1_step00_E.png)
 
-Click the plus sign to add a new record, and then fill in the fields:
+Fai clic sul segno più per aggiungere un nuovo record e poi compila i campi:
 
-* Conn Id: Create a unique connection identifier, such as "cdw_connection".
-* Conn Type: Select Hive Client Wrapper.
-* Host: Enter the hostname from the JDBC connection URL. Do not enter the full JDBC URL.
+* Conn Id: Crea un identificativo di connessione univoco, come ad esempio "cdw_connection".
+* Conn Type: Seleziona Hive Client Wrapper.
+* Host: Inserisci l'hostname dall'URL di connessione JDBC. Non inserire l'intero URL JDBC.
 * Schema: default
-* Login: Enter your workload username and password.
+* Login: Inserisci il tuo nome utente e password del carico di lavoro.
 
-6. Click Save.
+Fai clic su "Save".
 
 ![alt text](../../img/bonus1_step1.png)
 
-##### Editing the DAG Python file
+##### Modifica del File DAG di Python
 
-Now you are ready to use the CDWOperator in your Airflow DAG. Open the "bonus-01_Airflow_CDW.py" script and familiarize yourself with the code.
+Ora sei pronto per utilizzare il CDWOperator nel tuo DAG di Airflow. Apri lo script "bonus-01_Airflow_CDW.py" e familiarizza con il codice.
 
-The Operator class is imported at line 47.
+La classe Operator viene importata alla riga 47.
 
 ```
 from cloudera.cdp.airflow.operators.cdw_operator import CDWOperator
 ```
 
-An instance of the CDWOperator class is created at lines 78-86.
+Un'istanza della classe CDWOperator viene creata alle righe 78-86.
 
 ```
 cdw_query = """
@@ -145,110 +152,107 @@ dw_step3 = CDWOperator(
 )
 ```
 
-Notice that the SQL syntax run in the CDW Virtual Warehouse is declared as a separate variable and then passed to the Operator instance as an argument. The Connection is also passed as an argument at line
+Nota che la sintassi SQL eseguita nella CDW Virtual Warehouse è dichiarata come una variabile separata e quindi passata all'istanza dell'Operatore come argomento. La Connessione viene anche passata come argomento alla riga
 
-Finally, notice that task dependencies include both the spark and dw steps:
+Infine, nota che le dipendenze delle attività includono sia le attività spark che dw:
 
 ```
 spark_step >> dw_step
 ```
 
-Next, create a new Airflow CDE Job named "CDW Dag". Upload the new DAG file to the same or a new CDE resource as part of the creation process.
+Successivamente, crea un nuovo Job CDE Airflow chiamato "CDW Dag". Carica il nuovo file DAG nella stessa risorsa CDE o in una nuova risorsa durante il processo di creazione.
 
 ![alt text](../../img/bonus1_step2.png)
 
-Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the Tree View and validate that the job has succeeded.
+Vai alla pagina delle esecuzioni dei job CDE e apri l'interfaccia utente Airflow dell'esecuzione. Quindi apri la vista ad albero e verifica che il job sia stato eseguito correttamente.
 
 ![alt text](../../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
+### Bonus Lab 3: Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE (Approfondimento)
 
-#### Summary
+La maggior parte dei casi d'uso di produzione della CDE si basa sull'API e sulla CLI della CDE. Con esse, puoi interagire facilmente con la CDE da un IDE locale e creare integrazioni con sistemi esterni di terze parti. Ad esempio, puoi implementare flussi di lavoro multi-CDE cluster con GitLab CI o Python.
 
-The majority of CDE Production use cases rely on the CDE API and CLI. With them, you can easily interact with CDE from a local IDE and build integrations with external 3rd party systems. For example, you can implement multi-CDE cluster workflows with GitLabCI or Python.  
+In questa parte del workshop acquisirai familiarità con la CLI della CDE eseguendo nuovamente gli stessi job e interagendo con il servizio in remoto.
 
-In this part of the workshop you will gain familiarity with the CDE CLI by rerunning the same jobs and interacting with the service remotely.
+Puoi utilizzare la CLI o l'API della CDE per eseguire job Spark e Airflow in remoto anziché tramite l'interfaccia utente della CDE come mostrato fino a questo punto. In generale, si consiglia l'uso della CLI della CDE rispetto all'interfaccia utente quando si eseguono submit di Spark da un computer locale. L'API è invece consigliata quando si integrano Job Spark o Job Airflow della CDE (o entrambi) con sistemi di orchestrazione di terze parti. Ad esempio, puoi utilizzare GitLab CI per creare Pipeline CDE su più Cluster Virtuali. Per un esempio dettagliato, consulta  [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE).
 
-You can use the CDE CLI or API to execute Spark and Airflow jobs remotely rather than via the CDE UI as shown up to this point. In general, the CDE CLI is recommended over the UI when running spark submits from a local machine. The API is instead recommended when integrating CDE Spark Jobs or Airflow Jobs (or both) with 3rd party orchestration systems. For example you can use GitLab CI to build CDE Pipelines across multiple Virtual Clusters. For a detailed example, please reference [GitLab2CDE](https://github.com/pdefusco/Gitlab2CDE).
+Presumiamo che tu abbia già installato la CLI seguendo le istruzioni nella Parte 1. Se non lo hai ancora fatto, ti preghiamo di installare la CLI della CDE adesso.
 
-We assume you have already installed the CLI following the instructions in Part 1. If you haven't done so, please install the CDE CLI now.
+Innanzitutto, crea un ambiente virtuale Python e installa i requisiti.
 
-First, create a Python virtual environment and install the requirements.
+#### Uso della CLI di CDE
 
+###### Esecuzione Job Spark:
 
-#### Using the CDE CLI
+Questo comando eseguirà lo script come un semplice Spark Submit. Questo è leggermente diverso dalla creazione di un Job CDE di tipo Spark in quanto la definizione del Job non diventerà riutilizzabile.
 
-###### Run Spark Job:
-
-This command will run the script as a simple Spark Submit. This is slightly different from creating a CDE Job of type Spark as the Job definition will not become reusable.
-
->**⚠ Warning**  
-> The CLI commands below are meant to be copy/pasted in your terminal as-is and run from the "cde_tour_ace_hol" directory. However, you may have to update the script path in each command if you're running these from a different folder.
+>**⚠ Avviso**  
+> I comandi CLI qui di seguito sono pensati per essere copiati/incollati nel tuo terminale così come sono e eseguiti dalla directory "cde_tour_ace_hol". Tuttavia, potresti dover aggiornare il percorso dello script in ciascun comando se li esegui da una cartella diversa.
 
 ```
 cde spark submit --conf "spark.pyspark.python=python3" cde_cli_jobs/01_pyspark-sql.py
 ```
 
-###### Check Job Status:
+###### Verifica dello Stato del Job::
 
-This command will allow you to obtain information related to the above spark job. Make sure to replace the id flag with the id provided when you executed the last script e.g. 199.
+Questo comando ti permetterà di ottenere informazioni relative al job Spark sopra. Assicurati di sostituire il flag "id" con l'ID fornito quando hai eseguito lo script precedente, ad esempio 199.
 
 ```
 cde run describe --id 199
 ```
 
-###### Review the Output:
+###### Esamina l'Output:
 
-This command shows the logs for the above job. Make sure to replace the id flag with the id provided when you executed the last script.  
+Questo comando mostra i log per il job sopra. Assicurati di sostituire il flag "id" con l'ID fornito quando hai eseguito lo script precedente.
 
 ```
 cde run logs --type "driver/stdout" --id 199
 ```
 
-###### Create a CDE Resource:
+###### Creazione di una Resource:
 
-This command creates a CDE Resource of type File:
+Questo comando crea una Resource di tipo File:
 
 ```
 cde resource create --name "my_CDE_Resource"
 ```
 
-###### Upload file(s) to resource:
+###### Carica file(i) sulla Resource:
 
-This command uploads the "01_pyspark-sql.py" script into the CDE Resource.
+Il comando seguente carica lo script "01_pyspark-sql.py" nella Risorsa CDE.
 
 ```
 cde resource upload --local-path "cde_cli_jobs/01_pyspark-sql.py" --name "my_CDE_Resource"
 ```
 
-###### Validate CDE Resource:
+###### Convalidazione Resource:
 
-This command obtains information related to the CDE Resource.
+Il comando seguente ottiene informazioni relative alla Resource.
 
 ```
 cde resource describe --name "my_CDE_Resource"
 ```
 
-###### Schedule CDE Spark Job with the File Uploaded to the CDE Resource
+###### Pianificazione di un Job Spark con il File Caricato sulla Resource
 
-This command creates a CDE Spark Job using the file uploaded to the CDE Resource.
+Il comando seguente crea un Job Spark CDE utilizzando il file caricato sulla Risorsa.
 
 ```
 cde job create --name "PySparkJob_from_CLI" --type spark --conf "spark.pyspark.python=python3" --application-file "/app/mount/01_pyspark-sql.py" --cron-expression "0 */1 * * *" --schedule-enabled "true" --schedule-start "2022-11-28" --schedule-end "2023-08-18" --mount-1-resource "my_CDE_Resource"
 ```
 
-###### Validate Job:
+###### Convalidazione Job:
 
-This command obtains information about CDE Jobs whose name contains the string "PySparkJob".
+Il comando seguente ottiene informazioni sui Job CDE il cui nome contiene la stringa "PySparkJob".
 
 ```
 cde job list --filter 'name[like]%PySparkJob%'
 ```
 
-###### Learning to use the CDE CLI
+###### Come Apprendere a Usare la CLI di CDE
 
-The CDE CLI offers many more commands. To become familiarized with it you can use the "help" command and learn as you go. Here are some examples:
+La CLI della CDE offre molti altri comandi. Per familiarizzartici, puoi utilizzare il comando "help" e imparare man mano. Ecco alcuni esempi:
 
 ```
 cde --help
@@ -257,30 +261,29 @@ cde run --help
 cde resource --help
 ```
 
-To learn more about the CDE CLI please visit [Using the Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html) in the CDE Documentation.
+Per saperne di più sulla CLI della CDE, visita la pagina [Using the Cloudera Data Engineering command line interface](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html) nella documentazione.
 
 
-### Bonus Lab 4: Using Python with the CDE API
+### Bonus Lab 4: Utilizzo di Python con la API di CDE
 
-Cloudera Data Engineering (CDE) provides a robust API for integration with your existing continuous integration/continuous delivery platforms. In this example we will use Python to create and deploy Spark Jobs in CDE from your local machine. The same code can execute on other platforms and 3rd party tools.
+CDE fornisce una robusta API per l'integrazione con le tue piattaforme esistenti di integrazione continua e distribuzione continua. In questo esempio utilizzeremo Python per creare e distribuire Spark Jobs nella CDE dal tuo computer locale. Lo stesso codice può essere eseguito su altre piattaforme e strumenti di terze parti.
 
-##### Introduction to the CDE API
+##### Introduzione alla API di CDE
 
-The Cloudera Data Engineering service API is documented in Swagger. You can view the API documentation and try out individual API calls by accessing the API DOC link in any virtual cluster:
+Il servizio Cloudera Data Engineering ha un'API documentata in Swagger. Puoi visualizzare la documentazione dell'API e provare singole chiamate API accedendo al link API DOC in qualsiasi virtual cluster:
 
-In the Data Engineering web console, select an environment.
-Click the Cluster Details icon in any of the listed virtual clusters.
-Click the link under API DOC.
+Nella console web Data Engineering, seleziona un ambiente.
+Fai clic sull'icona Dettagli del cluster in uno qualsiasi dei virtual cluster elencati. Fai clic sul link su "API DOC".
 
-##### Basic API Workflow
+##### Workflow Base con la API
 
-Obtain CDE Token and Set Environment Variable:
+Ottieni il Token della CDE e imposta la variabile d'Ambiente:
 
 ```
 export CDE_TOKEN=$(curl -u <workload_user> $(echo '<grafana_charts>' | cut -d'/' -f1-3 | awk '{print $1"/gateway/authtkn/knoxtoken/api/v1/token"}') | jq -r '.access_token')
 ```
 
-Create a sample CDE Resource
+Creare una Resource CDE:
 
 ```
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST \
@@ -288,13 +291,13 @@ curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST \
   -d "{ \"name\": \"cml2cde_api_resource\"}"
 ```
 
-Validate CDE Resource Creation
+Convalidare la presenza della Resource:
 
 ```
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X GET "$JOBS_API_URL/resources/cml2cde_api_resource"
 ```
 
-Upload Spark Job Script
+Caricare lo script del Job Spark:
 
 ```
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X PUT \
@@ -302,7 +305,7 @@ curl -H "Authorization: Bearer $ACCESS_TOKEN" -X PUT \
   -F "file=@/home/cdsw/cml2cde_tutorial_code/Data_Extraction_Sub_150k.py"
 ```
 
-Create CDE Spark Job
+Creare un Job Spark in CDE:
 
 ```
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs" \
@@ -311,15 +314,15 @@ curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs" \
           -d "{ \"name\": \"cml2cde_api_job\", \"type\": \"spark\", \"retentionPolicy\": \"keep_indefinitely\", \"mounts
 ```
 
-Run CDE Spark Job
+Eseguire Job Spark:
 
 ```
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs/cml2cde_api_job/run"
 ```
 
-##### Using Python
+##### Utilizzo di Python
 
-You can use the Python Requests library to wrap the above methods. For example you can build a function to download the CDE Token via:
+Puoi utilizzare la libreria Python "Requests" per incapsulare i metodi sopra descritti. Ad esempio, puoi creare una funzione per scaricare il Token della CDE tramite:
 
 ```
 import requests
@@ -332,7 +335,7 @@ def set_cde_token():
     return json.loads(token_json[5])["access_token"]
 ```
 
-Once you set the JOBS_API_URL correctly you can run the following code to download the CDE Token:
+Una volta impostato correttamente il JOBS_API_URL, puoi eseguire il seguente codice per scaricare il Token della CDE:
 
 ```
 JOBS_API_URL = "https://ewefwfw.cde-6fhtj4hthr.my-cluster.ylcu-atmi.cloudera.site/dex/api/v1"
@@ -340,7 +343,9 @@ JOBS_API_URL = "https://ewefwfw.cde-6fhtj4hthr.my-cluster.ylcu-atmi.cloudera.sit
 tok = set_cde_token()
 ```
 
-Although this can work in an interactive setting, we recommend using CDE Sessions as they allow you to directly use the PySpark and Spark Scala shells. In general, the API is a great choice for building applications. For example, you could use Python to issue a CDE API Request in order to monitor CDE Resources:
+Sebbene ciò possa funzionare in un ambiente interattivo, consigliamo l'uso delle Sessioni CDE in quanto ti consentono di utilizzare direttamente gli shell PySpark e Spark Scala.
+
+In generale, la API è un'ottima scelta per la creazione di applicazioni. Ad esempio, potresti utilizzare Python per inviare una richiesta all'API della CDE al fine di monitorare le Risorse CDE:
 
 ```
 url = os.environ["JOBS_API_URL"] + "/resources"
@@ -352,15 +357,15 @@ x = requests.get(url, headers=headers)
 x.json()["resources"][-3:-1]
 ```
 
-As an exmaple we built [CDE Alerter](https://github.com/pdefusco/CDE_Alerter) and the cde_python module. CDE Alerter is a Python App to continuously monitor the status of CDE Jobs across multiple CDE Virtual Clusters. It allows you to flag CDE Jobs that last more than a provided number of seconds. It uses cde_python, a custom Python wrapper for the CDE API, to periodically submit requests to the CDE Virtual Cluster. The general idea is that you can use Python to implement a set of business rules in case of a particular event in a CDE Cluster.  
+Come esempio, abbiamo creato [CDE Alerter](https://github.com/pdefusco/CDE_Alerter) e il modulo cde_python. CDE Alerter è un'applicazione Python per monitorare continuamente lo stato dei lavori CDE in più Virtual Clusters CDE. Ti consente di segnalare i lavori CDE che durano più di un determinato numero di secondi. Utilizza cde_python, un wrapper Python personalizzato per l'API della CDE, per inviare periodicamente richieste al Virtual Cluster della CDE. L'idea generale è che puoi utilizzare Python per implementare un insieme di regole aziendali in caso di eventi particolari in un Cluster CDE.
 
-In order to run this App in your local machine little to none code changes are required. You will need Python 3.6 or above, a Gmail account with 2-step authentication and an App password. Steps to set up a Gmail account correctly are provided below. We do not recommend using your existing Gmail account if you have one and instead creating a new one as shown below.
+Per eseguire questa App nel tuo computer locale, sono necessarie poche o nessuna modifica al codice. Avrai bisogno di Python 3.6 o versioni successive, di un account Gmail con autenticazione a due fattori e di una password per l'app. Di seguito sono forniti i passaggi per configurare correttamente un account Gmail. Non consigliamo di utilizzare il tuo account Gmail esistente, se ne hai uno, ma di crearne uno nuovo come indicato di seguito.
 
-## Instructions
+## Istruzione per il Dispiegamento della App
 
-#### Step 0: Project setup
+#### Passo 0: Configurazione del Progetto
 
-Clone this GitHub repository to your local machine or the VM where you will be running the script.
+Clona questo repository GitHub nella tua macchina locale o nella VM in cui eseguirai lo script.
 
 ```
 mkdir ~/Documents/CDE_Alerter
@@ -368,12 +373,12 @@ cd ~/Documents/CDE_Alerter
 git clone https://github.com/pdefusco/CDE_Alerter.git
 ```
 
-Alternatively, if you don't have GitHub create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE_Alerter.git) and download the files.
+In alternativa, se non hai GitHub, crea una cartella sul tuo computer locale, vai a [questo URL](https://github.com/pdefusco/CDE_Alerter.git) e scarica i file.
 
 
-#### Step 1: Create a Python Virtual Environment and Install Requirements
+#### Passo 1: Crea un ambiente virtuale Python e installa i requisiti
 
-Although a Python Virtual Environment is optional, it is highly recommended. To create one and install requirements execute the following commands:
+Sebbene un ambiente virtuale Python sia opzionale è altamente consigliato usarlo per isolare l'installazione dei moduli necessari per la app. Per crearlo e installare i requisiti, esegui i seguenti comandi:
 
 ```
 #Create
@@ -392,66 +397,67 @@ pip install -r requirements.txt #Optionally use pip3 install
 ![alt text](../../img/alerter_img01.png)
 
 
-#### Step 2: Edit Clusters.txt and Test CDE Connection
+#### Passo 2: Modifica Clusters.txt e testa la connessione a CDE
 
-The clusters.txt file contains a list of JOBS_API_URL and email addresses, reflecting the cluster(s) you want to monitor and the email addresses to be notified.
+Il file clusters.txt contiene un elenco di JOBS_API_URL e indirizzi email, che riflettono il/i cluster che desideri monitorare e gli indirizzi email da notificare.
 
-Add your JOBS_API_URL and email to clusters.txt and remove any other entries. The app works with one or multiple cluster entries. Then, ensure that your machine or VM can reach the CDE Virtual Cluster by running the following command in the terminal:
+Aggiungi il tuo JOBS_API_URL e l'indirizzo email a clusters.txt e rimuovi eventuali altre voci. L'app funziona con una o più voci di cluster. Poi, assicurati che la tua macchina o VM possa raggiungere il CDE Virtual Cluster eseguendo il seguente comando nel terminale:
 
 ```
 python3 connection_tester.py jobs_api_url cdpusername cdppwd
 ```
 
-The output in the terminal should confirm that a test resource has been created successfully.
+L'output nel terminale dovrebbe confermare che è stata creata con successo una risorsa di test.
 
 
-#### Step 3: Run the script
+#### Step 3: Esegui lo script
 
-Before you can run the script you will need:
-* The CDE JOBS API URL for the intended CDE Virtual Cluster you want to monitor.
-* The Gmail APP password (not just the account login password). If you need help setting this up for the first time:
-  1. Recommended: [Create a New Gmail Account](https://support.google.com/mail/answer/56256?hl=en)
-  2. [Enable 2-step Authentication and Create an App Password](https://www.youtube.com/watch?v=hXiPshHn9Pw)
-* The CDP User and Password you will authenticate into the CDE Virtual Cluster with.
+Prima di poter eseguire lo script avrai bisogno di:
 
-To run the script, run the following python command in the directory where you cloned your project.
+* Il JOBS_API_URL del Virtual Cluster CDE che intendi monitorare.
+* La password APP Gmail (non solo la password di accesso all'account). Se hai bisogno di aiuto per impostarla per la prima volta:
+  1. Consigliato: [Crea un nuovo account Gmail](https://support.google.com/mail/answer/56256?hl=en)
+  2. [Abilita l'autenticazione a due fattori e crea una password dell'app](https://www.youtube.com/watch?v=hXiPshHn9Pw)
+* L'utente e la password CDP con cui ti autenticherai nel Virtual Cluster CDE.
+
+Per eseguire lo script, esegui il seguente comando Python nella directory in cui hai clonato il tuo progetto.
 
 ```
 python3 alerter.py https://z4xgdztf.cde-6fr6l74r.go01-dem.ylcu-atmi.cloudera.site/dex/api/v1 cdpusername cdppwd mysecregapppwdhere 1800 me@myco.com mycolleague@myco.com
 ```
 
-The Gmail App password should be entered as the fourth argument (for example replacing "mysecregapppwdhere" above).
+La password dell'app Gmail dovrebbe essere inserita come quarto argomento (sostituendo ad esempio "mysecregapppwdhere" sopra).
 
-The script will automatically detect whether more than 1800 seconds (30 minutes) have expired between the start and end time of any of your CDE Jobs.
+Lo script rileverà automaticamente se sono trascorsi più di 1800 secondi (30 minuti) tra l'ora di inizio e l'ora di fine di uno dei tuoi lavori CDE.
 
-If any CDE Jobs meet the criteria, the script will automatically send a notification to the provided emails. You can enter two email recipients by adding them as the last two arguments at script execution.
+Se alcuni lavori CDE soddisfano i criteri, lo script invierà automaticamente una notifica agli indirizzi email forniti. Puoi inserire due destinatari dell'email aggiungendoli come gli ultimi due argomenti all'esecuzione dello script.
 
-As an example, if we lower the time window from 1800 seconds to 18 seconds the script will detect some jobs and output the following to the terminal.
+Come esempio, se riduciamo la finestra temporale da 1800 secondi a 18 secondi, lo script rileverà alcuni lavori e stamperà il seguente output nel terminale.
 
 ![alt text](../../img/alerter_img_02A.png)
 
-If no CDE Jobs meet the criteria, nothing is done.
+Se nessun lavoro CDE soddisfa i criteri, non verrà fatto nulla.
 
 ![alt text](../../img/alerter_img02.png)
 
 
-#### Step 4: Schedule the Script as a Cron Job
+#### Passo 4: Schedula lo script come un Job Cron
 
-The script can run as often as you would like. For example, you could schedule a cron job to execute the script every minute with the following command:
+Lo script può essere eseguito quanto desideri. Ad esempio, potresti pianificare un job Cron per eseguire lo script ogni minuto con il seguente comando:
 
 ```
 * * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
 ```
 
 
-## Summary
+## Riepilogo
 
-In this section we reviewed three more advanced CDE use cases: a more advanced CDE Airflow DAG, an Airflow DAG leveraging the CDW Operator and a more in-depth view of the CDE CLI.
+In questa sezione abbiamo esaminato tre casi d'uso più avanzati di CDE: un DAG CDE Airflow più avanzato, un DAG Airflow che sfrutta l'operatore CDW e una visione più approfondita della CDE CLI.
 
-You can use CDE Airflow with Open Source operators to implement advanced business logic to your DAGs. CDE Version 1.20 will further this functionality by providing the ability to utilize a broader set of Airflow Operators, Plugins, and other open source features.
+Puoi utilizzare CDE Airflow con operatori open source per implementare logiche aziendali avanzate nei tuoi DAG. La versione 1.20 di CDE amplierà ulteriormente questa funzionalità offrendo la possibilità di utilizzare un set più ampio di operatori Airflow, plugin e altre funzionalità open source.
 
-The CDWOperator has been contributed by Cloudera to allow users to orchestrate CDW queries from an Airflow DAG. You can connect to one or more CDW Virtual Warehouses from within the same CDE Airflow DAG.
+Il CDWOperator è stato fornito da Cloudera per consentire agli utenti di orchestrare query CDW da un DAG Airflow. Puoi connetterti a uno o più data warehouse virtuali CDW all'interno dello stesso DAG CDE Airflow.
 
-Finally, the CDE CLI is the ideal choice for those who use CDE at scale. While the CDE Jobs UI is a great observability tool we do not recommend building your Spark Jobs with the UI too frequently. The CLI provides more options including the ability to submit CDE Jobs to more than one CDE Virtual Cluster from the same terminal program. In general, you can use the CLI to build more CDE Jobs more quickly once you become familiar with it.
+Infine, la CDE CLI è l'opzione ideale per coloro che utilizzano CDE su larga scala. Mentre l'interfaccia utente di CDE Jobs è uno strumento utile per l'osservabilità, non consigliamo di costruire i tuoi Spark Jobs con l'interfaccia utente troppo frequentemente. La CLI offre più opzioni, compresa la possibilità di inviare Jobs CDE a più di un Virtual Cluster CDE dalla stessa finestra del terminale. In generale, puoi utilizzare la CLI per costruire più Jobs CDE più velocemente una volta che ti sarai familiarizzato con essa.
 
-Thank you for going through the Bonus Labs! Before visit the [Conclusion and Next Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#part-6-conclusions-and-next-steps) page for a brief recap and recommended projects and articles. These are particularly useful if you are already using or will be using CDE in the future.
+Grazie per aver completato le Bonus Labs! Prima di proseguire, visita la pagina [Conclusioni e prossimi passi](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#part-6-conclusions-and-next-steps) per un breve riepilogo e per scoprire i progetti e gli articoli consigliati. Questi possono essere particolarmente utili se stai già utilizzando o prevedi di utilizzare CDE in futuro.
