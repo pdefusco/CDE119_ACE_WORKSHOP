@@ -38,21 +38,55 @@ Host: https://official-joke-api.appspot.com/
 
 Now open "bonus-01_Airflow_Operators.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
 
-* Review line 127. Task Execution no longer follows a linear sequence. Step 3 only executes when both Step 1 and 2 have completed successfully.
+* Review line 170. Task Execution no longer follows a linear sequence. Step 5 triggers step 6a and 6b. Step 6c only executes when both Step 6a and 6b have completed successfully.
 
-* At lines 75-77, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
+```
+step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
 
-* At lines 106-115, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
+```
 
-* At line 109 the connection id value is the same as the one used in the Airflow Connection you just created.
+* At lines 80-83, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
 
-* At line 110 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
+```
+start = DummyOperator(
+    task_id="start",
+    dag=operators_dag
+)
+```
 
-* At line 112 the response is captured and parsed by the "handle_response" method specified between lines 98-104.
+* At lines 147-156, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
 
-* At line 114 we use the "do_xcom_push" option to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
+* At line 150 the connection id value is the same as the one used in the Airflow Connection you just created. At line 151 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
 
-* At lines 120-124 the Python Operator executes the "_print_random_joke" method declared at lines 117-118 and outputs the response of the API call.
+* At line 153 the response is captured and parsed by the "handle_response" method specified between lines 139-145.
+
+* At line 155 the "do_xcom_push" option is used to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
+
+<pre>
+step7 = SimpleHttpOperator(
+    task_id="random_joke_api",
+    method="GET",
+    <b>http_conn_id="random_joke_connection"<b\>,
+    <b>endpoint="/jokes/programming/random"<b\>,
+    headers={"Content-Type":"application/json"},
+    <b>response_check=lambda response: handle_response(response)<b\>,
+    dag=operators_dag,
+    <b>do_xcom_push=True<b\>
+)
+<pre\>
+
+* At lines 161-165 the Python Operator executes the "_print_random_joke" method declared at lines 158-159 and outputs the response of the API call.
+
+```
+def _print_random_joke(**context):
+    return context['ti'].xcom_pull(task_ids='random_joke_api')
+
+step8 = PythonOperator(
+    task_id="print_random_joke",
+    python_callable=_print_random_joke,
+    dag=operators_dag
+)
+```
 
 As in the part 3, first create *(but don't run)* three CDE Spark Jobs using "05_C_pyspark_LEFT.py", "05_D_pyspark_RIGHT.py" and  "05_E_pyspark_JOIN.py".
 
