@@ -2,7 +2,7 @@
 
 ## Objectivo
 
-El comando spark-submit es una utilidad para ejecutar o enviar un programa de aplicación Spark o PySpark (o trabajo) al clúster, especificando opciones y configuraciones. La aplicación que estás enviando puede estar escrita en Scala, Java o Python (PySpark).
+El comando spark-submit es una utilidad para ejecutar o enviar un programa de aplicación Spark o PySpark (o Job) al clúster, especificando opciones y configuraciones. La aplicación que estás enviando puede estar escrita en Scala, Java o Python (PySpark).
 
 La CLI de CDE proporciona una manera similar aunque no idéntica de ejecutar "spark-submits" en CDE. Sin embargo, adaptar muchos spark-submits a CDE podría convertirse en un obstáculo en tu migración. El equipo de Ingeniería de Cloudera creó una herramienta de Migración de Spark para facilitar la conversión.
 
@@ -60,11 +60,11 @@ spark-submit \
 06-pyspark-sql.py
 ```
 
-Pronto deberías obtener resultados en tu terminal, incluido un ID de ejecución de trabajo que confirma la correcta presentación del trabajo en CDE. En el ejemplo de captura de pantalla a continuación, el ID de ejecución de trabajo es 9.
+Pronto deberías obtener resultados en tu terminal, incluido un ID de ejecución de Job que confirma la correcta presentación del Job en CDE. En el ejemplo de captura de pantalla a continuación, el ID de ejecución de Job es 9.
 
 ![alt text](../../img/job_submit_confirm1.png)
 
-Dirígete a la página de ejecuciones de trabajos en tu CDE Virtual Cluster y valida que el trabajo esté en ejecución o se haya ejecutado con éxito.
+Dirígete a la página de ejecuciones de Jobs en tu CDE Virtual Cluster y valida que el Job esté en ejecución o se haya ejecutado con éxito.
 
 ![alt text](../../img/job_submit_confirm3.png)
 
@@ -73,7 +73,7 @@ Dirígete a la página de ejecuciones de trabajos en tu CDE Virtual Cluster y va
 
 ## Resumen
 
-El comando spark-submit es el único utilizado para enviar una aplicación Spark a un clúster. El comando ofrece una amplia variedad de opciones y configuraciones para ejecutar la aplicación como un trabajo, por ejemplo, el número y los recursos asignados al controlador y los ejecutores de Spark.
+El comando spark-submit es el único utilizado para enviar una aplicación Spark a un clúster. El comando ofrece una amplia variedad de opciones y configuraciones para ejecutar la aplicación como un Job, por ejemplo, el número y los recursos asignados al controlador y los ejecutores de Spark.
 
 El CLI de CDE proporciona un comando muy similar, el CDE spark-submit, que se puede utilizar para enviar aplicaciones Spark a clústeres virtuales de CDE. La Herramienta de Migración de Spark Submit de CDE se creó para permitirte convertir uno o más comandos spark-submit en CDE spark-submit. Esto requiere una breve instalación y está disponible para ti desde la página de Detalles del Servicio de Clúster Virtual.
 

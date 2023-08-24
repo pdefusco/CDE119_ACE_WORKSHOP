@@ -4,7 +4,7 @@ Esta guía proporciona instrucciones para configurar el proyecto en tu máquina 
 
 ## Requisitos
 
-"Para llevar a cabo los Laboratorios Prácticos, necesitas:
+Para llevar a cabo los Laboratorios Prácticos, necesitas:
 
 * Un Clúster Virtual CDE habilitado para Spark 3 e Iceberg (compatible con Azure, AWS y Nube Privada).
 * Se requieren muy pocos cambios de código, pero se recomienda tener familiaridad con Python y PySpark.
