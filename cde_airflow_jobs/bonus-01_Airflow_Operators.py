@@ -48,15 +48,15 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.http_operator import SimpleHttpOperator
 import pendulum
 
-username = "pdefusco_061423"
+username = "pdefusco_082423"
 
 print("Running as Username: ", username)
 
-cde_job_name_03_A = "job3A" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_B = "job3B" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_C = "job3C" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_D = "job3D" #Replace with CDE Job Name you used in the UI
-cde_job_name_03_E = "job3E" #Replace with CDE Job Name you used in the UI
+cde_job_name_03_A = "03-A-ETL_Paul" #Replace with CDE Job Name you used in the DAG in part 3
+cde_job_name_03_B = "03-B-Reports_Paul" #Replace with CDE Job Name you used in the DAG in part 3
+cde_job_name_05_C = "05-C-pyspark-LEFT" #Replace with CDE Job Name you used in the UI
+cde_job_name_05_D = "05-D-pyspark-RIGHT" #Replace with CDE Job Name you used in the UI
+cde_job_name_05_E = "05-E-pyspark-JOIN" #Replace with CDE Job Name you used in the UI
 
 #DAG instantiation
 default_args = {
@@ -67,9 +67,9 @@ default_args = {
     'end_date': datetime(2023,9,30,8) #End Date must be in the future
 }
 
-dag_name = '{}-03-airflow-pipeline'.format(username)
+dag_name = '{}-05-airflow-pipeline'.format(username)
 
-intro_dag = DAG(
+operators_dag = DAG(
     dag_name,
     default_args=default_args,
     schedule_interval='@yearly',
@@ -79,31 +79,31 @@ intro_dag = DAG(
 
 start = DummyOperator(
     task_id="start",
-    dag=airflow_tour_dag
+    dag=operators_dag
 )
 
 #Using the CDEJobRunOperator
 step1 = CDEJobRunOperator(
   task_id='etl',
-  dag=intro_dag,
+  dag=operators_dag,
   job_name=cde_job_name_03_A #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
 )
 
 step2 = CDEJobRunOperator(
     task_id='report',
-    dag=intro_dag,
+    dag=operators_dag,
     job_name=cde_job_name_03_B #job_name needs to match the name assigned to the Spark CDE Job in the CDE UI
 )
 
 step3 = BashOperator(
         task_id='bash',
-        dag=intro_dag,
+        dag=operators_dag,
         bash_command='echo "Hello Airflow" '
         )
 
 step4 = BashOperator(
     task_id='bash_with_jinja',
-    dag=intro_dag,
+    dag=operators_dag,
     bash_command='echo "yesterday={{ yesterday_ds }} | today={{ ds }}| tomorrow={{ tomorrow_ds }}"',
 )
 
@@ -114,25 +114,25 @@ def _print_context(**context):
 step5 = PythonOperator(
     task_id="print_context_vars",
     python_callable=_print_context,
-    dag=intro_dag
+    dag=operators_dag
 )
 
 step6a = CDEJobRunOperator(
         task_id='create-left-table',
-        dag=airflow_tour_dag,
-        job_name=cde_job_name_03_C
+        dag=operators_dag,
+        job_name=cde_job_name_05_C
         )
 
 step6b = CDEJobRunOperator(
         task_id='create-right-table',
-        dag=airflow_tour_dag,
-        job_name=cde_job_name_03_D
+        dag=operators_dag,
+        job_name=cde_job_name_05_D
         )
 
 step6c = CDEJobRunOperator(
         task_id='join-tables',
-        dag=airflow_tour_dag,
-        job_name=cde_job_name_03_E
+        dag=operators_dag,
+        job_name=cde_job_name_05_E
         )
 
 #api_host = Variable.get("ran")
@@ -151,7 +151,7 @@ step7 = SimpleHttpOperator(
     endpoint="/jokes/programming/random",
     headers={"Content-Type":"application/json"},
     response_check=lambda response: handle_response(response),
-    dag=airflow_tour_dag,
+    dag=operators_dag,
     do_xcom_push=True
 )
 
@@ -161,7 +161,7 @@ def _print_random_joke(**context):
 step8 = PythonOperator(
     task_id="print_random_joke",
     python_callable=_print_random_joke,
-    dag=airflow_tour_dag
+    dag=operators_dag
 )
 
 #Execute tasks in the below order

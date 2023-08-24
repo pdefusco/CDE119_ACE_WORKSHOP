@@ -78,7 +78,7 @@ Puoi utilizzare il CDWRunOperator per eseguire query CDW da un DAG CDE Airflow. 
 
 Prima di poter utilizzare l'operatore in un DAG, è necessario stabilire una connessione tra CDE Airflow e CDW. Per completare questi passaggi, è necessario avere accesso a un data warehouse virtuale CDW.
 
-Attualmente, CDE supporta operazioni CDW per carichi di lavoro ETL nei data warehouse virtuali Apache Hive. Per determinare l'hostname CDW da utilizzare per la connessione:
+Attualmente, CDE supporta operazioni CDW per carichi di job ETL nei data warehouse virtuali Apache Hive. Per determinare l'hostname CDW da utilizzare per la connessione:
 
 Accedi alla pagina Panoramica del Data Warehouse Cloudera facendo clic sulla tessera Data Warehouse nella console di gestione della piattaforma Cloudera Data Platform (CDP).
 
@@ -118,7 +118,7 @@ Fai clic sul segno più per aggiungere un nuovo record e poi compila i campi:
 * Conn Type: Seleziona Hive Client Wrapper.
 * Host: Inserisci l'hostname dall'URL di connessione JDBC. Non inserire l'intero URL JDBC.
 * Schema: default
-* Login: Inserisci il tuo nome utente e password del carico di lavoro.
+* Login: Inserisci il tuo nome utente e password del carico di job.
 
 Fai clic su "Save".
 
@@ -171,7 +171,7 @@ Vai alla pagina delle esecuzioni dei job CDE e apri l'interfaccia utente Airflow
 
 ### Bonus Lab 3: Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE (Approfondimento)
 
-La maggior parte dei casi d'uso di produzione della CDE si basa sull'API e sulla CLI della CDE. Con esse, puoi interagire facilmente con la CDE da un IDE locale e creare integrazioni con sistemi esterni di terze parti. Ad esempio, puoi implementare flussi di lavoro multi-CDE cluster con GitLab CI o Python.
+La maggior parte dei casi d'uso di produzione della CDE si basa sull'API e sulla CLI della CDE. Con esse, puoi interagire facilmente con la CDE da un IDE locale e creare integrazioni con sistemi esterni di terze parti. Ad esempio, puoi implementare flussi di job multi-CDE cluster con GitLab CI o Python.
 
 In questa parte del workshop acquisirai familiarità con la CLI della CDE eseguendo nuovamente gli stessi job e interagendo con il servizio in remoto.
 
@@ -436,7 +436,7 @@ Come esempio, se riduciamo la finestra temporale da 1800 secondi a 18 secondi, l
 
 ![alt text](../../img/alerter_img_02A.png)
 
-Se nessun lavoro CDE soddisfa i criteri, non verrà fatto nulla.
+Se nessun job CDE soddisfa i criteri, non verrà fatto nulla.
 
 ![alt text](../../img/alerter_img02.png)
 

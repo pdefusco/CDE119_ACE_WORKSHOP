@@ -10,7 +10,7 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
 
 Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.
 
-Using "07-Airflow-Logic-DAG.py" you will create a new CDE Airflow Job with other popular Operators such as the SimpleHttpOperator Operator to send/receive API requests.
+Using "bonus-01_Airflow_Operators.py" you will create a new CDE Airflow Job with other popular Operators such as the SimpleHttpOperator Operator to send/receive API requests.
 
 First you must set up a Connection to the API endpoint you will reference in the DAG code. Navigate back to the CDE Administration tab, open your Virtual Cluster's "Cluster Details" and then click on the "Airflow" icon to reach the Airflow UI.
 
@@ -36,22 +36,29 @@ Host: https://official-joke-api.appspot.com/
 
 ![alt text](../../img/airflow_connection_4.png)
 
-Now open "07-Airflow-Logic-DAG.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
+Now open "bonus-01_Airflow_Operators.py" and familiarize yourself with the code. Some of the most notable aspects of this DAG include:
 
 * Review line 127. Task Execution no longer follows a linear sequence. Step 3 only executes when both Step 1 and 2 have completed successfully.
+
 * At lines 75-77, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
+
 * At lines 106-115, the SimpleHttpOperator Operator is used to send a request to an API endpoint. This provides an optional integration point between CDE Airflow and 3rd Party systems or other Airflow services as requests and responses can be processed by the DAG.
+
 * At line 109 the connection id value is the same as the one used in the Airflow Connection you just created.
+
 * At line 110 the endpoint value determines the API endpoint your requests will hit. This is appended to the base URL you set in the Airflow Connection.
+
 * At line 112 the response is captured and parsed by the "handle_response" method specified between lines 98-104.
+
 * At line 114 we use the "do_xcom_push" option to write the response as a DAG context variable. Now the response is temporarily stored for the duration of the Airflow Job and can be reused by other operators.
+
 * At lines 120-124 the Python Operator executes the "_print_random_joke" method declared at lines 117-118 and outputs the response of the API call.
 
-As in the previous example, first create (but don't run) three CDE Spark Jobs using "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" and  "07_C_pyspark_JOIN.py".
+As in the part 3, first create *(but don't run)* three CDE Spark Jobs using "05_C_pyspark_LEFT.py", "05_D_pyspark_RIGHT.py" and  "05_E_pyspark_JOIN.py".
 
-Then, open "07-Airflow-Logic-DAG.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
+Then, open "bonus-01_Airflow_Operators.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
 
-Finally, reupload the script to your CDE Files Resource. Create a new CDE Job of type Airflow and select the script from your CDE Resource.
+Finally, upload the script to your CDE Files Resource. Create a new CDE Job of type Airflow, select the script from your CDE Resource and run it.
 
 >**Note**
 >The SimpleHttpOperator Operator can be used to interact with 3rd party systems and exchange data to and from a CDE Airflow Job run. For example you could trigger the execution of jobs outside CDP or execute CDE Airflow DAG logic based on inputs from 3rd party systems.

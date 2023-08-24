@@ -1,4 +1,4 @@
-# Introducción a los Laboratorios Prácticos
+# Introducción
 
 Esta guía proporciona instrucciones para configurar el proyecto en tu máquina local y una breve introducción a los conceptos principales relacionados con el Servicio de Ingeniería de Datos de Cloudera.
 
