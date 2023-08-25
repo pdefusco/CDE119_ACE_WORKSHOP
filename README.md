@@ -77,10 +77,10 @@ GROUP TOTAL SALES BY GENDER
 
 Detailed instructions are provided in the [step_by_step_guides](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/) folder.
 
-* [Link to the English Guide](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english)
-* [Enlace a la guía en español](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espanol)
-* [Link alla guida in italiano](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano)
+* [Link to the English Guide](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english).
+* [Enlace a la guía en español](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espanol).
+* [Link alla guida in italiano](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano).
 
 ## Prior Versions
 
-The CDE HOL guides for versions up until 1.18 are available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL). If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL.
+This GitHub repository pertains to CDE version 1.19 which introduced some important changes with respect to prior versions. If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL which covers all versions up until 1.18 and is available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL). 
