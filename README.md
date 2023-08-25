@@ -18,6 +18,8 @@ CDE is the Cloudera Data Engineering Service, a containerized managed service fo
 
 CDE allows you to create, manage, and schedule Apache Spark jobs without the overhead of creating and maintaining Spark clusters. With CDE, you define virtual clusters with a range of CPU and memory resources, and the cluster scales up and down as needed to run your Spark workloads, helping to control your cloud costs.
 
+## About the Labs
+
 This Hands On Lab is designed to walk you through the Services's main capabilities. Throughout the exercises you will:
 
 1. Deploy an Ingestion, Transformation and Reporting pipeline with Spark 3.2.
