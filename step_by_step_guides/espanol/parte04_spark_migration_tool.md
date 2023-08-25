@@ -1,4 +1,4 @@
-# Parte 4: Utilizando la Herramienta de Migración de CDE Spark para Convertir Spark Submits en CDE Spark Submits
+# Parte 4: Utilizando la Spark Migration Tool de CDE para Convertir Spark Submits en CDE Spark Submits
 
 ## Objectivo
 
