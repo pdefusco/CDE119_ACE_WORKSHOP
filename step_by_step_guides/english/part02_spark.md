@@ -349,7 +349,7 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 
 ### Creating a CDE Spark Job with Apache Iceberg
 
-In this final section of Part 2 you will finish by deploying a CDE Job of type Spark in the CDE UI using PySpark script "03_PySpark_Iceberg.py".
+In this final section of Part 2 you will finish by deploying a CDE Job of type Spark in the CDE UI using PySpark script "02_PySpark_Iceberg.py".
 
 The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
 
