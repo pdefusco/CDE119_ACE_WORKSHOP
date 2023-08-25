@@ -70,7 +70,7 @@ step7 = SimpleHttpOperator(
     headers={"Content-Type":"application/json"},
     <b>response_check=lambda response: handle_response(response)</b>,
     dag=operators_dag,
-    <b>do_xcom_push=True<b/>
+    <b>do_xcom_push=True</b>
 )
 </pre>
 
@@ -93,13 +93,13 @@ Quindi, apri "bonus-01_Airflow_Operators.py" nel tuo editor e aggiorna il tuo no
 
 Infine, carica nuovamente lo script nella tua risorsa File CDE. Crea un nuovo Job CDE di tipo Airflow e seleziona lo script dalla tua risorsa CDE.
 
->**Nota**
+>**Note**
 >L'operatore SimpleHttpOperator può essere utilizzato per interagire con sistemi di terze parti e scambiare dati da e verso l'esecuzione di un Job CDE Airflow. Ad esempio, potresti attivare l'esecuzione di job al di fuori di CDP o eseguire la logica del DAG CDE Airflow in base agli input provenienti dai sistemi di terze parti.
 
->**Nota**  
+>**Note**  
 >Puoi utilizzare CDE Airflow per orchestrare query SQL in CDW, il servizio Cloudera Data Warehouse Data, con l'operatore CDWOperator supportato da Cloudera. Se vuoi saperne di più, vai al [Bonus Lab 1: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
 
->**Nota**  
+>**Note**  
 >Inoltre, sono disponibili in CDE altri operatori tra cui Python, HTTP e Bash. Se desideri saperne di più su Airflow in CDE, consulta [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
 
 
@@ -220,7 +220,7 @@ Innanzitutto, crea un ambiente virtuale Python e installa i requisiti.
 
 Questo comando eseguirà lo script come un semplice Spark Submit. Questo è leggermente diverso dalla creazione di un Job CDE di tipo Spark in quanto la definizione del Job non diventerà riutilizzabile.
 
->**⚠ Avviso**  
+>**⚠ Warning**  
 > I comandi CLI qui di seguito sono pensati per essere copiati/incollati nel tuo terminale così come sono e eseguiti dalla directory "cde_tour_ace_hol". Tuttavia, potresti dover aggiornare il percorso dello script in ciascun comando se li esegui da una cartella diversa.
 
 ```

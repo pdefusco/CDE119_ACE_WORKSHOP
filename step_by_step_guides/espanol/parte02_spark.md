@@ -43,7 +43,7 @@ Carga el archivo "requirements.txt" proporcionado en la carpeta "cde_ace_hol/res
 
 ![alt text](../../img/create_new_pres119_3.png)
 
-Observa que el Recurso de CDE está construyendo el Entorno Virtual de Python. Después de unos momentos, la compilación se completará y podrás validar las bibliotecas utilizadas.
+Observa que el Recurso de CDE está construyendo el Ambiente Virtual de Python. Después de unos momentos, la compilación se completará y podrás validar las bibliotecas utilizadas.
 
 ![alt text](../../img/create_new_pres119_4.png)
 

@@ -93,13 +93,13 @@ Luego, abre "bonus-01_Airflow_Operators.py" en tu editor y actualiza tu nombre d
 
 Finalmente, vuelve a cargar el guión en tu Recurso de Archivos de CDE. Crea un nuevo Job de CDE de tipo Airflow y selecciona el guión de tu Recurso de CDE.
 
->**Nota**
+>**Note**
 >El operador SimpleHttpOperator se puede usar para interactuar con sistemas de terceros e intercambiar datos hacia y desde una ejecución de Job de CDE Airflow. Por ejemplo, podrías desencadenar la ejecución de Jobs fuera de CDP o ejecutar la lógica del DAG de CDE Airflow según las entradas de sistemas de terceros.
 
->**Nota**  
+>**Note**  
 >Puedes usar CDE Airflow para orquestar consultas SQL en CDW, el servicio de datos del Almacén de Datos Cloudera, con el operador CDWOperator respaldado por Cloudera. Si deseas obtener más información, por favor visita [Laboratorio Adicional 2: Usando CDE Airflow con CDW.](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
 
->**Nota**  
+>**Note**  
 >Además, hay disponibles otros operadores, incluidos los operadores Python, HTTP y Bash en CDE. Si deseas obtener más información sobre Airflow en CDE, consulta la referencia [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
 
 
@@ -221,7 +221,7 @@ Primero, crea un entorno virtual de Python e instala los requisitos.
 
 Este comando ejecutará el script como un simple envío de Spark. Esto es ligeramente diferente de crear un Job de tipo Spark en CDE, ya que la definición del Job no será reutilizable.
 
->**⚠ Advertencia**  
+>**⚠ Warning**  
 > Los comandos CLI a continuación están diseñados para copiar/pegar en tu terminal tal como están y ejecutarlos desde el directorio "cde_tour_ace_hol". Sin embargo, es posible que debas actualizar la ruta del script en cada comando si los ejecutas desde una carpeta diferente.
 
 ```
