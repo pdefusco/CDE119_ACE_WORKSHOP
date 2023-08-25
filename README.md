@@ -80,3 +80,7 @@ Detailed instructions are provided in the [step_by_step_guides](https://github.c
 * [Link to the English Guide](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english)
 * [Enlace a la guía en español](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espanol)
 * [Link alla guida in italiano](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano)
+
+## Prior Versions
+
+The CDE HOL guides for versions up until 1.18 are available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL). If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL.
