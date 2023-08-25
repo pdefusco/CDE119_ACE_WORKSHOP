@@ -134,15 +134,15 @@ La pestaña de Configuración te permite verificar el script y los recursos util
 
 Esto también sirve como una característica de Observabilidad importante de CDE. CDE mantiene un historial completo de todas las ejecuciones y las configuraciones de Job respectivas asociadas con ellas. En otras palabras, en clústeres tradicionales, cuando un Job de Spark fallaba, el desarrollador tenía que investigar los registros manualmente o, en el mejor de los casos, mantener procesos de DevOps para respaldar los registros y las ejecuciones. En CDE, todo esto se hace automáticamente.  
 
-![alt text](../../img/sparkjob_ui_15.png)
+![alt text](../../img/part2_jobruns2.png)
 
 La pestaña de Registros contiene información detallada de registro. Por ejemplo, puedes verificar la salida del código en "Logs" -> "Driver" -> "StdOut".
 
-![alt text](../../img/sparkjob_ui_16.png)
+![alt text](../../img/part2_jobruns3.png)
 
 La Interfaz de Usuario de Spark te permite visualizar recursos, optimizar el rendimiento y solucionar problemas en tus Jobs de Spark.
 
-![alt text](../../img/sparkjob_ui_17.png)
+![alt text](../../img/part2_jobruns4.png)
 
 
 ### Creación de Jobs de Spark de CDE con la CLI
@@ -351,7 +351,7 @@ Observa que puedes pasar Opciones de Cálculo de CDE, como el número de ejecuto
 
 ### Creación de un Job de Spark CDE con Apache Iceberg
 
-En esta última sección de la Parte 2, terminarás desplegando un Job de CDE de tipo Spark en la interfaz de usuario de CDE utilizando el script PySpark "03_PySpark_Iceberg.py".
+En esta última sección de la Parte 2, terminarás desplegando un Job de CDE de tipo Spark en la interfaz de usuario de CDE utilizando el script PySpark "02_PySpark_Iceberg.py".
 
 El script incluye mucho código relacionado con Iceberg. Ábrelo en tu editor de elección y familiarízate con el código. En particular, observa:
 

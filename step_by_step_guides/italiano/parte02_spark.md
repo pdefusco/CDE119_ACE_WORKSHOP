@@ -137,15 +137,15 @@ La scheda "Configurazioni" ti consente di verificare lo script e le risorse util
 
 Questo serve anche come importante funzione di osservabilità di CDE. CDE mantiene un percorso storico di tutte le esecuzioni e delle relative configurazioni di job associate. In altre parole, nei cluster tradizionali, quando un job Spark falliva, il programmatore doveva investigare manualmente i log o, nel migliore dei casi, mantenere processi DevOps per eseguire il backup dei log e delle esecuzioni. In CDE tutto ciò avviene automaticamente.  
 
-![alt text](../../img/sparkjob_ui_15.png)
+![alt text](../../img/part2_jobruns2.png)
 
 La scheda "Log" contiene informazioni di logging dettagliate. Ad esempio, è possibile verificare l'output del codice sotto "Log" -> "Driver" -> "StdOut".
 
-![alt text](../../img/sparkjob_ui_16.png)
+![alt text](../../img/part2_jobruns3.png)
 
 L'interfaccia utente di Spark consente di visualizzare le risorse, ottimizzare le prestazioni e risolvere i problemi dei tuoi job Spark.
 
-![alt text](../../img/sparkjob_ui_17.png)
+![alt text](../../img/part2_jobruns4.png)
 
 
 ### Creazione di Job Spark tramite la CLI di CDE
@@ -354,7 +354,7 @@ note che puoi passare le Compute Options come il numero di executor e le executo
 
 ### Creazione di un Spark Job con Apache Iceberg
 
-In questa sezione finale della Parte 2, completerai creando un job CDE di tipo Spark nell'interfaccia utente di CDE utilizzando lo script PySpark "03_PySpark_Iceberg.py".
+In questa sezione finale della Parte 2, completerai creando un job CDE di tipo Spark nell'interfaccia utente di CDE utilizzando lo script PySpark "02_PySpark_Iceberg.py".
 
 Lo script include molto codice legato ad Iceberg. Aprilo nell'editor di tua scelta e familiarizza con il codice. In particolare, note:
 
