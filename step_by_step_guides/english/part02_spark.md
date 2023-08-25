@@ -69,7 +69,7 @@ Because you already uploaded the script to the CDE File Resource in the prior st
 
 ![alt text](../../img/sparkjob_ui_3.png)
 
-![alt text](../../img/sparkjob_ui_4.png)
+![alt text](../../img/part2_setjobname03.png)
 
 #### 2. Set Spark Configurations
 
