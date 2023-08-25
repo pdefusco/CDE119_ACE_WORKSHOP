@@ -2,11 +2,11 @@
 
 ## Obbiettivo
 
-Finora hai esplorato gli aspetti fondamentali di Spark, Airflow e Iceberg in CDE. I seguenti laboratori ti offrono l'opportunità di esplorare CDE in maggior dettaglio.
+Finora hai esplorato gli aspetti fondamentali di Spark, Airflow e Iceberg in CDE. I seguenti lab ti offrono l'opportunità di esplorare CDE in maggior dettaglio.
 
-Ogni laboratorio bonus può essere eseguito indipendentemente dagli altri. In altre parole, puoi eseguirne tutti o solo alcuni di essi, in qualsiasi ordine preferisci.
+Ogni labo bonus può essere eseguito indipendentemente dagli altri. In altre parole, puoi eseguirne tutti o solo alcuni di essi, in qualsiasi ordine preferisci.
 
-### Bonus Lab 1: Orchestrazione CDE Airflow (Approfondimento)
+### Bonus Lab 1: Approfondimento Orchestrazione Airflow in CDE
 
 La parte 2 del HOL ti ha introdotto a un DAG di base in Airflow in CDE. Tuttavia, le capacità di Airflow includono una vasta varietà di operatori, la possibilità di memorizzare valori di contesto temporanei, la connessione a sistemi di terze parti e in generale la capacità di implementare casi di orchestrazione più avanzati.
 
@@ -125,7 +125,7 @@ Clicca sul menu a tre punti per il data warehouse selezionato, quindi clicca su 
 
 ![alt text](../../img/bonus1_step00_C.png)
 
-Incolla l'URL in un editor di testo e prendi nota dell'hostname. Ad esempio, partendo dall'URL seguente, l'hostname sarebbe:
+Incolla l'URL in un editor di testo e prendi note dell'hostname. Ad esempio, partendo dall'URL seguente, l'hostname sarebbe:
 
 ```
 Original URL: jdbc:hive2://hs2-aws-2-hive.env-k5ip0r.dw.ylcu-atmi.cloudera.site/default;transportMode=http;httpPath=cliservice;ssl=true;retries=3;
@@ -185,9 +185,9 @@ dw_step3 = CDWOperator(
 )
 ```
 
-Nota che la sintassi SQL eseguita nella CDW Virtual Warehouse è dichiarata come una variabile separata e quindi passata all'istanza dell'Operatore come argomento. La Connessione viene anche passata come argomento alla riga
+note che la sintassi SQL eseguita nella CDW Virtual Warehouse è dichiarata come una variabile separata e quindi passata all'istanza dell'Operatore come argomento. La Connessione viene anche passata come argomento alla riga
 
-Infine, nota che le dipendenze delle attività includono sia le attività spark che dw:
+Infine, note che le dipendenze delle attività includono sia le attività spark che dw:
 
 ```
 spark_step >> dw_step
@@ -202,7 +202,7 @@ Vai alla pagina delle esecuzioni dei job CDE e apri l'interfaccia utente Airflow
 ![alt text](../../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE (Approfondimento)
+### Bonus Lab 3: Approfondimento Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE 
 
 La maggior parte dei casi d'uso di produzione della CDE si basa sull'API e sulla CLI della CDE. Con esse, puoi interagire facilmente con la CDE da un IDE locale e creare integrazioni con sistemi esterni di terze parti. Ad esempio, puoi implementare flussi di job multi-CDE cluster con GitLab CI o Python.
 

@@ -2,13 +2,13 @@
 
 ## Objectivo
 
-Hasta ahora, has explorado los aspectos principales de Spark, Airflow e Iceberg en CDE. Los siguientes laboratorios te brindan la oportunidad de explorar CDE con más detalle.
+Hasta ahora, has explorado los aspectos principales de Spark, Airflow e Iceberg en CDE. Los siguientes labs te brindan la oportunidad de explorar CDE con más detalle.
 
-Cada Laboratorio Adicional se puede realizar de manera independiente. En otras palabras, puedes realizar todos o solo algunos seleccionados, y en el orden que prefieras.
+Cada lab Adicional se puede realizar de manera independiente. En otras palabras, puedes realizar todos o solo algunos seleccionados, y en el orden que prefieras.
 
 ### Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
 
-La Parte 2 del laboratorio te presentó un DAG básico de Airflow en CDE. Sin embargo, las capacidades de Airflow incluyen una amplia variedad de operadores, la capacidad de almacenar valores de contexto temporales, conectarse a sistemas de terceros y, en general, la capacidad de implementar casos de uso de orquestación más avanzados.
+La Parte 2 del lab te presentó un DAG básico de Airflow en CDE. Sin embargo, las capacidades de Airflow incluyen una amplia variedad de operadores, la capacidad de almacenar valores de contexto temporales, conectarse a sistemas de terceros y, en general, la capacidad de implementar casos de uso de orquestación más avanzados.
 
 Usando "bonus-01_Airflow_Operators.py", crearás un nuevo Job de CDE Airflow con otros operadores populares, como el operador SimpleHttpOperator, para enviar/recibir solicitudes de API.
 
@@ -97,7 +97,7 @@ Finalmente, vuelve a cargar el guión en tu Recurso de Archivos de CDE. Crea un 
 >El operador SimpleHttpOperator se puede usar para interactuar con sistemas de terceros e intercambiar datos hacia y desde una ejecución de Job de CDE Airflow. Por ejemplo, podrías desencadenar la ejecución de Jobs fuera de CDP o ejecutar la lógica del DAG de CDE Airflow según las entradas de sistemas de terceros.
 
 >**Note**  
->Puedes usar CDE Airflow para orquestar consultas SQL en CDW, el servicio de datos del Almacén de Datos Cloudera, con el operador CDWOperator respaldado por Cloudera. Si deseas obtener más información, por favor visita [Laboratorio Adicional 2: Usando CDE Airflow con CDW.](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
+>Puedes usar CDE Airflow para orquestar consultas SQL en CDW, el servicio de datos del Almacén de Datos Cloudera, con el operador CDWOperator respaldado por Cloudera. Si deseas obtener más información, por favor visita [lab Adicional 2: Usando CDE Airflow con CDW.](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
 
 >**Note**  
 >Además, hay disponibles otros operadores, incluidos los operadores Python, HTTP y Bash en CDE. Si deseas obtener más información sobre Airflow en CDE, consulta la referencia [Using CDE Airflow](https://github.com/pdefusco/Using_CDE_Airflow).
@@ -125,7 +125,7 @@ Haz clic en el menú de tres puntos para el almacén seleccionado y luego en "Co
 
 ![alt text](../../img/bonus1_step00_C.png)
 
-Pega la URL en un editor de texto y toma nota del nombre del host. Por ejemplo, comenzando con la siguiente URL, el nombre del host sería:
+Pega la URL en un editor de texto y toma note del nombre del host. Por ejemplo, comenzando con la siguiente URL, el nombre del host sería:
 
 ```
 Original URL: jdbc:hive2://hs2-aws-2-hive.env-k5ip0r.dw.ylcu-atmi.cloudera.site/default;transportMode=http;httpPath=cliservice;ssl=true;retries=3;
@@ -443,7 +443,7 @@ python3 connection_tester.py jobs_api_url cdpusername cdppwd
 La salida en la terminal debería confirmar que se ha creado exitosamente un recurso de prueba.
 
 
-#### Step 3: Run the script
+#### Paso 3: Despliegue de la App
 
 Antes de poder ejecutar el script, necesitarás:
 
@@ -493,4 +493,4 @@ El CDWOperator ha sido contribuido por Cloudera para permitir a los usuarios orq
 
 Finalmente, la CLI de CDE es la elección ideal para aquellos que utilizan CDE a gran escala. Aunque la interfaz de usuario de CDE Jobs es una excelente herramienta de observabilidad, no recomendamos construir tus Spark Jobs con la interfaz de usuario con demasiada frecuencia. La CLI ofrece más opciones, incluida la capacidad de enviar Jobs de CDE a más de un Clúster Virtual CDE desde el mismo programa de terminal. En general, puedes utilizar la CLI para construir más Jobs de CDE de manera más rápida una vez que te familiarices con ella.
 
-¡Gracias por completar los Laboratorios Adicionales! Antes de continuar, visita la pagina de [Proyectos Relacionados](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#part-6-conclusions-and-next-steps) para un breve resumen y proyectos y artículos recomendados. Estos son especialmente útiles si ya estás utilizando o planeas utilizar CDE en el futuro.
+¡Gracias por completar los labs Adicionales! Antes de continuar, visita la pagina de [Proyectos Relacionados](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_next_steps.md#part-6-conclusions-and-next-steps) para un breve resumen y proyectos y artículos recomendados. Estos son especialmente útiles si ya estás utilizando o planeas utilizar CDE en el futuro.
