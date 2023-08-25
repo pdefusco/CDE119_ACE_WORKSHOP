@@ -118,7 +118,7 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 #### Deploy Airflow Basic DAG Code
 
-Create two CDE Spark Jobs (in the UI or with the CLI) using scripts "04-A-ETL.py" and "04-B-Reports.py" but *do not run them yet*.
+Create two CDE Spark Jobs (in the UI or with the CLI) using scripts "03-A-ETL.py" and "03-B-Reports.py" but *do not run them yet*.
 
 Upload the scripts from your local machine and create a new File Resource. Make sure to name it after yourself so it doesn't collide with other workshop participants.
 

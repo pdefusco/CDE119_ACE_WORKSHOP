@@ -116,7 +116,7 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 #### Implementación del Código Básico del DAG de Airflow
 
-Crea dos Jobs de CDE Spark (en la interfaz de usuario o con la CLI) utilizando los scripts "04-A-ETL.py" y "04-B-Reports.py", *pero no los ejecutes aún.*
+Crea dos Jobs de CDE Spark (en la interfaz de usuario o con la CLI) utilizando los scripts "03-A-ETL.py" y "03-B-Reports.py", *pero no los ejecutes aún.*
 
 Carga los scripts desde tu máquina local y crea un nuevo File Resource. Asegúrate de nombrarlo con tu nombre para que no choque con otros participantes del taller.
 
@@ -142,7 +142,7 @@ Finalmente, modifica las líneas 63 y 64 para asignar una fecha de inicio y fina
 
 Carga el guión actualizado en tu File Resource junto con el archivo parameters.conf. El nuevo Resource debería tener ahora un total de cuatro archivos.
 
-![alt text](../../img/fileinnewresource.png)
+![alt text](../../img/part3_airflow_resources.png)
 
 Luego, regresa a la Home Page de CDE y crea un nuevo Job de CDE de tipo Airflow.
 

@@ -116,7 +116,7 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 #### Diepiegamento del Codice del DAG in CDE Job di tipo Airflow
 
-Crea due CDE Spark Job (nell'interfaccia utente o con la CLI) utilizzando gli script "04-A-ETL.py" e "04-B-Reports.py", *ma non eseguirli ancora.*
+Crea due CDE Spark Job (nell'interfaccia utente o con la CLI) utilizzando gli script "03-A-ETL.py" e "03-B-Reports.py", *ma non eseguirli ancora.*
 
 Carica gli script dalla tua macchina locale e crea una nuova File Resource. Assicurati di nominarla con il tuo nome in modo che non entri in conflitto con gli altri partecipanti al workshop.
 
@@ -130,7 +130,7 @@ Successivamente, apri "03-Airflow-Dag.py" e inserisci i nomi dei due CDE Spark J
 
 Inoltre, note che le credenziali memorizzate in parameters.conf non sono disponibili per i job di CDE Airflow. Pertanto, aggiorna la variabile "username" alla linea 51 con qualcosa di univoco.
 
-La variabile "username" viene letta alla linea 67 per creare una variabile dag_name che verrà utilizzata alla linea 70 per assegnare un nome univoco al DAG quando si istanzia l'oggetto DAG.
+La variabile "username" viene letta alla linea 67 per creare una variabile dag_name che verrà utilizzata alla linea 70 per assegnare un nome univoco al DAG quando si istanza l'oggetto DAG.
 
 >**⚠ Avviso**  
 >CDE richiede un nome univoco per ciascun CDE Airflow Job o altrimenti restituirà un errore durante la creazione del job.
@@ -142,7 +142,7 @@ Infine, modifica le linee 63 e 64 per assegnare una data di inizio e fine che si
 
 Carica lo script aggiornato nella tua File Resource insieme al file parameters.conf. La nuova File Resource dovrebbe ora avere un totale di quattro file.
 
-![alt text](../../img/fileinnewresource.png)
+![alt text](../../img/part3_airflow_resources.png)
 
 Quindi torna alla Home Page di CDE e crea un nuovo CDE Job di tipo Airflow.
 
