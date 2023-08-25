@@ -153,7 +153,7 @@ Click the plus sign to add a new record, and then fill in the fields:
 * Schema: default
 * Login: Enter your workload username and password.
 
-6. Click Save.
+Click Save.
 
 ![alt text](../../img/bonus1_step1.png)
 

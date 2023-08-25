@@ -96,7 +96,7 @@ Finalmente, vuelve a cargar el guión en tu Recurso de Archivos de CDE. Crea un 
 >**Nota**
 >El operador SimpleHttpOperator se puede usar para interactuar con sistemas de terceros e intercambiar datos hacia y desde una ejecución de Job de CDE Airflow. Por ejemplo, podrías desencadenar la ejecución de Jobs fuera de CDP o ejecutar la lógica del DAG de CDE Airflow según las entradas de sistemas de terceros.
 
->**Note**  
+>**Nota**  
 >Puedes usar CDE Airflow para orquestar consultas SQL en CDW, el servicio de datos del Almacén de Datos Cloudera, con el operador CDWOperator respaldado por Cloudera. Si deseas obtener más información, por favor visita [Laboratorio Adicional 2: Usando CDE Airflow con CDW.](https://github.com/pdefusco/CDE_Tour_ACE_HOL/blob/main/step_by_step_guides/english.md#bonus-lab-1-using-cde-airflow-with-cdw).
 
 >**Nota**  
