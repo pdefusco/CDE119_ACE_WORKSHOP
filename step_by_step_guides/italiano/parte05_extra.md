@@ -10,13 +10,13 @@ Ogni laboratorio bonus può essere eseguito indipendentemente dagli altri. In al
 
 La parte 2 del HOL ti ha introdotto a un DAG di base in Airflow in CDE. Tuttavia, le capacità di Airflow includono una vasta varietà di operatori, la possibilità di memorizzare valori di contesto temporanei, la connessione a sistemi di terze parti e in generale la capacità di implementare casi di orchestrazione più avanzati.
 
-Utilizzando "07-Airflow-Logic-DAG.py", creerai un nuovo Job CDE Airflow con altri operatori popolari come il SimpleHttpOperator per inviare/ricevere richieste API.
+Utilizzando "bonus-01_Airflow_Operators.py", creerai un nuovo Job CDE Airflow con altri operatori popolari come il SimpleHttpOperator per inviare/ricevere richieste API.
 
 Prima devi configurare una Connessione all'endpoint API cui farai riferimento nel codice del DAG. Torna alla scheda Amministrazione CDE, apri i "Dettagli del Cluster Virtuale" e quindi fai clic sull'icona "Airflow" per accedere all'interfaccia Airflow.
 
-![alt text](../../img/airflow_connection_0.png)
+![alt text](../../img/cde_bonusairflow_1.png)
 
-![alt text](../../img/airflow_connection_1.png)
+![alt text](../../img/cde_bonusairflow_2.png)
 
 Apri le Connessioni Airflow nel menu a discesa Amministrazione come mostrato di seguito.
 
@@ -36,27 +36,60 @@ Host: https://official-joke-api.appspot.com/
 
 ![alt text](../../img/airflow_connection_4.png)
 
-Ora apri "07-Airflow-Logic-DAG.py" e familiarizza con il codice. Alcuni degli aspetti più rilevanti di questo DAG includono:
+Ora apri "bonus-01_Airflow_Operators.py" e familiarizza con il codice. Alcuni degli aspetti più rilevanti di questo DAG includono:
 
-* Rivedi la riga 127. L'esecuzione del task non segue più una sequenza lineare. Lo Step 3 viene eseguito solo quando sia lo Step 1 che lo Step 2 sono stati completati con successo.
+* Esamina la riga 170. L'esecuzione del task non segue più una sequenza lineare. Lo Step 3 viene eseguito solo quando sia lo Step 1 che lo Step 2 sono stati completati con successo.
 
-* Alle righe 75-77, l'operatore DummyOperator viene utilizzato come segnaposto e punto di partenza per l'esecuzione dei task.
+```
+step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
+```
 
-* Alle righe 106-115, l'operatore SimpleHttpOperator viene utilizzato per inviare una richiesta a un endpoint API. Questo fornisce un punto di integrazione opzionale tra CDE Airflow e sistemi di terze parti o altri servizi Airflow in quanto le richieste e le risposte possono essere elaborate dal DAG.
+* Alle righe 80-83, l'operatore DummyOperator viene utilizzato come segnaposto e punto di partenza per l'esecuzione dei task.
 
-* Alla riga 109, il valore dell'ID di connessione è lo stesso utilizzato nella Connessione Airflow appena creata.
+```
+start = DummyOperator(
+    task_id="start",
+    dag=operators_dag
+)
+```
 
-* Alla riga 110, il valore dell'endpoint determina l'endpoint API a cui verranno indirizzate le tue richieste. Questo viene aggiunto all'URL di base impostato nella Connessione Airflow.
+* Alle righe 147-156, l'operatore SimpleHttpOperator viene utilizzato per inviare una richiesta a un endpoint API. Questo fornisce un punto di integrazione opzionale tra CDE Airflow e sistemi di terze parti o altri servizi Airflow in quanto le richieste e le risposte possono essere elaborate dal DAG.
 
-* Alla riga 112, la risposta viene catturata e analizzata dal metodo "handle_response" specificato tra le righe 98-104.
+* Alla riga 150, il valore dell'ID di connessione è lo stesso utilizzato nella Connessione Airflow appena creata.
 
-* Alla riga 114, utilizziamo l'opzione "do_xcom_push" per scrivere la risposta come variabile di contesto del DAG. Ora la risposta è temporaneamente memorizzata per la durata del Job di Airflow e può essere riutilizzata da altri operatori.
+* Alla riga 150, il valore dell'endpoint determina l'endpoint API a cui verranno indirizzate le tue richieste. Questo viene aggiunto all'URL di base impostato nella Connessione Airflow. Alla riga 151, la risposta viene catturata e analizzata dal metodo "handle_response" specificato tra le righe 139-145.
 
-* Alle righe 120-124, l'operatore Python esegue il metodo "_print_random_joke" dichiarato alle righe 117-118 e restituisce la risposta della chiamata API.
+* Alla riga 155, l'opzione "do_xcom_push" è utilizzata per scrivere la risposta come variabile di contesto del DAG. Ora la risposta è temporaneamente memorizzata per la durata del Job di Airflow e può essere riutilizzata da altri operatori.
 
-Come nell'esempio precedente, crea prima (senza eseguire) tre Job CDE Spark usando "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" e "07_C_pyspark_JOIN.py".
+<pre>
+step7 = SimpleHttpOperator(
+    task_id="random_joke_api",
+    method="GET",
+    <b>http_conn_id="random_joke_connection"<b\>,
+    <b>endpoint="/jokes/programming/random"<b\>,
+    headers={"Content-Type":"application/json"},
+    <b>response_check=lambda response: handle_response(response)<b\>,
+    dag=operators_dag,
+    <b>do_xcom_push=True<b\>
+)
+<pre\>
 
-Quindi, apri "07-Airflow-Logic-DAG.py" nel tuo editor e aggiorna il tuo nome utente alla riga 50. Assicurati che i nomi dei job alle righe 54 - 56 riflettano i nomi dei tre Job CDE Spark come li hai inseriti nell'interfaccia CDE Job.
+* Alle righe 161-165, l'operatore Python esegue il metodo "_print_random_joke" dichiarato alle righe 117-118 e restituisce la risposta della chiamata API.
+
+```
+def _print_random_joke(**context):
+    return context['ti'].xcom_pull(task_ids='random_joke_api')
+
+step8 = PythonOperator(
+    task_id="print_random_joke",
+    python_callable=_print_random_joke,
+    dag=operators_dag
+)
+```
+
+Come nell'esempio nella parte 3, *crea (senza eseguire)* tre Job CDE Spark usando "05_C_pyspark_LEFT.py", "05_D_pyspark_RIGHT.py" e "05_E_pyspark_JOIN.py".
+
+Quindi, apri "bonus-01_Airflow_Operators.py" nel tuo editor e aggiorna il tuo nome utente alla riga 51. Assicurati che i nomi dei job alle righe 55-59 riflettano i nomi dei tre Job CDE Spark come li hai inseriti nell'interfaccia CDE Job.
 
 Infine, carica nuovamente lo script nella tua risorsa File CDE. Crea un nuovo Job CDE di tipo Airflow e seleziona lo script dalla tua risorsa CDE.
 

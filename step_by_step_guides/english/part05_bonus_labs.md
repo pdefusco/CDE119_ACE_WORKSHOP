@@ -42,7 +42,6 @@ Now open "bonus-01_Airflow_Operators.py" and familiarize yourself with the code.
 
 ```
 step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
-
 ```
 
 * At lines 80-83, the DummyOperator Operator is used as a placeholder and starting place for Task Execution.
@@ -90,7 +89,7 @@ step8 = PythonOperator(
 
 As in the part 3, first create *(but don't run)* three CDE Spark Jobs using "05_C_pyspark_LEFT.py", "05_D_pyspark_RIGHT.py" and  "05_E_pyspark_JOIN.py".
 
-Then, open "bonus-01_Airflow_Operators.py" in your editor and update your username at line 50. Make sure that the job names at lines 54 - 56 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
+Then, open "bonus-01_Airflow_Operators.py" in your editor and update your username at line 51. Make sure that the job names at lines 55-59 reflect the three CDE Spark Job names as you entered them in the CDE Job UI.
 
 Finally, upload the script to your CDE Files Resource. Create a new CDE Job of type Airflow, select the script from your CDE Resource and run it.
 

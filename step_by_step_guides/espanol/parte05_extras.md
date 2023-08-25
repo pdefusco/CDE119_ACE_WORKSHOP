@@ -10,13 +10,13 @@ Cada Laboratorio Adicional se puede realizar de manera independiente. En otras p
 
 La Parte 2 del laboratorio te presentó un DAG básico de Airflow en CDE. Sin embargo, las capacidades de Airflow incluyen una amplia variedad de operadores, la capacidad de almacenar valores de contexto temporales, conectarse a sistemas de terceros y, en general, la capacidad de implementar casos de uso de orquestación más avanzados.
 
-Usando "07-Airflow-Logic-DAG.py", crearás un nuevo Job de CDE Airflow con otros operadores populares, como el operador SimpleHttpOperator, para enviar/recibir solicitudes de API.
+Usando "bonus-01_Airflow_Operators.py", crearás un nuevo Job de CDE Airflow con otros operadores populares, como el operador SimpleHttpOperator, para enviar/recibir solicitudes de API.
 
 Primero debes configurar una Conexión al punto final de la API al que harás referencia en el código del DAG. Regresa a la pestaña de Administración de CDE, abre los "Detalles del Clúster" de tu Clúster Virtual y luego haz clic en el ícono de "Airflow" para acceder a la interfaz de usuario de Airflow."
 
-![alt text](../../img/airflow_connection_0.png)
+![alt text](../../img/cde_bonusairflow_1.png)
 
-![alt text](../../img/airflow_connection_1.png)
+![alt text](../../img/cde_bonusairflow_2.png)
 
 Abre las Conexiones de Airflow en el menú desplegable de Administración, como se muestra a continuación.
 
@@ -36,20 +36,60 @@ Host: https://official-joke-api.appspot.com/
 
 ![alt text](../../img/airflow_connection_4.png)
 
-Ahora abre el archivo '07-Airflow-Logic-DAG.py' y familiarízate con el código. Algunos de los aspectos más destacados de este DAG incluyen:
+Ahora abre el archivo 'bonus-01_Airflow_Operators.py' y familiarízate con el código. Algunos de los aspectos más destacados de este DAG incluyen:
 
-* Revisa la línea 127. La ejecución de tareas ya no sigue una secuencia lineal. El Paso 3 se ejecuta solo cuando tanto el Paso 1 como el Paso 2 han sido completados exitosamente.
-* En las líneas 75-77, el operador DummyOperator se usa como marcador de posición y punto de inicio para la ejecución de tareas.
-* En las líneas 106-115, el operador SimpleHttpOperator se usa para enviar una solicitud a un punto final de la API. Esto proporciona un punto de integración opcional entre CDE Airflow y sistemas de terceros u otros servicios de Airflow, ya que las solicitudes y respuestas pueden ser procesadas por el DAG.
-* En la línea 109, el valor de 'connection_id' es el mismo que el usado en la Conexión de Airflow que acabas de crear.
-* En la línea 110, el valor de 'endpoint' determina el punto final de la API al que se dirigirán las solicitudes. Esto se agrega a la URL base que estableciste en la Conexión de Airflow.
-* En la línea 112, la respuesta se captura y se analiza mediante el método 'handle_response' especificado entre las líneas 98-104.
-* En la línea 114, usamos la opción 'do_xcom_push' para escribir la respuesta como una variable de contexto del DAG. Ahora la respuesta se almacena temporalmente durante la duración del Job de Airflow y puede ser reutilizada por otros operadores.
-* En las líneas 120-124, el operador Python ejecuta el método '_print_random_joke' declarado en las líneas 117-118 y muestra la respuesta de la llamada a la API.
+* Revisa la línea 170. La ejecución de tareas ya no sigue una secuencia lineal. Step5 está seguido por Step6a y Step6b. Step6c se ejecuta cuando solo cuando tanto el Step6a como el Step6b han sido completados exitosamente.
 
-Como en el ejemplo anterior, primero crea (pero no ejecutes) tres Jobs de Spark de CDE utilizando "07_A_pyspark_LEFT.py", "07_B_pyspark_RIGHT.py" y "07_C_pyspark_JOIN.py".
+```
+step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
+```
 
-Luego, abre "07-Airflow-Logic-DAG.py" en tu editor y actualiza tu nombre de usuario en la línea 50. Asegúrate de que los nombres de los Jobs en las líneas 54-56 reflejen los nombres de los tres Jobs de Spark de CDE tal como los ingresaste en la interfaz de Job de CDE.
+* En las líneas 80-83, el operador DummyOperator se usa como marcador de posición y punto de inicio para la ejecución de tareas.
+
+```
+start = DummyOperator(
+    task_id="start",
+    dag=operators_dag
+)
+```
+
+* En las líneas 147-156, el operador SimpleHttpOperator se usa para enviar una solicitud a un punto final de la API. Esto proporciona un punto de integración opcional entre CDE Airflow y sistemas de terceros u otros servicios de Airflow, ya que las solicitudes y respuestas pueden ser procesadas por el DAG.
+
+* En la línea 150, el valor de 'connection_id' es el mismo que el usado en la Conexión de Airflow que acabas de crear. En la línea 151, el valor de 'endpoint' determina el punto final de la API al que se dirigirán las solicitudes. Esto se agrega a la URL base que estableciste en la Conexión de Airflow.
+
+* En la línea 153, la respuesta se captura y se analiza mediante el método 'handle_response' especificado entre las líneas 139-145.
+
+* En la línea 155, se usa la opción 'do_xcom_push' para escribir la respuesta como una variable de contexto del DAG. Ahora la respuesta se almacena temporalmente durante la duración del Job de Airflow y puede ser reutilizada por otros operadores.
+
+<pre>
+step7 = SimpleHttpOperator(
+    task_id="random_joke_api",
+    method="GET",
+    <b>http_conn_id="random_joke_connection"<b\>,
+    <b>endpoint="/jokes/programming/random"<b\>,
+    headers={"Content-Type":"application/json"},
+    <b>response_check=lambda response: handle_response(response)<b\>,
+    dag=operators_dag,
+    <b>do_xcom_push=True<b\>
+)
+<pre\>
+
+* En las líneas 161-165, el operador Python ejecuta el método '_print_random_joke' declarado en las líneas 117-118 y muestra la respuesta de la llamada a la API.
+
+```
+def _print_random_joke(**context):
+    return context['ti'].xcom_pull(task_ids='random_joke_api')
+
+step8 = PythonOperator(
+    task_id="print_random_joke",
+    python_callable=_print_random_joke,
+    dag=operators_dag
+)
+```
+
+Como en el ejemplo anterior, primero crea *(pero no ejecutes)* tres Jobs de Spark de CDE utilizando "05_C_pyspark_LEFT.py", "05_D_pyspark_RIGHT.py" y "05_E_pyspark_JOIN.py".
+
+Luego, abre "bonus-01_Airflow_Operators.py" en tu editor y actualiza tu nombre de usuario en la línea 51. Asegúrate de que los nombres de los Jobs en las líneas 55-59 reflejen los nombres de los tres Jobs de Spark de CDE tal como los ingresaste en la interfaz de Job de CDE.
 
 Finalmente, vuelve a cargar el guión en tu Recurso de Archivos de CDE. Crea un nuevo Job de CDE de tipo Airflow y selecciona el guión de tu Recurso de CDE.
 
