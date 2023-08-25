@@ -69,7 +69,7 @@ Vai alla pagina Job Runs del tuo CDE Virtual Cluster e verifica che il job sia i
 
 ![alt text](../../img/job_submit_confirm3.png)
 
->**⚠ Avvertenza**  
+>**⚠ Avviso**  
 >Se non riesci a eseguire il comando spark-submit potrebbe essere necessario rimuovere l'impostazione tls dal file config.yaml. In altre parole, cancella completamente la riga 4.
 
 ## Riepilogo

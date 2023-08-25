@@ -202,7 +202,7 @@ Vai alla pagina delle esecuzioni dei job CDE e apri l'interfaccia utente Airflow
 ![alt text](../../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Approfondimento Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE 
+### Bonus Lab 3: Approfondimento Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE
 
 La maggior parte dei casi d'uso di produzione della CDE si basa sull'API e sulla CLI della CDE. Con esse, puoi interagire facilmente con la CDE da un IDE locale e creare integrazioni con sistemi esterni di terze parti. Ad esempio, puoi implementare flussi di job multi-CDE cluster con GitLab CI o Python.
 
@@ -220,7 +220,7 @@ Innanzitutto, crea un ambiente virtuale Python e installa i requisiti.
 
 Questo comando eseguirà lo script come un semplice Spark Submit. Questo è leggermente diverso dalla creazione di un Job CDE di tipo Spark in quanto la definizione del Job non diventerà riutilizzabile.
 
->**⚠ Warning**  
+>**⚠ Avviso**  
 > I comandi CLI qui di seguito sono pensati per essere copiati/incollati nel tuo terminale così come sono e eseguiti dalla directory "cde_tour_ace_hol". Tuttavia, potresti dover aggiornare il percorso dello script in ciascun comando se li esegui da una cartella diversa.
 
 ```
