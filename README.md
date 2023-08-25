@@ -1,4 +1,4 @@
-# CDE 1.19 ACE Workshop Hands-On-Lab
+# CDE 1.19 ACE Hands-On-Lab Workshop
 
 ## About the Hands On Lab Workshops
 
