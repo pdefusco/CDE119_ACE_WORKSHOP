@@ -4,17 +4,17 @@
 
 The Hands-On Lab (HOL) Workshops are an initiative by Cloudera Solutions Engineering aimed at familiarizing CDP users with each Data Service. The content consists of a series of guides and exercises to quickly implement sample end-to-end use cases in the realm of Machine Learning, Datawarehousing, Data Engineering, Data Streaming and Operational Database.
 
-The HOL is typically a three-hour event organized by Cloudera for CDP customers and prospects, where a small technical team from Cloudera Solutions Engineering provides cloud infrastructure for participants and guides them through the completion of the guides with the help of presentations and discussions.
+The HOL is typically a three to four-hour event organized by Cloudera for CDP customers and prospects, where a small technical team from Cloudera Solutions Engineering provides cloud infrastructure for all participants and guides them through the completion of the labs with the help of presentations and open discussions.
 
-The HOL contained in this GitHub repository is dedicated to Cloudera Data Engineering 1.19, the CDP Data Service for data engineering commonly known for Spark and Airflow use cases in Private and Public Clouds.
+The HOL contained in this GitHub repository is dedicated to Cloudera Data Engineering 1.19. CDE is the CDP Data Service for data engineering commonly known for Spark and Airflow use cases in Private and Public Clouds.
 
 The content is primarily designed for developers, cloud administrators and big data software architects. However, little to no code changes are typically required and non-technical stakeholders such as project managers and analysts are encouraged to actively participate.
 
-HOL events are open to all CDP users and customers. If you would like to host an event with your colleagues please contact your local Cloudera Representative or submit your information [through this portal](https://www.cloudera.com/contact-sales.html). Finally, if you have access to a CDE Virtual Cluster you are welcome to use this guide and go through the same concepts in your own time.
+HOL events are open to all CDP users and customers. If you would like Cloudera to host an event for you and your colleagues please contact your local Cloudera Representative or submit your information [through this portal](https://www.cloudera.com/contact-sales.html). Finally, if you have access to a CDE Virtual Cluster you are welcome to use this guide and go through the same concepts in your own time.
 
-## Objective
+## About the Cloudera Data Enginneering (CDE) Service
 
-CDE is the Cloudera Data Engineering Service, a containerized managed service for Cloudera Data Platform designed for Large Scale Batch Pipelines with Spark, Airflow and Iceberg. It allows you to submit batch jobs to auto-scaling virtual clusters. As a serverless service, CDE enables you to spend more time on your applications, and less time on infrastructure.
+CDE is the Cloudera Data Engineering Service, a containerized managed service for Cloudera Data Platform designed for Large Scale Batch Pipelines with Spark, Airflow and Iceberg. It allows you to submit batch jobs to auto-scaling virtual clusters. As a Cloud-Native service, CDE enables you to spend more time on your applications, and less time on infrastructure.
 
 CDE allows you to create, manage, and schedule Apache Spark jobs without the overhead of creating and maintaining Spark clusters. With CDE, you define virtual clusters with a range of CPU and memory resources, and the cluster scales up and down as needed to run your Spark workloads, helping to control your cloud costs.
 
@@ -25,8 +25,9 @@ This Hands On Lab is designed to walk you through the Services's main capabiliti
 3. Orchestrate pipelines with Airflow.
 4. Use the CDE CLI to execute Spark Submits and more from your local machine.
 5. Use the CDE Spark Submit Migration Tool to automatically convert a Spark Submit to a CDE Spark Submit.
+6. Build a Python App leveraging the CDE API and monitor multiple CDE Virtual Clusters at the same time.
 
-Throughout these labs, you are going to deploy an ELT (Extract, Load, Transform) data pipeline that extracts data stored on AWS S3 object storage, loads it into the Cloudera Data Lakehouse and transforms it for reporting purposes.
+Throughout these labs, you are going to deploy an ELT (Extract, Load, Transform) data pipeline that extracts data stored on AWS S3 (or Azure ADLS) object storage, loads it into the Cloudera Data Lakehouse and transforms it for reporting purposes.
 
 ```mermaid
 graph LR
