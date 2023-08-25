@@ -1,16 +1,6 @@
 # Introduzione
 
-Il Hands On Lab è un'iniziativa di Cloudera per avvicinare gli utenti CDP a ciascun Data Service. I contenuti consistono in una serie di guide e esercizi per implementare un caso di uso simplificato.
-
-Il HOL è generalmente un evento di tre ore organizzato da Cloudera per clienti CDP nel quale un piccolo team tecnico di Cloudera fornisce la infrastruttura cloud per i participanti e gli accompagna nel completare le guide attraverso una serie di presentazioni.
-
-L'obbiettivo è apprtare una solida introduzione tecnica in tempi rapidi e fornire le conoscienze necessarie per implementare un caso di uso.
-
-Il HOL contenuto in questo repository GitHub è dedicato a Cloudera Data Engineering 1.19, il Data Service di CDP per ingegneria dati conosciuto più comunemente per casi di uso Spark e Airflow nel Cloud Privato e Pubblico.
-
-Il contenuto è pensato principalemnte per sviluppatori, amministratori Cloud, architetti di software Big Data ma anche stakeholder di tipo non tecnico come project manager e analisti sono incoraggiati a partecipare.
-
-Se hai un Virtual Cluster CDE a disposizione ti invitiamo a utilizzare questa guida per apprendere gli stessi concetti senza dover necessariamente partecipare a un evento ufficiale di Cloudera.
+Questa guida fornisce istruzioni per configurare il progetto nel tuo computer e una breve introduzione ai concetti principali legati al Servizio di Ingegneria dei Dati di Cloudera.
 
 ## Requisiti
 

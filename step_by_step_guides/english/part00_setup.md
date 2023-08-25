@@ -1,4 +1,4 @@
-# Introduction to the Hands On Labs
+# Introduction
 
 This guide provides instructions for setting up the project in your local machine and a brief introduction to the main concepts related to the Cloudera Data Engineering Service.
 
