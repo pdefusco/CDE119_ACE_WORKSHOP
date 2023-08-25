@@ -2,11 +2,11 @@
 
 ## Obiettivo
 
-In questa sezione imparerai l'architettura flessibile di CDE e i suoi principali componenti. Questa è solo una lettura consigliata e non ci sono lavori associati ad essa.
+In questa sezione imparerai l'architettura flessibile di CDE e i suoi principali componenti.
 
 ## Introduzione al Servizio CDE
 
-Cloudera Data Engineering (CDE) è un servizio per Cloudera Data Platform che consente di inviare lavori batch a cluster virtuali con ridimensionamento automatico. CDE ti consente di dedicare più tempo alle tue applicazioni e meno tempo all'infrastruttura.
+Cloudera Data Engineering (CDE) è un servizio per Cloudera Data Platform che consente di dispiegare Job batch in cluster virtuali con Autoscaling automatico. CDE ti consente di dedicare più tempo alle tue applicazioni e meno tempo all'infrastruttura.
 
 Cloudera Data Engineering ti permette di creare, gestire e pianificare lavori Apache Spark senza l'onere di creare e mantenere cluster Spark. Con Cloudera Data Engineering, puoi definire cluster virtuali con una gamma di risorse CPU e memoria, e il cluster si ridimensiona in base alle necessità per eseguire i carichi di job Spark, contribuendo a controllare i costi cloud.
 
@@ -14,7 +14,7 @@ Il Servizio CDE può essere raggiunto dalla Pagina Principale di CDP cliccando s
 
 ![alt text](../../img/cdp_lp_0.png)
 
-La Pagina Principale di CDE ti consente di accedere, creare e gestire Cluster Virtuali di CDE. All'interno di ciascun Cluster Virtuale di CDE puoi creare, monitorare e risolvere problemi di lavori Spark e Airflow.
+La Home Page di CDE ti consente di accedere, creare e gestire Cluster Virtuali di CDE. All'interno di ciascun Cluster Virtuale di CDE puoi creare, monitorare e risolvere problemi di lavori Spark e Airflow.
 
 Il Cluster Virtuale è associato all'Ambiente CDP. Ciascun Cluster Virtuale di CDE è mappato al massimo su un Ambiente CDP, mentre un Ambiente CDP può essere mappato su uno o più Cluster Virtuali.
 
@@ -27,7 +27,7 @@ Una sottoinsieme logico del tuo account provider cloud che include una rete virt
 Il cluster Kubernetes a lunga durata e i servizi che gestiscono i cluster virtuali. Il servizio CDE deve essere abilitato su un ambiente prima che tu possa creare qualsiasi cluster virtuale.
 
 ##### Cluster Virtuale
-Un singolo cluster con ridimensionamento automatico con intervalli definiti di CPU e memoria. I Cluster Virtuali in CDE possono essere creati e eliminati su richiesta. I lavori sono associati ai cluster. Fino alla versione CDE 1.18 era disponibile solo un tipo di Cluster Virtuale. Dalla versione 1.19 puoi scegliere tra due Tipi di Cluster:
+Un singolo cluster con autoscaling automatico con intervalli e limiti predefiniti di CPU e memoria. I Cluster Virtuali in CDE possono essere creati e eliminati su richiesta. I lavori sono associati ai cluster. Fino alla versione CDE 1.18 era disponibile solo un tipo di Cluster Virtuale. Dalla versione 1.19 puoi scegliere tra due Tipi di Cluster:
 
 *Core (Tier 1)*: Opzioni di trasformazione e ingegnerizzazione basate su batch che includono:
 * Cluster con Autoscaling Automatico
@@ -54,11 +54,9 @@ Una collezione definita di file, come un file Python o un file JAR dell'applicaz
 Un'istanza individuale di esecuzione di un Job.
 
 ##### CDE Session
-
 Le sessioni interattive CDE offrono agli ingegneri dei dati punti finali flessibili per iniziare a sviluppare applicazioni Spark ovunque, in un terminale basato sul web, nell'interfaccia della riga di comando locale, nell'IDE preferito e persino tramite JDBC da strumenti di terze parti.
 
 ##### Apache Iceberg
-
 Apache Iceberg è un formato di tabella aperto nativo per il cloud, ad alte prestazioni, per l'organizzazione di set di dati analitici di scala petabyte su un sistema di file o uno store di oggetti. In combinazione con Cloudera Data Platform (CDP), gli utenti possono creare un'architettura open data lakehouse per l'analisi multi-funzione e per distribuire pipeline su larga scala end-to-end.
 
 Open Data Lakehouse su CDP semplifica l'analisi avanzata su tutti i dati con una piattaforma unificata per dati strutturati e non strutturati e servizi dati integrati per abilitare qualsiasi caso di utilizzo di analisi, dalla ML (Machine Learning) all'BI, all'analisi di flussi e all'analisi in tempo reale. Apache Iceberg è il componente chiave del lakehouse open.
@@ -68,7 +66,6 @@ Iceberg è compatibile con una varietà di motori di calcolo, inclusi Spark. CDE
 Per ulteriori informazioni visita la [documentazione](https://iceberg.apache.org/).
 
 ##### Interfaccia CDE
-
 Ora che hai acquisito le basi di CDE, dedica qualche momento a familiarizzare con la pagina di accesso di CDE.
 
 La Home Page fornisce una panoramica generale di tutti i servizi e cluster CDE. È stata ridisegnata nella versione 1.19 per includere anche collegamenti rapidi per diverse azioni, come la creazione di Job e Resource CDE o la visita alla documentazione.

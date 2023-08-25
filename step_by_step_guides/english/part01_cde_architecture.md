@@ -2,7 +2,7 @@
 
 ## Objective
 
-In this section you will learn about CDE's flexible architecture and its main components. This is just a recommended reading and there are no jobs associated with it.
+In this section you will learn about CDE's flexible architecture and its main components.
 
 ## Introduction to the CDE Service
 
@@ -27,7 +27,7 @@ A logical subset of your cloud provider account including a specific virtual net
 The long-running Kubernetes cluster and services that manage the virtual clusters. The CDE service must be enabled on an environment before you can create any virtual clusters.
 
 ##### Virtual Cluster
-An individual auto-scaling cluster with defined CPU and memory ranges. Virtual Clusters in CDE can be created and deleted on demand. Jobs are associated with clusters. Up until CDE version 1.18 only one type of Virtual Clusters was available. Since Version 1.19 you can choose between two Cluster Tiers:
+An individual auto-scaling cluster with predefined CPU and memory ranges. Virtual Clusters in CDE can be created and deleted on demand. Jobs are associated with clusters. Up until CDE version 1.18 only one type of Virtual Clusters was available. Since Version 1.19 you can choose between two Cluster Tiers:
 
 *Core (Tier 1)*: Batch-based transformation and engineering options include:
 * Autoscaling Cluster
