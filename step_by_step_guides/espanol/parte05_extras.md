@@ -1,4 +1,4 @@
-# Parte 5: Laboratorios Adicionales
+# Parte 5: Labs Adicionales
 
 ## Objectivo
 
