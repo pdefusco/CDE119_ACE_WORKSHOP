@@ -5,17 +5,20 @@ This guide provides instructions for setting up the project in your local machin
 ## Requirements
 
 In order to execute the Hands On Labs you need:
+
 * A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok).
+
 * Very few code changes are required but familiarity with Python and PySpark is highly recommended.
+
 * Bonus Lab 1 requires a Hive CDW Virtual Warehouse. This lab is optional.
 
 ## Recommendations Before you Start
 
 Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
 
-Your Cloudera ACE Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
+Your Cloudera Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
 
-Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will also have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will have to ensure that these values reflect the Cloud Storage path where you loaded the data.
 
 ## Project Download
 
@@ -34,7 +37,7 @@ Alternatively, if you don't have `git` installed on your machine, create a folde
 This HOL uses a parameters.conf file to store the necessary credentials. Each user is asked to enter their Workload Username at line 4 and Datalake paths at lines 2 and 3. The Workload Password is automatically inherited at the CDP Environment level and does not be set.
 
 If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials. The data will already have been uplaoded by your Workshop Lead.
-If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload Username from your CDP Admin.
+If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload User from your CDP Admin.
 
 ## Index
 
