@@ -53,7 +53,7 @@ To learn more about CDE Resources please visit [Using CDE Resources](https://doc
 
 ### Creating CDE Spark Jobs in the UI
 
-Next we will run and deploy a Spark script as a CDE Job of type Spark using the "01_PySpark_ETL.py" script. Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
+Next we will run and deploy a Spark script as a CDE Job of type Spark using the "02_PySpark_ETL.py" script. Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
 
 ![alt text](../../img/sparkjob_ui_1.png)
 

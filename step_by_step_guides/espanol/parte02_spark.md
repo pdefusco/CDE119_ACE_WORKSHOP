@@ -53,7 +53,7 @@ Para obtener más información sobre los Resources de CDE, visita [Using CDE Res
 
 ### Creación de Jobs de Spark en la Interfaz de Usuario de CDE
 
-A continuación, ejecutaremos e implementaremos un script de Spark como un Job de CDE de tipo Spark utilizando el script "01_PySpark_ETL.py". Regresa a la Página de Inicio de CDE. Haz clic en "Create New" en la sección "Jobs" -> "Spark".
+A continuación, ejecutaremos e implementaremos un script de Spark como un Job de CDE de tipo Spark utilizando el script "02_PySpark_ETL.py". Regresa a la Página de Inicio de CDE. Haz clic en "Create New" en la sección "Jobs" -> "Spark".
 
 ![alt text](../../img/sparkjob_ui_1.png)
 
@@ -65,11 +65,11 @@ Selecciona tu Clúster Virtual de CDE y asigna "O1_ETL" como Nombre del Job. Agr
 
 El Archivo de Aplicación es el código que se ejecutará como el Job de Spark. Puede ser un archivo de PySpark o un archivo Jar.
 
-Dado que ya cargaste el script en el Recurso de Archivo de CDE en el paso anterior, esto se puede seleccionar fácilmente en la construcción de la Configuración del Job: asegúrate de seleccionar "Archivo" en el botón de opción y haz clic en "Seleccionar desde Recurso" en la sección "Archivo de Aplicación". Se abrirá una ventana con el contenido cargado en tu Recurso de Archivo. Selecciona el script "01_PySpark_ETL.py".
+Dado que ya cargaste el script en el Recurso de Archivo de CDE en el paso anterior, esto se puede seleccionar fácilmente en la construcción de la Configuración del Job: asegúrate de seleccionar "Archivo" en el botón de opción y haz clic en "Seleccionar desde Recurso" en la sección "Archivo de Aplicación". Se abrirá una ventana con el contenido cargado en tu Recurso de Archivo. Selecciona el script "02_PySpark_ETL.py".
 
 ![alt text](../../img/sparkjob_ui_3.png)
 
-![alt text](../../img/sparkjob_ui_4.png)
+![alt text](../../img/part2_setjobname03.png)
 
 #### 2. Set Spark Configurations
 
@@ -95,7 +95,7 @@ En la sección "Python, Egg y Zip Files" selecciona las dependencias de archivos
 
 ![alt text](../../img/sparkjob_ui_8.png)
 
-![alt text](../../img/sparkjob_ui_9.png)
+![alt text](../../img/part2_jobconfigsnew.png)
 
 Desplázate nuevamente hacia abajo hasta la sección "Recursos" y observa que tu Recurso de Archivo se ha asignado al Job de manera predeterminada. Esto permite que el script de PySpark cargue módulos en el mismo Recurso, como los que están contenidos en el archivo "utils.py".
 
@@ -122,13 +122,13 @@ Desplázate hacia abajo y haz clic en el ícono azul "Create and Run".
 
 Serás llevado automáticamente a la pestaña de Jobs, donde el Job ahora se listará en la parte superior. Abre la pestaña de Ejecuciones de Jobs en el panel izquierdo y valida que el Job de Spark de CDE se esté ejecutando.
 
-![alt text](../../img/sparkjob_ui_13.png)
+![alt text](../../img/part2_sparketl.png)
 
 Cuando esté completo, aparecerá una marca de verificación verde en el lado izquierdo. Haz clic en el número de Ejecución del Job para explorar más a fondo.
 
-![alt text](../../img/sparkjob_ui_14.png)
+![alt text](../../img/part2_jobruns.png)
 
-La Ejecución del Job se llena con Metadatos, Registros y la Interfaz de Usuario de Spark. Esta información se mantiene y puede consultarse en un momento posterior.
+La Job RUn se llena con Metadatos, Registros y la Interfaz de Usuario de Spark. Esta información se mantiene y puede consultarse en un momento posterior.
 
 La pestaña de Configuración te permite verificar el script y los recursos utilizados por el Job de Spark de CDE. Desde aquí, puedes editar la Configuración para cambiar archivos, dependencias, horarios de ejecución y más. Por ejemplo, el desarrollador puede reutilizar un Job existente (o crear un clon opcionalmente) y hacer cambios en sus dependencias, horario, etc., desde la interfaz de usuario.
 
