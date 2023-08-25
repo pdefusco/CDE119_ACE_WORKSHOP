@@ -83,4 +83,6 @@ Detailed instructions are provided in the [step_by_step_guides](https://github.c
 
 ## Hands On Lab Workshops for Prior Versions of CDE
 
-This GitHub repository pertains to CDE version 1.19 which introduced some important changes with respect to prior versions. If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL which covers all versions up until 1.18 and is available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL).
+This GitHub repository pertains to CDE version 1.19 which introduced some important changes with respect to prior versions.
+
+If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL which covers all versions up until 1.18 and is available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL).
