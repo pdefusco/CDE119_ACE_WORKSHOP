@@ -24,7 +24,7 @@ Upload the following files located in the "cde_ace_hol/cde_spark_jobs" and "cde_
 When you have finished ensure that the following files are located in your File Resource:
 
 ```
-01_PySpark_ETL.py
+02_PySpark_ETL.py
 simple_udf.zip
 simple_udf_dependency.py
 parameters.conf
@@ -61,11 +61,11 @@ Next we will run and deploy a Spark script as a CDE Job of type Spark using the 
 
 Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name. Append your name to distinguish your job's name from others'.
 
-![alt text](../../img/sparkjob_ui_2.png)
+![alt text](../../img/part2_setjobname02.png)
 
 The Application File is the code that will run as the Spark Job. This could be a PySpark file or a Jar.
 
-Because you already uploaded the script to the CDE File Resource in the prior step this can be easily selected in the Job Configuration build: ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "01_PySpark_ETL.py".
+Because you already uploaded the script to the CDE File Resource in the prior step this can be easily selected in the Job Configuration build: ensure to select "File" from the radio button and click on "Select from Resource" in the "Application File" section. A window will open with the contents loaded in your File Resource. Select script "02_PySpark_ETL.py".
 
 ![alt text](../../img/sparkjob_ui_3.png)
 
@@ -95,7 +95,7 @@ In the Python, Egg, Zip Files section select the "utils.py" and "simple_udf.zip"
 
 ![alt text](../../img/sparkjob_ui_8.png)
 
-![alt text](../../img/sparkjob_ui_9.png)
+![alt text](../../img/part2_jobconfigsnew.png)
 
 Scroll down again to the "Resources" section and notice that your File Resource has been mapped to the Job by default. This allows the PySpark script to load modules in the same Resource such as the ones contained in the "utils.py" file.
 
@@ -122,11 +122,11 @@ Scroll to the bottom and click on the "Create and Run" blue icon.
 
 You will be automatically taken to the Jobs tab where the Job will now be listed at the top. Open the Job Runs tab on the left pane and validate that the CDE Spark Job is executing.
 
-![alt text](../../img/sparkjob_ui_13.png)
+![alt text](../../img/part2_sparketl.png)
 
 When complete, a green checkmark will appear on the left side. Click on the Job Run number to explore further.
 
-![alt text](../../img/sparkjob_ui_14.png)
+![alt text](../../img/part2_jobruns.png)
 
 The Job Run is populated with Metadata, Logs, and the Spark UI. This information is persisted and can be referenced at a later point in time.
 
@@ -134,15 +134,15 @@ The Configuration tab allows you to verify the script and resources used by the 
 
 This also serves as an important CDE Observability feature. CDE maintains a historical trail of all runs and the respective job configurations associated with them. In other words, in traditional clusters when a Spark Job fails the developer had to manually investigate logs or, in a best case scenario, maintain DevOps processes to back up logs and runs. In CDE all of this is done automatically.   
 
-![alt text](../../img/sparkjob_ui_15.png)
+![alt text](../../img/part2_jobruns2.png)
 
 The Logs tab contains rich logging information. For example, you can verify code output under "Logs" -> "Driver" -> "StdOut".
 
-![alt text](../../img/sparkjob_ui_16.png)
+![alt text](../../img/part2_jobruns3.png)
 
 The Spark UI allows you to visualize resources, optimize performance and troubleshoot your Spark Jobs.
 
-![alt text](../../img/sparkjob_ui_17.png)
+![alt text](../../img/part2_jobruns4.png)
 
 
 ### Creating CDE Spark Jobs with the CLI

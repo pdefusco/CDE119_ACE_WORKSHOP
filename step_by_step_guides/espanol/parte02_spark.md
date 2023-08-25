@@ -24,7 +24,7 @@ Carga los siguientes archivos ubicados en las carpetas "cde_ace_hol/cde_spark_jo
 Cuando hayas terminado, asegúrate de que los siguientes archivos se encuentren en tu Recurso de Archivo:
 
 ```
-01_PySpark_ETL.py
+02_PySpark_ETL.py
 simple_udf.zip
 simple_udf_dependency.py
 parameters.conf
@@ -194,7 +194,7 @@ Comienza con un Spark-Submit simple ejecutando el siguiente comando en tu termin
 cde spark submit cde_spark_jobs/simple-pyspark-sql.py
 ```
 
-Poco después de ejecutar esto, notarás la confirmación de la presentación en la terminal. A medida que se ejecuta la Aplicación de Spark, la terminal mostrará registros y salidas del Job.
+Poco después de ejecutar esto, noterás la confirmación de la presentación en la terminal. A medida que se ejecuta la Aplicación de Spark, la terminal mostrará registros y salidas del Job.
 
 ![alt text](../../img/cdeclijob_1.png)
 
@@ -276,7 +276,7 @@ La sesión estará en estado "iniciando" durante algunos momentos. Cuando esté 
 
 Copia y pega los siguientes fragmentos de código en cada celda y observa la salida (no se requieren cambios en el código).
 
->**Nota**  
+>**note**  
 >Las Sesiones CDE no requieren la creación del objeto SparkSession. La shell ya ha sido lanzada para ti. Sin embargo, si necesitas importar algún tipo o función, debes importar los módulos necesarios.
 
 importa el paquete PySpark:

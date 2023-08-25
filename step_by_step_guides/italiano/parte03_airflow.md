@@ -37,7 +37,7 @@ Inoltre, è possibile automatizzare le migrazioni da Oozie su CDP Public Cloud D
 
 #### Analisi Codice del DAG Airflow
 
-Apri "03-Airflow-Dag.py" nella cartella "cde_airflow_jobs", familiarizza con il codice e nota quanto segue:
+Apri "03-Airflow-Dag.py" nella cartella "cde_airflow_jobs", familiarizza con il codice e note quanto segue:
 
 * Airflow ti consente di suddividere pipeline di Spark complesse in diversi passaggi, isolando problemi e fornendo eventualmente opzioni di ripetizione. Gli operatori CDEJobRunOperator, BashOperator e PythonOperator vengono importati alle linee 44-46. Questi ti consentono di eseguire un CDE Spark Job, Bash e codice Python, tutti all'interno dello stesso flusso di lavoro.
 
@@ -128,7 +128,7 @@ Carica gli script dalla tua macchina locale e crea una nuova risorsa file. Assic
 
 Successivamente, apri "03-Airflow-Dag.py" e inserisci i nomi dei due CDE Spark Job come appaiono nell'interfaccia dei CDE Jobs alle linee 55 e 56.
 
-Inoltre, nota che le credenziali memorizzate in parameters.conf non sono disponibili per i job di CDE Airflow. Pertanto, aggiorna la variabile "username" alla linea 51 con qualcosa di univoco.
+Inoltre, note che le credenziali memorizzate in parameters.conf non sono disponibili per i job di CDE Airflow. Pertanto, aggiorna la variabile "username" alla linea 51 con qualcosa di univoco.
 
 La variabile "username" viene letta alla linea 67 per creare una variabile dag_name che verrà utilizzata alla linea 70 per assegnare un nome univoco al DAG quando si istanzia l'oggetto DAG.
 
@@ -158,7 +158,7 @@ Crea una nuova Resource di tipo File per questo, oppure riutilizza la risorsa es
 
 ![alt text](../../img/cdeairflowdag_4.png)
 
-Vai alla pagina "Job Runs" e nota che il DAG di Airflow è in fase di esecuzione. Mentre è in corso, torna alla Pagina Principale di CDE, scorri fino alla sezione "Virtual Clusters" e apri i dettagli del Virtual Cluster. Poi apri l'interfaccia utente di Airflow.
+Vai alla pagina "Job Runs" e note che il DAG di Airflow è in fase di esecuzione. Mentre è in corso, torna alla Pagina Principale di CDE, scorri fino alla sezione "Virtual Clusters" e apri i dettagli del Virtual Cluster. Poi apri l'interfaccia utente di Airflow.
 
 ![alt text](../../img/reachairflowui.png)
 

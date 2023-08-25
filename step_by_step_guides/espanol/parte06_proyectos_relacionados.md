@@ -1,6 +1,6 @@
 # Parte 6: Conclusiones y Próximos Pasos
 
-¡Felicitaciones por llegar al final de este Laboratorio Práctico! Esperamos que hayas disfrutado usando CDE de primera mano.
+¡Felicitaciones por llegar al final de este lab Práctico! Esperamos que hayas disfrutado usando CDE de primera mano.
 
 ### Conclusiones
 

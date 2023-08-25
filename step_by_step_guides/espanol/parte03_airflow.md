@@ -132,12 +132,12 @@ Además, ten en cuenta que las credenciales almacenadas en parameters.conf no es
 
 La variable "username" se lee en la línea 67 para crear una variable dag_name que a su vez se usará en la línea 70 para asignar un nombre de DAG único al instanciar el objeto DAG.
 
->**⚠ Advertimiento**  
+>**⚠ Warning**  
 >CDE requiere un nombre de DAG único para cada Job de CDE Airflow, de lo contrario, devolverá un error al crear el Job.
 
 Finalmente, modifica las líneas 63 y 64 para asignar una fecha de inicio y finalización que tenga lugar en el futuro.
 
->**⚠ Advertimiento**   
+>**⚠ Warning**   
 > Si no editas la fecha de inicio y finalización, el Job de CDE Airflow podría fallar. El parámetro de Fecha de Inicio debe reflejar una fecha pasada, mientras que la Fecha de Finalización debe estar en el futuro. Si estás obteniendo dos ejecuciones idénticas del Job de Airflow, has configurado ambas fechas en el pasado.
 
 Carga el guión actualizado en tu Recurso de Archivos de CDE junto con el archivo parameters.conf. El nuevo Recurso de Archivos debería tener ahora un total de cuatro archivos.

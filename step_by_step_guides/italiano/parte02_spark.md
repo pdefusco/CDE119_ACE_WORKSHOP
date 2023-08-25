@@ -16,7 +16,7 @@ Scegli il tuo CDE Virtual Cluster abilitato a Spark 3 / Iceberg e *dai un nome a
 
 ![alt text](../../img/create_new_res119_2.png)
 
->**⚠ Attenzione**  
+>**⚠ Avviso**  
 >Ogni utente del workshop dovrebbe creare una Risorsa File separata con un nome univoco.
 
 Carica i seguenti file presenti nelle cartelle "cde_ace_hol/cde_spark_jobs" e "cde_ace_hol/resources_files".
@@ -24,7 +24,7 @@ Carica i seguenti file presenti nelle cartelle "cde_ace_hol/cde_spark_jobs" e "c
 Una volta finito, assicurati che i seguenti file si trovino nella tua Resource:
 
 ```
-01_PySpark_ETL.py
+02_PySpark_ETL.py
 simple_udf.zip
 simple_udf_dependency.py
 parameters.conf
@@ -91,7 +91,7 @@ Imposta l'ambiente Python sulla Resource di tipo Python che hai creato nel passa
 
 La sezione "File Python, Egg, Zip" ti consente di caricare le dipendenze nel tuo job. Questo può essere utilizzato per una varietà di casi d'uso, tra cui montare file Python negli Executor, utilizzare file Wheel e altro.
 
-Nella sezione "File Python, Egg, Zip" seleziona le dipendenze dei file "utils.py" e "simple_udf.zip" per caricare l'UDF nel Job Spark. Nota che i file sono già stati caricati nella Resource di tipo File, quindi devi solo selezionarli da lì.
+Nella sezione "File Python, Egg, Zip" seleziona le dipendenze dei file "utils.py" e "simple_udf.zip" per caricare l'UDF nel Job Spark. note che i file sono già stati caricati nella Resource di tipo File, quindi devi solo selezionarli da lì.
 
 ![alt text](../../img/sparkjob_ui_8.png)
 
@@ -203,17 +203,17 @@ Poco dopo aver eseguito questo comando, noterai la conferma dell'invio nel termi
 
 ![alt text](../../img/cdeclijob_2.png)
 
-L'operazione sopra ha creato una voce "cli-submit-username-timestamp" nella pagina delle Esecuzioni di Job del tuo Cluster CDE. Apri l'Esecuzione del Job e esplora i log. Nota che la Definizione del Job non è riutilizzabile.
+L'operazione sopra ha creato una voce "cli-submit-username-timestamp" nella pagina delle Esecuzioni di Job del tuo Cluster CDE. Apri l'Esecuzione del Job e esplora i log. note che la Definizione del Job non è riutilizzabile.
 
 ![alt text](../../img/cdeclijob_3.png)
 
-Il primo Spark Submit ha eseguito un semplice job PySpark, ma notare che non abbiamo specificato alcuna Opzione Spark. Successivamente, crea una Spark Submit più avanzata eseguendo il seguente comando nel tuo terminale:
+Il primo Spark Submit ha eseguito un semplice job PySpark, ma notere che non abbiamo specificato alcuna Opzione Spark. Successivamente, crea una Spark Submit più avanzata eseguendo il seguente comando nel tuo terminale:
 
 ```
 cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl cde_spark_jobs/mywheel/__main__.py --executor-cores 2 --executor-memory 2g
 ```
 
-Il Spark Submit CDE sopra è stato eseguito con il codice dell'applicazione Spark confezionato in un file Wheel. Nota che la Spark Submit CDE include le opzioni ```--py-files```, ```--exeutor-cores``` e ```--executor-memory```. Queste corrispondono alle stesse opzioni disponibili per una Spark Submit. Per ulteriori informazioni sulla creazione di comandi per Spark Submit, visita la [Documentazione di Spark]((https://spark.apache.org/docs/latest/submitting-applications.html)).
+Il Spark Submit CDE sopra è stato eseguito con il codice dell'applicazione Spark confezionato in un file Wheel. note che la Spark Submit CDE include le opzioni ```--py-files```, ```--exeutor-cores``` e ```--executor-memory```. Queste corrispondono alle stesse opzioni disponibili per una Spark Submit. Per ulteriori informazioni sulla creazione di comandi per Spark Submit, visita la [Documentazione di Spark]((https://spark.apache.org/docs/latest/submitting-applications.html)).
 
 
 #### 2. Job Spark tramite la CLI di CDE.
@@ -257,7 +257,7 @@ Osserva l'ID dell'esecuzione del Job visualizzato nel terminale e verifica il Jo
 
 ![alt text](../../img/cdeclijob_5.png)
 
-Vai alla pagina dei Job nel tuo CDE Virtual Cluster e apri il Job. Nota che la Definizione può essere modificata ed è riutilizzabile.
+Vai alla pagina dei Job nel tuo CDE Virtual Cluster e apri il Job. note che la Definizione può essere modificata ed è riutilizzabile.
 
 ![alt text](../../img/cdeclijob_6.png)
 
@@ -279,7 +279,7 @@ La sessione sarà nello stato "Starting" per qualche istante. Quando sarà pront
 
 Copia e incolla i seguenti frammenti di codice in ogni cella e osserva l'output (non sono richieste modifiche al codice).
 
->**Nota**  
+>**note**  
 >Le sessioni CDE non richiedono la creazione dell'oggetto SparkSession. La shell è già stata avviata per te. Tuttavia, se è necessario importare alcuni tipi o funzioni, è necessario importare i moduli necessari.
 
 Importa il module PySpark:
@@ -345,7 +345,7 @@ Puoi anche creare una sessione direttamente dal CLI. Nel tuo terminale locale, e
 
 ```cde session create --name cde_shell_from_cli --type spark-scala --description launched-from-cli --executor-cores 4 --num-executors 2```.
 
-Nota che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
+note che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
 
 ![alt text](../../img/sparkshell3.png)
 
@@ -356,7 +356,7 @@ Nota che puoi passare le Compute Options come il numero di executor e le executo
 
 In questa sezione finale della Parte 2, completerai creando un job CDE di tipo Spark nell'interfaccia utente di CDE utilizzando lo script PySpark "03_PySpark_Iceberg.py".
 
-Lo script include molto codice legato ad Iceberg. Aprilo nell'editor di tua scelta e familiarizza con il codice. In particolare, nota:
+Lo script include molto codice legato ad Iceberg. Aprilo nell'editor di tua scelta e familiarizza con il codice. In particolare, note:
 
 * Righe 62-69: La SparkSession deve essere avviata con il Catalogo Iceberg. Tuttavia, non è necessario fare riferimento a Jars. Questi sono già disponibili poiché Iceberg è abilitato a livello di CDE Virtual Cluster. Il Catalogo Iceberg sostituisce l'Hive Metastore per il tracciamento dei metadati delle tabelle.   
 

@@ -95,7 +95,7 @@ Apri la pagina Dettagli del Servizio CDE e osserva le seguenti informazioni chia
 
 ![alt text](../../img/service_cde_2.png)
 
-Scorri verso il basso e apri la scheda Configurazioni. Nota che qui vengono definite le Tipologie di Istanza e gli intervalli di ridimensionamento automatico delle istanze.
+Scorri verso il basso e apri la scheda Configurazioni. note che qui vengono definite le Tipologie di Istanza e gli intervalli di ridimensionamento automatico delle istanze.
 
 ![alt text](../../img/cde_configs.png)
 
@@ -111,7 +111,7 @@ Questa vista include altre importanti informazioni sulla gestione del cluster. D
 * Visitare la documentazione API per conoscere l'API CDE e creare richieste di esempio nella pagina Swagger.
 * Accedere all'interfaccia utente di Airflow per monitorare i tuoi lavori Airflow, configurare connessioni personalizzate, variabili e altro ancora.
 
-Apri la scheda Configurazioni. Nota che puoi selezionare tra Cluster Tier Core e All Purpose.
+Apri la scheda Configurazioni. note che puoi selezionare tra Cluster Tier Core e All Purpose.
 Inoltre, questa vista offre opzioni per impostare intervalli di ridimensionamento automatico CPU e memoria, versione di Spark e opzioni Iceberg.
 CDE supporta Spark 2.4.8, 3.2.3 e 3.3.0.
 

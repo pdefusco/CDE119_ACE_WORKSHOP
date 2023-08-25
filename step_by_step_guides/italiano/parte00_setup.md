@@ -48,7 +48,7 @@ Questo Hands On Lab utilizza un file parameters.conf per memorizzare le credenzi
 
 Se stai partecipando a un evento Cloudera, il tuo coordinatore del workshop ti fornirà le credenziali sopra indicate. I dati saranno già stati caricati dal coordinatore del workshop.
 
-Se stai riproducendo i laboratori nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload Usder CDP dal tuo amministratore CDP.
+Se stai riproducendo i lab nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload Usder CDP dal tuo amministratore CDP.
 
 ## Index
 
