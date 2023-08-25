@@ -118,7 +118,7 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 Crea due CDE Spark Job (nell'interfaccia utente o con la CLI) utilizzando gli script "04-A-ETL.py" e "04-B-Reports.py", *ma non eseguirli ancora.*
 
-Carica gli script dalla tua macchina locale e crea una nuova risorsa file. Assicurati di nominarla con il tuo nome in modo che non entri in conflitto con gli altri partecipanti al workshop.
+Carica gli script dalla tua macchina locale e crea una nuova File Resource. Assicurati di nominarla con il tuo nome in modo che non entri in conflitto con gli altri partecipanti al workshop.
 
 ![alt text](../../img/newjobs_1.png)
 
@@ -140,7 +140,7 @@ Infine, modifica le linee 63 e 64 per assegnare una data di inizio e fine che si
 >**⚠ Avviso**   
 > Se non modifichi la data di inizio e fine, il CDE Airflow Job potrebbe fallire. Il parametro Start Date deve riflettere una data nel passato, mentre la End Date deve essere nel futuro. Se osservi due Runs identiche nella pagina Job Runs hai impostato le date in maniera incorretta.
 
-Carica lo script aggiornato nella tua risorsa File di CDE insieme al file parameters.conf. La nuova risorsa File dovrebbe ora avere un totale di quattro file.
+Carica lo script aggiornato nella tua File Resource insieme al file parameters.conf. La nuova File Resource dovrebbe ora avere un totale di quattro file.
 
 ![alt text](../../img/fileinnewresource.png)
 
@@ -152,7 +152,7 @@ Come prima, seleziona il tuo Virtual Cluster e il nome del Job. Poi crea ed eseg
 
 ![alt text](../../img/cdeairflowdag_2.png)
 
-Crea una nuova Resource di tipo File per questo, oppure riutilizza la risorsa esistente se ne hai una da un passaggio precedente.
+Crea una nuova Resource di tipo File per questo, oppure riutilizza la Resource esistente se ne hai una da un passaggio precedente.
 
 ![alt text](../../img/cdeairflowdag_3.png)
 

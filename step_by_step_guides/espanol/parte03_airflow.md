@@ -118,7 +118,7 @@ step1 >> step2 >> step3 >> step4 >> step5
 
 Crea dos Jobs de CDE Spark (en la interfaz de usuario o con la CLI) utilizando los scripts "04-A-ETL.py" y "04-B-Reports.py", *pero no los ejecutes aún.*
 
-Carga los scripts desde tu máquina local y crea un nuevo recurso de archivo. Asegúrate de nombrarlo con tu nombre para que no choque con otros participantes del taller.
+Carga los scripts desde tu máquina local y crea un nuevo File Resource. Asegúrate de nombrarlo con tu nombre para que no choque con otros participantes del taller.
 
 ![alt text](../../img/newjobs_1.png)
 
@@ -140,7 +140,7 @@ Finalmente, modifica las líneas 63 y 64 para asignar una fecha de inicio y fina
 >**⚠ Warning**   
 > Si no editas la fecha de inicio y finalización, el Job de CDE Airflow podría fallar. El parámetro de Fecha de Inicio debe reflejar una fecha pasada, mientras que la Fecha de Finalización debe estar en el futuro. Si estás obteniendo dos ejecuciones idénticas del Job de Airflow, has configurado ambas fechas en el pasado.
 
-Carga el guión actualizado en tu Recurso de Archivos de CDE junto con el archivo parameters.conf. El nuevo Recurso de Archivos debería tener ahora un total de cuatro archivos.
+Carga el guión actualizado en tu File Resource junto con el archivo parameters.conf. El nuevo Resource debería tener ahora un total de cuatro archivos.
 
 ![alt text](../../img/fileinnewresource.png)
 
@@ -152,7 +152,7 @@ Como antes, selecciona tu Clúster Virtual y nombre del Job. Luego, crea y ejecu
 
 ![alt text](../../img/cdeairflowdag_2.png)
 
-Crea un nuevo File Resource para esto o reutiliza tu recurso existente si ya tienes uno de un paso anterior.
+Crea un nuevo File Resource para esto o reutiliza tu Resource existente si ya tienes uno de un paso anterior.
 
 ![alt text](../../img/cdeairflowdag_3.png)
 
