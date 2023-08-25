@@ -65,14 +65,14 @@ start = DummyOperator(
 step7 = SimpleHttpOperator(
     task_id="random_joke_api",
     method="GET",
-    <b>http_conn_id="random_joke_connection"<b\>,
-    <b>endpoint="/jokes/programming/random"<b\>,
+    <b>http_conn_id="random_joke_connection"</b>,
+    <b>endpoint="/jokes/programming/random"</b>,
     headers={"Content-Type":"application/json"},
-    <b>response_check=lambda response: handle_response(response)<b\>,
+    <b>response_check=lambda response: handle_response(response)</b>,
     dag=operators_dag,
-    <b>do_xcom_push=True<b\>
+    <b>do_xcom_push=True</b>
 )
-<pre\>
+</pre>
 
 * En las líneas 161-165, el operador Python ejecuta el método '_print_random_joke' declarado en las líneas 117-118 y muestra la respuesta de la llamada a la API.
 
