@@ -115,11 +115,11 @@ Attualmente, CDE supporta operazioni CDW per carichi di job ETL nei data warehou
 
 Accedi alla pagina Panoramica del Data Warehouse Cloudera facendo clic sulla tessera Data Warehouse nella console di gestione della piattaforma Cloudera Data Platform (CDP).
 
-![alt text](../../img/bonus1_step0_A.png)
+![alt text](../../img/bonus1_step00_A.png)
 
 Nella colonna "Virtual Warehouses", trova il data warehouse a cui desideri connetterti.
 
-![alt text](../../img/bonus1_step0_B.png)
+![alt text](../../img/bonus1_step00_B.png)
 
 Clicca sul menu a tre punti per il data warehouse selezionato, quindi clicca su "Copia URL JDBC".
 
