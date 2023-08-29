@@ -2,17 +2,17 @@
 
 ## Objetivo
 
-En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuario de CDE, la CLI de CDE y Sesiones Interactivas de CDE. En el proceso, aprenderás cómo usar Recursos de CDE para almacenar archivos y reutilizar entornos virtuales de Python, migrar tablas de Spark a tablas de Iceberg y utilizar algunas de las características más esperadas de Iceberg, como Viaje en el Tiempo, Consultas Incrementales, Particiones y Evolución de Esquemas.
+En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuario de CDE, la CLI de CDE y Sesiones Interactivas de CDE. En el proceso, aprenderás cómo usar Recursos de CDE para almacenar archivos y reutilizar entornos virtuales de Python, migrar tablas de Spark a tablas de Iceberg y utilizar algunas de las características más esperadas de Iceberg, como Time Travel, Incremental Reads, Partition Evolution and Schema Evolution.
 
 ### Edición de Archivos y Creación de Recursos de CDE
 
-Los Recursos de CDE pueden ser de tipo "Archivo", "Python" o "Tiempo de Ejecución Personalizado". Comenzarás creando un recurso de tipo archivo para almacenar todos los archivos de Spark y Airflow y sus dependencias, y luego un Recurso de Python para utilizar bibliotecas Python personalizadas en una ejecución de Job de Spark de CDE.
+Las CDE Resources pueden ser de tipo "Archivo", "Python" o "Custom Runtime". Comenzarás creando una Resource de tipo File para almacenar todos los archivos de Spark y Airflow y sus dependencias, y luego una Resource de tipo Python para utilizar paquetes Python en una ejecución de Job de Spark de CDE.
 
-Para crear un Recurso de Archivo, desde la Página de Inicio de CDE, haz clic en "Crear Nuevo" en la sección "Recursos" -> "Archivo"."
+Para crear una File Resource, desde la Página de Inicio de CDE, haz clic en "Create New" en la sección "Resources" -> "File"."
 
 ![alt text](../../img/create_new_res119.png)
 
-Selecciona tu Clúster Virtual de CDE habilitado para Spark 3 / Iceberg y nombra tu *Recource con tu nombre de usuario o un ID único.*
+Selecciona tu Clúster Virtual de CDE habilitado para Spark 3 / Iceberg y nombra tu *Resource con tu nombre de usuario o un ID único.*
 
 ![alt text](../../img/create_new_res119_2.png)
 
@@ -21,7 +21,7 @@ Selecciona tu Clúster Virtual de CDE habilitado para Spark 3 / Iceberg y nombra
 
 Carga los siguientes archivos ubicados en las carpetas "cde_ace_hol/cde_spark_jobs" y "cde_ace_hol/resources_files".
 
-Cuando hayas terminado, asegúrate de que los siguientes archivos se encuentren en tu Recurso de Archivo:
+Cuando hayas terminado, asegúrate de que los siguientes archivos se encuentren en tu Resource:
 
 ```
 02_PySpark_ETL.py
@@ -31,11 +31,11 @@ parameters.conf
 utils.py
 ```
 
-Para crear un Resource de Python, regresa a la Página de Inicio de CDE y haz clic en "Crear Nuevo" en la sección "Recursos" -> "Python".
+Para crear un Resource de Python, regresa a la Página de Inicio de CDE y haz clic en "Create New" en la sección "Resources" -> "Python".
 
 ![alt text](../../img/create_new_pres_119.png)
 
-Asegúrate de seleccionar el mismo Clúster Virtual de CDE. Nombra el Recurso de CDE de Python y deja el campo de espejo de pipy en blanco.
+Asegúrate de seleccionar el mismo Clúster Virtual. Nombra la Resource de tipo Python y deja el campo de pipy mirror en blanco.
 
 ![alt text](../../img/create_new_pres119_2.png)
 
@@ -43,13 +43,13 @@ Carga el archivo "requirements.txt" proporcionado en la carpeta "cde_ace_hol/res
 
 ![alt text](../../img/create_new_pres119_3.png)
 
-Observa que el Recurso de CDE está construyendo el Ambiente Virtual de Python. Después de unos momentos, la compilación se completará y podrás validar las bibliotecas utilizadas.
+Observa que la Resource está construyendo el Ambiente Virtual de Python. Después de unos momentos, la compilación se completará y podrás validar los paquetes utilizadas.
 
 ![alt text](../../img/create_new_pres119_4.png)
 
 ![alt text](../../img/create_new_pres119_5.png)
 
-Para obtener más información sobre los Resources de CDE, visita [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) en la documentación de CDE.
+Para obtener más información sobre las Resource de CDE, visita [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) en la documentación de CDE.
 
 ### Creación de Jobs de Spark en la Interfaz de Usuario de CDE
 
@@ -59,13 +59,13 @@ A continuación, ejecutaremos e implementaremos un script de Spark como un Job d
 
 #### 1. Establecer Nombre del Job, Clúster Virtual y Archivo de Aplicación
 
-Selecciona tu Clúster Virtual de CDE y asigna "O1_ETL" como Nombre del Job. Agrega tu nombre para distinguir el nombre de tu Job de los demás.
+Selecciona tu Clúster Virtual y asigna "02_ETL" como nombre del Job. Agrega tu nombre para distinguir el nombre de tu Job de los demás.
 
-![alt text](../../img/sparkjob_ui_2.png)
+![alt text](../../img/part2_setjobname02.png)
 
-El Archivo de Aplicación es el código que se ejecutará como el Job de Spark. Puede ser un archivo de PySpark o un archivo Jar.
+El Archivo de Aplicación es el código que se ejecutará como Job de Spark. Puede ser un archivo de PySpark o un archivo Jar.
 
-Dado que ya cargaste el script en el Recurso de Archivo de CDE en el paso anterior, esto se puede seleccionar fácilmente en la construcción de la Configuración del Job: asegúrate de seleccionar "Archivo" en el botón de opción y haz clic en "Seleccionar desde Recurso" en la sección "Archivo de Aplicación". Se abrirá una ventana con el contenido cargado en tu Recurso de Archivo. Selecciona el script "02_PySpark_ETL.py".
+Dado que ya cargaste el script en el Recurso de Archivo de CDE en el paso anterior, esto se puede seleccionar fácilmente en la Configuración del Job: asegúrate de seleccionar "File" en el botón de opción y haz clic en "Select from Resource" en la sección "Archivo de Aplicación". Se abrirá una ventana con el contenido cargado en tu Recurso de Archivo. Selecciona el script "02_PySpark_ETL.py".
 
 ![alt text](../../img/sparkjob_ui_3.png)
 
@@ -75,13 +75,13 @@ Dado que ya cargaste el script en el Recurso de Archivo de CDE en el paso anteri
 
 La sección de Configuraciones te permite establecer Configuraciones de Aplicación de Spark, como la configuración del Controlador y los Ejecutores, Jars, propiedades de Spark y muchas más. En otras palabras, prácticamente la mayoría de las propiedades disponibles en la [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) se pueden aplicar aquí.
 
-En este Job, estableceremos la configuración `spark.executorEnv.PYTHONPATH` en `/app/mount/simple_udf.zip` para que pueda leer la UDF desde el Recurso de Archivo de CDE.
+En este Job, estableceremos la configuración `spark.executorEnv.PYTHONPATH` en `/app/mount/simple_udf.zip` para que pueda leer la UDF desde la File Resource.
 
 ![alt text](../../img/sparkjob_ui_5.png)
 
 #### 3. Establecer Ambiente de Python
 
-Establece el entorno de Python en el Recurso de Python de CDE que creaste en el paso anterior.
+Establece el ambiente de Python en la Python Resource que creaste en el paso anterior.
 
 ![alt text](../../img/sparkjob_ui_6.png)
 
@@ -97,20 +97,23 @@ En la sección "Python, Egg y Zip Files" selecciona las dependencias de archivos
 
 ![alt text](../../img/part2_jobconfigsnew.png)
 
-Desplázate nuevamente hacia abajo hasta la sección "Recursos" y observa que tu Recurso de Archivo se ha asignado al Job de manera predeterminada. Esto permite que el script de PySpark cargue módulos en el mismo Recurso, como los que están contenidos en el archivo "utils.py".
+Desplázate nuevamente hacia abajo hasta la sección "Resources" y observa que tu Resource se ha asignado al Job de manera predeterminada. Esto permite que el script de PySpark cargue módulos en la misma Resource, como los que están contenidos en el archivo "utils.py".
 
 ![alt text](../../img/sparkjob_ui_10.png)
 
-#### 5. Configurar Opciones de Cómputo
+#### 5. Configurar Compute Options
 
-Las Opciones de Cómputo te permiten establecer configuraciones importantes de recursos de Spark.
+Las Compute Options te permiten establecer configuraciones importantes de recursos de Spark.
 
-* La barra de alternancia de Ejecutores te permite establecer las opciones "spark.dynamicAllocation.minExecutors" y "spark.dynamicAllocation.maxExecutors". Estas determinan cuántos ejecutores serán desplegados por la Asignación Dinámica de Spark. La Asignación Dinámica de Spark se establece en "Habilitado" de forma predeterminada en CDE.
-* La barra de Initial Executors te permite establecer la propiedad "spark.dynamicAllocation.initialExecutors". Esta opción establece el número inicial de Executors para la asignación dinámica. Recomendamos asegurarte de que esto no esté configurado demasiado alto, especialmente en un valor que esté por encima del número esperado de Executors del Jobs.
-* Driver Cores and Driver Memory te permiten establecer "spark.driver.cores" y "spark.driver.memory". Aumentar los Cores del Controlador y la Memoria puede ser útil cuando tus consultas se compilan lentamente o en caso de que realices muchas acciones collect() o take(N), especialmente en RDD grandes.
+* La barra de alternancia de "Executors" te permite establecer las opciones "spark.dynamicAllocation.minExecutors" y "spark.dynamicAllocation.maxExecutors". Estas determinan cuántos Executors serán desplegados por la Dynamic Allocation de Spark. La Dynamic Allocation de Spark está habilitada de forma predeterminada en CDE.
+
+* La barra "Initial Executors" te permite establecer la propiedad "spark.dynamicAllocation.initialExecutors". Esta opción establece el número inicial de Executors para la asignación dinámica. Recomendamos asegurarte de que esto no esté configurado demasiado alto, especialmente en un valor que esté por encima del número esperado de Executors del Jobs.
+
+* Las barras "Driver Cores" y "Driver Memory" te permiten establecer "spark.driver.cores" y "spark.driver.memory". Aumentar los Cores y la Memoria del Driver puede ser útil cuando tus consultas se compilan lentamente o en caso de que realices muchas acciones collect() o take(N), especialmente en RDD grandes.
+
 * Executor Cores and Executor Memory te permiten establecer "spark.executor.cores" y "spark.executor.memory". Estas propiedades se utilizan mucho en el contexto de la Afinación de Spark, ya que te brindan la capacidad de influir en el grado de paralelismo y la capacidad de almacenamiento disponibles en cada Executor.
 
-Establece "Executors" en un mínimo de 1 y un máximo de 4. Luego, establece los Cores del Executor en 2, la Memoria del Controlador en 2 y la Memoria del Executor en 2. Esto te permite implementar una Aplicación de Spark con Executors que sean un poco más recursosos que los valores establecidos en las configuraciones predeterminadas, lo que a menudo puede resultar en Executors que son demasiado pequeños.
+Establece "Executors" en un mínimo de 1 y un máximo de 4. Luego, establece los Cores del Executor en 2, la Memoria del Driver en 2 y la Memoria del Executor en 2. Esto te permite implementar una aplicación de Spark con Executors que sean un poco más poderosos que los valores establecidos en las configuraciones predeterminadas.
 
 ![alt text](../../img/sparkjob_ui_11.png)
 
@@ -120,19 +123,19 @@ Desplázate hacia abajo y haz clic en el ícono azul "Create and Run".
 
 ![alt text](../../img/sparkjob_ui_12.png)
 
-Serás llevado automáticamente a la pestaña de Jobs, donde el Job ahora se listará en la parte superior. Abre la pestaña de Ejecuciones de Jobs en el panel izquierdo y valida que el Job de Spark de CDE se esté ejecutando.
+Serás llevado automáticamente a la pestaña de Jobs, donde el Job ahora se listará en la parte superior. Abre la pestaña Job Runs en el panel izquierdo y valida que el Job de Spark de CDE se esté ejecutando.
 
 ![alt text](../../img/part2_sparketl.png)
 
-Cuando esté completo, aparecerá una marca de verificación verde en el lado izquierdo. Haz clic en el número de Ejecución del Job para explorar más a fondo.
+Cuando esté completo, aparecerá una marca de verificación verde en el lado izquierdo. Haz clic en el número de Ejecución del Job para explorarlo más a fondo.
 
 ![alt text](../../img/part2_jobruns.png)
 
-La Job RUn se llena con Metadatos, Registros y la Interfaz de Usuario de Spark. Esta información se mantiene y puede consultarse en un momento posterior.
+La Job Run se llena con Metadatos, Registros y la Interfaz de Usuario de Spark. Esta información se mantiene y puede consultarse en un momento posterior.
 
-La pestaña de Configuración te permite verificar el script y los recursos utilizados por el Job de Spark de CDE. Desde aquí, puedes editar la Configuración para cambiar archivos, dependencias, horarios de ejecución y más. Por ejemplo, el desarrollador puede reutilizar un Job existente (o crear un clon opcionalmente) y hacer cambios en sus dependencias, horario, etc., desde la interfaz de usuario.
+La pestaña "Configurations" te permite verificar el script y los recursos utilizados por el Job de Spark de CDE. Desde aquí, puedes editar la Configuración para cambiar archivos, dependencias, horarios de ejecución y más. Por ejemplo, el desarrollador puede reutilizar un Job existente (o crear un clon opcionalmente) y hacer cambios en sus dependencias, horario, etc., desde la interfaz de usuario.
 
-Esto también sirve como una característica de Observabilidad importante de CDE. CDE mantiene un historial completo de todas las ejecuciones y las configuraciones de Job respectivas asociadas con ellas. En otras palabras, en clústeres tradicionales, cuando un Job de Spark fallaba, el desarrollador tenía que investigar los registros manualmente o, en el mejor de los casos, mantener procesos de DevOps para respaldar los registros y las ejecuciones. En CDE, todo esto se hace automáticamente.  
+Esto también sirve como una característica de Observability importante de CDE. CDE mantiene un historial completo de todas las ejecuciones y las configuraciones de Job respectivas asociadas con ellas. En otras palabras, en clústeres tradicionales, cuando un Job de Spark fallaba, el desarrollador tenía que investigar los registros manualmente o, en el mejor de los casos, mantener procesos de DevOps para respaldar los registros y las ejecuciones. En CDE, todo esto se hace automáticamente.  
 
 ![alt text](../../img/part2_jobruns2.png)
 
@@ -140,14 +143,14 @@ La pestaña de Registros contiene información detallada de registro. Por ejempl
 
 ![alt text](../../img/part2_jobruns3.png)
 
-La Interfaz de Usuario de Spark te permite visualizar recursos, optimizar el rendimiento y solucionar problemas en tus Jobs de Spark.
+La Interfaz de Usuario de Spark te permite visualizar el utilizo de recursos, optimizar el rendimiento y solucionar problemas en tus Jobs de Spark.
 
 ![alt text](../../img/part2_jobruns4.png)
 
 
-### Creación de Jobs de Spark de CDE con la CLI
+### Creación de Jobs de Spark con la CLI de CDE
 
-Hasta ahora hemos creado un Job de Spark a través de la Interfaz de Usuario de CDE. Sin embargo, los casos de uso de CDE que involucran más que solo unos pocos Jobs generalmente se benefician de numerosas formas con la CLI de CDE o la API de CDE. La CLI te permite iterar más rápidamente a través de diferentes envíos de Spark y Recursos de CDE. La API es un excelente punto de acceso a CDE desde otras herramientas, incluidas soluciones de DevOps y CI/CD de terceros.
+Hasta ahora hemos creado un Job de Spark a través de la Interfaz de Usuario de CDE. Sin embargo, los casos de uso de CDE que involucran más que solo unos pocos Jobs generalmente se benefician de numerosas formas con la CLI de CDE o la API de CDE. La CLI te permite iterar más rápidamente a través de diferentes spark-submits y Resources de CDE. La API es un excelente punto de acceso a CDE desde otras herramientas, incluidas soluciones de DevOps y CI/CD de terceros.
 
 En esta sección crearemos un Spark-Submit de CDE y un Job de Spark de CDE a través de la CLI. En el proceso, explicaremos la diferencia.
 
@@ -179,14 +182,14 @@ user: <CDP_user>
 vcluster-endpoint: <CDE_virtual_cluster_endpoint>
 ```
 
-Paso 5: Guarda el archivo de configuración. Si aún no lo has hecho, asegúrate de que el archivo cde sea ejecutable ejecutando ```chmod +x /path/to/cde```. Finalmente, ejecuta ```cde job list``` desde tu terminal para verificar tu configuración. Ingresa tu contraseña de carga de Job cuando se te solicite.
+Paso 5: Guarda el archivo de configuración. Si aún no lo has hecho, asegúrate de que el archivo "cde" sea ejecutable ejecutando ```chmod +x /path/to/cde```. Finalmente, ejecuta ```cde job list``` desde tu terminal para verificar tu configuración. Ingresa tu contraseña de carga de Job cuando se te solicite.
 
 Para obtener más información sobre la CLI, visita la [Documentación de CDE](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
 
 #### 1. Spark-Submit de CDE a través de la CLI de CDE.
 
-Un Spark-Submit de CDE es la forma más rápida de prototipar un Job de Spark. Te permite enviar Código de Aplicación de Spark y monitorear los resultados con las funciones de registro y observabilidad de CDE, pero no te permite guardar el Código como una Definición de Job de CDE reutilizable. Esto sería beneficioso, por ejemplo, si deseas reprogramar el job para que se ejecute de manera recurrente o incluirlo en un Job de CDE Airflow.
+Un Spark-Submit de CDE es la forma más rápida de prototipar un Job de Spark. Te permite enviar Código de Aplicación de Spark y monitorear los resultados con las funciones de registro y Observability de CDE, pero no te permite guardar el Código como una Definición de Job de CDE reutilizable. Esto sería beneficioso, por ejemplo, si deseas reprogramar el job para que se ejecute de manera recurrente o incluirlo en un Job de CDE Airflow.
 
 Comienza con un Spark-Submit simple ejecutando el siguiente comando en tu terminal:"
 
@@ -204,26 +207,26 @@ Lo anterior creó una entrada "cli-submit-nombredeusuario-marcatiempo" en la pá
 
 ![alt text](../../img/cdeclijob_3.png)
 
-El primer Spark-Submit ejecutó un job PySpark simple, pero observa que no especificamos ninguna Opción de Spark. A continuación, crea un Spark-Submit más avanzado ejecutando el siguiente comando en tu terminal:
+El primer Spark-Submit ejecutó un job PySpark simple, pero observa que no especificamos ninguna opción de configuración de Spark. A continuación, crea un Spark-Submit más avanzado ejecutando el siguiente comando en tu terminal:
 
 ```
 cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl cde_spark_jobs/mywheel/__main__.py --executor-cores 2 --executor-memory 2g
 ```
 
-El Spark-Submit de CDE anterior se ejecutó con el código de la Aplicación de Spark empaquetado en un archivo Wheel. Observa que el Spark-Submit de CDE incluyó las banderas  ```--executor-memory```. Estas corresponden a las mismas opciones disponibles para un Spark-Submit. Para obtener más información sobre cómo construir comandos Spark-Submit, visita la [Documentación de Spark](https://spark.apache.org/docs/latest/submitting-applications.html)
+El Spark-Submit de CDE anterior se ejecutó con el código de la aplicación de Spark empaquetado en un archivo Wheel. Observa que el Spark-Submit de CDE incluyó las banderas  ```--executor-memory```. Estas corresponden a las mismas opciones disponibles para un Spark-Submit. Para obtener más información sobre cómo construir comandos Spark-Submit, visita la [Documentación de Spark](https://spark.apache.org/docs/latest/submitting-applications.html)
 
 
 #### 2. Job de Spark de CDE a través de la CLI de CDE.
 
 Similar a un Spark-Submit de CDE, un Job de Spark de CDE es un código de Aplicación para ejecutar un Job de Spark (o Airflow) en un Clúster Virtual de CDE. Sin embargo, el Job de CDE te permite definir, editar y reutilizar configuraciones y recursos fácilmente en ejecuciones futuras. Los Jobs se pueden ejecutar a pedido o programarse. Una ejecución individual de Job se llama Ejecución de Job.
 
-Un Job de CDE de tipo Spark siempre requiere una referencia a un Recurso de CDE para montar el Código de Aplicación y cualquier dependencia. Por lo tanto, comienza creando un Recurso de CDE de tipo Archivo:
+Un Job de CDE de tipo Spark siempre requiere una referencia a una Resource para montar el código de aplicación y cualquier dependencia. Por lo tanto, comienza creando un Recurso de CDE de tipo Archivo:
 
 ```
 cde resource create --name my_user_resource
 ```
 
-Sube el Código de Aplicación al Recurso:
+Sube el Código de Aplicación en la Resource:
 
 ```
 cde resource upload --name my_user_resource --local-path cde_spark_jobs/cdejobjar_2.12-1.0.jar
@@ -231,7 +234,7 @@ cde resource upload --name my_user_resource --local-path cde_spark_jobs/cdejobja
 
 ![alt text](../../img/cdeclijob_4.png)
 
-Ahora crea un Job de CDE de tipo Spark montando los archivos de Resources subidos:
+Ahora crea un Job de CDE de tipo Spark montando los archivos de subidos a la Resource:
 
 ```
 cde job create \
@@ -244,7 +247,7 @@ cde job create \
   --executor-memory 2g
 ```
 
-Como antes, observa que las Configuraciones de Spark como ```--executor-cores```, ```--executor-memory```, o ```spark.sql.shuffle.partitions=10``` se pueden aplicar al Job de CDE mediante la bandera ```--conf```.
+Como antes, observa que las configuraciones de Spark como ```--executor-cores```, ```--executor-memory```, o ```spark.sql.shuffle.partitions=10``` se pueden aplicar al Job de CDE mediante la bandera ```--conf```.
 
 Finalmente, ejecuta el Job:
 
@@ -254,7 +257,7 @@ Observa la ID de Ejecución del Job que se muestra en la terminal y valida el Jo
 
 ![alt text](../../img/cdeclijob_5.png)
 
-Navega a la página de Jobs en tu Clúster Virtual de CDE y abre el Job. Observa que la Definición se puede editar y es reutilizable.
+Navega a la página de Jobs en tu Clúster Virtual de CDE y abre el Job. Observa que la definición se puede editar y es reutilizable.
 
 ![alt text](../../img/cdeclijob_6.png)
 
@@ -262,9 +265,9 @@ Navega a la página de Jobs en tu Clúster Virtual de CDE y abre el Job. Observa
 
 ### Explorando Datos de Forma Interactiva con Sesiones CDE
 
-Una Sesión CDE es un entorno interactivo de desarrollo de corta duración para ejecutar comandos de Spark que te ayudan a iterar y construir tus cargas de Job de Spark. Puedes iniciar Sesiones CDE de dos formas: desde la IU de CDE y desde tu terminal con la CLI.
+Una Sesión de CDE es un entorno interactivo de desarrollo de corta duración para ejecutar comandos de Spark que te ayudan a iterar y construir tus cargas de Job de Spark. Puedes iniciar Sesiones CDE de dos formas: desde la UI de CDE y desde tu terminal con la CLI.
 
-##### Usando Sesiones Interactivas en la IU de CDE
+##### Usando Sesiones Interactivas en la UI de CDE
 
 Desde la Página de Inicio de CDE, abre "Sesiones" en el panel izquierdo y luego selecciona el Clúster Virtual de CDE donde deseas ejecutar tu Sesión Interactiva de CDE.
 
@@ -272,14 +275,14 @@ Desde la Página de Inicio de CDE, abre "Sesiones" en el panel izquierdo y luego
 
 ![alt text](../../img/cdesessions_2.png)
 
-La sesión estará en estado "iniciando" durante algunos momentos. Cuando esté lista, lánzala y abre el Spark Shell haciendo clic en la pestaña "Interactuar".
+La sesión estará en estado "Starting" durante algunos momentos. Cuando esté lista, lánzala y abre el Spark Shell haciendo clic en la pestaña "Interact".
 
 Copia y pega los siguientes fragmentos de código en cada celda y observa la salida (no se requieren cambios en el código).
 
 >**note**  
 >Las Sesiones CDE no requieren la creación del objeto SparkSession. La shell ya ha sido lanzada para ti. Sin embargo, si necesitas importar algún tipo o función, debes importar los módulos necesarios.
 
-importa el paquete PySpark:
+Importa el paquete PySpark:
 
 ```
 from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
@@ -355,7 +358,7 @@ En esta última sección de la Parte 2, terminarás desplegando un Job de CDE de
 
 El script incluye mucho código relacionado con Iceberg. Ábrelo en tu editor de elección y familiarízate con el código. En particular, observa:
 
-* Líneas 62-69: La SparkSession debe lanzarse con el Catálogo de Iceberg. Sin embargo, no es necesario hacer referencia a Jars. Estos ya están disponibles, ya que Iceberg está habilitado a nivel de Virtual Cluster de CDE. El Catálogo de Iceberg reemplaza al Metastore de Hive para el seguimiento de los metadatos de las tablas.     
+* Líneas 62-69: La SparkSession debe lanzarse con el Catálogo de Iceberg. Sin embargo, no es necesario hacer referencia a Jars. Estos ya están disponibles, ya que Iceberg está habilitado a nivel de Virtual Cluster de CDE. El Catálogo de Iceberg sigue los metadatos de las tablas.     
 
 ```
 spark = SparkSession \
@@ -377,7 +380,7 @@ spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".forma
 
 ```
 
-* Líneas 125-126: Iceberg te permite consultar los metadatos de la tabla, incluido el historial de cambios y las instantáneas de la tabla.
+* Líneas 125-126: Iceberg te permite consultar los metadatos de la tabla, incluido el historial de cambios y las snapshot de la tabla.
 
 ```
 spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
@@ -401,7 +404,7 @@ temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username
 df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
 ```
 
-* Líneas 193-197: Puedes consultar una tabla Iceberg seleccionando solo los datos que han cambiado entre dos momentos en el tiempo o dos instantáneas. Esto se conoce como una "Lectura Incremental de Iceberg".
+* Líneas 193-197: Puedes consultar una tabla Iceberg seleccionando solo los datos que han cambiado entre dos momentos en el tiempo o dos snapshots. Esto se conoce como "Iceberg Incremental Read".
 
 ```
 spark.read\
@@ -411,17 +414,17 @@ spark.read\
     .load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
 ```
 
-* Líneas 234-251: Aunque Spark proporciona capacidades de particionado, una vez que se elige una estrategia de particionado, la única forma de cambiarla es mediante el reparticionado, es decir, recalculando todas las particiones de la tabla o el dataframe.
+* Líneas 234-251: Aunque Spark proporciona capacidades de particionado, una vez que se elige una estrategia de particionado, la única forma de cambiarla es mediante el reparticionado, es decir, recalculando todas las particiones.
 
-Iceberg introduce la Evolución de Particiones, es decir, la capacidad de cambiar el esquema de particionado en nuevos datos sin modificarlo en el conjunto de datos inicial. Gracias a esto, las tablas y los dataframes no se recalculan. Esto se logra mediante una forma mejorada de rastrear los metadatos de la tabla en la Capa de Metadatos de Iceberg.
+Iceberg introduce Partition Evolution, es decir, la capacidad de cambiar el esquema de particionado en nuevos datos sin modificarlo en el conjunto de datos inicial. Gracias a esto, las tablas no se recalculan. Esto se logra mediante una forma mejorada de rastrear los metadatos de la tabla en el Metadata Layer de Iceberg.
 
-En este ejemplo, los datos presentes en la tabla CAR_SALES están inicialmente particionados por Mes. A medida que fluyen más datos a nuestra tabla, decidimos que el particionado por Día proporciona a Spark mejores oportunidades para el paralelismo en Jobs. Por lo tanto, simplemente cambiamos el esquema de particionado a Día. Los datos antiguos siguen estando particionados por Mes, mientras que los nuevos datos agregados a la tabla desde este punto en adelante se particionarán por Día.
+En este ejemplo, los datos presentes en la tabla CAR_SALES están inicialmente particionados por Mes. Pero a medida que fluyen más datos a nuestra tabla, el particionado por Día proporciona mejores oportunidades de  paralelismo. Por lo tanto, simplemente cambiamos el esquema de particionado a Día. Los datos antiguos siguen estando particionados por Mes, mientras que los nuevos datos agregados a la tabla desde este punto en adelante se particionarán por Día.
 
 ```
 spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION FIELD month WITH day".format(username))
 ```
 
-* Línea 260: de manera similar a la evolución de particiones, Spark no te permite cambiar el esquema de una tabla sin recrearla. Iceberg te permite de manera más flexible AGREGAR y ELIMINAR columnas de una tabla a través de la instrucción ALTER TABLE.
+* Línea 260: de manera similar a respeto a cambios en la estrategia de particionamento, Spark tradicionalmente no permite cambiar el esquema de una tabla sin recrearla. Con datos en tablas Iceberg, Spark permite de manera más flexible AGREGAR y ELIMINAR columnas de una tabla a través de la instrucción ALTER TABLE.
 
 ```
 spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
@@ -435,7 +438,7 @@ ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USIN
 spark.sql(ICEBERG_MERGE_INTO)
 ```
 
-Una vez que hayas terminado de revisar el código, ejecuta el script como un Job de Spark CDE desde la interfaz de usuario de CDE. Supervisa las salidas y los resultados desde la página de Ejecuciones de Jobs de CDE.
+Una vez que hayas terminado de revisar el código, ejecuta el script como un Job de Spark desde la interfaz de usuario. Supervisa las salidas y los resultados desde la página "Job Runs".
 
 Para obtener más información sobre Iceberg en CDE, visita [Using Apache Iceberg in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-using-iceberg.html).
 
@@ -447,9 +450,9 @@ CDE ofrece múltiples opciones para ejecutar código de aplicaciones Spark a gra
 
 La forma más sencilla de crear y desplegar un Job Spark es aprovechar la interfaz de usuario (UI). Cada sección en la UI corresponde a una parte de un spark-submit. Sin embargo, si planeas utilizar CDE de manera habitual, te recomendamos aprender la CLI, ya que proporciona un conjunto más amplio de opciones y la capacidad de iterar a través de múltiples ejecuciones de Jobs de manera más rápida.
 
-Tanto la CLI como la UI te permiten crear y desplegar un Job CDE de tipo Spark. La CLI también te permite ejecutar un spark-submit. El Job CDE envuelve el código de la aplicación Spark con una entidad reutilizable. El Job CDE está asociado con una configuración editable y un historial detallado de ejecuciones que incluye registros, dependencias, usuario e incluso una interfaz de usuario Spark de larga duración. El simple spark-submit no proporciona ninguna de estas funcionalidades y se recomienda más bien cuando se están creando prototipos de aplicaciones Spark sin la necesidad de preocuparse por el futuro. El spark-submit también se puede convertir en un Job CDE de Spark a través de la UI o la CLI.
+Tanto la CLI como la UI te permiten crear y desplegar un Job CDE de tipo Spark. La CLI también te permite ejecutar un spark-submit. El Job CDE envuelve el código de la aplicación Spark con una entidad reutilizable. El Job CDE está asociado con una configuración editable y un historial detallado de ejecuciones que incluye registros, dependencias, usuario e incluso una Spark UI de larga duración. El simple spark-submit no proporciona ninguna de estas funcionalidades y se recomienda más bien cuando se están creando prototipos de aplicaciones Spark sin la necesidad de preocuparse por el futuro. El spark-submit también se puede convertir en un Job CDE de Spark a través de la UI o la CLI.
 
-Otra ventaja de los Jobs CDE es que pueden estar asociados con Recursos CDE. Los recursos pueden ser de tipo Archivo o Python. Los Recursos de Archivo te permiten almacenar las dependencias de archivos a nivel de clúster y montarlas en tiempo de ejecución. De manera similar, los Recursos de Python permiten aplicar Entornos Python personalizados a un Job o ejecución de Job determinados. Al desvincular las Aplicaciones Spark de sus dependencias, CDE permite a los usuarios iterar más rápido y lograr una alta observabilidad del Job.
+Otra ventaja de los Jobs CDE es que pueden estar asociados con Recursos CDE. Los recursos pueden ser de tipo Archivo o Python. Los Recursos de Archivo te permiten almacenar las dependencias de archivos a nivel de clúster y montarlas en tiempo de ejecución. De manera similar, los Recursos de Python permiten aplicar Entornos Python personalizados a un Job o ejecución de Job determinados. Al desvincular las aplicaciones Spark de sus dependencias, CDE permite a los usuarios iterar más rápido y lograr una alta Observability del Job.
 
 Finalmente, las Sesiones CDE te permiten conectarte a CDE de forma remota ingresando a un Spark Shell interactivo. Los usuarios pueden elegir entre Scala y PySpark. Las sesiones se recomiendan para la exploración interactiva de datos y pruebas rápidas en general.
 

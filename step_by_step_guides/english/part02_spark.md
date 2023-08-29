@@ -75,13 +75,13 @@ Because you already uploaded the script to the CDE File Resource in the prior st
 
 The Configurations section allows you to set Spark Application Configurations such as Driver and Executor settings, Jars, Spark properties, and many more. In other words, virtually most properties available in the [Spark Configurations Documentation](https://spark.apache.org/docs/latest/configuration.html) can be applied here.
 
-In this job we will set the "spark.executorEnv.PYTHONPATH" configuration to "/app/mount/simple_udf.zip" so it can read the UDF from the CDE File Resource.
+In this job we will set the "spark.executorEnv.PYTHONPATH" configuration to "/app/mount/simple_udf.zip" so it can read the UDF from the File Resource.
 
 ![alt text](../../img/sparkjob_ui_5.png)
 
 #### 3. Set Python Environment
 
-Set the Python environment to the CDE Python Resource you created in the previous step.
+Set the Python environment to the Python Resource you created in the previous step.
 
 ![alt text](../../img/sparkjob_ui_6.png)
 
@@ -89,7 +89,7 @@ Set the Python environment to the CDE Python Resource you created in the previou
 
 #### 4. Set Advanced Options
 
-The Python, Egg, Zip Files section allows you to load dependencies onto your job. This can be used for a variety of use cases including mounting Python files to the Executors, using Wheel files, and more.
+The "Python, Egg, Zip Files" section allows you to load dependencies onto your job. This can be used for a variety of use cases including mounting Python files to the Executors, using Wheel files, and more.
 
 In the Python, Egg, Zip Files section select the "utils.py" and "simple_udf.zip" file dependencies to load the UDF to the Spark Job. Notice the files have already been uploaded to the File Resource so you just need to select them from there.
 
@@ -103,11 +103,14 @@ Scroll down again to the "Resources" section and notice that your File Resource 
 
 #### 5. Set Compute Options
 
-Compute Options allow you to set important Spark Resource Configs.
+Compute Options allow you to set important Spark Resource Configurations.
 
 * The Executors toggle bar allows you to set the "spark.dynamicAllocation.minExecutors" and "spark.dynamicAllocation.maxExecutors" options. These determine how many executors will be deployed by Spark Dynamic Allocation. Spark Dynamic Allocation is overridden to "Enabled" by default in CDE.
+
 * The Initial Executors bar allows you to set the "spark.dynamicAllocation.initialExecutors" property. The option sets the initial number of executors for dynamic allocation. We recommend ensuring this is not set too high, especially to a value that is above the Job's expected number of Executors.
+
 * Driver Cores and Driver Memory allow you to set "spark.driver.cores" and "spark.driver.memory". Increasing Driver Cores and Memory can be useful when your queries compile slowly or in case you call lots of collect() or take(N) actions especially on large RDD's.
+
 * Executor Cores and Executor Memory allow you to set "spark.executor.cores" and "spark.executor.memory". These properties are used heavily in the context of Spark Tuning as they provide you with the ability to influence the degree of parallelism and storage capacity available in each Executor.
 
 Set "Executors" to a minimum of 1 and a maximum of 4. Then set Executor Cores to 2, Driver Memory to 2, and Executor Memory to 2. This allows you to deploy a Spark Application with Executors that are slightly more resourceful than the values set in the default configurations, which often can result in Executors that are too small.
@@ -140,12 +143,12 @@ The Logs tab contains rich logging information. For example, you can verify code
 
 ![alt text](../../img/part2_jobruns3.png)
 
-The Spark UI allows you to visualize resources, optimize performance and troubleshoot your Spark Jobs.
+The Spark UI allows you to visualize resource usage, optimize performance and troubleshoot your Spark Jobs.
 
 ![alt text](../../img/part2_jobruns4.png)
 
 
-### Creating CDE Spark Jobs with the CLI
+### Creating Spark Jobs with the CDE CLI
 
 So far we have created a Spark Job via the CDE UI. However, CDE use cases involving more than just a few jobs normally benefit in numerous ways from the CDE CLI or CDE API. The CLI allows you to more quickly iterate through different Spark Submits and CDE Resources. The API is an excellent access point to CDE from other tools including 3rd party DevOps and CI/CD solutions.
 
@@ -192,7 +195,7 @@ Start with a simple Spark Submit by running the following command in your termin
 cde spark submit cde_spark_jobs/simple-pyspark-sql.py
 ```
 
-Shortly after running this you will notice confirmation of sibmission in the terminal. As the Spark Application runs the terminal will show logs and job outputs.
+Shortly after running this you will notice confirmation of submission in the terminal. As the Spark Application runs the terminal will show logs and job outputs.
 
 ![alt text](../../img/cdeclijob_1.png)
 
@@ -353,7 +356,7 @@ In this final section of Part 2 you will finish by deploying a CDE Job of type S
 
 The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
 
-* Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog replaces the Hive Metastore for tracking table metadata.     
+* Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog tracks table metadata.     
 
 ```
 spark = SparkSession \
@@ -399,7 +402,7 @@ temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username
 df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
 ```
 
-* Lines 193-197: You can query Iceberg table by selecting only data that has changed between two points in time or two snaphots. This is referred to as an "Iceberg Incremental Read".
+* Lines 193-197: You can query Iceberg table by selecting only data that has changed between two points in time or two snapshots. This is referred to as an "Iceberg Incremental Read".
 
 ```
 spark.read\
@@ -409,9 +412,9 @@ spark.read\
     .load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
 ```
 
-* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all table / dataframe partitions.
+* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all partitions.
 
-Iceberg introduces Partition Evolution i.e. the ability to change the partitoning scheme on new data without modifying it on the initial dataset. Thanks to this tables / dataframes are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata in the Iceberg Metadata Layer.
+Iceberg introduces Partition Evolution i.e. the ability to change the partitioning scheme on new data without modifying it on the initial dataset. Thanks to this tables are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata in the Iceberg Metadata Layer.
 
 In this example, the data present in the CAR_SALES table is initially partitioned by Month. As more data flows into our table, we decided that partitioning by Day provides Spark with better opportunities for job parallelism. Thus we simply change the partitioning scheme to Day. The old data is still partitioned by Month, while the new data added to the table from this point in time and onwards will be partitioned by Day.  
 
@@ -425,7 +428,7 @@ spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION
 spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
 ```
 
-* Line 275: The MERGE INTO statment allows you to more easily compare data between tables and proceed with flexible updates based on intricate logic. In comparison, Spark table inserts and updates are rigid as the MERGE INTO statement is not allowed in Spark SQL.
+* Line 275: The MERGE INTO statement allows you to more easily compare data between tables and proceed with flexible updates based on intricate logic. In comparison, Spark table inserts and updates are rigid as the MERGE INTO statement is not allowed in Spark SQL.
 
 ```
 ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON t.customer_id = s.customer_id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *".format(username)
@@ -443,7 +446,7 @@ To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https
 
 CDE provides multiple options for running Spark Application code at scale.
 
-The easiest way to create and deploy a Spark Job is by leveraging the UI. Each section in the UI corresponds to a piece of a spark-submit. However, if you are planning to use CDE on a daily basis we recommend learning the CLI as it provides a richer set of options and the abolity to iterate through multiple job runs faster.
+The easiest way to create and deploy a Spark Job is by leveraging the UI. Each section in the UI corresponds to a piece of a spark-submit. However, if you are planning to use CDE on a daily basis we recommend learning the CLI as it provides a richer set of options and the ability to iterate through multiple job runs faster.
 
 Both the CLI and the UI allow you to create and deploy a CDE Job of type Spark. The CLI also allows you to run a spark-submit. The CDE Job wraps the Spark Application code with a reusable entity. The CDE Job is associated with an editable configuration and a detailed run history including logs, dependencies, user, and even a long-lived Spark UI. The simple spark-submit doesn't provide any of the above and is rather recommended when prototyping Spark Applications without the need to worry about the future. The spark-submit can also be converted into a CDE Spark Job via the UI or CLI.
 
