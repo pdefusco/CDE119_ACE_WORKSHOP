@@ -273,7 +273,7 @@ print("\n")
 print("PRE-MERGE COUNT")
 spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
 
-ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON t.customer_id = s.customer_id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *".format(username)
+ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON s.customer_id = t.customer_id WHEN MATCHED THEN UPDATE SET t.saleprice = s.saleprice".format(username)
 
 #s.model = 'Model Q' THEN UPDATE SET t.saleprice = t.saleprice - 100\
 #WHEN MATCHED AND s.model = 'Model R' THEN UPDATE SET t.saleprice = t.saleprice + 10\
