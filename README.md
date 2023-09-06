@@ -12,7 +12,7 @@ The content is primarily designed for developers, cloud administrators and big d
 
 HOL events are open to all CDP users and customers. If you would like Cloudera to host an event for you and your colleagues please contact your local Cloudera Representative or submit your information [through this portal](https://www.cloudera.com/contact-sales.html). Finally, if you have access to a CDE Virtual Cluster you are welcome to use this guide and go through the same concepts in your own time.
 
-## About the Cloudera Data Enginneering (CDE) Service
+## About the Cloudera Data Engineering (CDE) Service
 
 CDE is the Cloudera Data Engineering Service, a containerized managed service for Cloudera Data Platform designed for Large Scale Batch Pipelines with Spark, Airflow and Iceberg. It allows you to submit batch jobs to auto-scaling virtual clusters. As a Cloud-Native service, CDE enables you to spend more time on your applications, and less time on infrastructure.
 
@@ -88,3 +88,12 @@ Detailed instructions are provided in the [step_by_step_guides](https://github.c
 This GitHub repository pertains to CDE version 1.19 which introduced some important changes with respect to prior versions.
 
 If you don't have access to a CDE 1.19 Virtual Cluster we recommend the prior version of the HOL which covers all versions up until 1.18 and is available [at this GitHub repository](https://github.com/pdefusco/CDE_Tour_ACE_HOL).
+
+## Other CDP Hands On Lab Workshops
+
+CDP Data Services include Cloudera Machine Learning (CML), Cloudera Operational Database (COD), Cloudera Data Flow (CDF) and Cloudera Data Warehouse (CDW). HOL Workshops are available for each of these CDP Data Services.
+
+* [CML Workshop](https://github.com/cloudera/CML_AMP_Churn_Prediction): Prototype and deploy a Churn Prediction model with Cloudera Machine Learning.
+* [CDF Workshop](https://github.com/cloudera-labs/edge2ai-workshop): Build a full OT to IT workflow for an IoT Predictive Maintenance use case
+* CDW Workshop
+* COD Workshop
