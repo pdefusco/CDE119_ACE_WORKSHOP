@@ -59,11 +59,11 @@ spark = SparkSession.builder.appName('INGEST').config("spark.yarn.access.hadoopF
 #---------------------------------------------------
 #               READ TABLES
 #---------------------------------------------------
-car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_INSTALLS_{}".format(username))
-car_sales_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}".format(username))
-factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}".format(username))
-customer_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CUSTOMER_DATA_{}".format(username))
-geo_data_df = spark.sql("SELECT * FROM CDE_WORKSHOP.GEO_DATA_XREF_{}".format(username))
+car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_INSTALLS_{0}".format(username))
+car_sales_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username))
+factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_{0}".format(username))
+customer_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}".format(username))
+geo_data_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.GEO_DATA_XREF_{0}".format(username))
 
 print("\tPOPULATE TABLE(S) COMPLETED")
 
@@ -72,7 +72,7 @@ print("\tPOPULATE TABLE(S) COMPLETED")
 #---------------------------------------------------
 # SQL way to do things
 salesandcustomers_sql = "SELECT customers.*, sales.saleprice, sales.model, sales.VIN \
-                            FROM CDE_WORKSHOP.CAR_SALES_{0} sales JOIN CDE_WORKSHOP.CUSTOMER_DATA_{0} customers \
+                            FROM CDE_WORKSHOP_{0}.CAR_SALES_{0} sales JOIN CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0} customers \
                              ON sales.customer_id = customers.customer_id".format(username)
 
 tempTable = spark.sql(salesandcustomers_sql)
@@ -116,8 +116,8 @@ if (_DEBUG_):
 #---------------------------------------------------
 #             CREATE NEW HIVE TABLE
 #---------------------------------------------------
-tempTable.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.experimental_motors_report_{}_tuned'.format(username), format="parquet")
-print("\tNEW ENRICHED TABLE CREATED: CDE_WORKSHOP.experimental_motors_report_{}".format(username))
+tempTable.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.experimental_motors_report_{0}_tuned'.format(username), format="parquet")
+print("\tNEW ENRICHED TABLE CREATED: CDE_WORKSHOP_{0}.experimental_motors_report_{0}".format(username))
 tempTable.show(n=5)
 print("\n")
 tempTable.dtypes

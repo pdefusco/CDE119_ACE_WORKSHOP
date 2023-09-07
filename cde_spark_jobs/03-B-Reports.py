@@ -60,7 +60,7 @@ spark = SparkSession\
             .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
             .getOrCreate()
 
-installs_etl_step2_df = spark.sql("SELECT * FROM CDE_WORKSHOP.INSTALLS_ETL_{}".format(username))
+installs_etl_step2_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.INSTALLS_ETL_{0}".format(username))
 
 print("Report: Weekly Count of Parts Installed")
 installs_etl_step3_df = installs_etl_step2_df.drop("timestamp").groupBy("weekofyear").count().orderBy("weekofyear", asc=True)

@@ -61,8 +61,8 @@ spark = SparkSession\
             .getOrCreate()
 
 
-car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_INSTALLS_{}".format(username))
-factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}".format(username))
+car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_INSTALLS_{0}".format(username))
+factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_{0}".format(username))
 
 installs_report_df = car_installs_df.join(factory_data_df, "serial_no").drop(car_installs_df.id)
 
@@ -84,4 +84,4 @@ installs_etl_step2_df = installs_etl_step1_df\
 
 installs_etl_step2_df.show()
 
-installs_etl_step2_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.INSTALLS_ETL_{}'.format(username), format="parquet")
+installs_etl_step2_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.INSTALLS_ETL_{0}'.format(username), format="parquet")

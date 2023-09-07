@@ -75,7 +75,7 @@ for each in left_df.collect():
     print(each[0])
 
 try:
-    left_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.LEFT_TABLE_{}'.format(username), format="parquet")
+    left_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.LEFT_TABLE_{0}'.format(username), format="parquet")
 except:
     pass
 

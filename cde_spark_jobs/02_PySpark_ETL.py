@@ -79,12 +79,12 @@ geo_data      = spark.read.csv(s3BucketName + "/geo_data_119.csv",        header
 #       SQL CLEANUP: DATABASES, TABLES, VIEWS
 #---------------------------------------------------
 print("JOB STARTED...")
-spark.sql("DROP DATABASE IF EXISTS CDE_WORKSHOP CASCADE")
+spark.sql("DROP DATABASE IF EXISTS CDE_WORKSHOP_{} CASCADE".format(username))
 
 ##---------------------------------------------------
 ##                 CREATE DATABASES
 ##---------------------------------------------------
-spark.sql("CREATE DATABASE IF NOT EXISTS CDE_WORKSHOP")
+spark.sql("CREATE DATABASE IF NOT EXISTS CDE_WORKSHOP_{}".format(username))
 
 #---------------------------------------------------
 #       RUNNING DATA QUALITY TESTS WITH PYTHON LIB
@@ -138,9 +138,9 @@ customer_data = customer_data.filter(col('birthdate') <= F.add_months(F.current_
 #---------------------------------------------------
 
 #NB: The car sales table is partitioned by month
-car_sales.write.mode("overwrite").partitionBy("month").saveAsTable('CDE_WORKSHOP.CAR_SALES_{}'.format(username), format="parquet")
-car_installs.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.CAR_INSTALLS_{}'.format(username), format="parquet")
-factory_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}'.format(username), format="parquet")
-customer_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.CUSTOMER_DATA_{}'.format(username), format="parquet")
-geo_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.GEO_DATA_XREF_{}'.format(username), format="parquet")
+car_sales.write.mode("overwrite").partitionBy("month").saveAsTable('CDE_WORKSHOP_{0}.CAR_SALES_{0}'.format(username), format="parquet")
+car_installs.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.CAR_INSTALLS_{0}'.format(username), format="parquet")
+factory_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_{0}'.format(username), format="parquet")
+customer_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}'.format(username), format="parquet")
+geo_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.GEO_DATA_XREF_{0}'.format(username), format="parquet")
 print("\tPOPULATE TABLE(S) COMPLETED")

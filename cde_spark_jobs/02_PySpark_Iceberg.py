@@ -80,19 +80,19 @@ spark = SparkSession \
 #               MIGRATE SPARK TABLES TO ICEBERG TABLE
 #----------------------------------------------------
 try:
-    print("ALTER TABLE CDE_WORKSHOP.CAR_SALES_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-    spark.sql("ALTER TABLE CDE_WORKSHOP.CAR_SALES_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-    print("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".format(username))
-    spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".format(username))
+    print("ALTER TABLE CDE_WORKSHOP_{0}.CAR_SALES_{0} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
+    spark.sql("ALTER TABLE CDE_WORKSHOP_{0}.CAR_SALES_{0} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
+    print("CALL spark_catalog.system.migrate('CDE_WORKSHOP_{0}.CAR_SALES_{0}')".format(username))
+    spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP_{0}.CAR_SALES_{0}')".format(username))
     print("Migrated the Car Sales Table to Iceberg Format.")
 except:
     print("The Car Sales table has already been migrated to Iceberg Format.")
 
 try:
-    print("ALTER TABLE CDE_WORKSHOP.CUSTOMER_DATA_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-    spark.sql("ALTER TABLE CDE_WORKSHOP.CUSTOMER_DATA_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-    print("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CUSTOMER_DATA_{}')".format(username))
-    spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CUSTOMER_DATA_{}')".format(username))
+    print("ALTER TABLE CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
+    spark.sql("ALTER TABLE CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
+    print("CALL spark_catalog.system.migrate('CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}')".format(username))
+    spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}')".format(username))
     print("Migrated the Customer Data table to Iceberg Format.")
 except:
     print("The Customer Data table has already been migrated to Iceberg.")
@@ -108,22 +108,22 @@ except:
 #                READ SOURCE TABLES
 #---------------------------------------------------
 """print("JOB STARTED...")
-car_sales     = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}".format(username)) #could also checkpoint here but need to set checkpoint dir
-customer_data = spark.sql("SELECT * FROM CDE_WORKSHOP.CUSTOMER_DATA_{}".format(username))
-car_installs  = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_INSTALLS_{}".format(username))
-factory_data  = spark.sql("SELECT * FROM CDE_WORKSHOP.EXPERIMENTAL_MOTORS_{}".format(username))
-geo_data      = spark.sql("SELECT postalcode as zip, latitude, longitude FROM CDE_WORKSHOP.GEO_DATA_XREF_{}".format(username))
+car_sales     = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)) #could also checkpoint here but need to set checkpoint dir
+customer_data = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}".format(username))
+car_installs  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_INSTALLS_{0}".format(username))
+factory_data  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_{0}".format(username))
+geo_data      = spark.sql("SELECT postalcode as zip, latitude, longitude FROM CDE_WORKSHOP_{0}.GEO_DATA_XREF_{0}".format(username))
 print("\tREAD TABLE(S) COMPLETED")
 
 print("CAR SALES TABLE POST-ICEBERG MIGRATION PARTITIONS: ")
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.PARTITIONS".format(username)).show()"""
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.PARTITIONS".format(username)).show()"""
 
 #---------------------------------------------------
 #               SHOW ICEBERG TABLE SNAPSHOTS
 #---------------------------------------------------
 
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots".format(username)).show(20, False)
+spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.history".format(username)).show(20, False)
+spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots".format(username)).show(20, False)
 
 #spark.sql("SELECT * FROM spark_catalog.{}_CAR_DATA.CAR_SALES.history".format(username)).show(20, False)
 #spark.sql("SELECT * FROM spark_catalog.{}_CAR_DATA.CAR_SALES.snapshots".format(username)).show(20, False)
@@ -139,18 +139,18 @@ print("PRE-INSERT TIMESTAMP: ", timestamp)
 
 # PRE-INSERT COUNT
 print("PRE-INSERT COUNT")
-spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 # INSERT DATA APPROACH 1 - APPEND FROM DATAFRAME
-temp_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).sample(fraction=0.1, seed=3)
-temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).append()
+temp_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).sample(fraction=0.1, seed=3)
+temp_df.writeTo("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).append()
 
 # INSERT DATA APPROACH 2 - INSERT VIA SQL
-spark.sql("DROP TABLE IF EXISTS spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username))
-temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username)).create()
+spark.sql("DROP TABLE IF EXISTS spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_SAMPLE_{0}".format(username))
+temp_df.writeTo("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_SAMPLE_{0}".format(username)).create()
 
 print("INSERT DATA VIA SPARK SQL")
-query_5 = """INSERT INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{0}""".format(username)
+query_5 = """INSERT INTO spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_SAMPLE_{0}""".format(username)
 print(query_5)
 spark.sql(query_5)
 
@@ -160,15 +160,15 @@ spark.sql(query_5)
 
 # NOTICE SNAPSHOTS HAVE BEEN ADDED
 #spark.read.format("iceberg").load("spark_catalog.{}_CAR_DATA.CAR_SALES.history".format(username)).show(20, False)
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots".format(username)).show(20, False)
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.history".format(username)).show(20, False)
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots".format(username)).show(20, False)
 
 # POST-INSERT COUNT
 print("POST-INSERT COUNT")
-spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 # TIME TRAVEL AS OF PREVIOUS TIMESTAMP
-df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
+df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username))
 
 # POST TIME TRAVEL COUNT
 print("POST-TIME TRAVEL COUNT")
@@ -179,13 +179,13 @@ print(df.count())
 #---------------------------------------------------
 
 # ICEBERG TABLE HISTORY (SHOWS EACH SNAPSHOT AND TIMESTAMP)
-spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}.history;".format(username)).show()
+spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.history;".format(username)).show()
 
 # ICEBERG TABLE SNAPSHOTS (USEFUL FOR INCREMENTAL QUERIES AND TIME TRAVEL)
-spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}.snapshots;".format(username)).show()
+spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username)).show()
 
 # STORE FIRST AND LAST SNAPSHOT ID'S FROM SNAPSHOTS TABLE
-snapshots_df = spark.sql("SELECT * FROM CDE_WORKSHOP.CAR_SALES_{}.snapshots;".format(username))
+snapshots_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username))
 
 last_snapshot = snapshots_df.select("snapshot_id").tail(1)[0][0]
 first_snapshot = snapshots_df.select("snapshot_id").head(1)[0][0]
@@ -194,7 +194,7 @@ spark.read\
     .format("iceberg")\
     .option("start-snapshot-id", first_snapshot)\
     .option("end-snapshot-id", last_snapshot)\
-    .load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+    .load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 #---------------------------------------------------
 #               SAVE DATA TO PARQUET
@@ -207,8 +207,8 @@ spark.read\
 #            LOAD ICEBERG TABLES AS SPARK DATAFRAMES
 #---------------------------------------------------
 
-car_sales_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
-customer_data_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CUSTOMER_DATA_{}".format(username))
+car_sales_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username))
+customer_data_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0}".format(username))
 
 #---------------------------------------------------
 #               LOAD NEW BATCH DATA
@@ -221,20 +221,20 @@ batch_df = spark.read.csv(s3BucketName + "/10012020_car_sales.csv", header=True,
 batch_df.createOrReplaceTempView('CAR_SALES_TEMP_{}'.format(username))
 print("\n")
 print("COMPARING CAR SALES AND CAR SALES TEMP TABLES")
-print("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+print("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username))
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 print("\n")
-print("SELECT * FROM CAR_SALES_TEMP_{}".format(username))
-spark.sql("SELECT * FROM CAR_SALES_TEMP_{}".format(username)).show()
+print("SELECT * FROM CAR_SALES_TEMP_{0}".format(username))
+spark.sql("SELECT * FROM CAR_SALES_TEMP_{0}".format(username)).show()
 
 #---------------------------------------------------
 #               ICEBERG PARTITION EVOLUTION
 #---------------------------------------------------
 
 print("CAR SALES TABLE PARTITIONS BEFORE ALTER PARTITION STATEMENT: ")
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.PARTITIONS".format(username)).show()
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.PARTITIONS".format(username)).show()
 
-testdf = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
+testdf = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username))
 
 print("-------")
 print(testdf.schema)
@@ -243,12 +243,12 @@ print(testdf.dtypes)
 print("-------")
 
 print("REPLACE PARTITION FIELD MONTH WITH FIELD DAY:")
-print("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION FIELD MONTH WITH DAY".format(username))
-spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION FIELD month WITH day".format(username))
+print("ALTER TABLE spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} REPLACE PARTITION FIELD MONTH WITH DAY".format(username))
+spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} REPLACE PARTITION FIELD month WITH day".format(username))
 #spark.sql("ALTER TABLE prod.db.sample ADD PARTITION FIELD month")
 
 print("CAR SALES TABLE PARTITIONS AFTER ALTER PARTITION STATEMENT: ")
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.PARTITIONS".format(username)).show()
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.PARTITIONS".format(username)).show()
 
 #---------------------------------------------------
 #               ICEBERG SCHEMA EVOLUTION
@@ -256,8 +256,8 @@ spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.PARTITIONS".for
 
 # DROP COLUMNS
 print("EXECUTING ICEBERG DROP COLUMN STATEMENT:")
-print("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
-spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
+print("ALTER TABLE spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} DROP COLUMN VIN".format(username))
+spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} DROP COLUMN VIN".format(username))
 
 # CAST COLUMN TO BIGINT
 #print("EXECUTING ICEBERG TYPE CONVERSION STATEMENT")
@@ -271,9 +271,9 @@ spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".
 # PRE-INSERT COUNT
 print("\n")
 print("PRE-MERGE COUNT")
-spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
-ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON s.customer_id = t.customer_id WHEN MATCHED THEN UPDATE SET t.saleprice = s.saleprice".format(username)
+ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON s.customer_id = t.customer_id WHEN MATCHED THEN UPDATE SET t.saleprice = s.saleprice".format(username)
 
 #s.model = 'Model Q' THEN UPDATE SET t.saleprice = t.saleprice - 100\
 #WHEN MATCHED AND s.model = 'Model R' THEN UPDATE SET t.saleprice = t.saleprice + 10\
@@ -285,7 +285,7 @@ spark.sql(ICEBERG_MERGE_INTO)
 # PRE-INSERT COUNT
 print("\n")
 print("POST-MERGE COUNT")
-spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
+spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 #---------------------------------------------------
 #               ICEBERG TABLE HISTORY AND SNAPSHOTS
@@ -293,13 +293,13 @@ spark.sql("SELECT COUNT(*) FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(
 
 # ICEBERG TABLE HISTORY (SHOWS EACH SNAPSHOT AND TIMESTAMP)
 print("SHOW ICEBERG TABLE HISTORY")
-print("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history;".format(username))
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history;".format(username)).show()
+print("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.history;".format(username))
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.history;".format(username)).show()
 
 # ICEBERG TABLE SNAPSHOTS (USEFUL FOR INCREMENTAL QUERIES AND TIME TRAVEL)
 print("SHOW ICEBERG TABLE SNAPSHOTS")
-print("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots;".format(username))
-spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots;".format(username)).show()
+print("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username))
+spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username)).show()
 
 #---------------------------------------------------
 #               JOIN CUSTOMER AND SALES DATA
@@ -307,14 +307,14 @@ spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots;".for
 
 #spark.sql("DROP TABLE IF EXISTS spark_catalog.{0}_CAR_DATA.CAR_SALES_REPORTS PURGE".format(username))
 print("EXECUTING ICEBERG CREATE OR REPLACE TABLE STATEMENT")
-print("CREATE OR REPLACE TABLE spark_catalog.CDE_WORKSHOP.SALES_REPORT_{0} USING ICEBERG AS SELECT s.MODEL, s.SALEPRICE, c.SALARY, c.GENDER, c.EMAIL FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} s INNER JOIN spark_catalog.CDE_WORKSHOP.CUSTOMER_DATA_{0} c on s.CUSTOMER_ID = c.CUSTOMER_ID".format(username))
-spark.sql("CREATE OR REPLACE TABLE spark_catalog.CDE_WORKSHOP.SALES_REPORT_{0} USING ICEBERG AS SELECT s.MODEL, s.SALEPRICE, c.SALARY, c.GENDER, c.EMAIL FROM spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} s INNER JOIN spark_catalog.CDE_WORKSHOP.CUSTOMER_DATA_{0} c on s.CUSTOMER_ID = c.CUSTOMER_ID".format(username))
+print("CREATE OR REPLACE TABLE spark_catalog.CDE_WORKSHOP_{0}.SALES_REPORT_{0} USING ICEBERG AS SELECT s.MODEL, s.SALEPRICE, c.SALARY, c.GENDER, c.EMAIL FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} s INNER JOIN spark_catalog.CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0} c on s.CUSTOMER_ID = c.CUSTOMER_ID".format(username))
+spark.sql("CREATE OR REPLACE TABLE spark_catalog.CDE_WORKSHOP_{0}.SALES_REPORT_{0} USING ICEBERG AS SELECT s.MODEL, s.SALEPRICE, c.SALARY, c.GENDER, c.EMAIL FROM spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0} s INNER JOIN spark_catalog.CDE_WORKSHOP_{0}.CUSTOMER_DATA_{0} c on s.CUSTOMER_ID = c.CUSTOMER_ID".format(username))
 
 #---------------------------------------------------
 #               ANALYTICAL QUERIES
 #---------------------------------------------------
 
-reports_df = spark.sql("SELECT * FROM CDE_WORKSHOP.SALES_REPORT_{}".format(username))
+reports_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.SALES_REPORT_{0}".format(username))
 
 print("GROUP TOTAL SALES BY MODEL")
 model_sales_df = reports_df.groupBy("Model").sum("Saleprice").na.drop().sort(F.asc('sum(Saleprice)')).withColumnRenamed("sum(Saleprice)", "sales_by_model")

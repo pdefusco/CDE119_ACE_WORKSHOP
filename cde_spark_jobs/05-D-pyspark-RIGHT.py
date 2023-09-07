@@ -63,7 +63,7 @@ right_df = spark.createDataFrame(rows)
 right_df.printSchema()
 
 try:
-    right_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP.RIGHT_TABLE_{}'.format(username), format="parquet")
+    right_df.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.RIGHT_TABLE_{0}'.format(username), format="parquet")
 except:
     pass
 

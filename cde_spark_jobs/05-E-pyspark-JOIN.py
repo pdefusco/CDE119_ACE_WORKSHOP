@@ -57,9 +57,9 @@ spark = SparkSession \
     .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
     .getOrCreate()
 
-spark.sql("SELECT * FROM CDE_WORKSHOP.LEFT_TABLE_{0} L\
-            INNER JOIN CDE_WORKSHOP.RIGHT_TABLE_{0} R\
+spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.LEFT_TABLE_{0} L\
+            INNER JOIN CDE_WORKSHOP_{0}.RIGHT_TABLE_{0} R\
             ON L.PERSON_NAME = R.NAME ".format(username)).show()
 
-spark.sql("DROP TABLE IF EXISTS CDE_WORKSHOP.RIGHT_TABLE_{}".format(username))
-spark.sql("DROP TABLE IF EXISTS CDE_WORKSHOP.LEFT_TABLE_{}".format(username))
+spark.sql("DROP TABLE IF EXISTS CDE_WORKSHOP_{0}.RIGHT_TABLE_{0}".format(username))
+spark.sql("DROP TABLE IF EXISTS CDE_WORKSHOP_{0}.LEFT_TABLE_{0}".format(username))
