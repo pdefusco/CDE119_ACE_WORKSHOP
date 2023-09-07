@@ -103,8 +103,10 @@ car_sales = utils.test_null_presence_in_col(car_sales, "saleprice")
 #---------------------------------------------------
 print("SPARK UDF")
 
+factory_data.write.mode("overwrite").saveAsTable('CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_ENRICHED_{0}'.format(username), format="parquet")
+
 spark.udf.register("TSTAMP_TO_STRING", simple_udf.tstampToString)
-spark.sql("SELECT TSTAMP_TO_STRING(timestamp) AS tstamp_str, timestamp FROM factory.experimental_motors_enriched LIMIT 10").show()
+spark.sql("SELECT TSTAMP_TO_STRING(timestamp) AS tstamp_str, timestamp FROM CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_ENRICHED_{0} LIMIT 10").show()
 
 #---------------------------------------------------
 #       TRANSFORM FUTURE JOIN KEYS

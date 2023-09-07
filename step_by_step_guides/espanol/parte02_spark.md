@@ -327,7 +327,7 @@ for each in another_df.collect():
 
 ##### Usar Sesiones Interactivas con el CDE CLI
 
-Puedes interactuar con la misma Sesión de CDE desde tu terminal local usando el comando ```cde sessions interact```.
+Puedes interactuar con la misma Sesión de CDE desde tu terminal local usando el comando ```cde session interact```.
 
 Abre tu terminal e ingresa ```cde session interact --name InteractiveSession```. Se te solicitará tu contraseña y luego se lanzará el SparkShell.
 
