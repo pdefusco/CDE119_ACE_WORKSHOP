@@ -167,4 +167,4 @@ step8 = PythonOperator(
 #Execute tasks in the below order
 
 # step6c only executes when both step6a and step6b have completed
-step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
+start >> step1 >> step2 >> step3 >> step4 >> step5 >> [step6a, step6b] >> step6c >> step7 >> step8
