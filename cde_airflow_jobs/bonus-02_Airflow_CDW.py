@@ -45,6 +45,7 @@ from airflow import DAG
 from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
 from cloudera.cdp.airflow.operators.cdw_operator import CDWOperator
 from airflow.operators.bash import BashOperator
+from airflow.operators.dummy_operator import DummyOperator
 
 username = "pdefusco_061523"
 
