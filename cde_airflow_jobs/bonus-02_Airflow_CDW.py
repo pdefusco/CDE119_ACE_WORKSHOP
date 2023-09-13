@@ -60,6 +60,11 @@ default_args = {
         'end_date': datetime(2023,9,30,8)
         }
 
+start = DummyOperator(
+    task_id="start",
+    dag=intro_dag
+)
+
 airflow_cdw_dag = DAG(
         dag_name,
         default_args=default_args,
@@ -88,4 +93,4 @@ dw_step = CDWOperator(
     query_isolation=True
 )
 
-spark_step >> dw_step
+start >> spark_step >> dw_step
