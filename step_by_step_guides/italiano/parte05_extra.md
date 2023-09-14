@@ -32,7 +32,7 @@ Ogni labo bonus può essere eseguito indipendentemente dagli altri. In altre par
     * [Passo 0: Configurazione del Progetto](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-0-configurazione-del-progetto)
     * [Passo 1: Crea un ambiente virtuale Python e installa i requisiti](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-1-crea-un-ambiente-virtuale-python-e-installa-i-requisiti)
     * [Passo 2: Modifica Clusters.txt e testa la connessione a CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-2-modifica-clusterstxt-e-testa-la-connessione-a-cde)
-    * [Step 3: Esegui lo script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#step-3-esegui-lo-script)
+    * [Passo 3: Esegui lo script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-3-esegui-lo-script)
     * [Passo 4: Schedula lo script come un Job Cron](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-4-schedula-lo-script-come-un-job-cron)
 * [Riepilogo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#riepilogo)
 
@@ -473,7 +473,7 @@ python3 connection_tester.py jobs_api_url cdpusername cdppwd
 L'output nel terminale dovrebbe confermare che è stata creata con successo una risorsa di test.
 
 
-#### Step 3: Esegui lo script
+#### Passo 3: Esegui lo script
 
 Prima di poter eseguire lo script avrai bisogno di:
 
