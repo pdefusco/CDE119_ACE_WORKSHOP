@@ -8,14 +8,14 @@ Questo tutorial è diviso in due sezioni. Inizialmente, costruirai tre job Airfl
 
 ## Indice
 
-* Concetti Airflow
-  * L'interfaccia Utente di Airflow
-  * Cosa è un Job di CDE in Airflow?
-* Dispiegamento di una Pipeline di Orchestrazione con Airflow
-  * Analisi Codice del DAG Airflow
-  * Disepiegamento del Codice del DAG in CDE Job di tipo Airflow
-* Dispiegamento di una Pipeline di Orchestrazione con l'Editor Cloudera Airflow
-* Riepilogo
+* [Concetti Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#concetti-airflow)
+  * [L'interfaccia Utente di Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#linterfaccia-utente-di-airflow)
+  * Cosa è un Job di CDE di Tipo Airflow?
+* [Dispiegamento di una Pipeline di Orchestrazione con Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#dispiegamento-di-una-pipeline-di-orchestrazione-con-airflow)
+  * [Analisi Codice del DAG Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#analisi-codice-del-dag-airflow)
+  * [Dispiegamento del Codice del DAG in CDE Job di tipo Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#disepiegamento-del-codice-del-dag-in-cde-job-di-tipo-airflow)
+* [Dispiegamento di una Pipeline di Orchestrazione con l'Editor Cloudera Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#dispiegamento-di-una-pipeline-di-orchestrazione-con-leditor-cloudera-airflow)
+* [Riepilogo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#riepilogo)
 
 ## Concetti Airflow
 
@@ -29,7 +29,7 @@ Per ulteriori informazioni sui DAG (Directed Acyclic Graph) di Airflow, consulta
 
 L'interfaccia utente di Airflow semplifica il monitoraggio e la risoluzione dei problemi delle tue pipeline di dati. Per una panoramica completa dell'interfaccia utente di Airflow, consulta la documentazione di [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/ui.html).
 
-#### Cosa è un Job di CDE in Airflow?
+#### Cosa è un Job di CDE di Tipo Airflow?
 
 I job di CDE possono essere di due tipi: Spark e Airflow. I job di CDE di tipo Airflow sono generalmente utilizzati per orchestrare job di CDE di tipo Spark e altre azioni di Data Engineering.
 
