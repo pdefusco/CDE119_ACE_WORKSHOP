@@ -4,6 +4,68 @@
 
 In this section you will create four Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse Python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
 
+### Exploring Data Interactively with CDE Sessions
+
+A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
+
+##### Using Interactive Sessions in the CDE UI
+
+From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
+
+![alt text](../../img/cdesessions_1.png)
+
+![alt text](../../img/cdesessions_2.png)
+
+The session will be in "starting" state for a few moments. When it's ready, launch it and open the Spark Shell by clicking on the "Interact" tab.
+
+Copy and paste the following code snippets in each cell and observe the output (no code changes required).
+
+>**Note**  
+>CDE Sessions do not require creating the SparkSession object. The shell has already been launched for you. However, if you need to import any types or functions you do have to import the necessary modules.
+
+Import PySpark:
+
+```
+from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
+```
+
+Create a list of Rows. Infer schema from the first row, create a DataFrame and print the schema:
+
+```
+rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
+some_df = spark.createDataFrame(rows)
+some_df.printSchema()
+```
+
+Create a list of tuples:
+
+```
+tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
+```
+
+Create a Spark schema with two fields - person_name and person_age
+
+```
+schema = StructType([StructField("person_name", StringType(), False),
+                    StructField("person_age", IntegerType(), False)])
+```
+
+Create a DataFrame by applying the schema to the RDD and print the schema
+
+```
+another_df = spark.createDataFrame(tuples, schema)
+another_df.printSchema()
+```
+
+Iterate through the Spark Dataframe:
+
+```
+for each in another_df.collect():
+    print(each[0])
+```
+
+![alt text](../../img/cde_session_1.png)
+
 ### Editing Files and Creating CDE Resources
 
 CDE Resources can be of type "File", "Python", or "Custom Runtime". You will start by creating a resource of type file to store all Spark and Airflow files and dependencies and then a Python Resource to utilize custom Python libraries in a CDE Spark Job run.
@@ -261,67 +323,6 @@ Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice t
 
 ![alt text](../../img/cdeclijob_7.png)
 
-### Exploring Data Interactively with CDE Sessions
-
-A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
-
-##### Using Interactive Sessions in the CDE UI
-
-From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
-
-![alt text](../../img/cdesessions_1.png)
-
-![alt text](../../img/cdesessions_2.png)
-
-The session will be in "starting" state for a few moments. When it's ready, launch it and open the Spark Shell by clicking on the "Interact" tab.
-
-Copy and paste the following code snippets in each cell and observe the output (no code changes required).
-
->**Note**  
->CDE Sessions do not require creating the SparkSession object. The shell has already been launched for you. However, if you need to import any types or functions you do have to import the necessary modules.
-
-Import PySpark:
-
-```
-from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
-```
-
-Create a list of Rows. Infer schema from the first row, create a DataFrame and print the schema:
-
-```
-rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
-some_df = spark.createDataFrame(rows)
-some_df.printSchema()
-```
-
-Create a list of tuples:
-
-```
-tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
-```
-
-Create a Spark schema with two fields - person_name and person_age
-
-```
-schema = StructType([StructField("person_name", StringType(), False),
-                    StructField("person_age", IntegerType(), False)])
-```
-
-Create a DataFrame by applying the schema to the RDD and print the schema
-
-```
-another_df = spark.createDataFrame(tuples, schema)
-another_df.printSchema()
-```
-
-Iterate through the Spark Dataframe:
-
-```
-for each in another_df.collect():
-    print(each[0])
-```
-
-![alt text](../../img/cde_session_1.png)
 
 ##### Using Interactive Sessions with the CDE CLI
 

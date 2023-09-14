@@ -4,6 +4,90 @@
 
 In questa sezione creerai quattro job Spark utilizzando l'interfaccia utente di CDE, la CDE CLI e le sessioni interattive di CDE. Nel processo imparerai come utilizzare le Risorse CDE per archiviare file e riutilizzare ambienti virtuali Python, migrare tabelle Spark in tabelle Iceberg e utilizzare alcune delle funzionalità più attese di Iceberg fra cui Time Travel, Incremental Read, Partition Evolution e Schema Evolution.
 
+##### Utilizzo di sessioni interattive nell'interfaccia di CDE
+
+Dalla pagina principale di CDE, apri "Sessions" nel riquadro di sinistra e quindi seleziona il CDE Virtual Cluster in cui desideri eseguire la tua sessione interattiva CDE.
+
+![alt text](../../img/cdesessions_1.png)
+
+![alt text](../../img/cdesessions_2.png)
+
+La sessione sarà nello stato "Starting" per qualche istante. Quando sarà pronta, avviala e apri la Spark Shell cliccando sulla scheda "Interact".
+
+Copia e incolla i seguenti frammenti di codice in ogni cella e osserva l'output (non sono richieste modifiche al codice).
+
+>**note**  
+>Le sessioni CDE non richiedono la creazione dell'oggetto SparkSession. La shell è già stata avviata per te. Tuttavia, se è necessario importare alcuni tipi o funzioni, è necessario importare i moduli necessari.
+
+Importa il modulo PySpark:
+
+```
+from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
+```
+
+Crea una lista di oggetti Row. Deduci lo schema dalla prima Row, crea un DataFrame e stampa lo schema:
+
+```
+rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
+some_df = spark.createDataFrame(rows)
+some_df.printSchema()
+```
+
+Crea una lista di oggetti Tuple:
+
+```
+tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
+```
+
+Crea uno schema Spark con due campi: person_name e person_age
+
+```
+schema = StructType([StructField("person_name", StringType(), False),
+                    StructField("person_age", IntegerType(), False)])
+```
+
+Crea un DataFrame applicando lo schema all'RDD e stampa lo schema
+
+```
+another_df = spark.createDataFrame(tuples, schema)
+another_df.printSchema()
+```
+
+Itera attraverso il DataFrame Spark:
+
+```
+for each in another_df.collect():
+    print(each[0])
+```
+
+![alt text](../../img/cde_session_1.png)
+
+##### Utilizzo di Sessioni Interattive con il CDE CLI
+
+Puoi interagire con la stessa Sessione CDE dal tuo terminale locale utilizzando il comando ```cde session interact```.
+
+Apri il tuo terminale e inserisci ```cde session interact --name InteractiveSession```. Ti verrà richiesta la password e successivamente verrà avviata la SparkShell.
+
+Esegui lo stesso codice PySpark via shell.
+
+![alt text](../../img/sparkshell1.png)
+
+![alt text](../../img/sparkshell2_a.png)
+
+Torna alla Sessione CDE e verifica che il codice sia stato eseguito dall'interfaccia utente.
+
+![alt text](../../img/sparkshell_2b.png)
+
+Puoi anche creare una sessione direttamente dal CLI. Nel tuo terminale locale, esci dalla tua attuale Spark Shell con "ctrl+D" e quindi esegui il seguente comando:
+
+```cde session create --name cde_shell_from_cli --type spark-scala --description launched-from-cli --executor-cores 4 --num-executors 2```.
+
+note che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
+
+![alt text](../../img/sparkshell3.png)
+
+![alt text](../../img/sparkshell4_cdeui.png)
+
 ### Modifica dei File e Creazione delle Risorse CDE
 
 Le CDE Resources possono essere di tipo "File", "Python" o "Custom Runtime". Inizierai creando una Resource di tipo File per archiviare tutti i file e le dipendenze di Spark e Airflow, e successivamente una Resource di tipo Python per utilizzare librerie Python in un'esecuzione di job Spark CDE.
@@ -266,90 +350,6 @@ Vai alla pagina dei Job nel tuo CDE Virtual Cluster e apri il Job. note che la d
 ### Esplorazione interattiva dei dati con le sessioni CDE
 
 Una sessione di CDE è un ambiente di sviluppo interattivo a breve durata per eseguire comandi Spark che ti aiutano a iterare e costruire i tuoi pipeline Spark. Puoi avviare le sessioni CDE in due modi: dall'interfaccia utente di CDE e dal tuo terminale con la CLI.
-
-##### Utilizzo di sessioni interattive nell'interfaccia di CDE
-
-Dalla pagina principale di CDE, apri "Sessions" nel riquadro di sinistra e quindi seleziona il CDE Virtual Cluster in cui desideri eseguire la tua sessione interattiva CDE.
-
-![alt text](../../img/cdesessions_1.png)
-
-![alt text](../../img/cdesessions_2.png)
-
-La sessione sarà nello stato "Starting" per qualche istante. Quando sarà pronta, avviala e apri la Spark Shell cliccando sulla scheda "Interact".
-
-Copia e incolla i seguenti frammenti di codice in ogni cella e osserva l'output (non sono richieste modifiche al codice).
-
->**note**  
->Le sessioni CDE non richiedono la creazione dell'oggetto SparkSession. La shell è già stata avviata per te. Tuttavia, se è necessario importare alcuni tipi o funzioni, è necessario importare i moduli necessari.
-
-Importa il modulo PySpark:
-
-```
-from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
-```
-
-Crea una lista di oggetti Row. Deduci lo schema dalla prima Row, crea un DataFrame e stampa lo schema:
-
-```
-rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
-some_df = spark.createDataFrame(rows)
-some_df.printSchema()
-```
-
-Crea una lista di oggetti Tuple:
-
-```
-tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
-```
-
-Crea uno schema Spark con due campi: person_name e person_age
-
-```
-schema = StructType([StructField("person_name", StringType(), False),
-                    StructField("person_age", IntegerType(), False)])
-```
-
-Crea un DataFrame applicando lo schema all'RDD e stampa lo schema
-
-```
-another_df = spark.createDataFrame(tuples, schema)
-another_df.printSchema()
-```
-
-Itera attraverso il DataFrame Spark:
-
-```
-for each in another_df.collect():
-    print(each[0])
-```
-
-![alt text](../../img/cde_session_1.png)
-
-##### Utilizzo di Sessioni Interattive con il CDE CLI
-
-Puoi interagire con la stessa Sessione CDE dal tuo terminale locale utilizzando il comando ```cde session interact```.
-
-Apri il tuo terminale e inserisci ```cde session interact --name InteractiveSession```. Ti verrà richiesta la password e successivamente verrà avviata la SparkShell.
-
-Esegui lo stesso codice PySpark via shell.
-
-![alt text](../../img/sparkshell1.png)
-
-![alt text](../../img/sparkshell2_a.png)
-
-Torna alla Sessione CDE e verifica che il codice sia stato eseguito dall'interfaccia utente.
-
-![alt text](../../img/sparkshell_2b.png)
-
-Puoi anche creare una sessione direttamente dal CLI. Nel tuo terminale locale, esci dalla tua attuale Spark Shell con "ctrl+D" e quindi esegui il seguente comando:
-
-```cde session create --name cde_shell_from_cli --type spark-scala --description launched-from-cli --executor-cores 4 --num-executors 2```.
-
-note che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
-
-![alt text](../../img/sparkshell3.png)
-
-![alt text](../../img/sparkshell4_cdeui.png)
 
 
 ### Creazione di un Spark Job con Apache Iceberg

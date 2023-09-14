@@ -4,6 +4,65 @@
 
 En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuario de CDE, la CLI de CDE y Sesiones Interactivas de CDE. En el proceso, aprenderás cómo usar Recursos de CDE para almacenar archivos y reutilizar entornos virtuales de Python, migrar tablas de Spark a tablas de Iceberg y utilizar algunas de las características más esperadas de Iceberg, como Time Travel, Incremental Reads, Partition Evolution and Schema Evolution.
 
+##### Usando Sesiones Interactivas en la UI de CDE
+
+Desde la Página de Inicio de CDE, abre "Sesiones" en el panel izquierdo y luego selecciona el Clúster Virtual de CDE donde deseas ejecutar tu Sesión Interactiva de CDE.
+
+![alt text](../../img/cdesessions_1.png)
+
+![alt text](../../img/cdesessions_2.png)
+
+La sesión estará en estado "Starting" durante algunos momentos. Cuando esté lista, lánzala y abre el Spark Shell haciendo clic en la pestaña "Interact".
+
+Copia y pega los siguientes fragmentos de código en cada celda y observa la salida (no se requieren cambios en el código).
+
+>**note**  
+>Las Sesiones CDE no requieren la creación del objeto SparkSession. La shell ya ha sido lanzada para ti. Sin embargo, si necesitas importar algún tipo o función, debes importar los módulos necesarios.
+
+Importa el paquete PySpark:
+
+```
+from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
+```
+
+Crea una lista de Filas. Inferir el esquema a partir de la primera fila, crear un DataFrame e imprimir el esquema:
+
+```
+rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
+some_df = spark.createDataFrame(rows)
+some_df.printSchema()
+```
+
+Crea una lista de tuplas:
+
+```
+tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
+```
+
+Crea un esquema de Spark con dos campos: person_name y person_age
+
+```
+schema = StructType([StructField("person_name", StringType(), False),
+                    StructField("person_age", IntegerType(), False)])
+```
+
+Crea un DataFrame aplicando el esquema al RDD e imprime el esquema:
+
+```
+another_df = spark.createDataFrame(tuples, schema)
+another_df.printSchema()
+```
+
+Itera a través del DataFrame de Spark:
+
+```
+for each in another_df.collect():
+    print(each[0])
+```
+
+![alt text](../../img/cde_session_1.png)
+
+
 ### Edición de Archivos y Creación de Recursos de CDE
 
 Las CDE Resources pueden ser de tipo "Archivo", "Python" o "Custom Runtime". Comenzarás creando una Resource de tipo File para almacenar todos los archivos de Spark y Airflow y sus dependencias, y luego una Resource de tipo Python para utilizar paquetes Python en una ejecución de Job de Spark de CDE.
@@ -267,63 +326,6 @@ Navega a la página de Jobs en tu Clúster Virtual de CDE y abre el Job. Observa
 
 Una Sesión de CDE es un entorno interactivo de desarrollo de corta duración para ejecutar comandos de Spark que te ayudan a iterar y construir tus cargas de Job de Spark. Puedes iniciar Sesiones CDE de dos formas: desde la UI de CDE y desde tu terminal con la CLI.
 
-##### Usando Sesiones Interactivas en la UI de CDE
-
-Desde la Página de Inicio de CDE, abre "Sesiones" en el panel izquierdo y luego selecciona el Clúster Virtual de CDE donde deseas ejecutar tu Sesión Interactiva de CDE.
-
-![alt text](../../img/cdesessions_1.png)
-
-![alt text](../../img/cdesessions_2.png)
-
-La sesión estará en estado "Starting" durante algunos momentos. Cuando esté lista, lánzala y abre el Spark Shell haciendo clic en la pestaña "Interact".
-
-Copia y pega los siguientes fragmentos de código en cada celda y observa la salida (no se requieren cambios en el código).
-
->**note**  
->Las Sesiones CDE no requieren la creación del objeto SparkSession. La shell ya ha sido lanzada para ti. Sin embargo, si necesitas importar algún tipo o función, debes importar los módulos necesarios.
-
-Importa el paquete PySpark:
-
-```
-from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerType
-```
-
-Crea una lista de Filas. Inferir el esquema a partir de la primera fila, crear un DataFrame e imprimir el esquema:
-
-```
-rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
-some_df = spark.createDataFrame(rows)
-some_df.printSchema()
-```
-
-Crea una lista de tuplas:
-
-```
-tuples = [("John", 19), ("Smith", 23), ("Sarah", 18)]
-```
-
-Crea un esquema de Spark con dos campos: person_name y person_age
-
-```
-schema = StructType([StructField("person_name", StringType(), False),
-                    StructField("person_age", IntegerType(), False)])
-```
-
-Crea un DataFrame aplicando el esquema al RDD e imprime el esquema:
-
-```
-another_df = spark.createDataFrame(tuples, schema)
-another_df.printSchema()
-```
-
-Itera a través del DataFrame de Spark:
-
-```
-for each in another_df.collect():
-    print(each[0])
-```
-
-![alt text](../../img/cde_session_1.png)
 
 ##### Usar Sesiones Interactivas con el CDE CLI
 
