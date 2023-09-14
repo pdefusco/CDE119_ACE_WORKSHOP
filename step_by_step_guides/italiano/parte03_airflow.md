@@ -10,7 +10,7 @@ Questo tutorial è diviso in due sezioni. Inizialmente, costruirai tre job Airfl
 
 * [Concetti Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#concetti-airflow)
   * [L'interfaccia Utente di Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#linterfaccia-utente-di-airflow)
-  * Cosa è un Job di CDE di Tipo Airflow?
+  * [Cosa è un Job di CDE di Tipo Airflow?](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#cosa-%C3%A8-un-job-di-cde-di-tipo-airflow)
 * [Dispiegamento di una Pipeline di Orchestrazione con Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#dispiegamento-di-una-pipeline-di-orchestrazione-con-airflow)
   * [Analisi Codice del DAG Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#analisi-codice-del-dag-airflow)
   * [Dispiegamento del Codice del DAG in CDE Job di tipo Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte03_airflow.md#disepiegamento-del-codice-del-dag-in-cde-job-di-tipo-airflow)
@@ -125,7 +125,7 @@ step2 = CDEJobRunOperator(
 step1 >> step2 >> step3 >> step4 >> step5
 ```
 
-#### Disepiegamento del Codice del DAG in CDE Job di tipo Airflow
+#### Dispiegamento del Codice del DAG in CDE Job di tipo Airflow
 
 Crea due CDE Spark Job (nell'interfaccia utente o con la CLI) utilizzando gli script "03-A-ETL.py" e "03-B-Reports.py", *ma non eseguirli ancora.*
 
