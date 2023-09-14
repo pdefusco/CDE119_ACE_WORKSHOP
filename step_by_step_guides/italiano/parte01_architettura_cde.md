@@ -6,17 +6,17 @@ In questa sezione imparerai l'architettura flessibile di CDE e i suoi principali
 
 ## Indice
 
-* Introduzione al Servizio CDE
-  * Ambiente CDP
-  * Servizio CDE
-  * Cluster Virtuale
-  * CDE Jobs
-  * CDE Resource
-  * Job Run
-  * CDE Sessions
-  * Apache Iceberg
-  * Interfaccia CDE
-* Riepilogo
+* [Introduzione al Servizio CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#introduzione-al-servizio-cde)
+  * [Ambiente CDP](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#ambiente-cdp)
+  * [Servizio CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#servizio-cde)
+  * [Cluster Virtuale](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#cluster-virtuale)
+  * [CDE Jobs](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#jobs)
+  * [CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#resource)
+  * [Job Run](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#job-run)
+  * [CDE Session](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#cde-session)
+  * [Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#apache-iceberg)
+  * [Interfaccia CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#interfaccia-cde)
+* [Riepilogo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte01_architettura_cde.md#riepilogo)
 
 ## Introduzione al Servizio CDE
 

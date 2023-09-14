@@ -25,11 +25,11 @@ In questa sezione creerai quattro job Spark utilizzando l'interfaccia utente di 
 * Riepilogo
 
 
-### Esplorazione interattiva dei dati con le sessioni CDE
+### Esplorazione Interattiva Dati con Sessioni CDE
 
 Una sessione di CDE è un ambiente di sviluppo interattivo a breve durata per eseguire comandi Spark che ti aiutano a iterare e costruire i tuoi pipeline Spark. Puoi avviare le sessioni CDE in due modi: dall'interfaccia utente di CDE e dal tuo terminale con la CLI.
 
-##### Utilizzo di sessioni interattive nell'interfaccia di CDE
+##### Utilizzo Sessioni Interattive nell'Interfaccia di CDE
 
 Dalla pagina principale di CDE, apri "Sessions" nel riquadro di sinistra e quindi seleziona il CDE Virtual Cluster in cui desideri eseguire la tua sessione interattiva CDE.
 
@@ -88,7 +88,7 @@ for each in another_df.collect():
 ![alt text](../../img/cde_session_1.png)
 
 
-### Utilizzo delle Risorse CDE
+### Utilizzo delle Resource CDE
 
 Le CDE Resources possono essere di tipo "File", "Python" o "Custom Runtime". Inizierai creando una Resource di tipo File per archiviare tutti i file e le dipendenze di Spark e Airflow, e successivamente una Resource di tipo Python per utilizzare librerie Python in un'esecuzione di job Spark CDE.
 

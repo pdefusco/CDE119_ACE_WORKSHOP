@@ -8,7 +8,7 @@ En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuari
 
 * [Explorando Datos en Sesiones Interactivas](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#explorando-datos-en-sesiones-interactivas)
   * [Usando Sesiones Interactivas en la UI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-sesiones-interactivas-en-la-ui-de-cde)
-* [Usando Recursos de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-recursos-de-cde)
+* [Usando Resources de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-resources-de-cde)
 * [Creación de Jobs de Spark en la Interfaz de Usuario de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#creaci%C3%B3n-de-jobs-de-spark-en-la-interfaz-de-usuario-de-cde)
   * [1. Establecer Nombre del Job, Clúster Virtual y Archivo de Aplicación](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#1-establecer-nombre-del-job-cl%C3%BAster-virtual-y-archivo-de-aplicaci%C3%B3n)
   * [2. Set Spark Configurations](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#2-set-spark-configurations)
@@ -100,7 +100,7 @@ Selecciona tu Clúster Virtual de CDE habilitado para Spark 3 / Iceberg y nombra
 ![alt text](../../img/create_new_res119_2.png)
 
 >**⚠ Advertencia**  
->Cada usuario del taller debe crear un Recurso de Archivo separado con un nombre único.
+>Cada usuario del taller debe crear un Resource de tipo "File" separado con un nombre único.
 
 Carga los siguientes archivos ubicados en las carpetas "cde_ace_hol/cde_spark_jobs" y "cde_ace_hol/resources_files".
 
