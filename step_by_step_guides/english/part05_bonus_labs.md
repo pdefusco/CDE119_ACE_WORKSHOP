@@ -8,34 +8,34 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
 
 ## Table of Contents
 
-* Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
-* Bonus Lab 2: Using CDE Airflow with CDW
-  * CDW Setup Steps
-  * CDE Setup Steps
-  * Editing the DAG Python file
-* Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
-  * Summary
-  * Using the CDE CLI
-    * Run Spark Job
-    * Check Job Status
-    * Review the Output
-    * Create a CDE Resource
-    * Upload file(s) to resource
-    * Validate CDE Resource
-    * Schedule CDE Spark Job with the File Uploaded to the CDE Resource
-    * Validate Job
-    * Learning to use the CDE CLI
-* Bonus Lab 4: Using Python with the CDE API
-  * Introduction to the CDE API
-  * Basic API Workflow
-  * Using Python
-  * Instructions
-    * Step 0: Project setup
-    * Step 1: Create a Python Virtual Environment and Install Requirements
-    * Step 2: Edit Clusters.txt and Test CDE Connection
-    * Step 3: Run the script
-    * Step 4: Schedule the Script as a Cron Job
-* Summary
+* [Bonus Lab 1: CDE Airflow Orchestration (In-Depth)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth)
+* [Bonus Lab 2: Using CDE Airflow with CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-2-using-cde-airflow-with-cdw)
+  * [CDW Setup Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#cdw-setup-steps)
+  * [CDE Setup Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#cde-setup-steps)
+  * [Editing the DAG Python file](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#editing-the-dag-python-file)
+* [Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth)
+  * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#summary)
+  * [Using the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#using-the-cde-cli)
+    * [Run Spark Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#run-spark-job)
+    * [Check Job Status](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#check-job-status)
+    * [Review the Output](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#review-the-output)
+    * [Create a CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#create-a-cde-resource)
+    * [Upload file(s) to resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#upload-files-to-resource)
+    * [Validate CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#validate-cde-resource)
+    * [Schedule CDE Spark Job with the File Uploaded to the CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#schedule-cde-spark-job-with-the-file-uploaded-to-the-cde-resource)
+    * [Validate Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#validate-job)
+    * [Learning to use the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#learning-to-use-the-cde-cli)
+* [Bonus Lab 4: Using Python with the CDE API](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-4-using-python-with-the-cde-api)
+  * [Introduction to the CDE API](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#introduction-to-the-cde-api)
+  * [Basic API Workflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#basic-api-workflow)
+  * [Using Python](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#using-python)
+  * [Instructions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#instructions)
+    * [Step 0: Project setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-0-project-setup)
+    * [Step 1: Create a Python Virtual Environment and Install Requirements](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-1-create-a-python-virtual-environment-and-install-requirements)
+    * [Step 2: Edit Clusters.txt and Test CDE Connection](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-2-edit-clusterstxt-and-test-cde-connection)
+    * [Step 3: Run the script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-3-run-the-script)
+    * [Step 4: Schedule the Script as a Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-4-schedule-the-script-as-a-cron-job)
+* [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#summary-1)
 
 ### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 

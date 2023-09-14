@@ -4,10 +4,9 @@
 
 En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuario de CDE, la CLI de CDE y Sesiones Interactivas de CDE. En el proceso, aprenderás cómo usar Recursos de CDE para almacenar archivos y reutilizar entornos virtuales de Python, migrar tablas de Spark a tablas de Iceberg y utilizar algunas de las características más esperadas de Iceberg, como Time Travel, Incremental Reads, Partition Evolution and Schema Evolution.
 
-
 ## Tabla de Contenido
 
-* Explorando Datos de Forma Interactiva con Sesiones CDE
+* Explorando Datos en Sesiones Interactivas
   * Usando Sesiones Interactivas en la UI de CDE
 * Usando Recursos de CDE
 * Creación de Jobs de Spark en la Interfaz de Usuario de CDE
@@ -25,8 +24,7 @@ En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuari
 * Creación de un Job de Spark CDE con Apache Iceberg
 * Resumen
 
-
-### Explorando Datos de Forma Interactiva con Sesiones CDE
+### Explorando Datos en Sesiones Interactivas
 
 Una Sesión de CDE es un entorno interactivo de desarrollo de corta duración para ejecutar comandos de Spark que te ayudan a iterar y construir tus cargas de Job de Spark. Puedes iniciar Sesiones CDE de dos formas: desde la UI de CDE y desde tu terminal con la CLI.
 

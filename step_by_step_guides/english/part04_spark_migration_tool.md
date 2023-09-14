@@ -8,8 +8,8 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 
 ## Table of Contents
 
-* Step By Step Instructions
-* Summary
+* [Step By Step Instructions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#step-by-step-instructions)
+* [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#summary)
 
 #### Step By Step Instructions
 

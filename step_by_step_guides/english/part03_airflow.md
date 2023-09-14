@@ -8,14 +8,14 @@ This tutorial is divided in two sections. First you will build three Airflow job
 
 ## Table of Contents
 
-* Airflow Concepts
-  * The Airflow UI
-  * What is an Airflow CDE Job?
-* Deploying Orchestration Pipeline with Airflow
-  * Review Airflow Basic DAG Code
-  * Deploy Airflow Basic DAG Code
-* Deploying Orchestration Pipeline with Cloudera Airflow Editor
-* Summary
+* [Airflow Concepts](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#airflow-concepts)
+  * [The Airflow UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#the-airflow-ui)
+  * [What is an Airflow CDE Job?](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#what-is-an-airflow-cde-job)
+* [Deploying Orchestration Pipeline with Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#deploying-orchestration-pipeline-with-airflow)
+  * [Review Airflow Basic DAG Code](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#review-airflow-basic-dag-code)
+  * [Deploy Airflow Basic DAG Code](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#deploy-airflow-basic-dag-code)
+* [Deploying Orchestration Pipeline with Cloudera Airflow Editor](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#deploying-orchestration-pipeline-with-cloudera-airflow-editor)
+* [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_airflow.md#summary)
 
 ## Airflow Concepts
 

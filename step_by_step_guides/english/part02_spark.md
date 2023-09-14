@@ -6,22 +6,23 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
 
 ## Table of Contents
 
-* Exploring Data Interactively with CDE Sessions
-  * Using Interactive Sessions in the CDE UI
-* Using CDE Resources
-* Creating CDE Spark Jobs in the UI
-  * 1. Set Job Name, Virtual Cluster and Application File
-  * 2. Set Spark Configurations
-  * 3. Set Python Environment
-  * 4. Set Advanced Options
-  * 5. Set Compute Options
-  * 6. Trigger and Monitor the Job
+* [Exploring Data Interactively with CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#exploring-data-interactively-with-cde-sessions)
+  * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-interactive-sessions-in-the-cde-ui)
+* [Using CDE Resources](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-cde-resources)
+* [Creating CDE Spark Jobs in the UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-cde-spark-jobs-in-the-ui)
+  * [1. Set Job Name, Virtual Cluster and Application File](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#1-set-job-name-virtual-cluster-and-application-file)
+  * [2. Set Spark Configurations](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#2-set-spark-configurations)
+  * [3. Set Python Environment](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#3-set-python-environment)
+  * [4. Set Advanced Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#4-set-advanced-options)
+  * [5. Set Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#5-set-compute-options)
+  * [6. Trigger and Monitor the Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#6-trigger-and-monitor-the-job)
 * Creating Spark Jobs with the CDE CLI
-  * 0. Installing the CDE CLI
-  * 1. CDE Spark Submit via the CDE CLI.
-  * 2. CDE Spark Job via the CDE CLI.
-  * 3. Using Interactive Sessions with the CDE CLI
-* Creating a CDE Spark Job with Apache Iceberg
+  * [0. Installing the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#0-installing-the-cde-cli)
+  * [1. CDE Spark Submit via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#1-cde-spark-submit-via-the-cde-cli)
+  * [2. CDE Spark Job via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#2-cde-spark-job-via-the-cde-cli)
+  * [3. Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#3-using-interactive-sessions-with-the-cde-cli)
+* [Creating a CDE Spark Job with Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-a-cde-spark-job-with-apache-iceberg)
+* [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#summary)
 
 ### Exploring Data Interactively with CDE Sessions
 
