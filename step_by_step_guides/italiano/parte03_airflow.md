@@ -17,7 +17,6 @@ Questo tutorial è diviso in due sezioni. Inizialmente, costruirai tre job Airfl
 * Dispiegamento di una Pipeline di Orchestrazione con l'Editor Cloudera Airflow
 * Riepilogo
 
-
 ## Concetti Airflow
 
 In Airflow, un DAG (Directed Acyclic Graph) è definito in uno script Python che rappresenta la struttura del DAG (attività e le loro dipendenze) come codice.

@@ -37,8 +37,6 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
     * Step 4: Schedule the Script as a Cron Job
 * Summary
 
-
-
 ### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 
 Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.

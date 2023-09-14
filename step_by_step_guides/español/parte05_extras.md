@@ -6,6 +6,37 @@ Hasta ahora, has explorado los aspectos principales de Spark, Airflow e Iceberg 
 
 Cada lab Adicional se puede realizar de manera independiente. En otras palabras, puedes realizar todos o solo algunos seleccionados, y en el orden que prefieras.
 
+## Tabla de Contenido
+
+* Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
+* Bonus Lab 2: Usando CDE Airflow con CDW
+  * Pasos de Configuración de CDW
+  * Pasos de Configuración de CDE
+  * Editando el Archivo Python del DAG
+* Bonus Lab 3: Uso del CDE CLI para Optimizar Casos de Uso de Producción de CDE (En Detalle)
+  * Uso de la CLI de CDE
+    * Ejecutar un Job de Spark
+    * Verificar el Estado del Job
+    * Revisar la Salida
+    * Crear un Recurso de CDE
+    * Subir archivo(s) al File Resource
+    * Validar el File Resource
+    * Programar un Job de Spark de CDE con el Archivo Subido al File Resource
+    * Validar el Job
+    * Aprender a Usar la CLI de CDE
+* Bonus Lab 4: Uso de Python con la API de CDE
+  * Introducción a la API de CDE
+  * Workflow Básico con la API
+  * Usando Python
+  * Instrucciones
+    * Paso 0: Configuración del proyecto
+    * Paso 1: Crea un Entorno Virtual de Python e Instala los Requisitos
+    * Paso 2: Edita Clusters.txt y Prueba la Conexión con CDE
+    * Paso 3: Despliegue de la App
+    * Paso 4: Programar el Script como un Cron Job
+* Resumen
+
+
 ### Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
 
 La Parte 2 del lab te presentó un DAG básico de Airflow en CDE. Sin embargo, las capacidades de Airflow incluyen una amplia variedad de operadores, la capacidad de almacenar valores de contexto temporales, conectarse a sistemas de terceros y, en general, la capacidad de implementar casos de uso de orquestación más avanzados.
@@ -228,7 +259,7 @@ Este comando ejecutará el script como un simple envío de Spark. Esto es ligera
 cde spark submit --conf "spark.pyspark.python=python3" cde_cli_jobs/01_pyspark-sql.py
 ```
 
-###### Verificar el Estado del Job::
+###### Verificar el Estado del Job:
 
 Este comando te permitirá obtener información relacionada con el Job de Spark anterior. Asegúrate de reemplazar el indicador "id" con el ID proporcionado cuando ejecutaste el último script, por ejemplo, 199.
 
@@ -310,7 +341,7 @@ En la consola web de Data Engineering, selecciona un entorno.
 Haz clic en el ícono Detalles del Clúster en cualquiera de los clústeres virtuales listados.
 Haz clic en el enlace bajo API DOC.
 
-##### Flujo de Job Básico de la API
+##### Workflow Básico con la API
 
 Obtener el Token de CDE y Configurar la Variable de Ambiente:
 
@@ -355,7 +386,7 @@ Ejecutar el Job de Spark en CDE:
 curl -H "Authorization: Bearer $ACCESS_TOKEN" -X POST "$JOBS_API_URL/jobs/cml2cde_api_job/run"
 ```
 
-##### sando Python
+##### Usando Python
 
 Puedes utilizar la biblioteca Requests de Python para envolver los métodos anteriores. Por ejemplo, puedes crear una función para obtener el Token de CDE de la siguiente manera:
 

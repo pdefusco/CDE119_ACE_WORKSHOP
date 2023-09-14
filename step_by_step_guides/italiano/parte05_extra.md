@@ -6,6 +6,36 @@ Finora hai esplorato gli aspetti fondamentali di Spark, Airflow e Iceberg in CDE
 
 Ogni labo bonus può essere eseguito indipendentemente dagli altri. In altre parole, puoi eseguirne tutti o solo alcuni di essi, in qualsiasi ordine preferisci.
 
+## Indice
+
+* Bonus Lab 1: Approfondimento Orchestrazione Airflow in CDE
+* Bonus Lab 2: Utilizzo di CDE Airflow con CDW
+  * Passaggi per la Configurazione di CDW
+  * Passaggi di Configurazione CDE
+  * Modifica del File DAG di Python
+* Bonus Lab 3: Approfondimento Utilizzo della CDE CLI per Ottimizzare i Casi d'Uso di Produzione della CDE
+  * Uso della CLI di CDE
+    * Esecuzione Job Spark
+    * Verifica dello Stato del Job
+    * Esamina l'Output
+    * Creazione di una Resource
+    * Carica file sulla Resource
+    * Convalidazione Resource
+    * Pianificazione di un Job Spark con il File Caricato sulla Resource
+    * Convalidazione Job
+    * Come Apprendere a Usare la CLI di CDE
+* Bonus Lab 4: Utilizzo di Python con la API di CDE
+  * Introduzione alla API di CDE
+  * Workflow Base con la API
+  * Utilizzo di Python
+  * Istruzione per il Dispiegamento della App
+    * Passo 0: Configurazione del Progetto
+    * Passo 1: Crea un ambiente virtuale Python e installa i requisiti
+    * Passo 2: Modifica Clusters.txt e testa la connessione a CDE
+    * Step 3: Esegui lo script
+    * Passo 4: Schedula lo script come un Job Cron
+* Riepilogo
+  
 ### Bonus Lab 1: Approfondimento Orchestrazione Airflow in CDE
 
 La parte 2 del HOL ti ha introdotto a un DAG di base in Airflow in CDE. Tuttavia, le capacità di Airflow includono una vasta varietà di operatori, la possibilità di memorizzare valori di contesto temporanei, la connessione a sistemi di terze parti e in generale la capacità di implementare casi di orchestrazione più avanzati.
@@ -227,7 +257,7 @@ Questo comando eseguirà lo script come un semplice Spark Submit. Questo è legg
 cde spark submit --conf "spark.pyspark.python=python3" cde_cli_jobs/01_pyspark-sql.py
 ```
 
-###### Verifica dello Stato del Job::
+###### Verifica dello Stato del Job:
 
 Questo comando ti permetterà di ottenere informazioni relative al job Spark sopra. Assicurati di sostituire il flag "id" con l'ID fornito quando hai eseguito lo script precedente, ad esempio 199.
 
@@ -251,7 +281,7 @@ Questo comando crea una Resource di tipo File:
 cde resource create --name "my_CDE_Resource"
 ```
 
-###### Carica file(i) sulla Resource:
+###### Carica file sulla Resource:
 
 Il comando seguente carica lo script "01_pyspark-sql.py" nella Risorsa CDE.
 
