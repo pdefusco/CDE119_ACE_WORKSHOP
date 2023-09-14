@@ -87,7 +87,7 @@ for each in another_df.collect():
 ![alt text](../../img/cde_session_1.png)
 
 
-### Usando Recursos de CDE
+### Usando Resources de CDE
 
 Las CDE Resources pueden ser de tipo "File", "Python" o "Custom Runtime". Comenzarás creando una Resource de tipo File para almacenar todos los archivos de Spark y Airflow y sus dependencias, y luego una Resource de tipo Python para utilizar paquetes Python en una ejecución de Job de Spark de CDE.
 

@@ -18,7 +18,7 @@ Cada lab Adicional se puede realizar de manera independiente. En otras palabras,
     * [Ejecutar un Job de Spark](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#ejecutar-un-job-de-spark)
     * [Verificar el Estado del Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#verificar-el-estado-del-job)
     * [Revisar la Salida](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#revisar-la-salida)
-    * Crear un Resource de CDE
+    * [Crear un Resource de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#crear-un-resource-de-cde)
     * [Subir archivo(s) al File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#subir-archivos-al-file-resource)
     * [Validar el File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#validar-el-file-resource)
     * [Programar un Job de Spark de CDE con el Archivo Subido al File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#programar-un-job-de-spark-de-cde-con-el-archivo-subido-al-file-resource)
