@@ -4,6 +4,20 @@
 
 In this section you will learn about CDE's flexible architecture and its main components.
 
+## Table of Contents
+
+* Introduction to the CDE Service
+  * CDP Environment
+  * CDP Service
+  * Virtual Cluster
+  * CDE Jobs
+  * CDE Resource
+  * Job Run
+  * CDE Sessions
+  * Apache Iceberg
+  * CDE User Interface
+* Summary
+
 ## Introduction to the CDE Service
 
 Cloudera Data Engineering (CDE) is a service for Cloudera Data Platform that allows you to submit batch jobs to auto-scaling virtual clusters. CDE enables you to spend more time on your applications, and less time on infrastructure.

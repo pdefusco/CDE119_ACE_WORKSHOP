@@ -4,9 +4,28 @@
 
 In this section you will create four Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse Python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
 
+## Table of Contents
+
+* Exploring Data Interactively with CDE Sessions
+  * Using Interactive Sessions in the CDE UI
+* Using CDE Resources
+* Creating CDE Spark Jobs in the UI
+  * 1. Set Job Name, Virtual Cluster and Application File
+  * 2. Set Spark Configurations
+  * 3. Set Python Environment
+  * 4. Set Advanced Options
+  * 5. Set Compute Options
+  * 6. Trigger and Monitor the Job
+* Creating Spark Jobs with the CDE CLI
+  * 0. Installing the CDE CLI
+  * 1. CDE Spark Submit via the CDE CLI.
+  * 2. CDE Spark Job via the CDE CLI.
+  * 3. Using Interactive Sessions with the CDE CLI
+* Creating a CDE Spark Job with Apache Iceberg
+
 ### Exploring Data Interactively with CDE Sessions
 
-A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your termianl with the CLI.
+A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your terminal with the CLI.
 
 ##### Using Interactive Sessions in the CDE UI
 
@@ -66,7 +85,7 @@ for each in another_df.collect():
 
 ![alt text](../../img/cde_session_1.png)
 
-### Editing Files and Creating CDE Resources
+### Using CDE Resources
 
 CDE Resources can be of type "File", "Python", or "Custom Runtime". You will start by creating a resource of type file to store all Spark and Airflow files and dependencies and then a Python Resource to utilize custom Python libraries in a CDE Spark Job run.
 
@@ -324,7 +343,7 @@ Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice t
 ![alt text](../../img/cdeclijob_7.png)
 
 
-##### Using Interactive Sessions with the CDE CLI
+#### 3. Using Interactive Sessions with the CDE CLI
 
 You can interact with the same CDE Session from your local terminal using the ```cde session interact``` command.
 

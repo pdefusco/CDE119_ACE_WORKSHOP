@@ -4,6 +4,31 @@
 
 In questa sezione creerai quattro job Spark utilizzando l'interfaccia utente di CDE, la CDE CLI e le sessioni interattive di CDE. Nel processo imparerai come utilizzare le Risorse CDE per archiviare file e riutilizzare ambienti virtuali Python, migrare tabelle Spark in tabelle Iceberg e utilizzare alcune delle funzionalità più attese di Iceberg fra cui Time Travel, Incremental Read, Partition Evolution e Schema Evolution.
 
+
+## Indice
+* Esplorazione interattiva dei dati con le sessioni CDE
+  * Utilizzo di sessioni interattive nell'interfaccia di CDE
+* Utilizzo delle Risorse CDE
+* Creazione di Job Spark in CDE UI
+  * 1. Imposta il Nome del Job, il Virtual Cluster e il File dell'Applicazione
+  * 2. Imposta le Configurazioni di Spark
+  * 3. Imposta l'Ambiente Python
+  * 4. Imposta le Opzioni Avanzate
+  * 5. Imposta le Compute Options
+  * 6. Dispiegamento e Monitoraggio del Job
+* Creazione di Job Spark tramite la CLI di CDE
+  * 0. Installazione della CLI di CDE
+  * 1. Spark Submit di CDE tramite la CLI di CDE
+  * 2. Job Spark tramite la CLI di CDE
+  * 3. Utilizzo di Sessioni Interattive con il CDE CLI
+* Creazione di un Spark Job con Apache Iceberg
+* Riepilogo
+
+
+### Esplorazione interattiva dei dati con le sessioni CDE
+
+Una sessione di CDE è un ambiente di sviluppo interattivo a breve durata per eseguire comandi Spark che ti aiutano a iterare e costruire i tuoi pipeline Spark. Puoi avviare le sessioni CDE in due modi: dall'interfaccia utente di CDE e dal tuo terminale con la CLI.
+
 ##### Utilizzo di sessioni interattive nell'interfaccia di CDE
 
 Dalla pagina principale di CDE, apri "Sessions" nel riquadro di sinistra e quindi seleziona il CDE Virtual Cluster in cui desideri eseguire la tua sessione interattiva CDE.
@@ -62,33 +87,8 @@ for each in another_df.collect():
 
 ![alt text](../../img/cde_session_1.png)
 
-##### Utilizzo di Sessioni Interattive con il CDE CLI
 
-Puoi interagire con la stessa Sessione CDE dal tuo terminale locale utilizzando il comando ```cde session interact```.
-
-Apri il tuo terminale e inserisci ```cde session interact --name InteractiveSession```. Ti verrà richiesta la password e successivamente verrà avviata la SparkShell.
-
-Esegui lo stesso codice PySpark via shell.
-
-![alt text](../../img/sparkshell1.png)
-
-![alt text](../../img/sparkshell2_a.png)
-
-Torna alla Sessione CDE e verifica che il codice sia stato eseguito dall'interfaccia utente.
-
-![alt text](../../img/sparkshell_2b.png)
-
-Puoi anche creare una sessione direttamente dal CLI. Nel tuo terminale locale, esci dalla tua attuale Spark Shell con "ctrl+D" e quindi esegui il seguente comando:
-
-```cde session create --name cde_shell_from_cli --type spark-scala --description launched-from-cli --executor-cores 4 --num-executors 2```.
-
-note che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
-
-![alt text](../../img/sparkshell3.png)
-
-![alt text](../../img/sparkshell4_cdeui.png)
-
-### Modifica dei File e Creazione delle Risorse CDE
+### Utilizzo delle Risorse CDE
 
 Le CDE Resources possono essere di tipo "File", "Python" o "Custom Runtime". Inizierai creando una Resource di tipo File per archiviare tutti i file e le dipendenze di Spark e Airflow, e successivamente una Resource di tipo Python per utilizzare librerie Python in un'esecuzione di job Spark CDE.
 
@@ -271,7 +271,7 @@ Passaggio 5: Salva il file di configurazione. Se non l'hai già fatto, assicurat
 Per ulteriori informazioni sulla CLI, visita la [documentazione](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
 
-#### 1. Spark Submit di CDE tramite la CLI di CDE.
+#### 1. Spark Submit di CDE tramite la CLI di CDE
 
 Una CDE Spark Submit è il modo più rapido per creare un prototipo di un Job Spark. Ti consente di inviare il codice dell'applicazione Spark e monitorare i risultati con le funzionalità di registrazione e Observability di CDE, ma non ti permette di salvare il codice come una definizione di Job CDE riutilizzabile. Questo è vantaggioso, ad esempio, nel caso in cui desideri pianificare nuovamente l'esecuzione del job in modo ricorrente o includerlo in un Job CDE Airflow.
 
@@ -300,7 +300,7 @@ cde spark submit --py-files cde_spark_jobs/dist/mywheel-0.0.1-py3-none-any.whl c
 Il Spark Submit CDE sopra è stato eseguito con il codice dell'applicazione Spark confezionato in un file Wheel. Note che il comando Spark Submit CDE include le opzioni ```--py-files```, ```--exeutor-cores``` e ```--executor-memory```. Queste corrispondono alle stesse opzioni disponibili per una Spark Submit. Per ulteriori informazioni sulla creazione di comandi per Spark Submit, visita la [Documentazione di Spark]((https://spark.apache.org/docs/latest/submitting-applications.html)).
 
 
-#### 2. Job Spark tramite la CLI di CDE.
+#### 2. Job Spark tramite la CLI di CDE
 
 Analogamente a una CDE Spark Submit, un Job CDE Spark rappresenta il codice di un'applicazione per eseguire un Job Spark (o Airflow) in un Virtual Cluster di CDE. Tuttavia, il Job CDE consente di definire, modificare e riutilizzare facilmente configurazioni e risorse in esecuzioni future. I job possono essere eseguiti su richiesta o pianificati. L'esecuzione individuale di un job è chiamata Job Run.
 
@@ -347,10 +347,32 @@ Vai alla pagina dei Job nel tuo CDE Virtual Cluster e apri il Job. note che la d
 
 ![alt text](../../img/cdeclijob_7.png)
 
-### Esplorazione interattiva dei dati con le sessioni CDE
 
-Una sessione di CDE è un ambiente di sviluppo interattivo a breve durata per eseguire comandi Spark che ti aiutano a iterare e costruire i tuoi pipeline Spark. Puoi avviare le sessioni CDE in due modi: dall'interfaccia utente di CDE e dal tuo terminale con la CLI.
+#### 3. Utilizzo di Sessioni Interattive con il CDE CLI
 
+Puoi interagire con la stessa Sessione CDE dal tuo terminale locale utilizzando il comando ```cde session interact```.
+
+Apri il tuo terminale e inserisci ```cde session interact --name InteractiveSession```. Ti verrà richiesta la password e successivamente verrà avviata la SparkShell.
+
+Esegui lo stesso codice PySpark via shell.
+
+![alt text](../../img/sparkshell1.png)
+
+![alt text](../../img/sparkshell2_a.png)
+
+Torna alla Sessione CDE e verifica che il codice sia stato eseguito dall'interfaccia utente.
+
+![alt text](../../img/sparkshell_2b.png)
+
+Puoi anche creare una sessione direttamente dal CLI. Nel tuo terminale locale, esci dalla tua attuale Spark Shell con "ctrl+D" e quindi esegui il seguente comando:
+
+```cde session create --name cde_shell_from_cli --type spark-scala --description launched-from-cli --executor-cores 4 --num-executors 2```.
+
+note che puoi passare le Compute Options come il numero di executor e le executor-cores quando utilizzi il comando.
+
+![alt text](../../img/sparkshell3.png)
+
+![alt text](../../img/sparkshell4_cdeui.png)
 
 ### Creazione di un Spark Job con Apache Iceberg
 

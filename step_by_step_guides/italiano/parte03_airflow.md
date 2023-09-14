@@ -6,7 +6,19 @@ CDE fornisce un servizio Airflow nativo che consente di orchestrare pipeline com
 
 Questo tutorial è diviso in due sezioni. Inizialmente, costruirai tre job Airflow per pianificare, orchestrare e monitorare l'esecuzione dei Job Spark e altro ancora. Successivamente, costruirai un DAG (Directed Acyclic Graph) Airflow con l'Editor Airflow di Cloudera, uno strumento "No-Code" che consente di creare DAG Airflow in modo semplificato.
 
-### Concetti Airflow
+## Indice
+
+* Concetti Airflow
+  * L'interfaccia Utente di Airflow
+  * Cosa è un Job di CDE in Airflow?
+* Dispiegamento di una Pipeline di Orchestrazione con Airflow
+  * Analisi Codice del DAG Airflow
+  * Disepiegamento del Codice del DAG in CDE Job di tipo Airflow
+* Dispiegamento di una Pipeline di Orchestrazione con l'Editor Cloudera Airflow
+* Riepilogo
+
+
+## Concetti Airflow
 
 In Airflow, un DAG (Directed Acyclic Graph) è definito in uno script Python che rappresenta la struttura del DAG (attività e le loro dipendenze) come codice.
 
@@ -114,7 +126,7 @@ step2 = CDEJobRunOperator(
 step1 >> step2 >> step3 >> step4 >> step5
 ```
 
-#### Diepiegamento del Codice del DAG in CDE Job di tipo Airflow
+#### Disepiegamento del Codice del DAG in CDE Job di tipo Airflow
 
 Crea due CDE Spark Job (nell'interfaccia utente o con la CLI) utilizzando gli script "03-A-ETL.py" e "03-B-Reports.py", *ma non eseguirli ancora.*
 

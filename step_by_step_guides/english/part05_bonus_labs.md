@@ -6,6 +6,39 @@ So far you explored the core aspects of Spark, Airflow and Iceberg in CDE. The f
 
 Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
 
+## Table of Contents
+
+* Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
+* Bonus Lab 2: Using CDE Airflow with CDW
+  * CDW Setup Steps
+  * CDE Setup Steps
+  * Editing the DAG Python file
+* Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
+  * Summary
+  * Using the CDE CLI
+    * Run Spark Job
+    * Check Job Status
+    * Review the Output
+    * Create a CDE Resource
+    * Upload file(s) to resource
+    * Validate CDE Resource
+    * Schedule CDE Spark Job with the File Uploaded to the CDE Resource
+    * Validate Job
+    * Learning to use the CDE CLI
+* Bonus Lab 4: Using Python with the CDE API
+  * Introduction to the CDE API
+  * Basic API Workflow
+  * Using Python
+  * Instructions
+    * Step 0: Project setup
+    * Step 1: Create a Python Virtual Environment and Install Requirements
+    * Step 2: Edit Clusters.txt and Test CDE Connection
+    * Step 3: Run the script
+    * Step 4: Schedule the Script as a Cron Job
+* Summary
+
+
+
 ### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 
 Part 2 of the lab introduced you to a basic Airflow DAG in CDE. However, Airflow's capabilities include a wide variety of operators, the ability to store temporary context values, connecting to 3rd party systems and overall the ability to implement more advanced orchestration use cases.

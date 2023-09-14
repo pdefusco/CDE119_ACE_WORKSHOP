@@ -6,6 +6,11 @@ Il comando spark-submit è un'utilità per eseguire o inviare un programma di ap
 
 La CLI di CDE fornisce un modo simile, sebbene non identico, per eseguire "spark-submits" in CDE. Tuttavia, adattare molti spark-submit a CDE potrebbe diventare un ostacolo nella migrazione. Il team di ingegneria di Cloudera ha creato uno strumento di migrazione Spark per facilitare la conversione.
 
+## Indice
+
+* Istruzioni Passo per Passo
+* Riepilogo
+
 ### Istruzioni Passo Per Passo
 
 >**⚠ Avviso**  

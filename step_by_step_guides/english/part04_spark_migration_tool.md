@@ -6,6 +6,11 @@ The spark-submit command is a utility to run or submit a Spark or PySpark applic
 
 The CDE CLI provides a similar although not identical way of running "spark-submits" in CDE. However, adapting many spark-submita to CDE might become an obstacle in your migration. The Cloudera Engineering team created a Spark Migration tool to facilitate the conversion.
 
+## Table of Contents
+
+* Step By Step Instructions
+* Summary
+
 #### Step By Step Instructions
 
 >**⚠ Warning**  

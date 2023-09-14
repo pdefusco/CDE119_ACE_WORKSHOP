@@ -6,7 +6,18 @@ CDE ofrece un servicio nativo de Airflow que te permite orquestar tuberías comp
 
 Este tutorial se divide en dos secciones. Primero construirás tres Jobs de Airflow para programar, orquestar y monitorear la ejecución de Jobs Spark y más. Luego construirás un DAG de Airflow con el Editor de Airflow de Cloudera, una herramienta sin código que te permite crear DAGs de Airflow de manera simplificada.
 
-### Conceptos de Airflow
+## Tabla de Contenido
+
+* Conceptos de Airflow
+  * La interfaz de Airflow
+  * ¿Qué es un Job de Airflow en CDE?
+* Despliegue de una Tubería de Orquestación con Airflow
+  * Revisando el Código Básico del DAG de Airflow  
+  * Implementación del Código Básico del DAG de Airflow
+* Despliegue de Pipeline de Orquestación con el Airflow Editor de Cloudera
+* Resumen
+
+## Conceptos de Airflow
 
 En Airflow, un DAG (Grafo Dirigido Acíclico) se define en un script de Python que representa la estructura del DAG (tareas y sus dependencias) como código.
 
