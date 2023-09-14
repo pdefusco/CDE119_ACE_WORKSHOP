@@ -8,8 +8,8 @@ La CLI de CDE proporciona una manera similar aunque no idéntica de ejecutar "sp
 
 ## Tabla de Contenidos
 
-* Instrucciones Paso a Paso
-* Resumen
+* [Instrucciones Paso a Paso](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte04_spark_migration_tool.md#instrucciones-paso-a-paso)
+* [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte04_spark_migration_tool.md#resumen)
 
 #### Instrucciones Paso a Paso
 

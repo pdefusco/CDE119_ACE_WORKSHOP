@@ -6,23 +6,23 @@ En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuari
 
 ## Tabla de Contenido
 
-* Explorando Datos en Sesiones Interactivas
-  * Usando Sesiones Interactivas en la UI de CDE
-* Usando Recursos de CDE
-* Creación de Jobs de Spark en la Interfaz de Usuario de CDE
-  * 1. Establecer Nombre del Job, Clúster Virtual y Archivo de Aplicación
-  * 2. Set Spark Configurations
-  * 3. Establecer Ambiente de Python
-  * 4. Set Advanced Options
-  * 5. Configurar Compute Options
-  * 6. Desencadenar y Monitorear el Job
-* Creación de Jobs de Spark con la CLI de CDE
-  * 0. Instalación de la CLI de CDE
-  * 1. Spark-Submit de CDE a través de la CLI de CDE
-  * 2. Job de Spark de CDE a través de la CLI de CDE
-  * 3. Usar Sesiones Interactivas con el CDE CLI
-* Creación de un Job de Spark CDE con Apache Iceberg
-* Resumen
+* [Explorando Datos en Sesiones Interactivas](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#explorando-datos-en-sesiones-interactivas)
+  * [Usando Sesiones Interactivas en la UI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-sesiones-interactivas-en-la-ui-de-cde)
+* [Usando Recursos de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-recursos-de-cde)
+* [Creación de Jobs de Spark en la Interfaz de Usuario de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#creaci%C3%B3n-de-jobs-de-spark-en-la-interfaz-de-usuario-de-cde)
+  * [1. Establecer Nombre del Job, Clúster Virtual y Archivo de Aplicación](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#1-establecer-nombre-del-job-cl%C3%BAster-virtual-y-archivo-de-aplicaci%C3%B3n)
+  * [2. Set Spark Configurations](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#2-set-spark-configurations)
+  * [3. Establecer Ambiente de Python](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#3-establecer-ambiente-de-python)
+  * [4. Set Advanced Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#4-set-advanced-options)
+  * [5. Configurar Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#5-configurar-compute-options)
+  * [6. Desencadenar y Monitorear el Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#6-desencadenar-y-monitorear-el-job)
+* [Creación de Jobs de Spark con la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#creaci%C3%B3n-de-jobs-de-spark-con-la-cli-de-cde)
+  * [0. Instalación de la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#0-instalaci%C3%B3n-de-la-cli-de-cde)
+  * [1. Spark-Submit de CDE a través de la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#1-spark-submit-de-cde-a-trav%C3%A9s-de-la-cli-de-cde)
+  * [2. Job de Spark de CDE a través de la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#2-job-de-spark-de-cde-a-trav%C3%A9s-de-la-cli-de-cde)
+  * [3. Usar Sesiones Interactivas con el CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#3-usar-sesiones-interactivas-con-el-cde-cli)
+* [Creación de un Job de Spark CDE con Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#creaci%C3%B3n-de-un-job-de-spark-cde-con-apache-iceberg)
+* [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#resumen)
 
 ### Explorando Datos en Sesiones Interactivas
 

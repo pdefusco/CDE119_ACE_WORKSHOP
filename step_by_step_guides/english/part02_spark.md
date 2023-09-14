@@ -16,7 +16,7 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
   * [4. Set Advanced Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#4-set-advanced-options)
   * [5. Set Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#5-set-compute-options)
   * [6. Trigger and Monitor the Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#6-trigger-and-monitor-the-job)
-* Creating Spark Jobs with the CDE CLI
+* [Creating Spark Jobs with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-spark-jobs-with-the-cde-cli)
   * [0. Installing the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#0-installing-the-cde-cli)
   * [1. CDE Spark Submit via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#1-cde-spark-submit-via-the-cde-cli)
   * [2. CDE Spark Job via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#2-cde-spark-job-via-the-cde-cli)
@@ -141,7 +141,7 @@ Next we will run and deploy a Spark script as a CDE Job of type Spark using the 
 
 #### 1. Set Job Name, Virtual Cluster and Application File
 
-Select your CDE Virtual Cluster and assign "O1_ETL" as the Job Name. Append your name to distinguish your job's name from others'.
+Select your CDE Virtual Cluster and assign "01_ETL" as the Job Name. Append your name to distinguish your job's name from others'.
 
 ![alt text](../../img/part2_setjobname02.png)
 

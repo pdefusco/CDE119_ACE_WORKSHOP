@@ -20,7 +20,7 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
     * [Check Job Status](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#check-job-status)
     * [Review the Output](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#review-the-output)
     * [Create a CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#create-a-cde-resource)
-    * [Upload file(s) to resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#upload-files-to-resource)
+    * [Upload file(s) to Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#upload-files-to-resource)
     * [Validate CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#validate-cde-resource)
     * [Schedule CDE Spark Job with the File Uploaded to the CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#schedule-cde-spark-job-with-the-file-uploaded-to-the-cde-resource)
     * [Validate Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#validate-job)
@@ -30,7 +30,7 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
   * [Basic API Workflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#basic-api-workflow)
   * [Using Python](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#using-python)
   * [Instructions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#instructions)
-    * [Step 0: Project setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-0-project-setup)
+    * [Step 0: Project Setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-0-project-setup)
     * [Step 1: Create a Python Virtual Environment and Install Requirements](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-1-create-a-python-virtual-environment-and-install-requirements)
     * [Step 2: Edit Clusters.txt and Test CDE Connection](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-2-edit-clusterstxt-and-test-cde-connection)
     * [Step 3: Run the script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-3-run-the-script)
@@ -285,7 +285,7 @@ This command creates a CDE Resource of type File:
 cde resource create --name "my_CDE_Resource"
 ```
 
-###### Upload file(s) to resource:
+###### Upload file(s) to Resource:
 
 This command uploads the "01_pyspark-sql.py" script into the CDE Resource.
 
@@ -301,7 +301,7 @@ This command obtains information related to the CDE Resource.
 cde resource describe --name "my_CDE_Resource"
 ```
 
-###### Schedule CDE Spark Job with the File Uploaded to the CDE Resource
+###### Schedule CDE Spark Job with the File Uploaded to the CDE Resource:
 
 This command creates a CDE Spark Job using the file uploaded to the CDE Resource.
 
@@ -317,7 +317,7 @@ This command obtains information about CDE Jobs whose name contains the string "
 cde job list --filter 'name[like]%PySparkJob%'
 ```
 
-###### Learning to use the CDE CLI
+###### Learning to use the CDE CLI:
 
 The CDE CLI offers many more commands. To become familiarized with it you can use the "help" command and learn as you go. Here are some examples:
 

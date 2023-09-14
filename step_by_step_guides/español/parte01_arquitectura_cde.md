@@ -6,17 +6,17 @@ En esta sección aprenderás sobre la arquitectura flexible de CDE y sus compone
 
 ## Tabla de Contenido
 
-* Introducción al Servicio CDE
-  * Ambiente CDP
-  * Servicio CDE
-  * Clúster Virtual
-  * CDE Jobs
-  * CDE Resource
-  * Job Run
-  * CDE Sessions
-  * Apache Iceberg
-  * Interfaz de usuario CDE
-* Resumen
+* [Introducción al Servicio CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#introducci%C3%B3n-al-servicio-cde)
+  * [Ambiente CDP](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#ambiente-cdp)
+  * [Servicio CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#servicio-cde)
+  * [Clúster Virtual](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#cl%C3%BAster-virtual)
+  * [CDE Jobs](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#jobs)
+  * [CDE Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#cde-resource)
+  * [Job Run](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#job-run)
+  * [CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#cde-session)
+  * [Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#apache-iceberg)
+  * [Interfaz de usuario CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#interfaz-de-usuario-de-cde)
+* [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte01_arquitectura_cde.md#resumen)
 
 ## Introducción al Servicio CDE
 

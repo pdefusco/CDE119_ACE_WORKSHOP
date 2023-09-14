@@ -8,14 +8,14 @@ Este tutorial se divide en dos secciones. Primero construirás tres Jobs de Airf
 
 ## Tabla de Contenido
 
-* Conceptos de Airflow
-  * La interfaz de Airflow
-  * ¿Qué es un Job de Airflow en CDE?
-* Despliegue de una Tubería de Orquestación con Airflow
-  * Revisando el Código Básico del DAG de Airflow  
-  * Implementación del Código Básico del DAG de Airflow
-* Despliegue de Pipeline de Orquestación con el Airflow Editor de Cloudera
-* Resumen
+* [Conceptos de Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#conceptos-de-airflow)
+  * [La interfaz de Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#la-interfaz-de-airflow)
+  * [¿Qué es un Job de Airflow en CDE?](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#qu%C3%A9-es-un-job-de-airflow-en-cde)
+* [Despliegue de una Tubería de Orquestación con Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#despliegue-de-una-tuber%C3%ADa-de-orquestaci%C3%B3n-con-airflow)
+  * [Revisando el Código Básico del DAG de Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#revisando-el-c%C3%B3digo-b%C3%A1sico-del-dag-de-airflow)  
+  * [Implementación del Código Básico del DAG de Airflow](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#implementaci%C3%B3n-del-c%C3%B3digo-b%C3%A1sico-del-dag-de-airflow)
+* [Despliegue de Pipeline de Orquestación con el Airflow Editor de Cloudera](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#despliegue-de-pipeline-de-orquestaci%C3%B3n-con-el-airflow-editor-de-cloudera)
+* [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte03_airflow.md#resumen)
 
 ## Conceptos de Airflow
 
@@ -219,6 +219,7 @@ Ejecute el DAG y obsérvelo desde la interfaz de usuario de Ejecuciones de Job C
 ![alt text](../../img/bonus2_step07.png)
 
 ## Resumen
+
 Apache Airflow es una plataforma para crear, programar y ejecutar tuberías de Ingeniería de Datos. Es ampliamente utilizado por la comunidad para crear flujos de Job dinámicos y robustos para casos de uso de Ingeniería de Datos por lotes.
 
 CDE incrusta Apache Airflow a nivel de Clúster Virtual de CDE. Se despliega automáticamente para el usuario de CDE durante la creación del Clúster Virtual de CDE y no requiere mantenimiento por parte del Administrador de CDE.

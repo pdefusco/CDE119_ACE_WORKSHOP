@@ -8,34 +8,33 @@ Cada lab Adicional se puede realizar de manera independiente. En otras palabras,
 
 ## Tabla de Contenido
 
-* Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
-* Bonus Lab 2: Usando CDE Airflow con CDW
-  * Pasos de Configuración de CDW
-  * Pasos de Configuración de CDE
-  * Editando el Archivo Python del DAG
-* Bonus Lab 3: Uso del CDE CLI para Optimizar Casos de Uso de Producción de CDE (En Detalle)
-  * Uso de la CLI de CDE
-    * Ejecutar un Job de Spark
-    * Verificar el Estado del Job
-    * Revisar la Salida
-    * Crear un Recurso de CDE
-    * Subir archivo(s) al File Resource
-    * Validar el File Resource
-    * Programar un Job de Spark de CDE con el Archivo Subido al File Resource
-    * Validar el Job
-    * Aprender a Usar la CLI de CDE
-* Bonus Lab 4: Uso de Python con la API de CDE
-  * Introducción a la API de CDE
-  * Workflow Básico con la API
-  * Usando Python
-  * Instrucciones
-    * Paso 0: Configuración del proyecto
-    * Paso 1: Crea un Entorno Virtual de Python e Instala los Requisitos
-    * Paso 2: Edita Clusters.txt y Prueba la Conexión con CDE
-    * Paso 3: Despliegue de la App
-    * Paso 4: Programar el Script como un Cron Job
-* Resumen
-
+* [Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-1-orquestaci%C3%B3n-de-cde-airflow-en-detalle)
+* [Bonus Lab 2: Usando CDE Airflow con CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-2-usando-cde-airflow-con-cdw)
+  * [Pasos de Configuración de CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#pasos-de-configuraci%C3%B3n-de-cdw)
+  * [Pasos de Configuración de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#pasos-de-configuraci%C3%B3n-de-cde)
+  * [Editando el Archivo Python del DAG](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#editando-el-archivo-python-del-dag)
+* [Bonus Lab 3: Uso del CDE CLI para Optimizar Casos de Uso de Producción de CDE (En Detalle)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-3-uso-del-cde-cli-para-optimizar-casos-de-uso-de-producci%C3%B3n-de-cde-en-detalle)
+  * [Uso de la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#uso-de-la-cli-de-cde)
+    * [Ejecutar un Job de Spark](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#ejecutar-un-job-de-spark)
+    * [Verificar el Estado del Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#verificar-el-estado-del-job)
+    * [Revisar la Salida](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#revisar-la-salida)
+    * Crear un Resource de CDE
+    * [Subir archivo(s) al File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#subir-archivos-al-file-resource)
+    * [Validar el File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#validar-el-file-resource)
+    * [Programar un Job de Spark de CDE con el Archivo Subido al File Resource](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#programar-un-job-de-spark-de-cde-con-el-archivo-subido-al-file-resource)
+    * [Validar el Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#validar-el-job)
+    * [Aprender a Usar la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#aprender-a-usar-la-cli-de-cde)
+* [Bonus Lab 4: Uso de Python con la API de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-4-uso-de-python-con-la-api-de-cde)
+  * [Introducción a la API de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#introducci%C3%B3n-a-la-api-de-cde)
+  * [Workflow Básico con la API](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#workflow-b%C3%A1sico-con-la-api)
+  * [Usando Python](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#usando-python)
+  * [Instrucciones](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#instrucciones)
+    * [Paso 0: Configuración del proyecto](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-0-configuraci%C3%B3n-del-proyecto)
+    * [Paso 1: Crea un Entorno Virtual de Python e Instala los Requisitos](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-1-crea-un-entorno-virtual-de-python-e-instala-los-requisitos)
+    * [Paso 2: Edita Clusters.txt y Prueba la Conexión con CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-2-edita-clusterstxt-y-prueba-la-conexi%C3%B3n-con-cde)
+    * [Paso 3: Despliegue de la App](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-3-despliegue-de-la-app)
+    * [Paso 4: Programar el Script como un Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-4-programar-el-script-como-un-cron-job)
+* [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#resumen)
 
 ### Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
 
@@ -275,7 +274,7 @@ Ejecute este comando para mostrar los registros del Job anterior. Asegúrate de 
 cde run logs --type "driver/stdout" --id 199
 ```
 
-###### Crear un Recurso de CDE:
+###### Crear un Resource de CDE:
 
 Ejecute este comando para crear un File Resource de CDE:
 
