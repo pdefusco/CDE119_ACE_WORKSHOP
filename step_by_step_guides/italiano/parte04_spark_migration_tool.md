@@ -8,8 +8,8 @@ La CLI di CDE fornisce un modo simile, sebbene non identico, per eseguire "spark
 
 ## Indice
 
-* Istruzioni Passo per Passo
-* Riepilogo
+* [Istruzioni Passo per Passo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte04_spark_migration_tool.md#istruzioni-passo-per-passo)
+* [Riepilogo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte04_spark_migration_tool.md#riepilogo)
 
 ### Istruzioni Passo Per Passo
 
