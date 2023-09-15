@@ -95,5 +95,4 @@ CDP Data Services include Cloudera Machine Learning (CML), Cloudera Operational 
 
 * [CML Workshop](https://github.com/cloudera/CML_AMP_Churn_Prediction): Prototype and deploy a Churn Prediction classifier, apply an explainability model to it and deploy a Flask Application to share insights with your project stakeholders. This project uses SciKit-Lean, PySpark, and Local Interpretable Model-agnostic Explanations (LIME).
 * [CDF Workshop](https://github.com/cloudera-labs/edge2ai-workshop): Build a full OT to IT workflow for an IoT Predictive Maintenance use case with: Edge Flow Management with MQTT and Minifi for data collection; Data Flow management was handled by NiFi and Kafka, and Spark Streaming with Cloudera Data Science Workbench (CDSW) model to process data. The lab also includes content focused on Kudu, Impala and Hue.
-* CDW Workshop
-* COD Workshop
+* [CDW Workshop](https://github.com/pdefusco/cdw-workshop): As a Big Data Engineer and Analyst for an Aeronautics corporation, build a Data Warehouse & Data Lakehouse to gain an advantage over your competition. Interacticely explore data at scale. Create ongoing reports. Finally move to real-time analysis to anticipate engine failures. All using Apache Impala and Iceberg.
