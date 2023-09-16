@@ -13,7 +13,7 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
   * [CDW Setup Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#cdw-setup-steps)
   * [CDE Setup Steps](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#cde-setup-steps)
   * [Editing the DAG Python file](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#editing-the-dag-python-file)
-* [Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth)
+* [Bonus Lab 3: CDE CLI (In-Depth)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-3-using-the-cde-cli-to-streamline-cde-production-use-cases-in-depth)
   * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#summary)
   * [Using the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#using-the-cde-cli)
     * [Run Spark Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#run-spark-job)
@@ -233,7 +233,7 @@ Navigate to the CDE Job Runs Page and open the run's Airflow UI. Then open the T
 ![alt text](../../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Using the CDE CLI to Streamline CDE Production Use Cases (In-Depth)
+### Bonus Lab 3: CDE CLI (In-Depth)
 
 #### Summary
 

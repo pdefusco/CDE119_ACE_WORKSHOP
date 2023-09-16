@@ -13,7 +13,7 @@ Cada lab Adicional se puede realizar de manera independiente. En otras palabras,
   * [Pasos de Configuración de CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#pasos-de-configuraci%C3%B3n-de-cdw)
   * [Pasos de Configuración de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#pasos-de-configuraci%C3%B3n-de-cde)
   * [Editando el Archivo Python del DAG](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#editando-el-archivo-python-del-dag)
-* [Bonus Lab 3: Uso del CDE CLI para Optimizar Casos de Uso de Producción de CDE (En Detalle)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-3-uso-del-cde-cli-para-optimizar-casos-de-uso-de-producci%C3%B3n-de-cde-en-detalle)
+* [Bonus Lab 3: CLI de CLI (En Detalle)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-3-uso-del-cde-cli-para-optimizar-casos-de-uso-de-producci%C3%B3n-de-cde-en-detalle)
   * [Uso de la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#uso-de-la-cli-de-cde)
     * [Ejecutar un Job de Spark](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#ejecutar-un-job-de-spark)
     * [Verificar el Estado del Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#verificar-el-estado-del-job)
@@ -232,7 +232,7 @@ Navega a la página de Ejecución de Jobs CDE y abre la interfaz de usuario del 
 ![alt text](../../img/bonus1_step3.png)
 
 
-### Bonus Lab 3: Uso del CDE CLI para Optimizar Casos de Uso de Producción de CDE (En Detalle)
+### Bonus Lab 3: CLI de CDE (En Detalle)
 
 La mayoría de los casos de uso de producción de CDE dependen de la API y CLI de CDE. Con ellas, puedes interactuar fácilmente con CDE desde un entorno de desarrollo integrado (IDE) local y crear integraciones con sistemas externos de terceros. Por ejemplo, puedes implementar flujos de Job de múltiples clústeres CDE con GitLabCI o Python.
 
