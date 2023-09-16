@@ -18,7 +18,6 @@ In questa sezione creerai quattro job Spark utilizzando l'interfaccia utente di 
   * [5. Imposta le Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#5-imposta-le-compute-options)
   * [6. Dispiegamento e Monitoraggio del Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#6-dispiegamento-e-monitoraggio-del-job)
 * [Creazione di Job Spark tramite la CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#creazione-di-job-spark-tramite-la-cli-di-cde)
-  * [0. Installazione della CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#0-installazione-della-cli-di-cde)
   * [1. Spark Submit di CDE tramite la CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#1-spark-submit-di-cde-tramite-la-cli-di-cde)
   * [2. Job Spark tramite la CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#2-job-spark-tramite-la-cli-di-cde)
 * [Creazione di un Spark Job con Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#creazione-di-un-spark-job-con-apache-iceberg)
@@ -87,6 +86,10 @@ for each in another_df.collect():
 ![alt text](../../img/cde_session_1.png)
 
 ##### Utilizzo Sessioni Interattive con la CLI di CDE
+
+Puoi utilizzare le Sessioni di CDE direttamente dal terminale utilizzando la CLI. Se non l'hai già fatto, assicurati di aver configurato la CLI o nel contenitore Docker fornito o installandola manualmente come mostrato in [parte00_setup](). 
+
+Se hai scelto di utilizzare il contenitore Docker fornito, avvialo con il comando: ```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```.
 
 Puoi interagire con la stessa Sessione CDE dal tuo terminale locale utilizzando il comando ```cde session interact```.
 
@@ -261,39 +264,6 @@ L'interfaccia utente di Spark consente di visualizzare l'utilizzo delle risorse,
 Finora abbiamo creato un Job Spark tramite l'interfaccia utente di CDE. Tuttavia, i casi d'uso di CDE che coinvolgono più di qualche job traggono spesso numerosi vantaggi dall'utilizzo della CLI o dell'API di CDE. La CLI consente di iterare più rapidamente attraverso diversi Spark Submits e Resources. L'API è un ottimo punto di accesso a CDE da altre strumenti, inclusi strumenti DevOps e soluzioni di CI/CD di terze parti.
 
 In questa sezione creeremo una Spark Submit CDE e un Job Spark CDE tramite la CLI. Nel processo spiegheremo la differenza.
-
-#### 0. Installazione della CLI di CDE
-
-Passaggio 1: Scarica il Client CLI:
-```
-    * Vai alla pagina panoramica di Cloudera Data Engineering facendo clic sulla voce Data Engineering nella console di gestione della piattaforma Cloudera Data Platform (CDP).
-    * Nella console web di CDE, seleziona un ambiente.
-    * Fai clic sull'icona Dettagli del Cluster per il virtual cluster a cui desideri accedere.
-    * Fai clic sul collegamento sotto CLI TOOL per scaricare il client CLI.
-    * Modifica le autorizzazioni del file cde scaricato per renderlo eseguibile:
-```
-
-Passaggio 2: Determina l'URL dell'Endpoint del Virtual Cluster:
-```
-    * Vai alla pagina panoramica di Cloudera Data Engineering.
-    * Nella colonna Ambiente, seleziona l'ambiente contenente il virtual cluster a cui desideri accedere tramite la CLI.
-    * Nella colonna Virtual Clusters a destra, fai clic sull'icona Dettagli del Cluster per il virtual cluster a cui desideri accedere.
-    * Fai clic su JOBS API URL per copiare l'URL negli appunti.
-```
-
-Passaggio 3: Sull'host con il client CLI, crea o modifica il file di configurazione in ```~/.cde/config.yaml```. Puoi creare più profili nel file ```~/.cde/config.yaml``` e utilizzarli durante l'esecuzione dei comandi.
-
-Passaggio 4: Nel file di configurazione, specifica il Workload User CDP e l'endpoint del Virtual Cluster come segue. Il Worklaod User CDP è il tuo user:
-
-```
-user: <CDP_user>
-vcluster-endpoint: <CDE_virtual_cluster_endpoint>
-```
-
-Passaggio 5: Salva il file di configurazione. Se non l'hai già fatto, assicurati che il file "cde" sia eseguibile eseguendo il comando ```chmod +x /path/to/cde```. Infine, esegui il comando ```cde job list``` dal tuo terminale per verificare la configurazione. Inserisci la tua password di job quando richiesto.
-
-Per ulteriori informazioni sulla CLI, visita la [documentazione](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
-
 
 #### 1. Spark Submit di CDE tramite la CLI di CDE
 

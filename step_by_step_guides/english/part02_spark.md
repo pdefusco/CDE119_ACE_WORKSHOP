@@ -88,6 +88,10 @@ for each in another_df.collect():
 
 ##### Using Interactive Sessions with the CDE CLI
 
+You can use CDE Sessions directly from the terminal using the CLI. If you haven't done so already, ensure that you have configured the CLI either in the provided Docker container or by installing it manually as shown in [part00_setup]().
+
+If you chose to use the provided Docker container launch it with: ```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```
+
 You can interact with the same CDE Session from your local terminal using the ```cde session interact``` command.
 
 Open your terminal and enter ```cde session interact --name InteractiveSession```. You will be prompted for your password and then the SparkShell will launch.
@@ -262,37 +266,6 @@ The Spark UI allows you to visualize resource usage, optimize performance and tr
 So far we have created a Spark Job via the CDE UI. However, CDE use cases involving more than just a few jobs normally benefit in numerous ways from the CDE CLI or CDE API. The CLI allows you to more quickly iterate through different Spark Submits and CDE Resources. The API is an excellent access point to CDE from other tools including 3rd party DevOps and CI/CD solutions.
 
 In this section we will create a CDE Spark Submit and a CDE Spark Job via the CLI. In the process we will explain the difference.
-
-#### 0. Installing the CDE CLI
-
-Step 1: Download the CLI Client:
-
-    * Navigate to the Cloudera Data Engineering Overview page by clicking the Data Engineering tile in the Cloudera Data Platform (CDP) management console.
-    * In the CDE web console, select an environment.
-    * Click the Cluster Details icon for the virtual cluster you want to access.
-    * Click the link under CLI TOOL to download the CLI client.
-    * Change the permissions on the downloaded cde file to make it executable:
-
-Step 2: Determine the Virtual Cluster Endpoint URL:
-
-    * Navigate to the Cloudera Data Engineering Overview page.
-    * In the Environments column, select the environment containing the virtual cluster you want to access using the CLI.
-    * In the Virtual Clusters column on the right, click the Cluster Details icon for the virtual cluster you want to access.
-    * Click JOBS API URL to copy the URL to your clipboard.
-
-Step 3: On the host with the CLI client, create or edit the configuration file at ```~/.cde/config.yaml```. You can create multiple profiles in the ```~/.cde/config.yaml``` file and can be used while running commands.
-
-Step 4: In the configuration file, specify the CDP user and virtual cluster endpoint as follows. The CDP user is your workload username:
-
-```
-user: <CDP_user>
-vcluster-endpoint: <CDE_virtual_cluster_endpoint>
-```
-
-Step 5: Save the configuration file. If you have not done so already, make sure that the cde file is executable by running ```chmod +x /path/to/cde```. Finally, run ```cde job list``` from your terminal to verify your configuration. Enter your workload password when prompted.
-
-For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
-
 
 #### 1. CDE Spark Submit via the CDE CLI.
 

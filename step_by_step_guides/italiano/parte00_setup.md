@@ -40,6 +40,69 @@ Se stai partecipando a un evento Cloudera, il tuo coordinatore del workshop ti f
 
 Se stai riproducendo i lab nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload User dal tuo amministratore CDP.
 
+## Setup CLI di CDE
+
+Durante i lab utilizzerai la CLI di CDE. Per configurare la CLI hai due opzioni: utilizzare il contenitore Docker fornito o installarlo manualmente sulla tua macchina locale.
+Consigliamo vivamente di utilizzare il contenitore Docker, poiché la configurazione è molto più semplice.
+
+#### Configurare la CLI con il Contenitore Docker Fornito
+
+Per utilizzare il contenitore Docker fornito, esegui prima il comando seguente per scaricarlo:
+
+```docker pull pauldefusco/cde_cli_workshop_1_19:latest```
+
+Successivamente, avvia il contenitore. Il seguente comando avvia e ti connette al contenitore in esecuzione:
+
+```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```
+
+Per configurare la CLI, apri il file "config.yaml" e aggiungi le tue credenziali:
+
+```vi ~/.cde/config.yaml```
+
+* utente: questo ti sarà fornito dal tuo Responsabile del Workshop Cloudera. Se stai lavorando nell'ambiente CDP della tua azienda, puoi ottenere il tuo Utente di Carico di Lavoro CDP dalla Console di Gestione CDP o chiedendo al tuo Amministratore CDP.
+
+* vcluster-endpoint: il JOBS API URL fornito nella pagina dei Dettagli del Cluster. Puoi accedervi dalla scheda Amministrazione e facendo clic sull'icona Dettagli del Cluster per il tuo Cluster Virtuale.
+
+![alt text](../../img/cde_virtual_cluster_details.png)
+
+Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe non essere trovata nessuna esecuzione di lavori, ma l'output ti aiuterà a verificare che puoi connetterti al cluster.
+
+```cde run list```
+
+#### Installazione della CLI di CDE
+
+Passaggio 1: Scarica il Client CLI:
+```
+    * Vai alla pagina panoramica di Cloudera Data Engineering facendo clic sulla voce Data Engineering nella console di gestione della piattaforma Cloudera Data Platform (CDP).
+    * Nella console web di CDE, seleziona un ambiente.
+    * Fai clic sull'icona Dettagli del Cluster per il virtual cluster a cui desideri accedere.
+    * Fai clic sul collegamento sotto CLI TOOL per scaricare il client CLI.
+    * Modifica le autorizzazioni del file cde scaricato per renderlo eseguibile:
+```
+
+Passaggio 2: Determina l'URL dell'Endpoint del Virtual Cluster:
+```
+    * Vai alla pagina panoramica di Cloudera Data Engineering.
+    * Nella colonna Ambiente, seleziona l'ambiente contenente il virtual cluster a cui desideri accedere tramite la CLI.
+    * Nella colonna Virtual Clusters a destra, fai clic sull'icona Dettagli del Cluster per il virtual cluster a cui desideri accedere.
+    * Fai clic su JOBS API URL per copiare l'URL negli appunti.
+```
+
+Passaggio 3: Sull'host con il client CLI, crea o modifica il file di configurazione in ```~/.cde/config.yaml```. Puoi creare più profili nel file ```~/.cde/config.yaml``` e utilizzarli durante l'esecuzione dei comandi.
+
+Passaggio 4: Nel file di configurazione, specifica il Workload User CDP e l'endpoint del Virtual Cluster come segue. Il Worklaod User CDP è il tuo user:
+
+```
+user: <CDP_user>
+vcluster-endpoint: <CDE_virtual_cluster_endpoint>
+```
+
+Passaggio 5: Salva il file di configurazione. Se non l'hai già fatto, assicurati che il file "cde" sia eseguibile eseguendo il comando ```chmod +x /path/to/cde```. Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe non essere trovata alcuna esecuzione ma l'output ti aiuterà a verificare che puoi connetterti al cluster.
+
+```cde run list```
+
+Per ulteriori informazioni sulla CLI, visita la [documentazione](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
+
 ## Index
 
 * La [Parte 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part01_cde_architecture.md#cde-architecture) fornisce un'introduzione all'Architettura del Servizio CDE. Imparerai sui principali componenti di CDE, inclusi l'Ambiente, il Cluster Virtuale e altro ancora.
