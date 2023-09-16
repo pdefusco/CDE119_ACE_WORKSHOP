@@ -8,7 +8,7 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
 
 * [Exploring Data Interactively with CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#exploring-data-interactively-with-cde-sessions)
   * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-interactive-sessions-in-the-cde-ui)
-  * Using Interactive Sessions with the CDE CLI
+  * [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-interactive-sessions-with-the-cde-cli)
 * [Using CDE Resources](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-cde-resources)
 * [Creating CDE Spark Jobs in the UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-cde-spark-jobs-in-the-ui)
   * [1. Set Job Name, Virtual Cluster and Application File](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#1-set-job-name-virtual-cluster-and-application-file)
@@ -18,7 +18,6 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
   * [5. Set Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#5-set-compute-options)
   * [6. Trigger and Monitor the Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#6-trigger-and-monitor-the-job)
 * [Creating Spark Jobs with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-spark-jobs-with-the-cde-cli)
-  * [0. Installing the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#0-installing-the-cde-cli)
   * [1. CDE Spark Submit via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#1-cde-spark-submit-via-the-cde-cli)
   * [2. CDE Spark Job via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#2-cde-spark-job-via-the-cde-cli)
 * [Creating a CDE Spark Job with Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#creating-a-cde-spark-job-with-apache-iceberg)
@@ -88,7 +87,7 @@ for each in another_df.collect():
 
 ##### Using Interactive Sessions with the CDE CLI
 
-You can use CDE Sessions directly from the terminal using the CLI. If you haven't done so already, ensure that you have configured the CLI either in the provided Docker container or by installing it manually as shown in [part00_setup]().
+You can use CDE Sessions directly from the terminal using the CLI. If you haven't done so already, ensure that you have configured the CLI either in the provided Docker container or by installing it manually as shown in [part00_setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#cde-cli-setup).
 
 If you chose to use the provided Docker container launch it with: ```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```
 

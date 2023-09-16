@@ -8,7 +8,7 @@ In questa sezione creerai quattro job Spark utilizzando l'interfaccia utente di 
 
 * [Esplorazione Interattiva Dati con Sessioni CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#esplorazione-interattiva-dati-con-sessioni-cde)
   * [Utilizzo Sessioni Interattive nell'Interfaccia CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#utilizzo-sessioni-interattive-nellinterfaccia-di-cde)
-  * [Utilizzo Sessioni Interattive con la CLI di CDE]
+  * [Utilizzo Sessioni Interattive con la CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#utilizzo-sessioni-interattive-con-la-cli-di-cde)
 * [Utilizzo delle Resource CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#utilizzo-delle-resource-cde)
 * [Creazione di Job Spark in CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#creazione-di-job-spark-in-cde-ui)
   * [1. Imposta il Nome del Job, il Virtual Cluster e il File dell'Applicazione](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte02_spark.md#1-imposta-il-nome-del-job-il-virtual-cluster-e-il-file-dellapplicazione)
@@ -87,7 +87,7 @@ for each in another_df.collect():
 
 ##### Utilizzo Sessioni Interattive con la CLI di CDE
 
-Puoi utilizzare le Sessioni di CDE direttamente dal terminale utilizzando la CLI. Se non l'hai già fatto, assicurati di aver configurato la CLI o nel contenitore Docker fornito o installandola manualmente come mostrato in [parte00_setup](). 
+Puoi utilizzare le Sessioni di CDE direttamente dal terminale utilizzando la CLI. Se non l'hai già fatto, assicurati di aver configurato la CLI o nel contenitore Docker fornito o installandola manualmente come mostrato in [parte00_setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#setup-cli-di-cde).
 
 Se hai scelto di utilizzare il contenitore Docker fornito, avvialo con il comando: ```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```.
 

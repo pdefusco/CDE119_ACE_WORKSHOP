@@ -8,7 +8,7 @@ En esta sección, crearás cuatro Jobs de Spark utilizando la interfaz de usuari
 
 * [Explorando Datos en Sesiones Interactivas](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#explorando-datos-en-sesiones-interactivas)
   * [Sesiones Interactivas en la UI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-sesiones-interactivas-en-la-ui-de-cde)
-  * [Sesiones Interactivas en la CLI de CDE]
+  * [Sesiones Interactivas en la CLI de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#sesiones-interactivas-en-la-cli-de-cde)
 * [Usando Resources de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#usando-resources-de-cde)
 * [Creación de Jobs de Spark en la Interfaz de Usuario de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#creaci%C3%B3n-de-jobs-de-spark-en-la-interfaz-de-usuario-de-cde)
   * [1. Establecer Nombre del Job, Clúster Virtual y Archivo de Aplicación](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte02_spark.md#1-establecer-nombre-del-job-cl%C3%BAster-virtual-y-archivo-de-aplicaci%C3%B3n)
@@ -88,7 +88,7 @@ for each in another_df.collect():
 
 ##### Sesiones Interactivas en la CLI de CDE
 
-Puedes utilizar las Sesiones de CDE directamente desde la terminal utilizando la CLI. Si aún no lo has hecho, asegúrate de haber configurado la CLI ya sea en el contenedor Docker proporcionado o instalándolo manualmente como se muestra en [parte00_setup](). 
+Puedes utilizar las Sesiones de CDE directamente desde la terminal utilizando la CLI. Si aún no lo has hecho, asegúrate de haber configurado la CLI ya sea en el contenedor Docker proporcionado o instalándolo manualmente como se muestra en [parte00_setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte00_setup.md#configuraci%C3%B3n-de-la-cli-de-cde). 
 
 Si optaste por utilizar el contenedor Docker proporcionado, ejecútalo con el siguiente comando: ```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```
 
