@@ -48,7 +48,7 @@ Toma nota de la JOBS API URL de tu clúster navegando a la pestaña de Administr
 
 ![alt text](../../img/cde_virtual_cluster_details.png)
 
-![alt text](../../jobsapiurl.png)
+![alt text](../../img/jobsapiurl.png)
 
 ## Configuración de la CLI de CDE
 
