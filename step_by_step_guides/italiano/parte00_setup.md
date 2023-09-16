@@ -40,6 +40,16 @@ Se stai partecipando a un evento Cloudera, il tuo coordinatore del workshop ti f
 
 Se stai riproducendo i lab nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload User dal tuo amministratore CDP.
 
+## JOBS API URL
+
+Il JOBS API URL è il punto di accesso al cluster per la API e la CLI. Sarà necessario durante la configurazione della CLI di CDE e in altre parti dei lab.
+
+Nota il JOBS API URL del tuo cluster navigando nella scheda di Amministrazione e cliccando sull'icona Cluster Details per il tuo Cluster Virtuale.
+
+![alt text](../../img/cde_virtual_cluster_details.png)
+
+![alt text](../../jobsapiurl.png)
+
 ## Setup CLI di CDE
 
 Durante i lab utilizzerai la CLI di CDE. Per configurare la CLI hai due opzioni: utilizzare il contenitore Docker fornito o installarlo manualmente sulla tua macchina locale.
@@ -80,24 +90,16 @@ Passaggio 1: Scarica il Client CLI:
     * Modifica le autorizzazioni del file cde scaricato per renderlo eseguibile:
 ```
 
-Passaggio 2: Determina l'URL dell'Endpoint del Virtual Cluster:
-```
-    * Vai alla pagina panoramica di Cloudera Data Engineering.
-    * Nella colonna Ambiente, seleziona l'ambiente contenente il virtual cluster a cui desideri accedere tramite la CLI.
-    * Nella colonna Virtual Clusters a destra, fai clic sull'icona Dettagli del Cluster per il virtual cluster a cui desideri accedere.
-    * Fai clic su JOBS API URL per copiare l'URL negli appunti.
-```
+Passaggio 2: Sull'host con il client CLI, crea o modifica il file di configurazione in ```~/.cde/config.yaml```. Puoi creare più profili nel file ```~/.cde/config.yaml``` e utilizzarli durante l'esecuzione dei comandi.
 
-Passaggio 3: Sull'host con il client CLI, crea o modifica il file di configurazione in ```~/.cde/config.yaml```. Puoi creare più profili nel file ```~/.cde/config.yaml``` e utilizzarli durante l'esecuzione dei comandi.
-
-Passaggio 4: Nel file di configurazione, specifica il Workload User CDP e l'endpoint del Virtual Cluster come segue. Il Worklaod User CDP è il tuo user:
+Passaggio 3: Nel file di configurazione, specifica il Workload User CDP e l'endpoint del Virtual Cluster come segue. Il Worklaod User CDP è il tuo user:
 
 ```
 user: <CDP_user>
 vcluster-endpoint: <CDE_virtual_cluster_endpoint>
 ```
 
-Passaggio 5: Salva il file di configurazione. Se non l'hai già fatto, assicurati che il file "cde" sia eseguibile eseguendo il comando ```chmod +x /path/to/cde```. Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe non essere trovata alcuna esecuzione ma l'output ti aiuterà a verificare che puoi connetterti al cluster.
+Passaggio 4: Salva il file di configurazione. Se non l'hai già fatto, assicurati che il file "cde" sia eseguibile eseguendo il comando ```chmod +x /path/to/cde```. Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe non essere trovata alcuna esecuzione ma l'output ti aiuterà a verificare che puoi connetterti al cluster.
 
 ```cde run list```
 

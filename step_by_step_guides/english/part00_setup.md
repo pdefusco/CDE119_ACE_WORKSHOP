@@ -41,6 +41,16 @@ This HOL uses a parameters.conf file to store the necessary credentials. Each us
 If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials. The data will already have been uplaoded by your Workshop Lead.
 If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload User from your CDP Admin.
 
+## Jobs API URL
+
+The Jobs API URL is the entry point to the cluster for the API and CLI. It will become necessary in the CDE CLI Setup and other parts of the labs.
+
+Take note of your cluster's JOBS API URL by navigating to the Administration tab and by clicking on the Cluster Details icon for your Virtual Cluster.
+
+![alt text](../../img/cde_virtual_cluster_details.png)
+
+![alt text](../../jobsapiurl.png)
+
 ## CDE CLI Setup
 
 Throughout the labs you will be using the CDE CLI. To set up the CLI you have two options: using the provided Docker container or manually installing it in your local machine.
@@ -62,9 +72,7 @@ To configure the CLI open the "config.yaml" file and add your credentials:
 
 * user: this will be provided to you by your Cloudera Workshop Lead. If you are working in your company's CDP Environment you can obtain your CDP Workload User from the CDP Management Console or by asking your CDP Administrator.
 
-* vcluster-endpoint: the JOBS API URL provided in the Cluster Details page. This can be accessed from the Administration tab and by clicking on the Cluster Details icon for your Virtual Cluster.
-
-![alt text](../../img/cde_virtual_cluster_details.png)
+* vcluster-endpoint: the JOBS API URL provided in the Cluster Details page.
 
 Test the CLI by running the following command. If your cluster is new no job runs may be found, but the output will help you ensure that you can connect to the cluster.
 
@@ -82,23 +90,16 @@ Step 1: Download the CLI Client:
     * Click the link under CLI TOOL to download the CLI client.
     * Change the permissions on the downloaded cde file to make it executable:
 
-Step 2: Determine the Virtual Cluster Endpoint URL:
+Step 2: On the host with the CLI client, create or edit the configuration file at ```~/.cde/config.yaml```. You can create multiple profiles in the ```~/.cde/config.yaml``` file and can be used while running commands.
 
-    * Navigate to the Cloudera Data Engineering Overview page.
-    * In the Environments column, select the environment containing the virtual cluster you want to access using the CLI.
-    * In the Virtual Clusters column on the right, click the Cluster Details icon for the virtual cluster you want to access.
-    * Click JOBS API URL to copy the URL to your clipboard.
-
-Step 3: On the host with the CLI client, create or edit the configuration file at ```~/.cde/config.yaml```. You can create multiple profiles in the ```~/.cde/config.yaml``` file and can be used while running commands.
-
-Step 4: In the configuration file, specify the CDP user and virtual cluster endpoint as follows. The CDP user is your workload username:
+Step 3: In the configuration file, specify the CDP user and virtual cluster endpoint as follows. The CDP user is your workload username:
 
 ```
 user: <CDP_user>
-vcluster-endpoint: <CDE_virtual_cluster_endpoint>
+vcluster-endpoint: <JOBS API URL>
 ```
 
-Step 5: Save the configuration file. If you have not done so already, make sure that the cde file is executable by running ```chmod +x /path/to/cde```. Test the CLI by running the following command. If your cluster is new no job runs may be found, but the output will help you ensure that you can connect to the cluster.
+Step 4: Save the configuration file. If you have not done so already, make sure that the cde file is executable by running ```chmod +x /path/to/cde```. Test the CLI by running the following command. If your cluster is new no job runs may be found, but the output will help you ensure that you can connect to the cluster.
 
 ```cde run list```
 

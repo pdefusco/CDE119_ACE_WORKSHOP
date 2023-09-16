@@ -40,6 +40,16 @@ Si estás participando en un evento de Cloudera, tu Líder de Taller te proporci
 
 Si estás reproduciendo los labs en tu Ambiente de CDE sin la ayuda de un Líder de Cloudera, deberás cargar los datos en una ruta de la Nube arbitraria y obtener tu Workload User de tu Administrador de CDP.
 
+## JOBS API URL
+
+La JOBS API URL es el punto de entrada al clúster para la API y la CLI. Será necesario en la Configuración de la CLI de CDE y en otras partes de los laboratorios.
+
+Toma nota de la JOBS API URL de tu clúster navegando a la pestaña de Administración y haciendo clic en el ícono Cluster Details para tu Clúster Virtual.
+
+![alt text](../../img/cde_virtual_cluster_details.png)
+
+![alt text](../../jobsapiurl.png)
+
 ## Configuración de la CLI de CDE
 
 A lo largo de los laboratorios, utilizarás la CLI de CDE. Para configurar la CLI, tienes dos opciones: utilizar el contenedor Docker proporcionado o instalarlo manualmente en tu máquina local.
@@ -61,7 +71,7 @@ Para configurar la CLI, abre el archivo "config.yaml" y agrega tus credenciales:
 
 * usuario: este te será proporcionado por el líder del Taller de Cloudera. Si estás trabajando en el entorno de CDP de tu empresa, puedes obtener tu Usuario de CDP Workload desde la Consola de Gestión de CDP o consultando a tu Administrador de CDP.
 
-* vcluster-endpoint: la URL de JOBS_API_URL proporcionada en la página Cluster Details. Esto se puede acceder desde la pestaña de Administración y haciendo clic en el ícono de Cluster Details para tu Clúster Virtual.
+* vcluster-endpoint: la JOBS API URL de tu clúster.
 
 ![alt text](../../img/cde_virtual_cluster_details.png)
 
@@ -80,24 +90,16 @@ Paso 1: Descarga el Cliente de la CLI:
     * Cambia los permisos del archivo cde descargado para que sea ejecutable:
 ```
 
-Paso 2: Determina la URL del Punto de Acceso del Clúster Virtual:
-```
-    * Navega a la página de Resumen de Cloudera Data Engineering.
-    * En la columna de Entornos, selecciona el entorno que contiene el clúster virtual al que deseas acceder mediante la CLI.
-    * En la columna de Clústeres Virtuales a la derecha, haz clic en el icono de Detalles del Clúster para el clúster virtual al que deseas acceder.
-    * Haz clic en URL DE LA JOBS API para copiar la URL en tu portapapeles."
-```
+Paso 2: En el host con el cliente de la CLI, crea o edita el archivo de configuración en ```~/.cde/config.yaml```. Puedes crear varios perfiles en el archivo ```~/.cde/config.yaml``` y se pueden utilizar al ejecutar comandos.
 
-Paso 3: En el host con el cliente de la CLI, crea o edita el archivo de configuración en ```~/.cde/config.yaml```. Puedes crear varios perfiles en el archivo ```~/.cde/config.yaml``` y se pueden utilizar al ejecutar comandos.
-
-Paso 4: En el archivo de configuración, especifica el usuario de CDP y el punto de acceso del clúster virtual de la siguiente manera. El usuario de CDP es tu Workload User:
+Paso 3: En el archivo de configuración, especifica el usuario de CDP y el punto de acceso del clúster virtual de la siguiente manera. El usuario de CDP es tu Workload User:
 
 ```
 user: <CDP_user>
-vcluster-endpoint: <CDE_virtual_cluster_endpoint>
+vcluster-endpoint: JOBS API URL de tu clúster
 ```
 
-Paso 5: Guarda el archivo de configuración. Si aún no lo has hecho, asegúrate de que el archivo "cde" sea ejecutable ejecutando ```chmod +x /path/to/cde```. Prueba la CLI ejecutando el siguiente comando. Si tu clúster es nuevo, es posible que no se encuentren ejecuciones de trabajos, pero la salida te ayudará a asegurarte de que puedes conectarte al clúster.
+Paso 4: Guarda el archivo de configuración. Si aún no lo has hecho, asegúrate de que el archivo "cde" sea ejecutable ejecutando ```chmod +x /path/to/cde```. Prueba la CLI ejecutando el siguiente comando. Si tu clúster es nuevo, es posible que no se encuentren ejecuciones de trabajos, pero la salida te ayudará a asegurarte de que puedes conectarte al clúster.
 
 ```cde run list```
 
