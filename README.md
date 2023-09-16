@@ -6,7 +6,7 @@ The Hands-On Lab (HOL) Workshops are an initiative by Cloudera Solutions Enginee
 
 The HOL is typically a three to four-hour event organized by Cloudera for CDP customers and prospects, where a small technical team from Cloudera Solutions Engineering provides cloud infrastructure for all participants and guides them through the completion of the labs with the help of presentations and open discussions.
 
-The HOL contained in this GitHub repository is dedicated to Cloudera Data Engineering 1.19. CDE is the CDP Data Service for data engineering commonly known for Spark and Airflow use cases in Private and Public Clouds.
+The HOL contained in this GitHub repository is dedicated to Cloudera Data Engineering 1.19.3. CDE is the CDP Data Service for data engineering commonly known for Spark and Airflow use cases in Private and Public Clouds.
 
 The content is primarily designed for developers, cloud administrators and big data software architects. However, little to no code changes are typically required and non-technical stakeholders such as project managers and analysts are encouraged to actively take part.
 
