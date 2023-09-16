@@ -13,7 +13,7 @@ Ogni labo bonus può essere eseguito indipendentemente dagli altri. In altre par
   * [Passaggi per la Configurazione di CDW](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passaggi-per-la-configurazione-di-cdw)
   * [Passaggi di Configurazione CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passaggi-di-configurazione-cde)
   * [Modifica del File DAG di Python](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#modifica-del-file-dag-di-python)
-* [Bonus Lab 3: Approfondimento CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#bonus-lab-3-approfondimento-utilizzo-della-cde-cli-per-ottimizzare-i-casi-duso-di-produzione-della-cde)
+* [Bonus Lab 3: Approfondimento CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#bonus-lab-3-approfondimento-cli-di-cde)
   * [Uso della CLI di CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#uso-della-cli-di-cde)
     * [Esecuzione Job Spark](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#esecuzione-job-spark)
     * [Verifica dello Stato del Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#verifica-dello-stato-del-job)
