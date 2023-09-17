@@ -35,12 +35,12 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
     * [Step 2: Edit Clusters.txt and Test CDE Connection](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-2-edit-clusterstxt-and-test-cde-connection)
     * [Step 3: Run the script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-3-run-the-script)
     * [Step 4: Schedule the Script as a Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-4-schedule-the-script-as-a-cron-job)
-* [Bonus Lab 5: Great Expectations with CDE Custom Docker Runtimes]()
-  * [Step 1: Explore the Dockerfile]()
-  * [Step 2: Build and Push the Dockerfile]()
-  * [Step 3: Create a CDE Credential]()
-  * [Step 4: Create a CDE Resource of type Custom Runtime]()
-  * [Step 5: Create the CDE File Resource and Job]()
+* [Bonus Lab 5: Great Expectations with CDE Custom Docker Runtimes](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#bonus-lab-5-great-expectations-with-cde-custom-docker-runtimes)
+  * [Step 1: Explore the Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-1-explore-the-dockerfile)
+  * [Step 2: Build and Push the Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-2-build-and-push-the-dockerfile)
+  * [Step 3: Create a CDE Credential](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-3-create-a-cde-credential)
+  * [Step 4: Create a CDE Resource of type Custom Runtime](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-4-create-a-cde-resource-of-type-custom-runtime)
+  * [Step 5: Create the CDE File Resource and Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-5-create-the-cde-file-resource-and-job)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#summary-1)
 
 

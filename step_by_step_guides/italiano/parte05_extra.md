@@ -34,12 +34,12 @@ Ogni lab bonus può essere eseguito indipendentemente dagli altri. In altre paro
     * [Passo 2: Modifica Clusters.txt e testa la connessione a CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-2-modifica-clusterstxt-e-testa-la-connessione-a-cde)
     * [Passo 3: Esegui lo script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-3-esegui-lo-script)
     * [Passo 4: Schedula lo script come un Job Cron](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-4-schedula-lo-script-come-un-job-cron)
-* [Bonus Lab 5: Great Expectations con Custom Docker Runtime]()
-  * [Passo 1: Esplora il Dockerfile]()
-  * [Passo 2: Crea il Build e Push con il Dockerfile]()
-  * [Passo 3: Crea una Credential CDE]()
-  * [Passo 4: Crea una Resource CDE di tipo Custom Runtime]()
-  * [Passo 5: Crea la Resource File e il Job CDE]()
+* [Bonus Lab 5: Great Expectations con Custom Docker Runtime](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#bonus-lab-5-great-expectations-con-custom-docker-runtime)
+  * [Passo 1: Esplora il Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-1-esplora-il-dockerfile)
+  * [Passo 2: Crea il Build e Push con il Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-2-crea-il-build-e-push-con-il-dockerfile)
+  * [Passo 3: Crea una Credential CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-3-crea-una-credential-cde)
+  * [Passo 4: Crea una Resource CDE di tipo Custom Runtime](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-4-crea-una-resource-cde-di-tipo-custom-runtime)
+  * [Passo 5: Crea la Resource File e il Job CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#passo-5-crea-la-resource-file-e-il-job-cde)
 * [Riepilogo](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte05_extra.md#riepilogo)
 
 

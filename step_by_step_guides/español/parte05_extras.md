@@ -34,12 +34,12 @@ Cada lab Adicional se puede realizar de manera independiente. En otras palabras,
     * [Paso 2: Edita Clusters.txt y Prueba la Conexión con CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-2-edita-clusterstxt-y-prueba-la-conexi%C3%B3n-con-cde)
     * [Paso 3: Despliegue de la App](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-3-despliegue-de-la-app)
     * [Paso 4: Programar el Script como un Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-4-programar-el-script-como-un-cron-job)
-* [Bonus Lab 5: Great Expectations con Custom Docker Runtime en CDE]()
-  * [Paso 1: Explora el Dockerfile]()
-  * [Paso 2: Construye y Publica el Dockerfile]()
-  * [Paso 3: Crea una Credential de CDE]()
-  * [Paso 4: Crea un CDE Resource del tipo Custom Runtime]()
-  * [Paso 5: Crea el File Resource y el Job de CDE]()
+* [Bonus Lab 5: Great Expectations con Custom Docker Runtime en CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#bonus-lab-5-great-expectations-con-custom-docker-runtime-en-cde)
+  * [Paso 1: Explora el Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-1-explora-el-dockerfile)
+  * [Paso 2: Construye y Publica el Dockerfile](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-2-construye-y-publica-el-dockerfile)
+  * [Paso 3: Crea una Credential de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-3-crea-una-credential-de-cde)
+  * [Paso 4: Crea un CDE Resource del tipo Custom Runtime](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-4-crea-un-cde-resource-del-tipo-custom-runtime)
+  * [Paso 5: Crea el File Resource y el Job de CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-5-crea-el-file-resource-y-el-job-de-cde)
 * [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#resumen)
 
 
