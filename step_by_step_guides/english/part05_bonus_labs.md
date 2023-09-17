@@ -35,7 +35,14 @@ Each Bonus Lab can be run independently of another. In other words, you can run 
     * [Step 2: Edit Clusters.txt and Test CDE Connection](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-2-edit-clusterstxt-and-test-cde-connection)
     * [Step 3: Run the script](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-3-run-the-script)
     * [Step 4: Schedule the Script as a Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#step-4-schedule-the-script-as-a-cron-job)
+* [Bonus Lab 5: Great Expectations with CDE Custom Docker Runtimes]()
+  * [Step 1: Explore the Dockerfile]()
+  * [Step 2: Build and Push the Dockerfile]()
+  * [Step 3: Create a CDE Credential]()
+  * [Step 4: Create a CDE Resource of type Custom Runtime]()
+  * [Step 5: Create the CDE File Resource and Job]()
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_bonus_labs.md#summary-1)
+
 
 ### Bonus Lab 1: CDE Airflow Orchestration (In-Depth)
 
@@ -514,6 +521,91 @@ The script can run as often as you would like. For example, you could schedule a
 * * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
 ```
 
+
+### Bonus Lab 5: Great Expectations with CDE Custom Docker Runtimes
+
+As an alternative to CDE Resources of type File and Python you can use Custom Runtime CDE Resources to pre-bake
+dependencies into a self-contained Docker file that can be used across multiple Spark jobs.
+
+Generally, Custom Spark runtime Docker images are recommended when
+custom packages and libraries need to be installed and used when executing Spark jobs. For example, custom packages and libraries can be proprietary software packages like RPMs that need to be compiled to generate the required binaries.
+
+In this lab we will use a CDE Custom Runtime to run a Spark Job with Great Expectations, an increasingly popular Python library designed to help data engineers, analysts, and scientists ensure the quality, accuracy, and completeness of their data.
+
+Great Expectations provides an easy and intuitive way to define and manage expectations (for example “this column should only contain positive values”), validate data against those expectations, and automatically alert users when expectations are violated.
+
+>**⚠ Warning**  
+> This Lab requires Docker.
+
+##### Step 1: Explore the Dockerfile
+
+In an editor of your choice open the Dockerfile located in the resources_files folder explore the build. Notice the following:
+
+* You can use build a custom image using Cloudera's DEX base image.
+
+```
+FROM docker-private.infra.cloudera.com/cloudera/dex/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15
+```
+
+* You can not only install custom packages but also different versions of Python.
+
+```
+RUN yum install ${YUM_OPTIONS} gcc openssl-devel libffi-devel bzip2-devel wget python39 python39-devel && yum clean all && rm -rf /var/cache/yum
+
+RUN /usr/bin/python3.9 -m pip install great_expectations==0.17.15
+```
+
+##### Step 2: Build and Push the Dockerfile
+
+Build the Dockerfile locally and push it to your Public Docker Repository.
+
+```
+docker build --network=host -t pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom . -f Dockerfile
+
+docker push pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom
+```
+
+##### Step 3: Create a CDE Credential
+
+CDE will need to access the image from the repository where the Runtime has been pushed. To provide access you can create a CDE Credential.
+
+Create the CDE Credential using the CDE CLI. As in part 2 you can use the CLI in the provided Docker container or in your local machine. If you have not set up the CLI as directed return to [part00_setup]().
+
+```
+docker run -it pauldefusco/cde_cli_workshop_1_19:latest
+```
+
+Run the following command to create the CDE Credential.
+
+```
+cde credential create --name docker-creds --type docker-basic --docker-server hub.docker.com --docker-username yourdockerusername
+```
+
+##### Step 4: Create a CDE Resource of type Custom Runtime
+
+Run the following command to create the Custom Runtime in your cluster. Then visit the Resources tab to validate that the new Resource has been added.
+
+```
+cde resource create --name dex-spark-runtime-greatexpectations --image pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom --image-engine spark3 --type custom-runtime-image
+```
+
+##### Step 5: Create the CDE File Resource and Job
+
+The remaining commands are similar to the ones you've run in Part 2. Create a CDE Resource of type File to upload the Great Expectations Spark Job and a sample dataset. Finally create a CDE Job and run it.
+
+```
+cde resource create --name greatexpectations_files --type files
+
+cde resource upload --name greatexpectations_files --local-path data/lending.csv
+
+cde resource upload --name greatexpectations_files --local-path ge_dataprofiler.py
+
+cde job create --name ge_job --type spark --application-file ge_dataprofiler.py --executor-cores 4 --executor-memory "4g" --mount-1-resource greatexpectations_files --runtime-image-resource-name dex-spark-runtime-greatexpectations
+
+cde job run --name ge_job
+```
+
+Validate the CDE Job Run in the CDE UI or via the CLI.
 
 ## Summary
 

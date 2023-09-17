@@ -34,7 +34,14 @@ Cada lab Adicional se puede realizar de manera independiente. En otras palabras,
     * [Paso 2: Edita Clusters.txt y Prueba la Conexión con CDE](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-2-edita-clusterstxt-y-prueba-la-conexi%C3%B3n-con-cde)
     * [Paso 3: Despliegue de la App](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-3-despliegue-de-la-app)
     * [Paso 4: Programar el Script como un Cron Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#paso-4-programar-el-script-como-un-cron-job)
+* [Bonus Lab 5: Great Expectations con Custom Docker Runtime en CDE]()
+  * [Paso 1: Explora el Dockerfile]()
+  * [Paso 2: Construye y Publica el Dockerfile]()
+  * [Paso 3: Crea una Credential de CDE]()
+  * [Paso 4: Crea un CDE Resource del tipo Custom Runtime]()
+  * [Paso 5: Crea el File Resource y el Job de CDE]()
 * [Resumen](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/espa%C3%B1ol/parte05_extras.md#resumen)
+
 
 ### Bonus Lab 1: Orquestación de CDE Airflow (En Detalle)
 
@@ -121,7 +128,7 @@ Como en el ejemplo anterior, primero crea *(pero no ejecutes)* tres Jobs de Spar
 
 Luego, abre "bonus-01_Airflow_Operators.py" en tu editor y actualiza tu nombre de usuario en la línea 51. Asegúrate de que los nombres de los Jobs en las líneas 55-59 reflejen los nombres de los tres Jobs de Spark de CDE tal como los ingresaste en la interfaz de Job de CDE.
 
-Finalmente, vuelve a cargar el guión en tu Recurso de Archivos de CDE. Crea un nuevo Job de CDE de tipo Airflow y selecciona el guión de tu Recurso de CDE.
+Finalmente, vuelve a cargar el guión en tu Resource de tipo File. Crea un nuevo Job de CDE de tipo Airflow y selecciona el guión de tu Resource.
 
 >**Note**
 >El operador SimpleHttpOperator se puede usar para interactuar con sistemas de terceros e intercambiar datos hacia y desde una ejecución de Job de CDE Airflow. Por ejemplo, podrías desencadenar la ejecución de Jobs fuera de CDP o ejecutar la lógica del DAG de CDE Airflow según las entradas de sistemas de terceros.
@@ -223,7 +230,7 @@ Finalmente, observa que las dependencias de tareas incluyen tanto los pasos spar
 spark_step >> dw_step
 ```
 
-Luego, crea un nuevo Job CDE Airflow con el nombre "CDW Dag". Sube el nuevo archivo DAG al mismo recurso CDE o a uno nuevo como parte del proceso de creación.
+Luego, crea un nuevo Job CDE Airflow con el nombre "CDW Dag". Sube el nuevo archivo DAG al mismo Resource de CDE o a uno nuevo como parte del proceso de creación.
 
 ![alt text](../../img/bonus1_step2.png)
 
@@ -300,7 +307,7 @@ cde resource describe --name "my_CDE_Resource"
 
 ###### Programar un Job de Spark de CDE con el Archivo Subido al File Resource
 
-Ejecute este comando para crear un Job de Spark de CDE utilizando el archivo subido al Recurso de CDE.
+Ejecute este comando para crear un Job de Spark de CDE utilizando el archivo subido al Resource de CDE.
 
 ```
 cde job create --name "PySparkJob_from_CLI" --type spark --conf "spark.pyspark.python=python3" --application-file "/app/mount/01_pyspark-sql.py" --cron-expression "0 */1 * * *" --schedule-enabled "true" --schedule-start "2022-11-28" --schedule-end "2023-08-18" --mount-1-resource "my_CDE_Resource"
@@ -408,7 +415,7 @@ JOBS_API_URL = "https://ewefwfw.cde-6fhtj4hthr.my-cluster.ylcu-atmi.cloudera.sit
 tok = set_cde_token()
 ```
 
-Aunque esto puede funcionar en un entorno interactivo, recomendamos utilizar Sesiones de CDE ya que te permiten usar directamente las consolas PySpark y Spark Scala. En general, la API es una excelente opción para construir aplicaciones. Por ejemplo, podrías usar Python para enviar una solicitud a la API de CDE con el fin de monitorear los Recursos de CDE:
+Aunque esto puede funcionar en un entorno interactivo, recomendamos utilizar Sesiones de CDE ya que te permiten usar directamente las consolas PySpark y Spark Scala. En general, la API es una excelente opción para construir aplicaciones. Por ejemplo, podrías usar Python para enviar una solicitud a la API de CDE con el fin de monitorear los Resource de CDE:
 
 ```
 url = os.environ["JOBS_API_URL"] + "/resources"
@@ -470,7 +477,7 @@ Añade tu JOBS_API_URL y dirección de correo electrónico a clusters.txt y elim
 python3 connection_tester.py jobs_api_url cdpusername cdppwd
 ```
 
-La salida en la terminal debería confirmar que se ha creado exitosamente un recurso de prueba.
+La salida en la terminal debería confirmar que se ha creado exitosamente un Resource de prueba.
 
 
 #### Paso 3: Despliegue de la App
@@ -511,6 +518,90 @@ El script puede ejecutarse tan frecuentemente como desees. Por ejemplo, podrías
 ```
 * * * * * /usr/bin/python ~/path/to/proj/cde_alerter/alerter.py
 ```
+
+
+### Bonus Lab 5: Great Expectations con Custom Docker Runtime en CDE
+
+Como alternativa a los Resource de CDE del tipo Archivo y Python, puedes utilizar los Custom Runtime Resource de CDE para preconfigurar las dependencias en un archivo Docker independiente que se pueda utilizar en múltiples Jobs de Spark.
+
+Generalmente, se recomiendan las imágenes Docker personalizadas de Tiempos de Ejecución de Spark cuando se necesitan instalar y utilizar paquetes y bibliotecas personalizadas al ejecutar Jobs de Spark. Por ejemplo, los paquetes y bibliotecas personalizados pueden ser paquetes de software propietarios como RPM que deben compilarse para generar los binarios requeridos.
+
+En este laboratorio, utilizaremos un Tiempo de Ejecución Personalizado de CDE para ejecutar un Job de Spark con Great Expectations, una biblioteca de Python cada vez más popular diseñada para ayudar a ingenieros de datos, analistas y científicos de datos a garantizar la calidad, precisión y completitud de sus datos.
+
+Great Expectations proporciona una forma fácil e intuitiva de definir y gestionar expectativas (por ejemplo, "esta columna debe contener solo valores positivos"), validar datos frente a esas expectativas y alertar automáticamente a los usuarios cuando se violan las expectativas.
+
+>**⚠ Warning**  
+> Este Lab requiere Docker.
+
+##### Paso 1: Explora el Dockerfile
+
+En un editor de tu elección, abre el Dockerfile ubicado en la carpeta resources_files para explorar la construcción. Observa lo siguiente:
+
+* Puedes utilizar una imagen personalizada de construcción con la base DEX de Cloudera.
+
+```
+FROM docker-private.infra.cloudera.com/cloudera/dex/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15
+```
+
+* No solo puedes instalar paquetes personalizados, sino también diferentes versiones de Python.
+
+```
+RUN yum install ${YUM_OPTIONS} gcc openssl-devel libffi-devel bzip2-devel wget python39 python39-devel && yum clean all && rm -rf /var/cache/yum
+
+RUN /usr/bin/python3.9 -m pip install great_expectations==0.17.15
+```
+
+##### Paso 2: Construye y Publica el Dockerfile
+
+Crea un Build con el Dockerfile localmente y publícalo en tu Repositorio Público de Docker.
+
+```
+docker build --network=host -t pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom . -f Dockerfile
+
+docker push pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom
+```
+
+##### Paso 3: Crea una Credential de CDE
+
+CDE necesitará acceder a la imagen desde el repositorio donde se ha publicado el Custom Runtime. Para proporcionar acceso, puedes crear una Credential de CDE.
+
+Crea la Credencial de CDE utilizando la CLI de CDE. Como se indicó en la parte 2, puedes utilizar la CLI en el contenedor Docker proporcionado o en tu máquina local. Si aún no has configurado la CLI como se indica, regresa a [parte00_setup]().
+
+```
+docker run -it pauldefusco/cde_cli_workshop_1_19:latest
+```
+
+Ejecuta el siguiente comando para crear la Credencial de CDE.
+
+```
+cde credential create --name docker-creds --type docker-basic --docker-server hub.docker.com --docker-username tu_nombre_de_usuario_de_docker
+```
+
+##### Paso 4: Crea un CDE Resource del tipo Custom Runtime
+
+Ejecuta el siguiente comando para crear el Tiempo de Ejecución Personalizado en tu clúster. Luego, visita la pestaña Resources para validar que se haya agregado el nuevo Resource.
+
+```
+cde resource create --name dex-spark-runtime-greatexpectations --image pauldefusco/dex-spark-runtime-3.2.3-7.2.15.8:1.20.0-b15-custom --image-engine spark3 --type custom-runtime-image
+```
+
+##### Paso 5: Crea el File Resource y el Job de CDE
+
+Los comandos restantes son similares a los que has ejecutado en la Parte 2. Crea un Resource de CDE del tipo Archivo para cargar el Job de Spark de Great Expectations y un conjunto de datos de muestra. Finalmente, crea un Job de CDE y ejecútalo.
+
+```
+cde resource create --name greatexpectations_files --type files
+
+cde resource upload --name greatexpectations_files --local-path data/lending.csv
+
+cde resource upload --name greatexpectations_files --local-path ge_dataprofiler.py
+
+cde job create --name ge_job --type spark --application-file ge_dataprofiler.py --executor-cores 4 --executor-memory "4g" --mount-1-resource greatexpectations_files --runtime-image-resource-name dex-spark-runtime-greatexpectations
+
+cde job run --name ge_job
+```
+
+Valida la Ejecución del Job en la Interfaz de Usuario de CDE o mediante la CLI.
 
 
 ## Resumen
