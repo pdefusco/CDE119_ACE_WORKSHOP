@@ -1,30 +1,40 @@
 # Introduction
 
-This guide provides instructions for setting up the project in your local machine and a brief introduction to the main concepts related to the Cloudera Data Engineering Service.
+This page provides instructions for setting up the necessary data assets. Follow the steps below as a checklist to ensure you are good to go.
 
-## Requirements
+## Table of Contents
 
-In order to execute the Hands On Labs you need:
+* [1. Requirements]()
+* [2. Recommendations Before you Start]()
+* [3. Project Download]()
+* [4. CDP User & Credentials]()
+* [5. Data Upload to Cloud Storage]
+* [6. parameters.conf Configuration]()
+* [7. Jobs API URL]
+* [8. CDE CLI Setup]()
+  * [8A. Configuring the CLI with the Provided Docker Container]()
+  * [8B. Installing the CLI in your Local Machine]()
+* [Index]()
 
-* A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok).
+## 1. Requirements
+
+In order to execute the Labs you need:
+
+* A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok). The CDE Service must be on version 1.19.3.
 
 * Very few code changes are required but familiarity with Python and PySpark is highly recommended.
 
-* Bonus Lab 1 requires a Hive CDW Virtual Warehouse. This lab is optional.
+* Bonus Lab 2 requires a Hive CDW Virtual Warehouse. This lab is optional.
 
-* A working installation of the CDE CLI. For this you have two options: installing the CLI with the provided steps or using Docker. More details are provided below in the CDE CLI Setup section.
+* A working installation of the CDE CLI. For this you have two options: pulling the provided Docker image or installing the CLI on your local machine. More details are provided below in step 7.
 
-## Recommendations Before you Start
+## 2. Recommendations Before you Start
 
-Throughout the labs, this guide will instruct you to make minor edits to some of the scripts. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom is highly recommended.
+This guide will instruct you to make minor edits to some of the scripts as you go along with the labs. Please be prepared to make changes in an editor and re-upload them to the same CDE File Resource after each change. Having all scripts open at all times in an editor such as Atom or Sublime Text is highly recommended.
 
-Your Cloudera Workshop Lead will load the required datasets to Cloud Storage ahead of the workshop. If you are reproducing these labs on your own, ensure you have placed all the contents of the data folder in a Cloud Storage path of your choice.
+## 3. Project Download
 
-Each user will be assigned a username and cloud storage path. Each script will read your credentials from "parameters.conf" which you will have placed in your CDE File Resource. Before you start the labs, open the "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead. If you are reproducing these labs on your own you will have to ensure that these values reflect the Cloud Storage path where you loaded the data.
-
-## Project Download
-
-Clone this GitHub repository to your local machine or the VM where you will be running the script.
+Clone this Git repository to your local machine.
 
 ```
 mkdir ~/Documents/cde_ace_hol
@@ -34,14 +44,29 @@ git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 
 Alternatively, if you don't have `git` installed on your machine, create a folder on your local computer; navigate to [this URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) and manually download the files.
 
-## CDP User & Credentials
+## 4. CDP User & Credentials
 
-This HOL uses a parameters.conf file to store the necessary credentials. Each user is asked to enter their Workload Username at line 4 and Datalake paths at lines 2 and 3. The Workload Password is automatically inherited at the CDP Environment level and does not be set.
+If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials.
 
-If you are participating in a Cloudera Event your Workshop Lead will provide you with the above credentials. The data will already have been uplaoded by your Workshop Lead.
 If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload User from your CDP Admin.
 
-## Jobs API URL
+## 5. Data Upload to Cloud Storage
+
+Upload the data folder in a Cloud Storage location of your choice.
+
+If you are attending a Public HOL event with infrastructure provided by Cloudera the data will already have been uplaoded by your Workshop Lead.
+
+If you are reproducing these labs in your own CDE deployment ensure you have placed all the contents of the data folder in a Cloud Storage location of your choice.
+
+## 6. parameters.conf Configuration
+
+Each script will read your credentials from "parameters.conf". Instructions for uploading this in your CDE File Resource are provided in part 2.
+
+Before you start the labs, open "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead.
+
+If you are reproducing these labs on your own you will have to ensure that these values reflect the Cloud Storage path where you loaded the data.
+
+## 7. Jobs API URL
 
 The Jobs API URL is the entry point to the cluster for the API and CLI. It will become necessary in the CDE CLI Setup and other parts of the labs.
 
@@ -51,12 +76,13 @@ Take note of your cluster's JOBS API URL by navigating to the Administration tab
 
 ![alt text](../../img/jobsapiurl.png)
 
-## CDE CLI Setup
+## 8. CDE CLI Setup
 
 Throughout the labs you will be using the CDE CLI. To set up the CLI you have two options: using the provided Docker container or manually installing it in your local machine.
+
 *We highly recommend using the provided Docker container* as the configuration is much simpler.
 
-#### Configuring the CLI with the Provided Docker Container
+#### 8A. Configuring the CLI with the Provided Docker Container
 
 In order to use the provided Docker container first pull with the following command:
 
@@ -78,7 +104,7 @@ Test the CLI by running the following command. If your cluster is new no job run
 
 ```cde run list```
 
-#### Installing the CLI in your Local Machine
+#### 8B. Installing the CLI in your Local Machine
 
 To manually install the CLI in your local machine follow the steps below:
 
@@ -104,7 +130,6 @@ Step 4: Save the configuration file. If you have not done so already, make sure 
 ```cde run list```
 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
-
 
 ## Index
 

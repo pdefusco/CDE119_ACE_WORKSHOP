@@ -531,7 +531,7 @@ In questo laboratorio, utilizzeremo un Tempo di Esecuzione Personalizzato di CDE
 
 Great Expectations fornisce un modo facile e intuitivo per definire e gestire le aspettative (ad esempio, "questa colonna dovrebbe contenere solo valori positivi"), convalidare i dati rispetto a tali aspettative e avvisare automaticamente gli utenti quando le aspettative vengono violate.
 
->**⚠ Attenzione**  
+>**⚠ Avviso**  
 > Questo Lab richiede Docker.
 
 ##### Passo 1: Esplora il Dockerfile

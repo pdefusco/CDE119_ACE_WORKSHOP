@@ -1,28 +1,42 @@
 # Introduzione
 
-Questa guida fornisce istruzioni per configurare il progetto nel tuo computer e una breve introduzione ai concetti principali legati al Servizio di Ingegneria dei Dati di Cloudera.
+Questa pagina fornisce istruzioni per configurare gli asset di dati necessari. Segui i passaggi di seguito come una checklist per assicurarti di essere pronto per iniziare.
 
-## Requisiti
+## Indice
 
-Per eseguire i Lab, hai bisogno di:
+* [1. Requisiti]()
+* [2. Raccomandazioni Per L'Uso di Queste Guide]()
+* [3. Download del Progetto]()
+* [4. Utente e Credenziali di CDP]()
+* [5. Caricamento Dati su Cloud Storage]()
+* [6. Configurazione parameters.conf]()
+* [7. URL API dei Lavori]
+* [8. Configurazione CDE CLI]()
+  * [8A. Configurazione della CLI con il Contenitore Docker Fornito]()
+  * [8B. Installazione Manuale della CLI]()
+* [Indice Guide]()
 
-* Un Virtual Cluster CDE abilitato per Spark 3 e Iceberg (Azure, AWS e Private Cloud sono accettati).
+## 1. Requisiti
 
-* Sono necessari pochi cambiamenti nel codice, ma è altamente consigliata la familiarità con Python e PySpark.
+Per eseguire i Laboratori sono necessari:
 
-* Il Bonus Lab 1 richiede un Hive CDW Virtual Warehouse. Questo Lab è opzionale.
+* Un cluster virtuale CDE abilitato per Spark 3 e Iceberg (Azure, AWS e Cloud Privato ok). Il servizio CDE deve essere nella versione 1.19.3.
 
-## Raccomandazioni Per L'Uso di Queste Guide
+* Sono necessari pochi cambiamenti di codice ma è altamente consigliata la familiarità con Python e PySpark.
 
-Gli script sono pronti all'uso e richiedono minime modifiche. Questa guida ti indicherà di apportare modifiche minori a alcuni degli script. Preparati a effettuare modifiche in un editor e a ricaricarli nella stessa CDE File Resource dopo ogni modifica. È altamente consigliato avere tutti gli script aperti in un editor come Atom.
+* Il Laboratorio Bonus 2 richiede un Warehouse Virtuale Hive CDW. Questo laboratorio è opzionale.
 
-Il tuo responsabile del workshop Cloudera caricherà i dataset richiesti su Cloud Storage prima del workshop. Se stai riproducendo questi Lab da solo, assicurati di aver inserito tutti i contenuti della cartella dei dati in un percorso di Cloud Storage a tua scelta.
+* Un'installazione funzionante della CLI di CDE. Per questo hai due opzioni: scaricare l'immagine Docker fornita o installare la CLI sulla tua macchina locale. Ulteriori dettagli sono forniti di seguito nel passaggio 7.
 
-Ad ogni utente verrà assegnato un nome utente e un percorso di Cloud Storage. Ogni script leggerà le tue credenziali da "parameters.conf", che avrai inserito nella tua File Resource. Prima di iniziare i Lab, apri "parameters.conf" situato nella cartella "resources_files" e modifica tutti e tre i campi con i valori forniti dal tuo responsabile del workshop Cloudera. Se stai riproducendo questi Lab da solo, dovrai assicurarti che questi valori riflettano il percorso di Cloud Storage in cui hai caricato i dati.
+## 2. Raccomandazioni Per L'Uso di Queste Guide
 
-## Project Download
+Questa guida ti indicherà di apportare piccole modifiche a alcuni dei script man mano che procedi con i laboratori.
 
-Clona questo repository GitHub nel tuo computer o nella macchina virtuale dove eseguirai gli script.
+Sii preparato a effettuare modifiche in un editor e a ricaricarle nello stesso File Resource di CDE dopo ogni modifica. È altamente consigliato avere tutti gli script aperti in ogni momento in un editor come Atom o Sublime Text.
+
+## 3. Download del Progetto
+
+Clona questo repository Git sulla tua macchina locale.
 
 ```
 mkdir ~/Documents/cde_ace_hol
@@ -32,30 +46,45 @@ git clone https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git
 
 In alternativa, se non hai git installato sulla tua macchina, crea una cartella sul tuo computer, vai a [questo URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP.git) e scarica manualmente i file.
 
-## Utente e Credenziali CDP
+## 4. Utente e Credenziali CDP
 
-Questo HOL utilizza un file parameters.conf per memorizzare le credenziali necessarie. A ciascun utente viene richiesto di inserire il proprio Workload User CDP alla riga 4 e i path Cloud per i dati alle righe 2 e 3. La Workload Password CDP è automaticamente ereditata a livello di Ambiente CDP e non deve essere impostata.
+Se stai partecipando a un evento Cloudera, il tuo Workshop Lead ti fornirà le credenziali sopra menzionate.
 
-Se stai partecipando a un evento Cloudera, il tuo coordinatore del workshop ti fornirà le credenziali sopra indicate. I dati saranno già stati caricati dal coordinatore del workshop.
+Se stai riproducendo i laboratori nel tuo ambiente CDE senza l'aiuto di un Workshop Lead di Cloudera, dovrai caricare i dati in un percorso Cloud arbitrario e ottenere il tuo Utente di Carico di Lavoro dal tuo Amministratore di CDP.
 
-Se stai riproducendo i lab nel tuo ambiente CDE senza l'aiuto di un coordinatore Cloudera, dovrai caricare i dati su un percorso cloud di tua scelta e ottenere il tuo Workload User dal tuo amministratore CDP.
+## 5. Caricamento Dati su Cloud Storage
 
-## JOBS API URL
+Carica la cartella "data" in una location di Cloud Storage a tua scelta.
+
+Se stai partecipando a un evento HOL pubblico con infrastruttura fornita da Cloudera, i dati saranno già stati caricati dal tuo Workshop Lead.
+
+Se stai riproducendo questi lab nella tua stessa implementazione di CDE, assicurati di aver inserito tutti i contenuti della cartella dei dati in una posizione di Cloud Storage a tua scelta.
+
+## 6. Configurazione parameters.conf
+
+Ogni script leggerà le tue credenziali da "parameters.conf". Le istruzioni per caricare questo nel tuo File Resource di CDE sono fornite nella parte 2.
+
+Prima di iniziare i lab, apri "parameters.conf" situato nella cartella "resources_files" e modifica tutti e tre i campi con i valori forniti dal tuo Cloudera ACE Workshop Lead.
+
+Se stai riproducendo questi laboratori da solo, dovrai assicurarti che questi valori riflettano il path di Cloud Storage in cui hai caricato i dati.
+
+## 7. Jobs API URL
 
 Il JOBS API URL è il punto di accesso al cluster per la API e la CLI. Sarà necessario durante la configurazione della CLI di CDE e in altre parti dei lab.
 
-Nota il JOBS API URL del tuo cluster navigando nella scheda di Amministrazione e cliccando sull'icona Cluster Details per il tuo Cluster Virtuale.
+Fai nota del JOBS API URL del tuo cluster navigando nella scheda di Amministrazione e cliccando sull'icona Cluster Details del tuo Cluster Virtuale.
 
 ![alt text](../../img/cde_virtual_cluster_details.png)
 
 ![alt text](../../img/jobsapiurl.png)
 
-## Setup CLI di CDE
+## 8. Configurazione CDE CLI
 
-Durante i lab utilizzerai la CLI di CDE. Per configurare la CLI hai due opzioni: utilizzare il contenitore Docker fornito o installarlo manualmente sulla tua macchina locale.
-Consigliamo vivamente di utilizzare il contenitore Docker, poiché la configurazione è molto più semplice.
+Durante tutto il corso dei laboratori, utilizzerai la CDE CLI. Per configurare la CLI, hai due opzioni: utilizzare il contenitore Docker fornito o installarlo manualmente sulla tua macchina locale.
 
-#### Configurare la CLI con il Contenitore Docker Fornito
+*Raccomandiamo vivamente di utilizzare il contenitore Docker fornito*, poiché la configurazione è molto più semplice.
+
+#### 8A. Configurare la CLI con il Contenitore Docker Fornito
 
 Per utilizzare il contenitore Docker fornito, esegui prima il comando seguente per scaricarlo:
 
@@ -79,7 +108,7 @@ Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe
 
 ```cde run list```
 
-#### Installazione della CLI di CDE
+#### 8B. Installazione Manuale della CLI
 
 Passaggio 1: Scarica il Client CLI:
 ```
@@ -105,7 +134,7 @@ Passaggio 4: Salva il file di configurazione. Se non l'hai già fatto, assicurat
 
 Per ulteriori informazioni sulla CLI, visita la [documentazione](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
 
-## Index
+## Indice Guide
 
 * La [Parte 1](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part01_cde_architecture.md#cde-architecture) fornisce un'introduzione all'Architettura del Servizio CDE. Imparerai sui principali componenti di CDE, inclusi l'Ambiente, il Cluster Virtuale e altro ancora.
 * Nella [Parte 2](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#part-2-developing-spark-jobs-in-cde) svilupperai e dispiegherai quattro Spark Jobs utilizzando l'interfaccia di CDE, la CLI di CDE e le Sessioni Interattive di CDE. Uno dei Job si concentrerà su Apache Iceberg.
