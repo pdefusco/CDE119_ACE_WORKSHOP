@@ -20,7 +20,7 @@ Esta página proporciona instrucciones para configurar los activos de datos nece
 
 Para llevar a cabo los labs, necesitas:
 
-* Un clúster virtual CDE con Spark 3 habilitado y compatible con Iceberg (Azure, AWS y nube privada son válidos). El servicio CDE debe estar en la versión 1.19.3.
+* Un clúster virtual CDE habilitado con Spark 3, Iceberg Analytics Tables, de tipo "All-Purpose". El servicio CDE debe estar en la versión 1.19.3 (Azure, AWS and Private Cloud ok). 
 
 * Se requieren cambios mínimos en el código, pero se recomienda tener familiaridad con Python y PySpark.
 

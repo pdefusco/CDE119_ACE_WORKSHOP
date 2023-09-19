@@ -20,7 +20,7 @@ This page provides instructions for setting up the necessary data assets. Follow
 
 In order to execute the Labs you need:
 
-* A Spark 3 and Iceberg-enabled CDE Virtual Cluster (Azure, AWS and Private Cloud ok). The CDE Service must be on version 1.19.3.
+* A Spark 3, Iceberg-enabled, All-Purpose CDE Virtual Cluster. The CDE Service must be on version 1.19.3 (Azure, AWS and Private Cloud ok).
 
 * Very few code changes are required but familiarity with Python and PySpark is highly recommended.
 

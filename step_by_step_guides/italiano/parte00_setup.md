@@ -20,7 +20,7 @@ Questa pagina fornisce istruzioni per configurare gli asset di dati necessari. S
 
 Per eseguire i Laboratori sono necessari:
 
-* Un cluster virtuale CDE abilitato per Spark 3 e Iceberg (Azure, AWS e Cloud Privato ok). Il servizio CDE deve essere nella versione 1.19.3.
+* Un cluster virtuale CDE di tipo "All-Purpose" abilitato per Spark 3 e Iceberg Analytic Tables. Il servizio CDE deve essere dispiegato nella versione 1.19.3 (Azure, AWS e Private Cloud ok).
 
 * Sono necessari pochi cambiamenti di codice ma è altamente consigliata la familiarità con Python e PySpark.
 
