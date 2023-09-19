@@ -4,17 +4,17 @@ This page provides instructions for setting up the necessary data assets. Follow
 
 ## Table of Contents
 
-* [1. Requirements]()
-* [2. Recommendations Before you Start]()
-* [3. Project Download]()
-* [4. CDP User & Credentials]()
-* [5. Data Upload to Cloud Storage]
-* [6. parameters.conf Configuration]()
-* [7. Jobs API URL]
-* [8. CDE CLI Setup]()
-  * [8A. Configuring the CLI with the Provided Docker Container]()
-  * [8B. Installing the CLI in your Local Machine]()
-* [Index]()
+* [1. Requirements](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#1-requirements)
+* [2. Recommendations Before you Start](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#2-recommendations-before-you-start)
+* [3. Project Download](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#3-project-download)
+* [4. CDP User & Credentials](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#4-cdp-user--credentials)
+* [5. Data Upload to Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#5-data-upload-to-cloud-storage)
+* [6. parameters.conf Configuration](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6-parametersconf-configuration)
+* [7. Jobs API URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#7-jobs-api-url)
+* [8. CDE CLI Setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8-cde-cli-setup)
+  * [8A. Configuring the CLI with the Provided Docker Container](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8a-configuring-the-cli-with-the-provided-docker-container)
+  * [8B. Installing the CLI in your Local Machine](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8b-installing-the-cli-in-your-local-machine)
+* [Index](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#index)
 
 ## 1. Requirements
 

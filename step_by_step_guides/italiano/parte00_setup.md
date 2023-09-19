@@ -4,17 +4,17 @@ Questa pagina fornisce istruzioni per configurare gli asset di dati necessari. S
 
 ## Indice
 
-* [1. Requisiti]()
-* [2. Raccomandazioni Per L'Uso di Queste Guide]()
-* [3. Download del Progetto]()
-* [4. Utente e Credenziali di CDP]()
-* [5. Caricamento Dati su Cloud Storage]()
-* [6. Configurazione parameters.conf]()
-* [7. URL API dei Lavori]
-* [8. Configurazione CDE CLI]()
-  * [8A. Configurazione della CLI con il Contenitore Docker Fornito]()
-  * [8B. Installazione Manuale della CLI]()
-* [Indice Guide]()
+* [1. Requisiti](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#1-requisiti)
+* [2. Raccomandazioni Per L'Uso di Queste Guide](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#2-raccomandazioni-per-luso-di-queste-guide)
+* [3. Download del Progetto](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#3-download-del-progetto)
+* [4. Utente e Credenziali di CDP](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#4-utente-e-credenziali-cdp)
+* [5. Caricamento Dati su Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#5-caricamento-dati-su-cloud-storage)
+* [6. Configurazione parameters.conf](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#6-configurazione-parametersconf)
+* [7. Jobs API URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#7-jobs-api-url)
+* [8. Configurazione CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#8-configurazione-cde-cli)
+  * [8A. Configurazione della CLI con il Contenitore Docker Fornito](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#8a-configurare-la-cli-con-il-contenitore-docker-fornito)
+  * [8B. Installazione Manuale della CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#8b-installazione-manuale-della-cli)
+* [Indice Guide](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/italiano/parte00_setup.md#indice-guide)
 
 ## 1. Requisiti
 
@@ -100,9 +100,7 @@ Per configurare la CLI, apri il file "config.yaml" e aggiungi le tue credenziali
 
 * utente: questo ti sarà fornito dal tuo Responsabile del Workshop Cloudera. Se stai lavorando nell'ambiente CDP della tua azienda, puoi ottenere il tuo Utente di Carico di Lavoro CDP dalla Console di Gestione CDP o chiedendo al tuo Amministratore CDP.
 
-* vcluster-endpoint: il JOBS API URL fornito nella pagina dei Dettagli del Cluster. Puoi accedervi dalla scheda Amministrazione e facendo clic sull'icona Dettagli del Cluster per il tuo Cluster Virtuale.
-
-![alt text](../../img/cde_virtual_cluster_details.png)
+* vcluster-endpoint: il JOBS API URL fornito nella pagina dei Dettagli del Cluster.
 
 Testa la CLI eseguendo il seguente comando. Se il tuo cluster è nuovo, potrebbe non essere trovata nessuna esecuzione di lavori, ma l'output ti aiuterà a verificare che puoi connetterti al cluster.
 
