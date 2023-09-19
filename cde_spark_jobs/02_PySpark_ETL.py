@@ -47,15 +47,17 @@ from demo_utils import simple_udf
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
 data_lake_name=config.get("general","data_lake_name")
-s3BucketName=config.get("general","s3BucketName")
+data_path=config.get("general","data_path")
 username=config.get("general","username")
+
+cloudPath=data_lake_name+data_path
 
 print("Running as Username: ", username)
 
 #---------------------------------------------------
 #               CREATE SPARK SESSION
 #---------------------------------------------------
-spark = SparkSession.builder.appName('INGEST').config("spark.yarn.access.hadoopFileSystems", data_lake_name).getOrCreate()
+spark = SparkSession.builder.appName('INGEST').config("spark.kubernetes.access.hadoopFileSystems", data_lake_name).getOrCreate()
 
 #-----------------------------------------------------------------------------------
 # LOAD DATA FROM .CSV FILES ON AWS S3 CLOUD STORAGE
@@ -69,11 +71,11 @@ spark = SparkSession.builder.appName('INGEST').config("spark.yarn.access.hadoopF
 #                                 s3BucketName = "s3a://usermarketing-cdp-demo"
 #-----------------------------------------------------------------------------------
 
-car_installs  = spark.read.csv(s3BucketName + "/car_installs_119.csv",        header=True, inferSchema=True)
-car_sales     = spark.read.csv(s3BucketName + "/car_sales_119.csv", header=True, inferSchema=True)
-customer_data = spark.read.csv(s3BucketName + "/customer_data_119.csv",       header=True, inferSchema=True)
-factory_data  = spark.read.csv(s3BucketName + "/factory_data_119.csv", header=True, inferSchema=True)
-geo_data      = spark.read.csv(s3BucketName + "/geo_data_119.csv",        header=True, inferSchema=True)
+car_installs  = spark.read.csv(cloudPath + "/car_installs_119.csv",        header=True, inferSchema=True)
+car_sales     = spark.read.csv(cloudPath + "/car_sales_119.csv", header=True, inferSchema=True)
+customer_data = spark.read.csv(cloudPath + "/customer_data_119.csv",       header=True, inferSchema=True)
+factory_data  = spark.read.csv(cloudPath + "/factory_data_119.csv", header=True, inferSchema=True)
+geo_data      = spark.read.csv(cloudPath + "/geo_data_119.csv",        header=True, inferSchema=True)
 
 #---------------------------------------------------
 #       SQL CLEANUP: DATABASES, TABLES, VIEWS

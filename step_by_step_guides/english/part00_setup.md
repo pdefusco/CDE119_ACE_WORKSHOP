@@ -136,6 +136,7 @@ You will be directly logged into the container as cdeuser. Run the next steps fr
 #### Step 3: Upload files to the Resource
 
 ```cde resource upload --local-path precheck/test_file.csv --name precheck_resource```
+
 ```cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource```
 
 #### Step 4: Create a CDE Job and Run it
@@ -147,7 +148,7 @@ Replace the --arg value with the ADLS/S3 location you intend to use for the work
 e.g. AWS 's3a://go01-demo'
 e.g. Azure 'abfs://data@go01demoazure.dfs.core.windows.net'
 
-```cde job run --name precheck_job --arg *abfs://data@go01demoazure.dfs.core.windows.net*```
+```cde job run --name precheck_job --arg abfs://data@go01demoazure.dfs.core.windows.net```
 
 Validate that the job is able to write and read data to Cloud Storage by checking the logs in the CDE UI.
 

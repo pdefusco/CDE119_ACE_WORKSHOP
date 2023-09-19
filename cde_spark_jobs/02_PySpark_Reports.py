@@ -44,8 +44,10 @@ import configparser
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
 data_lake_name=config.get("general","data_lake_name")
-s3BucketName=config.get("general","s3BucketName")
+data_path=config.get("general","data_path")
 username=config.get("general","username")
+
+cloudPath=data_lake_name+data_path
 
 print("Running as Username: ", username)
 
@@ -54,7 +56,7 @@ _DEBUG_ = False
 #---------------------------------------------------
 #               CREATE SPARK SESSION
 #---------------------------------------------------
-spark = SparkSession.builder.appName('INGEST').config("spark.yarn.access.hadoopFileSystems", data_lake_name).getOrCreate()
+spark = SparkSession.builder.appName('INGEST').config("spark.kubernetes.access.hadoopFileSystems", data_lake_name).getOrCreate()
 
 #---------------------------------------------------
 #               READ TABLES

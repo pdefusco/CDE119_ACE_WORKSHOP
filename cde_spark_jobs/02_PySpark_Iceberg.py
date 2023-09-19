@@ -54,8 +54,10 @@ import utils
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
 data_lake_name=config.get("general","data_lake_name")
-s3BucketName=config.get("general","s3BucketName")
+data_path=config.get("general","data_path")
 username=config.get("general","username")
+
+cloudPath=data_lake_name+data_path
 
 print("Running as Username: ", username)
 
@@ -214,7 +216,7 @@ customer_data_df = spark.sql("SELECT * FROM spark_catalog.CDE_WORKSHOP_{0}.CUSTO
 #               LOAD NEW BATCH DATA
 #---------------------------------------------------
 
-batch_df = spark.read.csv(s3BucketName + "/10012020_car_sales.csv", header=True, inferSchema=True)
+batch_df = spark.read.csv(cloudPath=data_lake_name+data_path + "/10012020_car_sales.csv", header=True, inferSchema=True)
 #batch_etl_df.write.mode("overwrite").saveAsTable('{}_CAR_DATA.CAR_SALES'.format(username), format="parquet")
 
 # Creating Temp View for MERGE INTO command

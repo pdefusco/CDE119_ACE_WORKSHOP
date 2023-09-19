@@ -46,8 +46,10 @@ import configparser
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
 data_lake_name=config.get("general","data_lake_name")
-s3BucketName=config.get("general","s3BucketName")
+data_path=config.get("general","data_path")
 username=config.get("general","username")
+
+cloudPath=data_lake_name+data_path
 
 print("Running as Username: ", username)
 
@@ -57,9 +59,8 @@ print("Running as Username: ", username)
 spark = SparkSession\
             .builder\
             .appName('CAR INSTALLS ETL')\
-            .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
+            .config("spark.kubernetes.access.hadoopFileSystems", data_lake_name)\
             .getOrCreate()
-
 
 car_installs_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_INSTALLS_{0}".format(username))
 factory_data_df  = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.EXPERIMENTAL_MOTORS_{0}".format(username))

@@ -46,15 +46,17 @@ import configparser
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
 data_lake_name=config.get("general","data_lake_name")
-s3BucketName=config.get("general","s3BucketName")
+data_path=config.get("general","data_path")
 username=config.get("general","username")
+
+cloudPath=data_lake_name+data_path
 
 print("Running as Username: ", username)
 
 spark = SparkSession \
     .builder \
     .appName("PySpark SQL") \
-    .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
+    .config("spark.kubernetes.access.hadoopFileSystems", data_lake_name)\
     .getOrCreate()
 
 spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.LEFT_TABLE_{0} L\
