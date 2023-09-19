@@ -8,13 +8,13 @@ This page provides instructions for setting up the necessary data assets. Follow
 * [2. Recommendations Before you Start](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#2-recommendations-before-you-start)
 * [3. Project Download](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#3-project-download)
 * [4. CDP User & Credentials](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#4-cdp-user--credentials)
-* [5. Jobs API URL]()
-* [6. CDE CLI Setup]()
-  * [6A. Configuring the CLI with the Provided Docker Container]()
-  * [6B. Installing the CLI in your Local Machine]()
-* [7. Connectivity Test]()
-* [8. Data Upload to Cloud Storage]()
-* [9. parameters.conf Configuration]()
+* [5. Jobs API URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#5-jobs-api-url)
+* [6. CDE CLI Setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6-cde-cli-setup)
+  * [6A. Configuring the CLI with the Provided Docker Container](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6a-configuring-the-cli-with-the-provided-docker-container)
+  * [6B. Installing the CLI in your Local Machine](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6b-installing-the-cli-in-your-local-machine)
+* [7. Connectivity Test](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#7-connectivity-test)
+* [8. Data Upload to Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8-data-upload-to-cloud-storage)
+* [9. parameters.conf Configuration](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#9-parametersconf-configuration)
 
 * [Index](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#index)
 
@@ -127,7 +127,7 @@ In this test you will run a simple CDE Job from the CLI and ensure that your CDP
 
 ```docker run -it pauldefusco/cde_cli_hol_1193```
 
-You will be directly logged into the container as cdeuser. Run the next steps from the shell inside the running container: 
+You will be directly logged into the container as cdeuser. Run the next steps from the shell inside the running container:
 
 #### Step 2: Create a CDE Resource
 
@@ -144,8 +144,8 @@ You will be directly logged into the container as cdeuser. Run the next steps fr
 
 Replace the --arg value with the ADLS/S3 location you intend to use for the workshop. If you don't know it you can obtain it from the CDP Management Console -> Data Lake tab or ask your CDP Administrator.
 
-#e.g. AWS 's3a://go01-demo'
-#e.g. Azure 'abfs://data@go01demoazure.dfs.core.windows.net'
+e.g. AWS 's3a://go01-demo'
+e.g. Azure 'abfs://data@go01demoazure.dfs.core.windows.net'
 
 ```cde job run --name precheck_job --arg *abfs://data@go01demoazure.dfs.core.windows.net*```
 
