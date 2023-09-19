@@ -1,0 +1,5 @@
+cde resource create --type files --name precheck_resource
+cde resource upload --local-path precheck/test_file.csv --name precheck_resource
+cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource
+cde job create --name precheck_job --type spark --application-file cloud_precheck.py --mount-1-resource precheck_resource
+cde job run --name precheck_job --arg abfs://data@go01demoazure.dfs.core.windows.net

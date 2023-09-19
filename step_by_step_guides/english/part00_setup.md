@@ -8,12 +8,14 @@ This page provides instructions for setting up the necessary data assets. Follow
 * [2. Recommendations Before you Start](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#2-recommendations-before-you-start)
 * [3. Project Download](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#3-project-download)
 * [4. CDP User & Credentials](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#4-cdp-user--credentials)
-* [5. Data Upload to Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#5-data-upload-to-cloud-storage)
-* [6. parameters.conf Configuration](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6-parametersconf-configuration)
-* [7. Jobs API URL](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#7-jobs-api-url)
-* [8. CDE CLI Setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8-cde-cli-setup)
-  * [8A. Configuring the CLI with the Provided Docker Container](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8a-configuring-the-cli-with-the-provided-docker-container)
-  * [8B. Installing the CLI in your Local Machine](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8b-installing-the-cli-in-your-local-machine)
+* [5. Jobs API URL]()
+* [6. CDE CLI Setup]()
+  * [6A. Configuring the CLI with the Provided Docker Container]()
+  * [6B. Installing the CLI in your Local Machine]()
+* [7. Connectivity Test]()
+* [8. Data Upload to Cloud Storage]()
+* [9. parameters.conf Configuration]()
+
 * [Index](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#index)
 
 ## 1. Requirements
@@ -50,23 +52,7 @@ If you are participating in a Cloudera Event your Workshop Lead will provide you
 
 If you are reproducing the labs in your CDE Environment without the help of a Cloudera Lead you will have to upload the data to an arbitrary Cloud path and obtain your Workload User from your CDP Admin.
 
-## 5. Data Upload to Cloud Storage
-
-Upload the data folder in a Cloud Storage location of your choice.
-
-If you are attending a Public HOL event with infrastructure provided by Cloudera the data will already have been uplaoded by your Workshop Lead.
-
-If you are reproducing these labs in your own CDE deployment ensure you have placed all the contents of the data folder in a Cloud Storage location of your choice.
-
-## 6. parameters.conf Configuration
-
-Each script will read your credentials from "parameters.conf". Instructions for uploading this in your CDE File Resource are provided in part 2.
-
-Before you start the labs, open "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead.
-
-If you are reproducing these labs on your own you will have to ensure that these values reflect the Cloud Storage path where you loaded the data.
-
-## 7. Jobs API URL
+## 5. Jobs API URL
 
 The Jobs API URL is the entry point to the cluster for the API and CLI. It will become necessary in the CDE CLI Setup and other parts of the labs.
 
@@ -76,21 +62,21 @@ Take note of your cluster's JOBS API URL by navigating to the Administration tab
 
 ![alt text](../../img/jobsapiurl.png)
 
-## 8. CDE CLI Setup
+## 6. CDE CLI Setup
 
 Throughout the labs you will be using the CDE CLI. To set up the CLI you have two options: using the provided Docker container or manually installing it in your local machine.
 
 *We highly recommend using the provided Docker container* as the configuration is much simpler.
 
-#### 8A. Configuring the CLI with the Provided Docker Container
+#### 6A. Configuring the CLI with the Provided Docker Container
 
 In order to use the provided Docker container first pull with the following command:
 
-```docker pull pauldefusco/cde_cli_workshop_1_19:latest```
+```docker pull pauldefusco/cde_cli_hol_1193:latest```
 
 Next run the container. The following command starts and logs you into the running container:
 
-```docker run -it pauldefusco/cde_cli_workshop_1_19:latest```
+```docker run -it pauldefusco/cde_cli_hol_1193:latest```
 
 To configure the CLI open the "config.yaml" file and add your credentials:
 
@@ -104,7 +90,7 @@ Test the CLI by running the following command. If your cluster is new no job run
 
 ```cde run list```
 
-#### 8B. Installing the CLI in your Local Machine
+#### 6B. Installing the CLI in your Local Machine
 
 To manually install the CLI in your local machine follow the steps below:
 
@@ -130,6 +116,66 @@ Step 4: Save the configuration file. If you have not done so already, make sure 
 ```cde run list```
 
 For further information on the CLI please visit the [CDE Documentation](https://docs.cloudera.com/data-engineering/cloud/cli-access/topics/cde-cli.html)
+
+## 7. Connectivity Test
+
+In this test you will run a simple CDE Job from the CLI and ensure that your CDP User is able to read and write data from Cloud Storage via Spark. Typically, if this test fails you haven't set up your CDP Workload User correctly in the CDP Management Console. This test requires Docker.
+
+#### Step 1: Pull Docker Image and Run it locally
+
+```docker pull pauldefusco/cde_cli_hol_1193```
+
+```docker run -it pauldefusco/cde_cli_hol_1193```
+
+You will be directly logged into the container as cdeuser. Run the next steps from the shell inside the running container: 
+
+#### Step 2: Create a CDE Resource
+
+```cde resource create --type files --name precheck_resource```
+
+#### Step 3: Upload files to the Resource
+
+```cde resource upload --local-path precheck/test_file.csv --name precheck_resource```
+```cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource```
+
+#### Step 4: Create a CDE Job and Run it
+
+```cde job create --name precheck_job --type spark --application-file cloud_precheck.py --mount-1-resource precheck_resource```
+
+Replace the --arg value with the ADLS/S3 location you intend to use for the workshop. If you don't know it you can obtain it from the CDP Management Console -> Data Lake tab or ask your CDP Administrator.
+
+#e.g. AWS 's3a://go01-demo'
+#e.g. Azure 'abfs://data@go01demoazure.dfs.core.windows.net'
+
+```cde job run --name precheck_job --arg *abfs://data@go01demoazure.dfs.core.windows.net*```
+
+Validate that the job is able to write and read data to Cloud Storage by checking the logs in the CDE UI.
+
+#### Connectivity Test Troubleshooting
+
+The connectivity test most commonly fails for the following reasons:
+
+* IDBroker Mappings were not set correctly: go to the CDP Management Console -> Actions -> Manage Access -> IDBroker Mappings tab and ensure your user has been added to the group and then in the IDBroker Mapping section.
+
+* Access Roles are not set correctly: go to the CDP Management Console -> Actions -> Manage Access -> Access tab and ensure your user has been given all CDE Roles.
+
+* Unset Workload Password: go to the CDP Management Console -> Actions -> Manage Access -> Workload Password tab and ensure that you have created a Workload Password for your user.
+
+## 8. Data Upload to Cloud Storage
+
+Upload the data folder in a Cloud Storage location of your choice.
+
+If you are attending a Public HOL event with infrastructure provided by Cloudera the data will already have been uplaoded by your Workshop Lead.
+
+If you are reproducing these labs in your own CDE deployment ensure you have placed all the contents of the data folder in a Cloud Storage location of your choice.
+
+## 9. parameters.conf Configuration
+
+Each script will read your credentials from "parameters.conf". Instructions for uploading this in your CDE File Resource are provided in part 2.
+
+Before you start the labs, open "parameters.conf" located in the "resources_files" folder and edit all three fields with values provided by your Cloudera ACE Workshop Lead.
+
+If you are reproducing these labs on your own you will have to ensure that these values reflect the Cloud Storage path where you loaded the data.
 
 ## Index
 
