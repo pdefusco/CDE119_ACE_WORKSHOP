@@ -72,11 +72,11 @@ Throughout the labs you will be using the CDE CLI. To set up the CLI you have tw
 
 In order to use the provided Docker container first pull with the following command:
 
-```docker pull pauldefusco/cde_cli_hol_1193:latest```
+```docker pull pauldefusco/hol_cli:latest```
 
 Next run the container. The following command starts and logs you into the running container:
 
-```docker run -it pauldefusco/cde_cli_hol_1193:latest```
+```docker run -it pauldefusco/hol_cli:latest```
 
 To configure the CLI open the "config.yaml" file and add your credentials:
 
@@ -121,11 +121,11 @@ For further information on the CLI please visit the [CDE Documentation](https://
 
 In this test you will run a simple CDE Job from the CLI and ensure that your CDP User is able to read and write data from Cloud Storage via Spark. Typically, if this test fails you haven't set up your CDP Workload User correctly in the CDP Management Console. This test requires Docker.
 
-#### Step 1: Pull Docker Image and Run it locally
+#### Step 1: Pull Docker Image and Run it
 
-```docker pull pauldefusco/cde_cli_hol_1193```
+```docker pull pauldefusco/hol_cli```
 
-```docker run -it pauldefusco/cde_cli_hol_1193```
+```docker run -it pauldefusco/hol_cli```
 
 You will be directly logged into the container as cdeuser. Run the next steps from the shell inside the running container:
 
@@ -135,9 +135,9 @@ You will be directly logged into the container as cdeuser. Run the next steps fr
 
 #### Step 3: Upload files to the Resource
 
-```cde resource upload --local-path precheck/test_file.csv --name precheck_resource```
+```cde resource upload --local-path setup_files/test_file.csv --name precheck_resource```
 
-```cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource```
+```cde resource upload --local-path setup_files/cloud_precheck.py --name precheck_resource```
 
 #### Step 4: Create a CDE Job and Run it
 
