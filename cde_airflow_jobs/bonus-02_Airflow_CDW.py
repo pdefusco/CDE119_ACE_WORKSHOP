@@ -57,8 +57,9 @@ default_args = {
         'owner': 'pauldefusco',
         'retry_delay': timedelta(seconds=5),
         'depends_on_past': False,
-        'start_date': pendulum.datetime(2020, 1, 1, tz="Europe/Amsterdam"),
-        'end_date': datetime(2023,9,30,8)
+        'start_date': datetime(2023,9,20,0),
+        'schedule_interval':'@hourly',
+        'end_date': datetime(2024,9,30,8)
         }
 
 start = DummyOperator(
@@ -69,7 +70,6 @@ start = DummyOperator(
 airflow_cdw_dag = DAG(
         dag_name,
         default_args=default_args,
-        schedule_interval='@daily',
         catchup=False,
         is_paused_upon_creation=False
         )

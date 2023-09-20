@@ -60,19 +60,19 @@ cde_job_name_05_E = "05-E-pyspark-JOIN" #Replace with CDE Job Name you used in t
 
 #DAG instantiation
 default_args = {
-    'owner': "pauldefusco",
-    'retry_delay': timedelta(seconds=10),
-    'depends_on_past': False,
-    'start_date': datetime(2022,11,22,8), #Start Date must be in the past
-    'end_date': datetime(2023,9,30,8) #End Date must be in the future
-}
+        'owner': 'pauldefusco',
+        'retry_delay': timedelta(seconds=5),
+        'depends_on_past': False,
+        'start_date': datetime(2023,9,20,0),
+        'schedule_interval':'@hourly',
+        'end_date': datetime(2024,9,30,8)
+        }
 
 dag_name = '{}-05-airflow-pipeline'.format(username)
 
 operators_dag = DAG(
     dag_name,
     default_args=default_args,
-    schedule_interval='@yearly',
     catchup=False,
     is_paused_upon_creation=False
 )
