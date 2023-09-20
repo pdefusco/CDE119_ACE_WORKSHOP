@@ -129,17 +129,25 @@ In this test you will run a simple CDE Job from the CLI and ensure that your CDP
 
 You will be directly logged into the container as cdeuser. Run the next steps from the shell inside the running container:
 
-#### Step 2: Create a CDE Resource
+#### Step 2: Edit CLI configuration
+
+Open the CLI config file and add your username and cluster JOBS_API_URL:
+
+```
+vi ~/.cde/config.yaml
+```
+
+#### Step 3: Create a CDE Resource
 
 ```cde resource create --type files --name precheck_resource```
 
-#### Step 3: Upload files to the Resource
+#### Step 4: Upload files to the Resource
 
 ```cde resource upload --local-path setup_files/test_file.csv --name precheck_resource```
 
 ```cde resource upload --local-path setup_files/cloud_precheck.py --name precheck_resource```
 
-#### Step 4: Create a CDE Job and Run it
+#### Step 5: Create a CDE Job and Run it
 
 ```cde job create --name precheck_job --type spark --application-file cloud_precheck.py --mount-1-resource precheck_resource```
 
