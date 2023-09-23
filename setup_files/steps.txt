@@ -1,5 +1,24 @@
+## Precheck
+
 cde resource create --type files --name precheck_resource
 cde resource upload --local-path precheck/test_file.csv --name precheck_resource
 cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource
 cde job create --name precheck_job --type spark --application-file cloud_precheck.py --mount-1-resource precheck_resource
 cde job run --name precheck_job --arg abfs://data@go01demoazure.dfs.core.windows.net
+
+## Automated Setup
+
+# Step 1: Load data to CDE Resource
+
+cde resource create --type files --name dataresource
+
+cde resource upload --local-path data/* --name dataresource
+
+# Step 2: Create appropriate ADLS Container & Write data from CDE Resource to ADLS Container using Spark
+# Requires Azure Account Name and Azure Storage Account Key
+
+cde resource upload --local-path adls_setup.py --name dataresource
+
+cde job create --name adls_setup --type spark --mount-1-resource dataresource
+
+cde job run --name adls_setup
