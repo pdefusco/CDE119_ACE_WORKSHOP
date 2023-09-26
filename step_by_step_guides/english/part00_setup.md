@@ -14,7 +14,7 @@ This page provides instructions for setting up the necessary data assets. Follow
   * [6B. Installing the CLI in your Local Machine](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6b-installing-the-cli-in-your-local-machine)
 * [7. Connectivity Test](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#7-connectivity-test)
 * [8. Automated Data Upload to Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8-automated-data-upload-to-cloud-storage)
-  * [8A. Automated Data Upload to ADLS]
+  * [8A. Automated Data Upload to ADLS](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8a-automated-data-upload-to-adls)
   * [8B. Automated Data Upload to S3]
 * [9. parameters.conf Configuration](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#9-parametersconf-configuration)
 
