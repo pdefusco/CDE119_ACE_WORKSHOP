@@ -13,7 +13,7 @@ This page provides instructions for setting up the necessary data assets. Follow
   * [6A. Configuring the CLI with the Provided Docker Container](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6a-configuring-the-cli-with-the-provided-docker-container)
   * [6B. Installing the CLI in your Local Machine](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#6b-installing-the-cli-in-your-local-machine)
 * [7. Connectivity Test](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#7-connectivity-test)
-* [8. Data Upload to Cloud Storage](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#8-data-upload-to-cloud-storage)
+* [8. Automated Data Upload to Cloud Storage]()
 * [9. parameters.conf Configuration](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#9-parametersconf-configuration)
 
 * [Index](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#index)
@@ -170,13 +170,66 @@ The connectivity test most commonly fails for the following reasons:
 
 * Unset Workload Password: go to the CDP Management Console -> Actions -> Manage Access -> Workload Password tab and ensure that you have created a Workload Password for your user.
 
-## 8. Data Upload to Cloud Storage
+## 8. Automated Data Upload to Cloud Storage
 
 Upload the data folder in a Cloud Storage location of your choice.
 
-If you are attending a Public HOL event with infrastructure provided by Cloudera the data will already have been uplaoded by your Workshop Lead.
+#### 8A. Automated Data Upload in ADLS
 
-If you are reproducing these labs in your own CDE deployment ensure you have placed all the contents of the data folder in a Cloud Storage location of your choice.
+You can upload data to Cloud Storage by following the steps below. This step requires Docker.
+
+1. Pull the Docker Image and Run it:
+
+```
+docker pull pauldefusco/hol_adls_setup
+docker run -it pauldefusco/hol_adls_setup
+```
+
+2. Add your Jobs API URL to the CDE CLI Configuration
+
+```
+vi ~/.cde/config.yaml
+```
+
+3. Create a CDE Files Resource and Load Data
+
+```
+cde resource create --type files --name dataresource
+cde resource upload --local-path setup_files/car_installs_119.csv --name dataresource
+cde resource upload --local-path setup_files/10012020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/12312020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/car_sales_119.csv --name dataresource
+cde resource upload --local-path setup_files/customer_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/factory_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/geo_data_119.csv --name dataresource
+```
+
+4. Create a CDE Python Resource
+
+```
+cde resource create --type python-env --name setup_py
+cde resource upload --name setup_py --local-path setup_files/requirements.txt
+```
+
+In the CDE Resources UI validate that the Resource has finished building before moving on.
+
+5. Create appropriate ADLS Container and Directory & Write data from CDE Resource to ADLS Container using Spark
+
+Open parameters.conf and add your ADLS Storage Account and ADLS Storage Account Key
+
+```
+vi setup_files/parametersconf
+```
+
+Then create the necessary CDE Files Resource and run the Job
+
+```
+cde resource create --type files --name adls_setup_resource
+cde resource upload --local-path setup_files/adls_setup.py --name adls_setup_resource
+cde resource upload --local-path setup_files/parameters.conf --name adls_setup_resource
+cde job create --name adls_setup --type spark --application-file adls_setup.py --mount-1-resource adls_setup_resource --mount-2-resource dataresource --python-env-resource-name setup_py
+cde job run --name adls_setup
+```
 
 ## 9. parameters.conf Configuration
 

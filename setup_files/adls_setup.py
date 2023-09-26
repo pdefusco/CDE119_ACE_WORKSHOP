@@ -44,11 +44,7 @@ from pyspark.sql.types import Row, StructField, StructType, StringType, IntegerT
 from azure.storage.filedatalake import DataLakeServiceClient
 from azure.core._match_conditions import MatchConditions
 from azure.storage.filedatalake._models import ContentSettings
-
-spark = SparkSession\
-    .builder\
-    .appName("WorkshopDataSetup")\
-    .getOrCreate()
+import configparser
 
 #-----------------------------------------------------------------
 #               HELPER METHODS TO CREATE REQUIRED ADLS RESOURCES
@@ -60,12 +56,12 @@ def initialize_storage_account(storage_account_name, storage_account_key):
 
         service_client = DataLakeServiceClient(account_url="{}://{}.dfs.core.windows.net".format(
             "https", storage_account_name), credential=storage_account_key)
-
         print("Connection to ADLS Initialized")
         print('\n')
-    except:
+    except Exception as e:
         print("Error During Connection Initialization")
         print('\n')
+        print(f'caught {type(e)}: e')
         print(e)
 
 def create_file_system(file_system_name):
@@ -75,9 +71,10 @@ def create_file_system(file_system_name):
         file_system_client = service_client.create_file_system(file_system=file_system_name)
         print("File System Creation Successful")
         print('\n')
-    except:
-        print("File System Cretion Failed")
+    except Exception as e:
+        print("File System Creation Failed")
         print('\n')
+        print(f'caught {type(e)}: e')
         print(e)
 
 def create_directory(directory_name):
@@ -85,17 +82,17 @@ def create_directory(directory_name):
         file_system_client.create_directory(directory_name)
         print("ADLS Directory Creation Successful")
         print('\n')
-    except:
+    except Exception as e:
         print("ADLS Directory Creation Failed")
         print('\n')
+        print(f'caught {type(e)}: e')
         print(e)
 
 def session(ADLS_ACCOUNT_NAME):
-
     storage = 'abfs://{}.dfs.core.windows.net'.format(ADLS_ACCOUNT_NAME)
     spark = SparkSession\
         .builder\
-        .appName("PythonSQL")\
+        .appName("WorkshopDataSetup")\
         .config("spark.kubernetes.access.hadoopFileSystems", storage)\
         .getOrCreate()
 
@@ -104,16 +101,20 @@ def session(ADLS_ACCOUNT_NAME):
 def read_df_from_resource(spark, file_name):
     try:
         csvDF = spark.read.options(header = 'True', delimiter=',', inferSchema='True').csv("/app/mount/"+file_name)
-        print("DF read successfully from /app/mount")
+        print("DF read successfully from /app/mount/")
         print('\n')
+        csvDF.show()
         return csvDF
     except Exception as e:
+        print("DF NOT read successfully from /app/mount/")
+        print("\n")
         print(f'caught {type(e)}: e')
-        print('\n')
+        print(e)
 
-def write_to_cloud_storage(spark, csvDF, storage, file_name):
+def write_to_cloud_storage(spark, csvDF, storage, ADLS_ACCOUNT_NAME, file_system_name, directory_name, file_name):
     try:
-        csvDF.write.options(header = 'True', sep=',', inferSchema='True').mode("overwrite").csv("{0}/{1}".format(storage, file_name))
+        csvDF.write.options(header = 'True', sep=',', inferSchema='True')\
+                .mode("overwrite").csv("abfs://{0}@{1}.dfs.core.windows.net/{2}/{3}".format(file_system_name, ADLS_ACCOUNT_NAME, directory_name, file_name))
         print("DF written successfully to Cloud Storage {}".format(storage))
         print('\n')
         csvDF.show()
@@ -121,31 +122,38 @@ def write_to_cloud_storage(spark, csvDF, storage, file_name):
         print(f'caught {type(e)}: e')
         print("DF NOT written successfully to Cloud Storage {}".format(storage))
         print('\n')
+        print(e)
 
 def list_directory_contents(file_system_name, directory_name):
     try:
-
         file_system_client = service_client.get_file_system_client(file_system=file_system_name)
-
         paths = file_system_client.get_paths(path=directory_name)
         print("PRINTING DIRECTORY {} CONTENTS".format(directory_name))
         for path in paths:
             print(path.name + '\n')
 
     except Exception as e:
-         print(e)
-         print("UNABLE TO PREVIEW Cloud Storage {}".format(storage))
-         print('\n')
+        print(f'caught {type(e)}: e')
+        print("UNABLE TO PREVIEW Cloud Storage {}".format(storage))
+        print('\n')
+        print(e)
 
 #----------------------------------------------------------------
 #               CDE JOB ARGS
 #----------------------------------------------------------------
 
-## YOUR ADLS INFO HERE
-ADLS_ACCOUNT_NAME = storage = sys.argv[1]
-ADLS_STORAGE_ACCOUNT_KEY = storage = sys.argv[2]
-FILE_SYSTEM_NAME = storage = sys.argv[3]
-DIRECTORY_NAME = storage = sys.argv[4]
+def parse_args():
+    ## YOUR ADLS INFO HERE
+    config = configparser.ConfigParser()
+    config.read('/app/mount/parameters.conf')
+    data_lake_name=config.get("general","data_lake_name")
+    username=config.get("general","username")
+    ADLS_ACCOUNT_NAME = config.get("general","adls_account_name")
+    ADLS_STORAGE_ACCOUNT_KEY = config.get("general","adls_storage_account_key")
+    FILE_SYSTEM_NAME = config.get("general","file_system_name")
+    DIRECTORY_NAME = config.get("general","directory_name")
+
+    return ADLS_ACCOUNT_NAME, ADLS_STORAGE_ACCOUNT_KEY, FILE_SYSTEM_NAME, DIRECTORY_NAME
 
 #-----------------------------------------------------------------
 #               UPLOADING FILE TO ADLS
@@ -154,20 +162,28 @@ DIRECTORY_NAME = storage = sys.argv[4]
 ## Not all steps are required
 ## If you run this script multiple times the file system and directory steps will be skipped
 
-def main(ADLS_ACCOUNT_NAME, ADLS_STORAGE_ACCOUNT_KEY, FILE_SYSTEM_NAME, DIRECTORY_NAME):
+def main():
 
+    ADLS_ACCOUNT_NAME, ADLS_STORAGE_ACCOUNT_KEY, FILE_SYSTEM_NAME, DIRECTORY_NAME = parse_args()
     initialize_storage_account(ADLS_ACCOUNT_NAME, ADLS_STORAGE_ACCOUNT_KEY)
     create_file_system(FILE_SYSTEM_NAME)
     create_directory(DIRECTORY_NAME)
 
     spark = session(ADLS_ACCOUNT_NAME)
-    storage = 'abfs://{}.dfs.core.windows.net'.format(ADLS_ACCOUNT_NAME)
+    STORAGE = 'abfs://{}.dfs.core.windows.net'.format(ADLS_ACCOUNT_NAME)
 
-    data_files = os.listdir("/app/mount")
+    import glob
+    data_files = glob.glob("/app/mount/*.csv")
+    print("Data Files Loaded in CDE Files Resource:")
+    data_files = [file.split("/")[-1] for file in data_files]
+    print(data_files)
+    print("\n")
 
     for file in data_files:
         csvDF = read_df_from_resource(spark, file)
-        write_to_cloud_storage(spark, csvDF, storage, file_name)
+        write_to_cloud_storage(spark, csvDF, STORAGE, ADLS_ACCOUNT_NAME, FILE_SYSTEM_NAME, DIRECTORY_NAME, file)
+
+    list_directory_contents(FILE_SYSTEM_NAME, DIRECTORY_NAME)
 
 if __name__ == "__main__":
-    main(ADLS_ACCOUNT_NAME, ADLS_STORAGE_ACCOUNT_KEY, FILE_SYSTEM_NAME, DIRECTORY_NAME)
+    main()

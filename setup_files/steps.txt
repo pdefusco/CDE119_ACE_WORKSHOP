@@ -1,5 +1,4 @@
 ## Precheck
-
 cde resource create --type files --name precheck_resource
 cde resource upload --local-path precheck/test_file.csv --name precheck_resource
 cde resource upload --local-path precheck/cloud_precheck.py --name precheck_resource
@@ -7,18 +6,25 @@ cde job create --name precheck_job --type spark --application-file cloud_prechec
 cde job run --name precheck_job --arg abfs://data@go01demoazure.dfs.core.windows.net
 
 ## Automated Setup
-
 # Step 1: Load data to CDE Resource
-
 cde resource create --type files --name dataresource
+cde resource upload --local-path setup_files/car_installs_119.csv --name dataresource
+cde resource upload --local-path setup_files/10012020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/12312020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/car_sales_119.csv --name dataresource
+cde resource upload --local-path setup_files/customer_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/factory_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/geo_data_119.csv --name dataresource
 
-cde resource upload --local-path data/* --name dataresource
+cde resource create --type python-env --name setup_py
+cde resource upload --name setup_py --local-path setup_files/requirements.txt
+#Wait for Python Resource to finish building before moving to next step
 
-# Step 2: Create appropriate ADLS Container & Write data from CDE Resource to ADLS Container using Spark
+# Step 2: Create appropriate ADLS Container and Dir & Write data from CDE Resource to ADLS Container using Spark
 # Requires Azure Account Name and Azure Storage Account Key
 
-cde resource upload --local-path adls_setup.py --name dataresource
-
-cde job create --name adls_setup --type spark --mount-1-resource dataresource
-
+cde resource create --type files --name adls_setup_resource
+cde resource upload --local-path setup_files/adls_setup.py --name adls_setup_resource
+cde resource upload --local-path setup_files/parameters.conf --name adls_setup_resource
+cde job create --name adls_setup --type spark --application-file adls_setup.py --mount-1-resource adls_setup_resource --mount-2-resource dataresource --python-env-resource-name setup_py
 cde job run --name adls_setup
