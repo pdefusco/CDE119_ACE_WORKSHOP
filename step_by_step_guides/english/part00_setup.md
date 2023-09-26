@@ -233,6 +233,43 @@ cde job create --name adls_setup --type spark --application-file adls_setup.py -
 cde job run --name adls_setup
 ```
 
+#### 8B. Automated Data Upload to S3
+
+1. Pull the Docker Image and Run it:
+
+```
+docker pull pauldefusco/hol_s3_setup
+docker run -it pauldefusco/hol_s3_setup
+```
+
+2. Add your Jobs API URL to the CDE CLI Configuration
+
+```
+vi ~/.cde/config.yaml
+```
+
+3. Create a CDE Files Resource and Load Data
+```
+cde resource create --type files --name dataresource
+cde resource upload --local-path setup_files/car_installs_119.csv --name dataresource
+cde resource upload --local-path setup_files/10012020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/12312020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/car_sales_119.csv --name dataresource
+cde resource upload --local-path setup_files/customer_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/factory_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/geo_data_119.csv --name dataresource
+```
+
+4. Create appropriate S3 Dir & Write data from CDE Resource to S3 using Spark
+
+```
+cde resource create --type files --name s3_setup_resource
+cde resource upload --local-path setup_files/adls_setup.py --name s3_setup_resource
+cde resource upload --local-path setup_files/parameters.conf --name s3_setup_resource
+cde job create --name s3_setup --type spark --application-file adls_setup.py --mount-1-resource s3_setup_resource --mount-2-resource dataresource --python-env-resource-name setup_py
+cde job run --name s3_setup
+```
+
 ## 9. parameters.conf Configuration
 
 Each script will read your credentials from "parameters.conf". Instructions for uploading this in your CDE File Resource are provided in part 2.

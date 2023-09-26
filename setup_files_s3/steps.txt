@@ -1,0 +1,20 @@
+## Automated Setup S3
+# Step 1: Load data to CDE Resource
+
+cde resource create --type files --name dataresource
+cde resource upload --local-path setup_files/car_installs_119.csv --name dataresource
+cde resource upload --local-path setup_files/10012020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/12312020_car_sales.csv --name dataresource
+cde resource upload --local-path setup_files/car_sales_119.csv --name dataresource
+cde resource upload --local-path setup_files/customer_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/factory_data_119.csv --name dataresource
+cde resource upload --local-path setup_files/geo_data_119.csv --name dataresource
+
+# Step 2: Create appropriate S3 Dir & Write data from CDE Resource to S3 using Spark
+# Requires Azure Account Name and Azure Storage Account Key
+
+cde resource create --type files --name s3_setup_resource
+cde resource upload --local-path setup_files/adls_setup.py --name s3_setup_resource
+cde resource upload --local-path setup_files/parameters.conf --name s3_setup_resource
+cde job create --name s3_setup --type spark --application-file adls_setup.py --mount-1-resource s3_setup_resource --mount-2-resource dataresource --python-env-resource-name setup_py
+cde job run --name s3_setup
