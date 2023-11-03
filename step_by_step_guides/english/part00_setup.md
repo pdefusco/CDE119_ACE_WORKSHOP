@@ -193,14 +193,22 @@ docker run -it pauldefusco/hol_adls_setup
 vi ~/.cde/config.yaml
 ```
 
-3. Create a CDE Files Resource and Load Data
+3. Update parameters.conf
+
+Open parameters.conf and update it with your username and cloud storage location:
+
+```
+vi setup_files/parameters.conf
+```
+
+4. Create a CDE Files Resource and Load Data
 
 ```
 cde resource create --type files --name dataresource
 cde resource upload --local-path setup_files/geo_data_119.csv --local-path setup_files/factory_data_119.csv --local-path setup_files/customer_data_119.csv --local-path setup_files/car_sales_119.csv --local-path setup_files/12312020_car_sales.csv --local-path setup_files/10012020_car_sales.csv --local-path setup_files/car_installs_119.csv --name dataresource
 ```
 
-4. Create a CDE Python Resource
+5. Create a CDE Python Resource
 
 ```
 cde resource create --type python-env --name setup_py
@@ -242,7 +250,15 @@ docker run -it pauldefusco/cde_hol_s3_setup
 vi ~/.cde/config.yaml
 ```
 
-3. Create a CDE Files Resource and Load Data
+3. Update parameters.conf
+
+Open parameters.conf and update it with your username and cloud storage location:
+
+```
+vi setup_files_s3/parameters.conf
+```
+
+4. Create a CDE Files Resource and Load Data
 
 ```
 cde resource create --type files --name dataresource
@@ -250,12 +266,11 @@ cde resource create --type files --name dataresource
 cde resource upload --local-path setup_files_s3/geo_data_119.csv --local-path setup_files_s3/factory_data_119.csv --local-path setup_files_s3/customer_data_119.csv --local-path setup_files_s3/car_sales_119.csv --local-path setup_files_s3/car_installs_119.csv --local-path setup_files_s3/10012020_car_sales.csv --local-path setup_files_s3/12312020_car_sales.csv --name dataresource
 ```
 
-4. Create appropriate S3 Dir & Write data from CDE Resource to S3 using Spark
+5. Create appropriate S3 Dir & Write data from CDE Resource to S3 using Spark
 
 ```
 cde resource create --type files --name s3_setup_resource
-cde resource upload --local-path setup_files_s3/s3_setup.py --name s3_setup_resource
-cde resource upload --local-path setup_files_s3/parameters.conf --name s3_setup_resource
+cde resource upload --local-path setup_files_s3/parameters.conf --local-path setup_files_s3/s3_setup.py --name s3_setup_resource
 cde job create --name s3_setup --type spark --application-file s3_setup.py --mount-1-resource s3_setup_resource --mount-2-resource dataresource
 cde job run --name s3_setup --executor-cores 2 --executor-memory "4g"
 ```
