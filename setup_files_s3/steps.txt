@@ -14,7 +14,7 @@ cde resource upload --local-path setup_files/geo_data_119.csv --name dataresourc
 # Requires Azure Account Name and Azure Storage Account Key
 
 cde resource create --type files --name s3_setup_resource
-cde resource upload --local-path setup_files/adls_setup.py --name s3_setup_resource
+cde resource upload --local-path setup_files/s3_setup.py --name s3_setup_resource
 cde resource upload --local-path setup_files/parameters.conf --name s3_setup_resource
-cde job create --name s3_setup --type spark --application-file adls_setup.py --mount-1-resource s3_setup_resource --mount-2-resource dataresource --python-env-resource-name setup_py
+cde job create --name s3_setup --type spark --application-file s3_setup.py --mount-1-resource s3_setup_resource --mount-2-resource dataresource
 cde job run --name s3_setup

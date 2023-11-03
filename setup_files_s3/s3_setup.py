@@ -65,10 +65,11 @@ def read_df_from_resource(spark, file_name):
         print(f'caught {type(e)}: e')
         print(e)
 
-def write_to_cloud_storage(spark, csvDF, storage, ADLS_ACCOUNT_NAME, file_system_name, directory_name, file_name):
+def write_to_cloud_storage(spark, csvDF, data_lake_name, data_path, file_name):
     try:
         csvDF.write.options(header = 'True', sep=',', inferSchema='True')\
-                .mode("overwrite").csv("abfs://{0}@{1}.dfs.core.windows.net/{2}/{3}".format(file_system_name, ADLS_ACCOUNT_NAME, directory_name, file_name))
+                .mode("overwrite").csv(data_lake_name+data_path+file_name)
+        storage = data_lake_name+data_path
         print("DF written successfully to Cloud Storage {}".format(storage))
         print('\n')
         csvDF.show()
@@ -114,7 +115,7 @@ def main():
 
     for file in data_files:
         csvDF = read_df_from_resource(spark, file)
-        write_to_cloud_storage(spark, csvDF, STORAGE, ADLS_ACCOUNT_NAME, FILE_SYSTEM_NAME, DIRECTORY_NAME, file)
+        write_to_cloud_storage(spark, csvDF, data_lake_name, data_path, file)
 
 if __name__ == "__main__":
     main()
