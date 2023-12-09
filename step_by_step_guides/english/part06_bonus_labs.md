@@ -6,8 +6,6 @@ So far you explored the core aspects of Spark, Airflow and Iceberg in CDE. The f
 
 Each Bonus Lab can be run independently of another. In other words, you can run all or just a select few, and in any order that you prefer.
 
-<new lin ks here>
-
 ## Table of Contents
 
 * [Bonus Lab 1: CDE Airflow Orchestration (In-Depth)](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part06_bonus_labs.md#bonus-lab-1-cde-airflow-orchestration-in-depth)

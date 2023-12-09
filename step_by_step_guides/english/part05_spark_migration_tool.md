@@ -4,11 +4,11 @@
 
 The spark-submit command is a utility to run or submit a Spark or PySpark application program (or job) to the cluster by specifying options and configurations, the application you are submitting can be written in Scala, Java, or Python (PySpark).
 
-The CDE CLI provides a similar although not identical way of running "spark-submits" in CDE. However, adapting many spark-submita to CDE might become an obstacle in your migration. The Cloudera Engineering team created a Spark Migration tool to facilitate the conversion.
+The CDE CLI provides a similar although not identical way of running "spark-submits" in CDE. However, adapting many spark-submits to CDE might become an obstacle in your migration. The Cloudera Engineering team created a Spark Migration tool to facilitate the conversion.
 
 ## Table of Contents
 
-* [Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job]()
+* [Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job](link here)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#summary)
 
 #### Step By Step Instructions
