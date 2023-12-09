@@ -1,4 +1,4 @@
-# Part 2: Developing and Deploying Spark Jobs in CDE
+# Part 2: Developing Spark Jobs with Iceberg in CDE Sessions
 
 ## Objective
 
