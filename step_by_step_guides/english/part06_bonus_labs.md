@@ -1,4 +1,4 @@
-# Part 5: Bonus Labs
+# Part 6: Bonus Labs
 
 ## Objective
 

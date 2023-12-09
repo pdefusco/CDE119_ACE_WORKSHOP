@@ -1,4 +1,4 @@
-# Part 2: Developing and Deploying Spark Jobs in CDE
+# Part 3: Developing and Deploying Spark Jobs in CDE
 
 ## Objective
 

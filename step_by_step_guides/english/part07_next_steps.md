@@ -1,4 +1,4 @@
-# Part 6: Conclusions and Next Steps
+# Part 7: Conclusions and Next Steps
 
 Congratulations for making it to the end of this Hands On Lab! We hope you enjoyed using CDE first hand.
 
