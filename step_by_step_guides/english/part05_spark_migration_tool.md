@@ -8,7 +8,7 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 
 ## Table of Contents
 
-* [Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job](link here)
+* [Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part05_spark_migration_tool.md#converting-a-spark-on-yarn-job-to-a-spark-on-kubernetes-cde-job)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#summary)
 
 #### Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job
