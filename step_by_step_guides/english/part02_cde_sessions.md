@@ -6,16 +6,13 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
 
 ## Table of Contents
 
-* [Introduction to CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#exploring-data-interactively-with-cde-sessions)
-  * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-in-the-cde-ui)
-  * [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-with-the-cde-cli)
-  * [Working with Spark and Iceberg in CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#working-with-iceberg-in-cde-spark-sessions)
+* [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-in-the-cde-ui)
+* [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-with-the-cde-cli)
+* [Working with Spark and Iceberg in CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#working-with-iceberg-in-cde-spark-sessions)
 
-### Exploring Data Interactively with CDE Sessions
+#### Using Interactive Sessions in the CDE UI
 
 A CDE Session is an interactive short-lived development environment for running Spark commands to help you iterate upon and build your Spark workloads. You can launch CDE Sessions in two ways: from the CDE UI and from your terminal with the CLI.
-
-##### Using Interactive Sessions in the CDE UI
 
 From the CDE Landing Page open "Sessions" on the left pane and then select the CDE Virtual Cluster where you want to run your CDE Interactive Session.
 
@@ -73,7 +70,7 @@ for each in another_df.collect():
 
 ![alt text](../../img/cde_session_1.png)
 
-##### Using Interactive Sessions with the CDE CLI
+#### Using Interactive Sessions with the CDE CLI
 
 You can use CDE Sessions directly from the terminal using the CLI. If you haven't done so already, ensure that you have configured the CLI either in the provided Docker container or by installing it manually as shown in [part00_setup](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part00_setup.md#cde-cli-setup).
 
@@ -106,7 +103,7 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 ![alt text](../../img/sparkshell4_cdeui.png)
 
 
-##### Working with Spark and Iceberg in CDE Sessions
+#### Working with Spark and Iceberg in CDE Sessions
 
 Run the following example in a new session. Feel free to choose between the UI and the CLI to launch a session. The steps below include instructions to launch a new Session from the CLI.
 
