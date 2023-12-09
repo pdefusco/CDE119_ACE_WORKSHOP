@@ -8,7 +8,7 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
 
 * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-in-the-cde-ui)
 * [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-with-the-cde-cli)
-* [Working with Spark and Iceberg in CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#working-with-iceberg-in-cde-spark-sessions)
+* [Working with Spark and Iceberg in CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#working-with-spark-and-iceberg-in-cde-sessions)
 
 #### Using Interactive Sessions in the CDE UI
 
