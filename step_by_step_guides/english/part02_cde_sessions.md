@@ -6,10 +6,10 @@ In this section you will create four Spark jobs using the CDE UI, the CDE CLI an
 
 ## Table of Contents
 
-* [Exploring Data Interactively with CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#exploring-data-interactively-with-cde-sessions)
-  * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-interactive-sessions-in-the-cde-ui)
-  * [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_spark.md#using-interactive-sessions-with-the-cde-cli)
-  * [Working with Iceberg in Interactive Sessions]()
+* [Introduction to CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#exploring-data-interactively-with-cde-sessions)
+  * [Using Interactive Sessions in the CDE UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-in-the-cde-ui)
+  * [Using Interactive Sessions with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#using-interactive-sessions-with-the-cde-cli)
+  * [Working with Spark and Iceberg in CDE Sessions](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part02_cde_sessions.md#working-with-iceberg-in-cde-spark-sessions)
 
 ### Exploring Data Interactively with CDE Sessions
 
@@ -106,7 +106,7 @@ Notice that you can pass CDE Compute Options such as number of executors and exe
 ![alt text](../../img/sparkshell4_cdeui.png)
 
 
-##### Working with Iceberg in CDE Spark Sessions
+##### Working with Spark and Iceberg in CDE Sessions
 
 Run the following example in a new session. Feel free to choose between the UI and the CLI to launch a session. The steps below include instructions to launch a new Session from the CLI.
 
