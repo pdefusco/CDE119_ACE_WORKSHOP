@@ -11,7 +11,7 @@ The CDE CLI provides a similar although not identical way of running "spark-subm
 * [Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job](link here)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_spark_migration_tool.md#summary)
 
-#### Step By Step Instructions
+#### Converting a Spark on Yarn Job to a Spark on Kubernetes CDE Job
 
 >**⚠ Warning**  
 >The Spark Submit Migration tool requires having the CDE CLI installed on your machine. Please ensure you have completed the installation steps in Part 3.
