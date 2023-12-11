@@ -1,27 +1,211 @@
 # Part 3: Developing and Deploying Spark Jobs in CDE
 
-## Objective
-
-In this section you will create four Spark jobs using the CDE UI, the CDE CLI and CDE Interactive Sessions. In the process you learn how to use CDE Resources to store files and reuse Python virtual environments, migrate Spark tables to Iceberg tables, and use some of Iceberg's most awaited features including Time Travel, Incremental Queries, Partition and Schema Evolution.
-
 ## Table of Contents
 
-* [Using CDE Resources](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#table-of-contents)
-* [Creating CDE Spark Jobs in the UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#creating-cde-spark-jobs-in-the-ui)
+* [Use Case: Create a Spark Pipeline]()
+* [Spark Concepts]()
+  * [Spark Architecture]()
+  * [Spark Application]()
+  * [Spark Worker Nodes]()
+  * [JVM]()
+  * [Spark Driver]()
+  * [Spark Executors]()
+  * [Spark Cores/Slots/Threads]()
+  * [Spark Partitioning]()
+  * [Lifecycle of a Spark Application]()
+  * [Spark DAG]()
+  * [Spark Job]()
+  * [Spark Stages]()
+  * [Spark Tasks]()
+  * [Caching in Spark]()
+  * [Shuffling in Spark]()
+  * [Transformations]()
+  * [Actions]()
+  * [Narrow vs Wide Tranformations]()
+  * [Application Execution Flow]()
+  * [Dataframes vs Datasets vs RDDs]()
+* [Lab 1: Using CDE Resources](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#table-of-contents)
+* [Lab 2: Creating CDE Spark Jobs in the UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#creating-cde-spark-jobs-in-the-ui)
   * [1. Set Job Name, Virtual Cluster and Application File](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#1-set-job-name-virtual-cluster-and-application-file)
   * [2. Set Spark Configurations](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#2-set-spark-configurations)
   * [3. Set Python Environment](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#3-set-python-environment)
   * [4. Set Advanced Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#4-set-advanced-options)
   * [5. Set Compute Options](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#5-set-compute-options)
   * [6. Trigger and Monitor the Job](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#6-trigger-and-monitor-the-job)
-* [Creating Spark Jobs with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#creating-spark-jobs-with-the-cde-cli)
+* [Lab 3: Creating Spark Jobs with the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#creating-spark-jobs-with-the-cde-cli)
   * [1. CDE Spark Submit via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#1-cde-spark-submit-via-the-cde-cli)
   * [2. CDE Spark Job via the CDE CLI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#2-cde-spark-job-via-the-cde-cli)
-* [Creating a CDE Spark Job with Apache Iceberg](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#creating-a-cde-spark-job-with-apache-iceberg)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part03_spark.md#summary)
 
+## Use Case: Create a Spark Pipeline
 
-### Using CDE Resources
+In part 2 you started using Spark in CDE via interactive sessions. However, Spark is often primarily used to process large quantities of data in batch. In the following labs you will create a Spark pipeline composed of two Spark Jobs. The first job will Extract, Load and Transform data located in Cloud Storage. The data will be saved in intermediary tables and then loaded and joind by the second job in order to create a report.
+
+In the process you will learn to build CDE Spark Jobs with PySpark and Scala. You will work with complex file dependencies and Spark configurations and leverage CDE Resources (Files and Python Environment) to more effectively organize and reuse them as part of CDE Job Definitions. In the process you will become familiar with the CDE UI and its built-in observability capabilities. Finally, you will leverage the CDE CLI in order to construct Jobs more efficiently.
+
+## Spark Concepts
+
+#### Spark Architecture
+
+A cluster, or group of machines, pools the resources of many machines together allowing us to use all the cumulative resources as if they were one. Now a group of machines sitting somewhere alone is not powerful, you need a framework to coordinate work across them. Spark is a tailor-made engine exactly for this, managing and coordinating the execution of tasks on data across a cluster of computers.
+
+The cluster of machines that Spark will leverage to execute tasks will be managed by a cluster manager like Spark’s Standalone cluster manager, YARN - Yet Another Resource Negotiator, Kubernetes. We then submit Spark Applications to these cluster managers which will grant resources to our application so that we can complete our work.
+
+#### Spark Application
+
+Spark Applications consist of a driver process and a set of executor processes. In the illustration we see above, our driver is on the left and four executors on the right.
+
+#### Spark Worker Nodes
+
+The worker nodes contain the executors which are responsible for actually carrying out the work that the driver assigns them. The Cluster Manager controls physical machines and allocates resources to the Spark Application. There can be multiple Spark Applications running on a cluster at the same time.
+
+#### JVM
+
+The JVM manages system memory and provides a portable execution environment for Java-based applications
+
+Technical definition: The JVM is the specification for a software program that executes code and provides the runtime environment for that code.
+
+Everyday definition: The JVM is how we run our Java programs. We configure the JVM's settings and then rely on it to manage program resources during execution.
+
+The Java Virtual Machine (JVM) is a program whose purpose is to execute other programs.
+
+The JVM has two primary functions: To allow Java programs to run on any device or operating system (known as the "Write once, run anywhere" principle) and to manage and optimize program memory.
+
+#### Spark Driver
+
+The driver process runs your main() functions; it sits on the node in the cluster and is responsible for 3 main things:
+
+1) Maintaining information about the spark application. Its a heart of a spark application and maintains all the I information during the lifetime of the application. Responding to user’s program or input. Analyzing, distributing and scheduling work across the executors.
+
+2) When a Spark program is triggered (e.g. a cell in this notebook performing Spark transformations and actions) the Driver converts the user program into tasks and after that it schedules the tasks on the executors.
+
+3) Spark Application — -> Driver — -> List of Tasks — -> Scheduler — -> Executors
+
+#### Spark Executors
+
+The executors are responsible for carrying out the work that the driver assigns them.
+
+Executors are worker nodes’ processes in charge of running individual tasks in a given Spark job. They are launched at the beginning of a Spark application and typically run for the entire lifetime of an application. Once they have run the task they send the results to the driver. They also provide in-memory storage for RDDs that are cached by user programs through Block Manager.
+
+When executors are started they register themselves with the driver and from so on they communicate directly. The workers are in charge of communicating the cluster manager the availability of their resources.
+
+Execute code assigned to it by the driver.
+
+Reporting the state of the computation on that executor back to driver.
+
+#### Spark Cores/Slots/Threads
+
+Spark parallelizes at two levels. One is the splitting the work among executors. The other is the slot. Each executor has a number of slots. Each slot can be assigned a Task.
+
+The JVM is naturally multithreaded, but a single JVM, such as our Driver, has a finite upper limit. By creating Tasks, the Driver can assign units of work to Slots on each Executor for parallel execution. Additionally, the Driver must also decide how to partition the data so that it can be distributed for parallel processing (see below). Consequently, the Driver is assigning a Partition of data to each task - in this way each Task knows which piece of data it is to process. Once started, each Task will fetch from the original data source (e.g. An Azure Storage Account) the Partition of data assigned to it. You can set the number of task slots to a value two or three times (i.e. to a multiple of) the number of CPU cores. Although these task slots are often referred to as CPU cores in Spark, they’re implemented as threads that work on a physical core's thread and don’t need to correspond to the number of physical CPU cores on the machine (since different CPU manufacturer's can architect multi-threaded chips differently).
+
+In other words:
+
+All processors of today have multiple cores (e.g. 1 CPU = 8 Cores) Most processors of today are multi-threaded (e.g. 1 Core = 2 Threads, 8 cores = 16 Threads) A Spark Task runs on a Slot. 1 Thread is capable of doing 1 Task at a time. To make use of all our threads on the CPU, we cleverly assign the number of Slots to correspond to a multiple of the number of Cores (which translates to multiple Threads). By doing this, after the Driver breaks down a given command into Tasks and Partitions, which are tailor-made to fit our particular Cluster Configuration (say 4 nodes - 1 driver and 3 executors, 8 cores per node, 2 threads per core). By using our Clusters at maximum efficiency like this (utilizing all available threads), we can get our massive command executed as fast as possible (given our Cluster in this case, 382 Threads --> 48 Tasks, 48 Partitions - i.e. 1 Partition per Task) If we don't do then even with a 100 executor cluster, the entire burden would go to 1 executor, and the other 99 will be sitting idle - i.e. slow execution. if we foolishly assign 49 Tasks and 49 Partitions, the first pass would execute 48 Tasks in parallel across the executors cores (say in 10 minutes), then that 1 remaining Task in the next pass will execute on 1 core for another 10 minutes, while the rest of our 47 cores are sitting idle - meaning the whole job will take double the time at 20 minutes. This is obviously an inefficient use of our available resources, and could rather be fixed by setting the number of tasks/partitions to a multiple of the number of cores we have (in this setup - 48, 96 etc).
+
+#### Spark Partitioning
+
+In order to allow every executor to perform work in parallel, Spark breaks up the data into chunks, called partitions. A partition is a collection of rows that sit on one physical machine in our cluster. A DataFrame’s partitions represent how the data is physically distributed across your cluster of machines during execution.
+
+A partition can be processed by a single Executor core/thread. For example: If you have 4 data partitions and you have 4 executor cores/threads, you can process everything in parallel, in a single pass. If you have many partitions, but only one executor, Spark will still only have a parallelism of one because there is only one computation resource.
+
+#### Lifecycle of a Spark Application
+
+When you create the SparkContext, each worker starts an executor. This is a separate process (JVM), and it loads your jar too. The executors connect back to your driver program. Now the driver can send them commands, like flatMap, map and reduceByKey in your example. When the driver quits, the executors shut down.
+
+RDDs are sort of like big arrays that are split into partitions, and each executor can hold some of these partitions.
+
+A task is a command sent from the driver to an executor by serializing your Function object. The executor deserializes the command (this is possible because it has loaded your jar), and executes it on a partition.
+
+#### Spark DAG
+
+Directed Acyclic Graph ( DAG ) in Apache Spark is a set of Vertices and Edges, where vertices represent the RDDs and the edges represent the Operation to be applied on RDDs.
+
+DAGScheduler is the scheduling layer of Apache Spark that implements stage-oriented scheduling. It transforms a logical execution plan to a physical execution plan (using stages).
+
+After an action has been called, SparkContext hands over a logical plan to DAGScheduler that it in turn translates to a set of stages that are submitted as a set of tasks for execution.
+
+The fundamental concepts of DAGScheduler are jobs and stages that it tracks through internal registries and counters.
+
+#### Spark Job
+
+A Job is a sequence of stages, triggered by an action such as count(), collect(), read() or write().
+
+Each parallelized action is referred to as a Job. The results of each Job (parallelized/distributed action) is returned to the Driver from the Executor. Depending on the work required, multiple Jobs will be required.
+
+#### Spark Stages
+
+Each job that gets divided into smaller sets of tasks is a stage.
+
+A Stage is a sequence of Tasks that can all be run together - i.e. in parallel - without a shuffle. For example: using ".read" to read a file from disk, then runnning ".filter" can be done without a shuffle, so it can fit in a single stage. The number of Tasks in a Stage also depends upon the number of Partitions your datasets have.
+
+#### Spark Tasks
+
+A task is a unit of work that is sent to the executor. Each stage has some tasks, one task per partition. The same task is done over different partitions of the RDD. In the example of Stages above, each Step is a Task.
+
+#### Caching in Spark
+
+In applications that reuse the same datasets over and over, one of the most useful optimizations is caching. Caching will place a DataFrame or table into temporary storage across the executors in your cluster and make subsequent reads faster.
+
+#### Shuffling in Spark
+
+A Shuffle refers to an operation where data is re-partitioned across a Cluster - i.e. when data needs to move between executors.
+
+join and any operation that ends with ByKey will trigger a Shuffle. It is a costly operation because a lot of data can be sent via the network.
+
+For example, to group by color, it will serve us best if...
+
+All the reds are in one partitions All the blues are in a second partition All the greens are in a third From there we can easily sum/count/average all of the reds, blues, and greens.
+
+#### Transformations
+
+In Spark, the core data structures are immutable meaning they cannot be changed once created. In order to "change" a DataFrame you will have to instruct Spark how you would like to modify the DataFrame you have into the one that you want. These instructions are called transformations. Let’s perform a simple transformation to find all even numbers in our currentDataFrame. Examples – Select, Filter, GroupBy, Join, Union, Partition etc
+
+#### Actions
+
+Transformations allow us to build up our logical transformation plan. To trigger the computation, we run an action. An action instructs Spark to compute a result from a series of transformations. The simplest action is count which gives us the total number of records in the DataFrame.
+
+#### Narrow Transformations Vs Wide Transformations
+
+There are two types of transformations: Narrow and Wide. For narrow transformations, the data required to compute the records in a single partition reside in at most one partition of the parent dataset.
+
+Examples include:
+
+filter(..) drop(..) coalesce() For wide transformations, the data required to compute the records in a single partition may reside in many partitions of the parent dataset.
+
+Examples include:
+
+distinct() groupBy(..).sum() repartition(n) Remember, spark partitions are collections of rows that sit on physical machines in the cluster. Narrow transformations mean that work can be computed and reported back to the executor without changing the way data is partitioned over the system. Wide transformations require that data be redistributed over the system. This is called a shuffle.
+
+Shuffles are triggered when data needs to move between executors.
+
+#### Dataframes vs Datasets vs RDDs
+
+Initially, in 2011 in they came up with the concept of RDDs, then in 2013 with Dataframes and later in 2015 with the concept of Datasets. None of them has been depreciated, we can still use all of them.
+
+#### Spark RDD's
+
+RDDs or Resilient Distributed Datasets is the fundamental data structure of the Spark. It is the collection of objects which is capable of storing the data partitioned across the multiple nodes of the cluster and also allows them to do processing in parallel.
+
+It is fault-tolerant if you perform multiple transformations on the RDD and then due to any reason any node fails. The RDD, in that case, is capable of recovering automatically.
+
+#### Spark Dataframes
+
+It was introduced first in Spark version 1.3 to overcome the limitations of the Spark RDD. Spark Dataframes are the distributed collection of the data points, but here, the data is organized into the named columns. They allow developers to debug the code during the runtime which was not allowed with the RDDs.
+
+Dataframes can read and write the data into various formats like CSV, JSON, AVRO, HDFS, and HIVE tables. It is already optimized to process large datasets for most of the pre-processing tasks so that we do not need to write complex functions on our own.
+
+It uses a catalyst optimizer for optimization purposes.
+
+#### Spark Datasets
+
+Spark Datasets is an extension of Dataframes API with the benefits of both RDDs and the Datasets. It is fast as well as provides a type-safe interface. Type safety means that the compiler will validate the data types of all the columns in the dataset while compilation only and will throw an error if there is any mismatch in the data types.
+
+Users of RDD will find it somewhat similar to code but it is faster than RDDs. It can efficiently process both structured and unstructured data.
+
+We cannot create Spark Datasets in Python yet. The dataset API is available only in Scala and Java only
+
+## Lab 1: Using CDE Resources
 
 CDE Resources can be of type "File", "Python", or "Custom Runtime". You will start by creating a resource of type file to store all Spark and Airflow files and dependencies and then a Python Resource to utilize custom Python libraries in a CDE Spark Job run.
 
@@ -68,7 +252,7 @@ Notice the CDE Resource is now building the Python Virtual Environment. After a 
 
 To learn more about CDE Resources please visit [Using CDE Resources](https://docs.cloudera.com/data-engineering/cloud/use-resources/topics/cde-python-virtual-env.html) in the CDE Documentation.
 
-### Creating CDE Spark Jobs in the UI
+## Lab 2: Creating CDE Spark Jobs in the UI
 
 Next we will run and deploy a Spark script as a CDE Job of type Spark using the "02_PySpark_ETL.py" script. Navigate back to the CDE Home Page. Click on "Create New" in the "Jobs" -> "Spark" section.
 
@@ -165,7 +349,7 @@ The Spark UI allows you to visualize resource usage, optimize performance and tr
 ![alt text](../../img/part2_jobruns4.png)
 
 
-### Creating Spark Jobs with the CDE CLI
+## Lab 3: Creating Spark Jobs with the CDE CLI
 
 So far we have created a Spark Job via the CDE UI. However, CDE use cases involving more than just a few jobs normally benefit in numerous ways from the CDE CLI or CDE API. The CLI allows you to more quickly iterate through different Spark Submits and CDE Resources. The API is an excellent access point to CDE from other tools including 3rd party DevOps and CI/CD solutions.
 
@@ -178,7 +362,7 @@ A CDE Spark Submit is the fastest way to prototype a Spark Job. It allows you to
 Start with a simple Spark Submit by running the following command in your terminal:
 
 ```
-cde spark submit cde_spark_jobs/simple-pyspark-sql.py
+cde spark submit cde_spark_jobs/02_PySpark_Reports.py
 ```
 
 Shortly after running this you will notice confirmation of submission in the terminal. As the Spark Application runs the terminal will show logs and job outputs.
@@ -235,7 +419,9 @@ As before, notice Spark Configurations such as ```--executor-cores```, ```--exec
 
 Finally, run the Job :
 
-```cde job run --name my-cde-job```
+```
+cde job run --name my-cde-job
+```
 
 Notice the Job Run ID output to the terminal and validate the Job in the Job Runs page of your cluster.
 
@@ -246,100 +432,6 @@ Navigate to the Jobs page in your CDE Virtual Cluster and open the Job. Notice t
 ![alt text](../../img/cdeclijob_6.png)
 
 ![alt text](../../img/cdeclijob_7.png)
-
-
-
-
-
-### Creating a CDE Spark Job with Apache Iceberg
-
-In this final section of Part 2 you will finish by deploying a CDE Job of type Spark in the CDE UI using PySpark script "02_PySpark_Iceberg.py".
-
-The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
-
-* Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog tracks table metadata.     
-
-```
-spark = SparkSession \
-    .builder \
-    .appName("ICEBERG LOAD") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.iceberg.spark.SparkSessionCatalog")\
-    .config("spark.sql.catalog.spark_catalog.type", "hive")\
-    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")\
-    .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
-    .getOrCreate()
-```
-
-* Lines 82 - 98: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" and "CALL" SQL statements as shown below.
-
-```
-spark.sql("ALTER TABLE CDE_WORKSHOP.CAR_SALES_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-
-spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".format(username))
-
-```
-
-* Lines 125-126: Iceberg allows you to query Table metadata including history of changes and table snapshots.
-
-```
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
-
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots".format(username)).show(20, False)
-```
-
-* Lines 146 and 150: You can create/update/append Iceberg tables from a Spark Dataframe via the Iceberg Dataframe API "writeTo" command.
-At line 146 we append the Dataframe to the pre-existing table.
-At line 150 we create a new Iceberg table from the Spark Dataframe.
-
-```
-temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).append()
-
-temp_df.writeTo("spark_catalog.CDE_WORKSHOP.CAR_SALES_SAMPLE_{}".format(username)).create()
-```
-
-* Line 171: You can query tables as of a particular timestamp or snapshot. In this case we use the timestamp. This information is available in the history and snapshots table we queries at lines 125-126. The metadata tables are updated in real time as tables are modified.
-
-```
-df = spark.read.option("as-of-timestamp", int(timestamp*1000)).format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username))
-```
-
-* Lines 193-197: You can query Iceberg table by selecting only data that has changed between two points in time or two snapshots. This is referred to as an "Iceberg Incremental Read".
-
-```
-spark.read\
-    .format("iceberg")\
-    .option("start-snapshot-id", first_snapshot)\
-    .option("end-snapshot-id", last_snapshot)\
-    .load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}".format(username)).show()
-```
-
-* Lines 234-251: While Spark provides partitioning capabilities, once a partitioning strategy is chosen the only way to change it is by repartitioning or in other words recomputing all partitions.
-
-Iceberg introduces Partition Evolution i.e. the ability to change the partitioning scheme on new data without modifying it on the initial dataset. Thanks to this tables are not recomputed. This is achieved by Iceberg's improved way of tracking table metadata in the Iceberg Metadata Layer.
-
-In this example, the data present in the CAR_SALES table is initially partitioned by Month. As more data flows into our table, we decided that partitioning by Day provides Spark with better opportunities for job parallelism. Thus we simply change the partitioning scheme to Day. The old data is still partitioned by Month, while the new data added to the table from this point in time and onwards will be partitioned by Day.  
-
-```
-spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} REPLACE PARTITION FIELD month WITH day".format(username))
-```
-
-* Line 260: similarly to partition evolution, Spark does not allow you to change table schema without recreating the table. Iceberg allows you to more flexibily ADD and DROP table columns via the ALTER TABLE statement.
-
-```
-spark.sql("ALTER TABLE spark_catalog.CDE_WORKSHOP.CAR_SALES_{} DROP COLUMN VIN".format(username))
-```
-
-* Line 275: The MERGE INTO statement allows you to more easily compare data between tables and proceed with flexible updates based on intricate logic. In comparison, Spark table inserts and updates are rigid as the MERGE INTO statement is not allowed in Spark SQL.
-
-```
-ICEBERG_MERGE_INTO = "MERGE INTO spark_catalog.CDE_WORKSHOP.CAR_SALES_{0} t USING (SELECT CUSTOMER_ID, MODEL, SALEPRICE, DAY, MONTH, YEAR FROM CAR_SALES_TEMP_{0}) s ON t.customer_id = s.customer_id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *".format(username)
-
-spark.sql(ICEBERG_MERGE_INTO)
-```
-
-Once you have finished going through the code, run the script as a CDE Spark Job from the CDE UI. Monitor outputs and results from the CDE Job Runs page.
-
-To learn more about Iceberg in CDE please visit [Using Apache Iceberg in Cloudera Data Engineering](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-using-iceberg.html).
 
 To learn more about CDE Jobs please visit [Creating and Managing CDE Jobs](https://docs.cloudera.com/data-engineering/cloud/manage-jobs/topics/cde-create-job.html) in the CDE Documentation.
 

@@ -113,7 +113,12 @@ step5 = PythonOperator(
     python_callable=_print_context,
     dag=intro_dag
 )
+
+end = DummyOperator(
+    task_id="end",
+    dag=intro_dag
+)
 #Execute tasks in the below order
 
 # step6c only executes when both step6a and step6b have completed
-start >> step1 >> step2 >> step3 >> step4 >> step5
+start >> step1 >> step2 >> step3 >> step4 >> step5 >> end

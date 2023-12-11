@@ -1,13 +1,8 @@
 # Part 4: Orchestrating Data Engineering Pipelines with Airflow
 
-## Objective
-
-CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
-
-This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
-
 ## Table of Contents
 
+* [Use Case: Orchestrate a Spark Pipeline with Airflow]()
 * [Airflow Concepts](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#airflow-concepts)
   * [The Airflow UI](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#the-airflow-ui)
   * [What is an Airflow CDE Job?](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#what-is-an-airflow-cde-job)
@@ -16,6 +11,12 @@ This tutorial is divided in two sections. First you will build three Airflow job
   * [Deploy Airflow Basic DAG Code](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#deploy-airflow-basic-dag-code)
 * [Deploying Orchestration Pipeline with Cloudera Airflow Editor](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#deploying-orchestration-pipeline-with-cloudera-airflow-editor)
 * [Summary](https://github.com/pdefusco/CDE119_ACE_WORKSHOP/blob/main/step_by_step_guides/english/part04_airflow.md#summary)
+
+## Use Case: Orchestrate a Spark Pipeline with Airflow
+
+In part 3 we built our first Spark Jobs in CDE. Although Jobs can be scheduled, complex pipelines require advanced job dependency scheduling and orchestration. To meet this requirement, CDE Provides a Native Airflow Service that allows you to orchestrate complex CDE pipelines. Although primarily designed to orchestrate CDE Spark Jobs, CDE Airflow allows you to run queries in CDW and integrate with 3rd party Orchestration and DevOps tools.
+
+This tutorial is divided in two sections. First you will build three Airflow jobs to schedule, orchestrate and monitor the execution of Spark Jobs and more. Then you will build an Airflow DAG with the Cloudera Airflow Editor, a No-Code tool that allows you to create Airflow DAGs in a simplified manner.
 
 ## Airflow Concepts
 
