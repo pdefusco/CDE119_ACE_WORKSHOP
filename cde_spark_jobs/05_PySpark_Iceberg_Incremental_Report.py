@@ -138,22 +138,21 @@ print("SHOWING SNAPSHOTS DF")
 
 snapshots = snapshots_df.toPandas()
 
-print("SHOWING PANDAS SNAPSHOTS DF")
+print("SHOWING ICEBERG SNAPSHOTS DF")
 print(snapshots.head())
 
 last_snapshot = str(snapshots[["snapshot_id"]].iloc[-1,0])
 second_last_snapshot = str(snapshots[["snapshot_id"]].iloc[-2,0])
 
-print("PANDAS SNAPSHOTS")
+print("PICKING LAST AND SECOND LAST ICEBERG SNAPSHOTS FOR REPORT \n")
 
 print(last_snapshot)
-print(type(last_snapshot))
 print(second_last_snapshot)
-print(type(second_last_snapshot))
 
 #last_snapshot = snapshots_df.select("snapshot_id").tail(1)[0][0]
 #first_snapshot = snapshots_df.select("snapshot_id").head(1)[0][0]
-
+print("INCREMENTAL REPORT\n")
+print("SELECT ALL UPDATES BETWEEN THE SELECTED SNAPSHOTS\n")
 spark.read\
     .format("iceberg")\
     .option("start-snapshot-id", second_last_snapshot)\
@@ -164,7 +163,7 @@ spark.read\
 #               ANALYTICAL QUERIES
 #---------------------------------------------------
 
-reports_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.SALES_REPORT_{0}".format(username))
+"""reports_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.SALES_REPORT_{0}".format(username))
 
 print("GROUP TOTAL SALES BY MODEL")
 model_sales_df = reports_df.groupBy("Model").sum("Saleprice").na.drop().sort(F.asc('sum(Saleprice)')).withColumnRenamed("sum(Saleprice)", "sales_by_model")
@@ -175,3 +174,4 @@ print("GROUP TOTAL SALES BY GENDER")
 gender_sales_df = reports_df.groupBy("Gender").sum("Saleprice").na.drop().sort(F.asc('sum(Saleprice)')).withColumnRenamed("sum(Saleprice)", "sales_by_gender")
 gender_sales_df = gender_sales_df.withColumn('total_sales_by_gender', gender_sales_df.sales_by_gender.cast(DecimalType(18, 2)))
 gender_sales_df.select(["Gender", "total_sales_by_gender"]).sort(F.asc('Gender')).show()
+"""
