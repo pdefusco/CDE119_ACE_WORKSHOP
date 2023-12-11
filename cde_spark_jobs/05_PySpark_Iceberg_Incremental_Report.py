@@ -134,15 +134,15 @@ spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(usern
 snapshots_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username))
 
 print("SHOWING SNAPSHOTS DF")
-snapshots_df.show()
+#snapshots_df.show()
 
 snapshots = snapshots_df.toPandas()
 
 print("SHOWING PANDAS SNAPSHOTS DF")
-snapshots.head()
+print(snapshots.head())
 
-last_snapshot = snapshots[["snapshot_id"]].iloc[1]
-second_last_snapshot = snapshots[["snapshot_id"]].iloc[2]
+last_snapshot = str(snapshots[["snapshot_id"]].iloc[-1,0])
+second_last_snapshot = str(snapshots[["snapshot_id"]].iloc[-2,0])
 
 print("PANDAS SNAPSHOTS")
 
@@ -156,8 +156,8 @@ print(type(second_last_snapshot))
 
 spark.read\
     .format("iceberg")\
-    .option("start-snapshot-id", str(second_last_snapshot))\
-    .option("end-snapshot-id", str(last_snapshot))\
+    .option("start-snapshot-id", second_last_snapshot)\
+    .option("end-snapshot-id", last_snapshot)\
     .load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 #---------------------------------------------------

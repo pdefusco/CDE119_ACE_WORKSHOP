@@ -59,7 +59,7 @@ with DAG(
     # Runs daily at 1 am
     #schedule_interval='0 1 * * *',
     # catchup must be true if start_date is before datetime.now()
-    start_date= datetime(2023,12,10,0),
+    start_date= datetime(2023,12,10,7),
     catchup=False,
     max_active_runs=1,
     is_paused_upon_creation=False
