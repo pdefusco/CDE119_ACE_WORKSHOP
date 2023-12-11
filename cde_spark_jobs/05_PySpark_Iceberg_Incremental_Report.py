@@ -141,20 +141,23 @@ snapshots = snapshots_df.toPandas()
 print("SHOWING PANDAS SNAPSHOTS DF")
 snapshots.head()
 
-last_snapshot = snapshots_df[["snapshot_id"]].iloc[1]
-second_last_snapshot = snapshots_df[["snapshot_id"]].iloc[2]
+last_snapshot = snapshots[["snapshot_id"]].iloc[1]
+second_last_snapshot = snapshots[["snapshot_id"]].iloc[2]
 
 print("PANDAS SNAPSHOTS")
+
 print(last_snapshot)
+print(type(last_snapshot))
 print(second_last_snapshot)
+print(type(second_last_snapshot))
 
 #last_snapshot = snapshots_df.select("snapshot_id").tail(1)[0][0]
 #first_snapshot = snapshots_df.select("snapshot_id").head(1)[0][0]
 
 spark.read\
     .format("iceberg")\
-    .option("start-snapshot-id", second_last_snapshot)\
-    .option("end-snapshot-id", last_snapshot)\
+    .option("start-snapshot-id", str(second_last_snapshot))\
+    .option("end-snapshot-id", str(last_snapshot))\
     .load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
 #---------------------------------------------------
