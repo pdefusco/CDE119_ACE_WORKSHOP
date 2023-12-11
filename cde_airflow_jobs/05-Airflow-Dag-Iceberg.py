@@ -42,6 +42,7 @@ from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import BranchPythonOperator
 from cloudera.cdp.airflow.operators.cde_operator import CDEJobRunOperator
+from airflow.utils.trigger_rule import TriggerRule
 
 username = "pauldefusco"
 
@@ -114,4 +115,4 @@ with DAG(
         task_id="end"
     )
 
-    start >> branch_task >> [iceberg_migration, skip_initial_task] >> iceberg_etl >> iceberg_report >> end
+    start >> branch_task >> [skip_initial_task, iceberg_migration] >> iceberg_etl >> iceberg_report >> end
