@@ -101,6 +101,10 @@ cde resource upload --name iceberg_pipeline_pauldefusco \
                     --local-path cde_spark_jobs/05_PySpark_Iceberg_Incremental_Report.py \
                     --local-path resources_files/parameters.conf
 
+cde resource create --name IcebergReportPythonEnv-pauldefusco --type python-env
+
+cde resource upload --name IcebergReportPythonEnv-pauldefusco --local-path resources_files/requirements.txt
+
 cde job create --name IcebergMigration-pauldefusco \
                --type spark \
                --mount-1-resource iceberg_pipeline_pauldefusco \
@@ -109,12 +113,17 @@ cde job create --name IcebergMigration-pauldefusco \
 cde job create --name IcebergETL-pauldefusco \
                --type spark \
                --mount-1-resource iceberg_pipeline_pauldefusco \
-               --application-file 05_PySpark_Iceberg_ETL.py
+               --application-file 05_PySpark_Iceberg_ETL.py \
+               --executor-cores 2 \
+               --executor-memory "2g"
 
 cde job create --name IcebergReport-pauldefusco \
                --type spark \
                --mount-1-resource iceberg_pipeline_pauldefusco \
-               --application-file 05_PySpark_Iceberg_Incremental_Report.py
+               --application-file 05_PySpark_Iceberg_Incremental_Report.py \
+               --python-env-resource-name IcebergReportPythonEnv-pauldefusco \
+               --executor-cores 2 \
+               --executor-memory "2g"
 ```
 
 Open the Airflow DAG "cde_airflow_jobs/05-Airflow-Dag-Iceberg.py" and update the start_date field with the current timestamp at line 61.

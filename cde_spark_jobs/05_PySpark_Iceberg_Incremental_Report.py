@@ -49,6 +49,7 @@ import sys
 import configparser
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
+import pandas as pd
 
 config = configparser.ConfigParser()
 config.read('/app/mount/parameters.conf')
@@ -132,12 +133,27 @@ spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(usern
 # STORE FIRST AND LAST SNAPSHOT ID'S FROM SNAPSHOTS TABLE
 snapshots_df = spark.sql("SELECT * FROM CDE_WORKSHOP_{0}.CAR_SALES_{0}.snapshots;".format(username))
 
-last_snapshot = snapshots_df.select("snapshot_id").tail(1)[0][0]
-first_snapshot = snapshots_df.select("snapshot_id").head(1)[0][0]
+print("SHOWING SNAPSHOTS DF")
+snapshots_df.show()
+
+snapshots = snapshots_df.toPandas()
+
+print("SHOWING PANDAS SNAPSHOTS DF")
+snapshots.head()
+
+last_snapshot = snapshots_df[["snapshot_id"]].iloc[1]
+second_last_snapshot = snapshots_df[["snapshot_id"]].iloc[2]
+
+print("PANDAS SNAPSHOTS")
+print(last_snapshot)
+print(second_last_snapshot)
+
+#last_snapshot = snapshots_df.select("snapshot_id").tail(1)[0][0]
+#first_snapshot = snapshots_df.select("snapshot_id").head(1)[0][0]
 
 spark.read\
     .format("iceberg")\
-    .option("start-snapshot-id", first_snapshot)\
+    .option("start-snapshot-id", second_last_snapshot)\
     .option("end-snapshot-id", last_snapshot)\
     .load("spark_catalog.CDE_WORKSHOP_{0}.CAR_SALES_{0}".format(username)).show()
 
