@@ -52,6 +52,10 @@ spark = SparkSession\
     .appName("PythonSQL")\
     .getOrCreate()
 
+print("JOB ARGUMENTS")
+print(sys.args)
+print(sys.args[1])
+
 # A list of Rows. Infer schema from the first row, create a DataFrame and print the schema
 rows = [Row(name="John", age=19), Row(name="Smith", age=23), Row(name="Sarah", age=18)]
 some_df = spark.createDataFrame(rows)

@@ -68,21 +68,42 @@ In this section you will revist your Spark and Airflow Pipeline by adding Iceber
 
 In this job you will migrate two Spark tables to Iceberg table format. The code in this script is very straightforward and consists of two basic routines to complete the migration:
 
-```
-spark.sql("ALTER TABLE DB_NAME.TABLE_NAME UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')"
-spark.sql("CALL spark_catalog.system.migrate('DB_NAME.TABLE_NAME')"
-```
+* Lines 63-70: The Iceberg Catalog is set in the Spark Session configurations. Any Iceberg-compatible compute engine issuing a query will interact with the Catalog. The Catalog is the central place where your query checks for the current location of the current metadata pointer.
 
-Once the tables are migrated you can query their History and Snapshots tables in order to gain useful insights on Iceberg metadata:
+Notice also that no Iceberg Jars are set among Spark Session configurations. These Jars are already available to your Spark Job as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog tracks table metadata.     
 
 ```
-spark.read.format("iceberg").load("spark_catalog.DB_NAME.TABLE_NAME.history").show(20, False)
-spark.read.format("iceberg").load("spark_catalog.DB_NAME.TABLE_NAME.snapshots").show(20, False)
+spark = SparkSession \
+    .builder \
+    .appName("ICEBERG LOAD") \
+    .config("spark.sql.catalog.spark_catalog", "org.apache.iceberg.spark.SparkSessionCatalog")\
+    .config("spark.sql.catalog.spark_catalog.type", "hive")\
+    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")\
+    .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
+    .getOrCreate()
+```
+
+* Lines 84 - 100: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" and "CALL" SQL statements as shown below.
+
+```
+spark.sql("ALTER TABLE MyDB.MyTABLE UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')"
+
+spark.sql("CALL spark_catalog.system.migrate('MyDB.MyTABLE')"
+```
+
+* Lines 106-107: Iceberg allows you to query Table metadata including history of changes and table snapshots. Now that the two tables have been migrated, their history and snaphots tables are available.
+
+```
+spark.read.format("iceberg").load("spark_catalog.MyDB.MyTABLE.history").show(20, False)
+
+spark.read.format("iceberg").load("spark_catalog.MyDB.MyTABLE.snapshots").show(20, False)
 ```
 
 #### Iceberg ETL Job
 
 This job consists of an Iceberg ETL pipeline.
+
+Review the application code and notice the following:
 
 #### Iceberg Report Job
 
@@ -159,35 +180,6 @@ In this final section of Part 2 you will finish by deploying a CDE Job of type S
 
 The script includes a lot of Iceberg-related code. Open it in your editor of choice and familiarize yourself with the code. In particular, notice:
 
-* Lines 62-69: The SparkSession must be launched with the Iceberg Catalog. However, no Jars need to be referenced. These are already available as Iceberg is enabled at the CDE Virtual Cluster level. The Iceberg Catalog tracks table metadata.     
-
-```
-spark = SparkSession \
-    .builder \
-    .appName("ICEBERG LOAD") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.iceberg.spark.SparkSessionCatalog")\
-    .config("spark.sql.catalog.spark_catalog.type", "hive")\
-    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")\
-    .config("spark.yarn.access.hadoopFileSystems", data_lake_name)\
-    .getOrCreate()
-```
-
-* Lines 82 - 98: You can migrate a Spark Table to Iceberg format with the "ALTER TABLE" and "CALL" SQL statements as shown below.
-
-```
-spark.sql("ALTER TABLE CDE_WORKSHOP.CAR_SALES_{} UNSET TBLPROPERTIES ('TRANSLATED_TO_EXTERNAL')".format(username))
-
-spark.sql("CALL spark_catalog.system.migrate('CDE_WORKSHOP.CAR_SALES_{}')".format(username))
-
-```
-
-* Lines 125-126: Iceberg allows you to query Table metadata including history of changes and table snapshots.
-
-```
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.history".format(username)).show(20, False)
-
-spark.read.format("iceberg").load("spark_catalog.CDE_WORKSHOP.CAR_SALES_{}.snapshots".format(username)).show(20, False)
-```
 
 * Lines 146 and 150: You can create/update/append Iceberg tables from a Spark Dataframe via the Iceberg Dataframe API "writeTo" command.
 At line 146 we append the Dataframe to the pre-existing table.
